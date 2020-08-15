@@ -1,0 +1,10 @@
+{
+  "users": [
+    { "id": "IZ1998", "name": "Igor Zolotnik" },
+    { "id": "OR1999", "name": "Oleg Ryazin" },
+    { "id": "DY2000", "name": "Dmitry Yaniuk" }
+  ],
+  "stories": [
+    { "id": "US123456", "title": "Test" }
+  ]
+}

@@ -1,0 +1,15 @@
+<div class="main-div">
+  <div class="main-header">
+    <app-header></app-header>
+  </div>
+  <div class="main-body">
+    <ng-container *ngFor="let column of columns">
+      <app-column [column]="column"></app-column>
+    </ng-container>
+
+    <mat-sidenav-container class="sidebar-container">
+      <mat-sidenav mode="side" [opened]="opened$ | async" class="sidebar-content">qwe</mat-sidenav>
+    </mat-sidenav-container>
+  </div>
+</div>
+
