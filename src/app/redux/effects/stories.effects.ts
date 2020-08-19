@@ -2,14 +2,18 @@ import { Injectable } from "@angular/core";
 import { HttpService } from "../../services/http.service";
 import { Actions, createEffect, Effect, ofType } from "@ngrx/effects";
 import * as StoryActions from '../actions/stories.actions';
-import {catchError, map, mergeMap} from "rxjs/operators";
+import { catchError, map, mergeMap, withLatestFrom } from "rxjs/operators";
 import { IStory } from "../../utils/interfaces";
 import { Routes } from '../../utils/constants/routes';
 import { of } from "rxjs";
+import { Store } from "@ngrx/store";
+import { IStoreState } from "../store/state";
+import { ChangeSidebarStateAction } from "../actions/sidebar.actions";
+import { GetIsOpenedSidebarSelector } from '../selectors/sidebar.selectors';
 
 @Injectable()
 export class StoriesEffects {
-  constructor(private actions$: Actions, private httpClient: HttpService) { }
+  constructor(private actions$: Actions, private store$: Store<IStoreState>, private httpClient: HttpService) { }
 
   @Effect({ dispatch: false })
   storiesRequest$ = createEffect(() => this.actions$.pipe(
@@ -21,6 +25,17 @@ export class StoriesEffects {
       return new StoryActions.GetStoriesSuccessAction(mappedStories);
     }),
     catchError(() => of(new StoryActions.GetStoriesRequestAction())),
+  ));
+
+  @Effect({dispatch: false})
+  viewDetails$ = createEffect(() => this.actions$.pipe(
+    ofType(StoryActions.StoryActions.VIEW_STORY_DETAILS),
+    withLatestFrom(this.store$.select(GetIsOpenedSidebarSelector)),
+    map(([action, isOpened]) => {
+      if (!isOpened) {
+        return new ChangeSidebarStateAction();
+      }
+    })
   ));
 
   private mapToStories = (response: any): IStory[] => {
@@ -36,6 +51,7 @@ export class StoriesEffects {
         isBlocked: story.isBlocked,
         isReady: story.isReady,
         blockReason: story.blockReason,
+        columnIndex: story.columnIndex,
       } as IStory
     });
   }

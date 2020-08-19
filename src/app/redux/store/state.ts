@@ -6,6 +6,7 @@ export interface IUserState {
 
 export interface IStoriesState {
   stories: IStory[];
+  selectedStory: IStory;
 }
 
 export interface ISidebarState {
@@ -15,4 +16,5 @@ export interface ISidebarState {
 export interface IStoreState {
   user: IUserState;
   story: IStoriesState;
+  sidebar: ISidebarState;
 }

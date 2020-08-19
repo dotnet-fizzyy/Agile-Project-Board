@@ -15,6 +15,7 @@ export interface IStory {
   isDefect: boolean;
   description: string;
   points?: number;
+  columnIndex: number;
   user?: string;
   isBlocked?: boolean;
   isReady?: boolean;

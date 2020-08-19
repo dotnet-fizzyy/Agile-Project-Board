@@ -6,5 +6,4 @@ export const SidebarActions = {
 
 export class ChangeSidebarStateAction implements Action {
   readonly type: string = SidebarActions.CHANGE_SIDEBAR_STATE;
-  constructor(public payload: boolean) { }
 }

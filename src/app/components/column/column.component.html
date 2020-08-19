@@ -3,7 +3,7 @@
     <span>{{ column.label }}</span>
   </div>
   <div class="column-body">
-    <ng-container *ngFor="let story of stories">
+    <ng-container *ngFor="let story of stories$ | async">
       <app-story [story]="story"></app-story>
     </ng-container>
   </div>

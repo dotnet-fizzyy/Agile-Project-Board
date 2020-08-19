@@ -5,6 +5,30 @@
     { "id": "DY2000", "name": "Dmitry Yaniuk" }
   ],
   "stories": [
-    { "id": "US123456", "title": "Test" }
+    {
+      "id": "US123456",
+      "title": "Title 1",
+      "column": "TODO",
+      "isDefect": "false",
+      "description": "This is a simple description",
+      "columnIndex": 0
+    },
+    {
+      "id": "US654321",
+      "title": "Hello world",
+      "column": "PROGRESS",
+      "isDefect": "false",
+      "description": "There should be some description",
+      "user": "Igor Zolotnik",
+      "columnIndex": 0
+    },
+    {
+      "id": "US678901",
+      "title": "Some long story title",
+      "column": "TODO",
+      "isDefect": "false",
+      "description": "There should be some description too",
+      "columnIndex": 1
+    }
   ]
 }

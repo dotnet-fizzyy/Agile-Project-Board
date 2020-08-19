@@ -1,16 +1,19 @@
-<div class="story-container">
+<div class="story-container" cdkDrag [cdkDragData]="story">
   <div class="story-header">
-    <span (click)="onClick()">{{ story.id }}</span>
+    <span (click)="onClick()" matTooltip="View Details">{{ story.id }}</span>
     <div class="icons-container">
-      <mat-icon class="story-ready-icon">done_outline</mat-icon>
-      <mat-icon class="story-ready-icon">block</mat-icon>
+      <mat-icon matTooltip="Ready" class="story-ready-icon">done_outline</mat-icon>
+      <mat-icon matTooltip="Block" class="story-ready-icon">block</mat-icon>
+    </div>
+    <div>
+      <mat-icon class="dnd-icon" cdkDragHandle>more_vert</mat-icon>
     </div>
   </div>
   <div class="story-body">
     <span>{{ story.title }}</span>
     <div class="story-user">
-      <mat-icon class="user-icon">account_circle</mat-icon>
-      <span>{{ story.user ? story.user : 'No Owner' }}</span>
+        <mat-icon class="user-icon">account_circle</mat-icon>
+        {{ story.user ? story.user : 'No Owner' }}
     </div>
   </div>
 </div>

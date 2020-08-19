@@ -20,6 +20,6 @@ function handleChangeSidebarStateAction(
 ): ISidebarState {
   return {
     ...state,
-    isOpened: action.payload,
+    isOpened: !state.isOpened,
   }
 }

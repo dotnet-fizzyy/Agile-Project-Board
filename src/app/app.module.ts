@@ -19,6 +19,8 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import Effects from "./redux/effects";
+import {MatTooltipModule} from "@angular/material/tooltip";
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import Effects from "./redux/effects";
     HeaderComponent,
     ColumnComponent,
     MainComponent,
-    StoryComponent
+    StoryComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
@@ -40,6 +43,7 @@ import Effects from "./redux/effects";
     MatIconModule,
     MatSidenavModule,
     BrowserAnimationsModule,
+    MatTooltipModule,
   ],
   providers: [HttpService],
   bootstrap: [AppComponent]
