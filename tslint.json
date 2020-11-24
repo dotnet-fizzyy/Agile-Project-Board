@@ -1,6 +1,8 @@
 {
   "extends": "tslint:recommended",
+  "semicolon": [true, "always", "ignore-bound-class-methods"],
   "rules": {
+    "prettier": true,
     "align": {
       "options": [
         "parameters",
@@ -42,7 +44,7 @@
     "max-classes-per-file": false,
     "max-line-length": [
       true,
-      140
+      120
     ],
     "member-ordering": [
       true,
@@ -82,7 +84,8 @@
     ],
     "semicolon": {
       "options": [
-        "always"
+        "always",
+        "strict-bound-class-methods"
       ]
     },
     "space-before-function-paren": {

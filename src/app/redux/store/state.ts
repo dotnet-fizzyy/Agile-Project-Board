@@ -1,20 +1,20 @@
 import { IStory, IUser } from '../../utils/interfaces';
 
 export interface IUserState {
-  users: IUser[];
+    users: IUser[];
 }
 
 export interface IStoriesState {
-  stories: IStory[];
-  selectedStory: IStory;
+    stories: IStory[];
+    selectedStory: IStory;
 }
 
 export interface ISidebarState {
-  isOpened: boolean;
+    isOpened: boolean;
 }
 
 export interface IStoreState {
-  user: IUserState;
-  story: IStoriesState;
-  sidebar: ISidebarState;
+    user: IUserState;
+    story: IStoriesState;
+    sidebar: ISidebarState;
 }

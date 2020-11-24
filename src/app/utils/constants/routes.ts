@@ -1,6 +1,6 @@
-export const MainRoute: string = 'http://localhost:3004';
+export const MainRoute = 'http://localhost:3004';
 
 export const Routes = {
-  USERS: MainRoute + '/users',
-  STORIES: MainRoute + '/stories',
-}
+    USERS: MainRoute + '/users',
+    STORIES: MainRoute + '/stories',
+};

@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root',
 })
 export class HttpService {
-  constructor(private httpClient: HttpClient) {
-  }
+    constructor(private httpClient: HttpClient) {}
 
-  public get = (url: string) => this.httpClient.get(url);
+    public get = (url: string) => this.httpClient.get(url);
 }

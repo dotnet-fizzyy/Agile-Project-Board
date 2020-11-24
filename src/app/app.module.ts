@@ -13,41 +13,34 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
-import { HttpService } from "./services/http.service";
+import { HttpService } from './services/http.service';
 import Reducers from './redux/store';
-import { MatIconModule } from "@angular/material/icon";
-import { MatSidenavModule } from "@angular/material/sidenav";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import Effects from "./redux/effects";
-import {MatTooltipModule} from "@angular/material/tooltip";
+import { MatIconModule } from '@angular/material/icon';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import Effects from './redux/effects';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    ColumnComponent,
-    MainComponent,
-    StoryComponent,
-    SidebarComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule,
-    DragDropModule,
-    StoreModule.forRoot(Reducers, {}),
-    StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
-    EffectsModule.forRoot(Effects),
-    MatIconModule,
-    MatSidenavModule,
-    BrowserAnimationsModule,
-    MatTooltipModule,
-  ],
-  providers: [HttpService],
-  bootstrap: [AppComponent]
+    declarations: [AppComponent, HeaderComponent, ColumnComponent, MainComponent, StoryComponent, SidebarComponent],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        FormsModule,
+        DragDropModule,
+        StoreModule.forRoot(Reducers, {}),
+        StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+        EffectsModule.forRoot(Effects),
+        MatIconModule,
+        MatSidenavModule,
+        BrowserAnimationsModule,
+        MatTooltipModule,
+    ],
+    providers: [HttpService],
+    bootstrap: [AppComponent],
 })
-export class AppModule{
-  constructor() { }
+export class AppModule {
+    constructor() {}
 }
