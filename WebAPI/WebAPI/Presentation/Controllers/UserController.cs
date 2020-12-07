@@ -21,10 +21,7 @@ namespace WebAPI.Presentation.Controllers
 
         [HttpGet]
         [Route(RouteConstants.UserControllerGetAllUsersUrl)]
-        public async Task<CollectionResponse<User>> GetUsers()
-        {
-            return await _userService.GetUsersAsync();
-        }
+        public async Task<CollectionResponse<User>> GetUsers() => await _userService.GetUsersAsync();
 
         [HttpGet]
         [Route(RouteConstants.UserControllerGetUserUrl)]

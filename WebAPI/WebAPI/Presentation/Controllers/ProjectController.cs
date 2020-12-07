@@ -20,14 +20,11 @@ namespace WebAPI.Presentation.Controllers
         }
 
         [HttpGet]
-        public async Task<CollectionResponse<Project>> GetAllProjects()
-        {
-            return await _projectService.GetProjectsAsync();
-        }
-
+        [Route(RouteConstants.ProjectControllerGetAllProjectsUrl)]
+        public async Task<CollectionResponse<Project>> GetAllProjects() => await _projectService.GetProjectsAsync();
 
         [HttpGet]
-        [Route(RouteConstants.UserControllerGetUserUrl)]
+        [Route(RouteConstants.ProjectControllerGetProjectUrl)]
         public async Task<IHttpActionResult> GetProject(Guid projectId)
         {
             var project = await _projectService.GeProjectAsync(projectId);
@@ -41,7 +38,7 @@ namespace WebAPI.Presentation.Controllers
         }
 
         [HttpPost]
-        [Route(RouteConstants.UserControllerUrl)]
+        [Route(RouteConstants.ProjectControllerUrl)]
         public async Task<IHttpActionResult> CreateProject([FromBody] Project project)
         {
             var createdProject = await _projectService.CreateProjectAsync(project);
@@ -50,7 +47,7 @@ namespace WebAPI.Presentation.Controllers
         }
 
         [HttpPut]
-        [Route(RouteConstants.UserControllerUrl)]
+        [Route(RouteConstants.ProjectControllerUrl)]
         public async Task<IHttpActionResult> UpdateProject([FromBody] Project project)
         {
             var updatedProject = await _projectService.UpdateProjectAsync(project);
@@ -59,8 +56,8 @@ namespace WebAPI.Presentation.Controllers
         }
 
         [HttpDelete]
-        [Route(RouteConstants.UserControllerGetUserUrl)]
-        public async Task<HttpResponseMessage> RemoveUser(Guid projectId)
+        [Route(RouteConstants.ProjectControllerGetProjectUrl)]
+        public async Task<HttpResponseMessage> RemoveProject(Guid projectId)
         {
             await _projectService.RemoveProjectAsync(projectId);
 
