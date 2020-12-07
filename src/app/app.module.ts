@@ -21,9 +21,19 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import Effects from './redux/effects';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './components/login-registration/login.component';
 
 @NgModule({
-    declarations: [AppComponent, HeaderComponent, ColumnComponent, MainComponent, StoryComponent, SidebarComponent],
+    declarations: [
+        AppComponent,
+        HeaderComponent,
+        ColumnComponent,
+        MainComponent,
+        StoryComponent,
+        SidebarComponent,
+        LoginComponent,
+    ],
     imports: [
         BrowserModule,
         AppRoutingModule,
@@ -37,6 +47,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
         MatSidenavModule,
         BrowserAnimationsModule,
         MatTooltipModule,
+        ReactiveFormsModule,
     ],
     providers: [HttpService],
     bootstrap: [AppComponent],
