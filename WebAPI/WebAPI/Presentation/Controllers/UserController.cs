@@ -46,6 +46,24 @@ namespace WebAPI.Presentation.Controllers
             return Created(nameof(UserController), createdUser);
         }
 
+        [HttpPost]
+        [Route(RouteConstants.UserControllerAuthenticateUrl)]
+        public async Task<IHttpActionResult> AuthenticateUser([FromBody]AuthUser authUser)
+        {
+	        var createdCustomer = await _userService.CreateCustomerAsync(authUser);
+
+	        return Created(nameof(UserController), createdCustomer);
+        }
+
+        [HttpPost]
+        [Route(RouteConstants.UserControllerCreateCustomerUrl)]
+        public async Task<IHttpActionResult> CreateCustomer([FromBody]AuthUser authUser)
+        {
+	        var createdCustomer = await _userService.CreateCustomerAsync(authUser);
+
+	        return Created(nameof(UserController), createdCustomer);
+        }
+
         [HttpPut]
         [Route(RouteConstants.UserControllerUrl)]
         public async Task<IHttpActionResult> UpdateUser([FromBody] User user)
