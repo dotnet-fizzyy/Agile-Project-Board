@@ -45,9 +45,16 @@ namespace WebAPI.ApplicationLogic.Services
         {
             var userEntity = _mapper.Map<Models.Entities.User>(user);
 
-            var createdEntity = await _userRepository.CreateItemAsync(userEntity);
+            var userModel = await PerformUserCreation(userEntity);
 
-            var userModel = _mapper.Map<User>(createdEntity);
+            return userModel;
+        }
+
+        public async Task<User> CreateCustomerAsync(AuthUser authUser)
+        {
+	        var userEntity = _mapper.Map<Models.Entities.User>(authUser);
+
+	        var userModel = await PerformUserCreation(userEntity);
 
             return userModel;
         }
@@ -66,6 +73,16 @@ namespace WebAPI.ApplicationLogic.Services
         public async Task RemoveUserAsync(Guid userId)
         {
             await _userRepository.RemoveItemAsync(x => x.UserId == userId);
+        }
+
+
+        private async Task<User> PerformUserCreation(Models.Entities.User userEntity)
+        {
+	        var createdEntity = await _userRepository.CreateItemAsync(userEntity);
+
+	        var userModel = _mapper.Map<User>(createdEntity);
+
+	        return userModel;
         }
     }
 }

@@ -53,7 +53,7 @@ namespace WebAPI.Infrastructure.MSSQL.Repository
         {
             try
             {
-                _dbSet.AddOrUpdate();
+                _dbSet.Add(item);
 
                 await _databaseContext.SaveChangesAsync();
 

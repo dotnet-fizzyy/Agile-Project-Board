@@ -25,5 +25,7 @@ namespace WebAPI.Core.Constants
         public const string UserControllerUrl = "user";
         public const string UserControllerGetAllUsersUrl = UserControllerUrl + "/all";
         public const string UserControllerGetUserUrl = UserControllerUrl + "/{userId}";
+        public const string UserControllerAuthenticateUrl = UserControllerUrl + "/auth";
+        public const string UserControllerCreateCustomerUrl = UserControllerUrl + "/customer";
     }
 }

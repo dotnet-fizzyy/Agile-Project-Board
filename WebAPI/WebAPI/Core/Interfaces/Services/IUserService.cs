@@ -13,6 +13,8 @@ namespace WebAPI.Core.Interfaces.Services
 
         Task<User> CreateUserAsync(User user);
 
+        Task<User> CreateCustomerAsync(AuthUser authUser);
+
         Task<User> UpdateUserAsync(User user);
 
         Task RemoveUserAsync(Guid userId);

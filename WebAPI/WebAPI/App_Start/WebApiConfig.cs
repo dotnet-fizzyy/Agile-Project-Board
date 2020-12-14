@@ -1,4 +1,5 @@
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace WebAPI
 {
@@ -10,6 +11,9 @@ namespace WebAPI
 
             // Web API routes
             config.MapHttpAttributeRoutes();
+
+            var corsAttribute = new EnableCorsAttribute("*", "*", "*");
+            config.EnableCors(corsAttribute);
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
