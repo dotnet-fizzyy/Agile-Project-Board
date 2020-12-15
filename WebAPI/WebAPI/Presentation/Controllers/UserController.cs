@@ -50,9 +50,14 @@ namespace WebAPI.Presentation.Controllers
         [Route(RouteConstants.UserControllerAuthenticateUrl)]
         public async Task<IHttpActionResult> AuthenticateUser([FromBody]AuthUser authUser)
         {
-	        var createdCustomer = await _userService.CreateCustomerAsync(authUser);
+	        var authenticatedUser = await _userService.AuthenticateUser(authUser);
 
-	        return Created(nameof(UserController), createdCustomer);
+	        if (authenticatedUser == null)
+	        {
+		        return BadRequest();
+	        }
+
+	        return Ok(authenticatedUser);
         }
 
         [HttpPost]

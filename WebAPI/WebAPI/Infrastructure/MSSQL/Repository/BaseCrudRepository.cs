@@ -11,7 +11,7 @@ namespace WebAPI.Infrastructure.MSSQL.Repository
 {
     public abstract class BaseCrudRepository<T> : IBaseCrudRepository<T> where T : class
     {
-        private readonly DatabaseContext _databaseContext;
+        protected readonly DatabaseContext _databaseContext;
         private readonly DbSet<T> _dbSet;
 
         protected BaseCrudRepository(DatabaseContext databaseContext)

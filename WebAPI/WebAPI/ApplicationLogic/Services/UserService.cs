@@ -50,11 +50,24 @@ namespace WebAPI.ApplicationLogic.Services
             return userModel;
         }
 
+        public async Task<User> AuthenticateUser(AuthUser authUser)
+        {
+	        var userEntity = _mapper.Map<Models.Entities.User>(authUser);
+	        userEntity.Password = PasswordHashing.GeneratePassword(userEntity.Password);
+
+	        var foundUserEntity = await _userRepository.AuthenticateUser(userEntity);
+
+	        var userModel = _mapper.Map<User>(foundUserEntity);
+
+	        return userModel;
+        }
+
         public async Task<User> CreateCustomerAsync(AuthUser authUser)
         {
 	        var userEntity = _mapper.Map<Models.Entities.User>(authUser);
+	        userEntity.Password = PasswordHashing.GeneratePassword(userEntity.Password);
 
-	        var userModel = await PerformUserCreation(userEntity);
+            var userModel = await PerformUserCreation(userEntity);
 
             return userModel;
         }

@@ -258,6 +258,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationLogic\PasswordHashing.cs" />
     <Compile Include="ApplicationLogic\Services\EpicService.cs" />
     <Compile Include="ApplicationLogic\Services\ProjectService.cs" />
     <Compile Include="ApplicationLogic\Services\SprintService.cs" />
