@@ -13,8 +13,14 @@ export interface ISidebarState {
     isOpened: boolean;
 }
 
+export interface ILoginCreationsState {
+    isSignInSuccessful?: boolean;
+    isRegistrationSuccessful?: boolean;
+}
+
 export interface IStoreState {
     user: IUserState;
     story: IStoriesState;
     sidebar: ISidebarState;
+    loginRegistration: ILoginCreationsState;
 }

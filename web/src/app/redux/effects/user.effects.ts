@@ -3,21 +3,21 @@ import { Actions, createEffect, Effect, ofType } from '@ngrx/effects';
 import { HttpService } from '../../services/http.service';
 import * as UserActions from '../actions/user.actions';
 import { map, catchError, mergeMap } from 'rxjs/operators';
-import { Routes } from '../../utils/constants/routes';
+import { MainRoutes } from '../../utils/constants/routes';
 import { IUser } from '../../utils/interfaces';
 import { of } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
 })
-export class UserEffects {
+export default class UserEffects {
     constructor(private actions$: Actions, private httpClient: HttpService) {}
 
     @Effect({ dispatch: false })
     usersRequest$ = createEffect(() =>
         this.actions$.pipe(
             ofType(UserActions.UserActions.GET_USERS_REQUEST),
-            mergeMap(() => this.httpClient.get(Routes.USERS)),
+            mergeMap(() => this.httpClient.get(MainRoutes.USERS)),
             map((response) => {
                 const mappedUsers = this.mapToUsers(response);
 

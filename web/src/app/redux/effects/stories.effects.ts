@@ -4,7 +4,7 @@ import { Actions, createEffect, Effect, ofType } from '@ngrx/effects';
 import * as StoryActions from '../actions/stories.actions';
 import { catchError, map, mergeMap, withLatestFrom } from 'rxjs/operators';
 import { IStory } from '../../utils/interfaces';
-import { Routes } from '../../utils/constants/routes';
+import { MainRoutes } from '../../utils/constants/routes';
 import { of } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { IStoreState } from '../store/state';
@@ -12,14 +12,14 @@ import { ChangeSidebarStateAction } from '../actions/sidebar.actions';
 import { GetIsOpenedSidebarSelector } from '../selectors/sidebar.selectors';
 
 @Injectable()
-export class StoriesEffects {
+export default class StoriesEffects {
     constructor(private actions$: Actions, private store$: Store<IStoreState>, private httpClient: HttpService) {}
 
     @Effect({ dispatch: false })
     storiesRequest$ = createEffect(() =>
         this.actions$.pipe(
             ofType(StoryActions.StoryActions.GET_STORIES_REQUEST),
-            mergeMap(() => this.httpClient.get(Routes.STORIES)),
+            mergeMap(() => this.httpClient.get(MainRoutes.STORIES)),
             map((response) => {
                 const mappedStories = this.mapToStories(response);
 
