@@ -1,5 +1,5 @@
 {
-  "name": "maypp",
+  "name": "web",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -46,6 +46,7 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
     "codelyzer": "^6.0.0-next.1",
+    "htmlhint": "^0.14.2",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "~5.0.0",
