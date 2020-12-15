@@ -5,7 +5,6 @@ using Ninject.Web.Common;
 using WebAPI.ApplicationLogic.Services;
 using WebAPI.Core.Interfaces.Repository;
 using WebAPI.Core.Interfaces.Services;
-using WebAPI.Infrastructure.MSSQL;
 using WebAPI.Infrastructure.MSSQL.Repository;
 
 namespace WebAPI.App_Start
@@ -14,13 +13,13 @@ namespace WebAPI.App_Start
     {
         public override void Load()
         {
-            //Repository
-            Bind<IUserRepository>().To<UserRepository>().InRequestScope().WithConstructorArgument("databaseContext", new DatabaseContext());
-            Bind<ITeamRepository>().To<TeamRepository>().InRequestScope().WithConstructorArgument("databaseContext", new DatabaseContext());
-            Bind<IStoryRepository>().To<StoryRepository>().InRequestScope().WithConstructorArgument("databaseContext", new DatabaseContext());
-            Bind<ISprintRepository>().To<SprintRepository>().InRequestScope().WithConstructorArgument("databaseContext", new DatabaseContext());
-            Bind<IEpicRepository>().To<EpicRepository>().InRequestScope().WithConstructorArgument("databaseContext", new DatabaseContext());
-            Bind<IProjectRepository>().To<ProjectRepository>().InRequestScope().WithConstructorArgument("databaseContext", new DatabaseContext());
+	        //Repository
+            Bind<IUserRepository>().To<UserRepository>().InRequestScope();
+            Bind<ITeamRepository>().To<TeamRepository>().InRequestScope();
+            Bind<IStoryRepository>().To<StoryRepository>().InRequestScope();
+            Bind<ISprintRepository>().To<SprintRepository>().InRequestScope();
+            Bind<IEpicRepository>().To<EpicRepository>().InRequestScope();
+            Bind<IProjectRepository>().To<ProjectRepository>().InRequestScope();
 
             //Services
             Bind<IUserService>().To<UserService>().InRequestScope();

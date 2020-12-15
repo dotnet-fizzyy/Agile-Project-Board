@@ -8,3 +8,8 @@ export const getIsRegistrationSuccessful = createSelector(
     loginRegistrationFeatureSelector,
     (state: ILoginCreationsState) => state.isRegistrationSuccessful
 );
+
+export const getIsSignInSuccessful = createSelector(
+    loginRegistrationFeatureSelector,
+    (state: ILoginCreationsState) => state.isSignInSuccessful
+);

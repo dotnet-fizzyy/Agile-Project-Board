@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { ILoginCreationsState } from 'src/app/redux/store/state';
 import { IAuthenticationUser } from 'src/app/utils/interfaces';
@@ -12,14 +13,24 @@ import * as LoginRegistrationSelectors from '../../../redux/selectors/loginRegis
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, DoCheck {
     readonly name = 'name';
     readonly password = 'password';
-    readonly successLogin$ = this.store$.select(LoginRegistrationSelectors.getIsRegistrationSuccessful);
+
+    isSuccessfulSignIn: boolean;
+    readonly successLogin$ = this.store$
+        .select(LoginRegistrationSelectors.getIsSignInSuccessful)
+        .subscribe((x) => (this.isSuccessfulSignIn = x));
 
     profileForm: FormGroup;
 
-    constructor(private fb: FormBuilder, private store$: Store<ILoginCreationsState>) {}
+    constructor(private fb: FormBuilder, private store$: Store<ILoginCreationsState>, private router: Router) {}
+
+    ngDoCheck(): void {
+        if (this.isSuccessfulSignIn) {
+            this.router.navigate(['/']);
+        }
+    }
 
     ngOnInit(): void {
         this.profileForm = this.fb.group({

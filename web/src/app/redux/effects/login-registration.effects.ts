@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, Effect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { HttpService } from '../../services/http.service';
 import * as LoginRegistrationActions from '../actions/login-registration.actions';
 import { catchError, map, mergeMap } from 'rxjs/operators';
@@ -10,7 +10,6 @@ import { UserRoutes } from '../../utils/constants/routes';
 export default class LoginRegistrationEffects {
     constructor(private actions$: Actions, private httpClient: HttpService) {}
 
-    @Effect()
     loginReguest$ = createEffect(() =>
         this.actions$.pipe(
             ofType<LoginRegistrationActions.LoginSignInActionRequest>(
@@ -28,7 +27,6 @@ export default class LoginRegistrationEffects {
         )
     );
 
-    @Effect()
     registrationRequest$ = createEffect(() =>
         this.actions$.pipe(
             ofType<LoginRegistrationActions.RegistrationCreateAccountActionRequest>(
