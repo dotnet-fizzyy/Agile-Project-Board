@@ -22,7 +22,10 @@ import Effects from './redux/effects';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { LoginComponent } from './components/login-registration/login.component';
+import { LoginComponent } from './components/login-registration/login/login.component';
+import { RegistrationComponent } from './components/login-registration/registration/registration.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
     declarations: [
@@ -33,6 +36,7 @@ import { LoginComponent } from './components/login-registration/login.component'
         StoryComponent,
         SidebarComponent,
         LoginComponent,
+        RegistrationComponent,
     ],
     imports: [
         BrowserModule,
@@ -48,6 +52,8 @@ import { LoginComponent } from './components/login-registration/login.component'
         BrowserAnimationsModule,
         MatTooltipModule,
         ReactiveFormsModule,
+        MatInputModule,
+        MatButtonModule,
     ],
     providers: [HttpService],
     bootstrap: [AppComponent],

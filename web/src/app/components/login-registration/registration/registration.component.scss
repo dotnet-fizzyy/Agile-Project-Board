@@ -1,0 +1,43 @@
+.flex-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.registration-main-container {
+    @extend .flex-container;
+    width: 100%;
+    height: 100%;
+}
+
+.header {
+    font-size: 30px;
+    font-family: 'Roboto';
+    margin: 10px 0;
+}
+
+.fields-container {
+    @extend .flex-container;
+    flex-direction: column;
+}
+
+.sign-in-button {
+    width: 160px;
+    margin-top: 20px;
+}
+
+.message-display {
+    font-size: 14px;
+    font-family: 'Roboto';
+}
+
+.error-message {
+    @extend .message-display;
+    color: red;
+}
+
+.account-creation {
+    @extend .message-display;
+    color: green;
+    margin-top: 10px;
+}

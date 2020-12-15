@@ -1,6 +1,11 @@
-export const MainRoute = 'http://localhost:3004';
+export const MainRoute = 'http://localhost:5001';
 
-export const Routes = {
-    USERS: MainRoute + '/users',
-    STORIES: MainRoute + '/stories',
+export const MainRoutes = {
+    USERS: MainRoute + '/user',
+    STORIES: MainRoute + '/story',
+};
+
+export const UserRoutes = {
+    AUTHENTICATE_USER: MainRoutes.USERS + '/auth',
+    CREATE_CUSTOMER: MainRoutes.USERS + '/customer',
 };
