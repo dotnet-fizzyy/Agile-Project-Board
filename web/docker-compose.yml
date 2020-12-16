@@ -1,0 +1,7 @@
+version: '3.4'
+
+services:
+    angular-ui:
+        image: scrum-ui
+        ports:
+            - 8080:80

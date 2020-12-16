@@ -3,12 +3,11 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve & json-server --watch db.json --port 3004",
+    "start": "ng serve -o",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "server": "json-server --watch db.json --port 3004"
+    "e2e": "ng e2e"
   },
   "lint": {
     "*.{ts,tsx}": [
@@ -32,7 +31,6 @@
     "@ngrx/store": "^10.0.0",
     "@ngrx/store-devtools": "^10.0.0",
     "husky": "^4.3.0",
-    "json-server": "^0.16.1",
     "prettier": "^2.2.0",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
