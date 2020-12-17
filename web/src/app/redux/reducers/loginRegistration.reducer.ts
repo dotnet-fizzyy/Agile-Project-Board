@@ -1,5 +1,5 @@
-import { ILoginCreationsState } from '../store/state';
 import * as LoginRegistrationActions from '../actions/login-registration.actions';
+import { ILoginCreationsState } from '../store/state';
 
 const initialState: ILoginCreationsState = {
     isSignInSuccessful: null,

@@ -2,6 +2,7 @@
   "extends": "tslint:recommended",
   "semicolon": [true, "always", "ignore-bound-class-methods"],
   "rules": {
+    "no-unused-declaration": true,
     "prettier": true,
     "align": {
       "options": [
@@ -148,7 +149,9 @@
     "template-no-negated-async": true,
     "use-lifecycle-interface": true,
     "use-pipe-transform-interface": true,
-    "no-unused-variable": true
+    "no-unused-variable": true,
+    "ordered-imports": true,
+    "newline-before-return": true
   },
   "rulesDirectory": [
     "codelyzer"

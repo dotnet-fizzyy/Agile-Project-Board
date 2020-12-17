@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IStory } from '../../utils/interfaces';
 import { Store } from '@ngrx/store';
-import { ISidebarState } from '../../redux/store/state';
 import { ViewStoryDetailsAction } from '../../redux/actions/stories.actions';
+import { ISidebarState } from '../../redux/store/state';
+import { IStory } from '../../utils/interfaces';
 
 @Component({
     selector: 'app-story',

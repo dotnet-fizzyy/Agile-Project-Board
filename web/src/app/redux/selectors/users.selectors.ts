@@ -1,6 +1,6 @@
-import { IUserState } from '../store/state';
-import { ReducerNames } from '../store';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { ReducerNames } from '../store';
+import { IUserState } from '../store/state';
 
 const SelectUsersFeature = createFeatureSelector(ReducerNames.users);
 

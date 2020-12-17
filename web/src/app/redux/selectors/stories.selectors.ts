@@ -1,7 +1,7 @@
-import { IStoriesState } from '../store/state';
-import { ReducerNames } from '../store';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { columnStoriesSorting } from '../../utils/helpers';
+import { ReducerNames } from '../store';
+import { IStoriesState } from '../store/state';
 
 const SelectStoriesFeature = createFeatureSelector(ReducerNames.stories);
 

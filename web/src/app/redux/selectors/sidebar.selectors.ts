@@ -1,6 +1,6 @@
-import { ISidebarState } from '../store/state';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { ReducerNames } from '../store';
+import { ISidebarState } from '../store/state';
 
 const sidebarFeatureSelector = createFeatureSelector(ReducerNames.sidebar);
 

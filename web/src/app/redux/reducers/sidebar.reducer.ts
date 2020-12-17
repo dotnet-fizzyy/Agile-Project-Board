@@ -1,5 +1,5 @@
-import { ISidebarState } from '../store/state';
 import * as SidebarActions from '../actions/sidebar.actions';
+import { ISidebarState } from '../store/state';
 
 const initialState: ISidebarState = {
     isOpened: false,

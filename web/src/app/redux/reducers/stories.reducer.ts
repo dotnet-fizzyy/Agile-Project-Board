@@ -1,5 +1,5 @@
-import { IStoriesState } from '../store/state';
 import * as StoryActions from '../actions/stories.actions';
+import { IStoriesState } from '../store/state';
 
 const initialState: IStoriesState = {
     stories: [],

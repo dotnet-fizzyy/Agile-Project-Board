@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ISelectItem, IStory } from '../../utils/interfaces';
 import { Store } from '@ngrx/store';
-import { IStoreState } from '../../redux/store/state';
 import { Observable } from 'rxjs';
 import { GetColumnStories } from '../../redux/selectors/stories.selectors';
+import { IStoreState } from '../../redux/store/state';
+import { ISelectItem, IStory } from '../../utils/interfaces';
 
 @Component({
     selector: 'app-column',

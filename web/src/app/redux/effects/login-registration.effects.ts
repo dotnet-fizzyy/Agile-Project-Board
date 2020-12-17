@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { HttpService } from '../../services/http.service';
-import * as LoginRegistrationActions from '../actions/login-registration.actions';
-import { catchError, map, mergeMap } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { catchError, map, mergeMap } from 'rxjs/operators';
+import { HttpService } from '../../services/http.service';
 import { UserRoutes } from '../../utils/constants/routes';
+import * as LoginRegistrationActions from '../actions/login-registration.actions';
 
 @Injectable()
 export default class LoginRegistrationEffects {

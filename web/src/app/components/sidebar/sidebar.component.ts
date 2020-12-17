@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { ISidebarState } from '../../redux/store/state';
 import { ChangeSidebarStateAction } from '../../redux/actions/sidebar.actions';
+import { ISidebarState } from '../../redux/store/state';
 
 @Component({
     selector: 'app-sidebar',

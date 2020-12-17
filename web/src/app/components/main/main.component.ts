@@ -1,13 +1,13 @@
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { ChangeStoryColumnAction, GetStoriesRequestAction } from '../../redux/actions/stories.actions';
+import { GetUsersRequestAction } from '../../redux/actions/user.actions';
+import { GetIsOpenedSidebarSelector } from '../../redux/selectors/sidebar.selectors';
+import { IStoreState } from '../../redux/store/state';
 import { ColumnNames } from '../../utils/constants';
 import { ISelectItem, IStory } from '../../utils/interfaces';
-import { Store } from '@ngrx/store';
-import { IStoreState } from '../../redux/store/state';
-import { GetUsersRequestAction } from '../../redux/actions/user.actions';
-import { GetStoriesRequestAction, ChangeStoryColumnAction } from '../../redux/actions/stories.actions';
-import { GetIsOpenedSidebarSelector } from '../../redux/selectors/sidebar.selectors';
-import { Observable } from 'rxjs';
-import { CdkDragDrop } from '@angular/cdk/drag-drop';
 
 @Component({
     selector: 'app-main',

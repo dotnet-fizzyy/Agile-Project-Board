@@ -1,7 +1,7 @@
-import userReducer from '../reducers/user.reducer';
-import storiesReducer from '../reducers/stories.reducer';
-import sidebarReducer from '../reducers/sidebar.reducer';
 import loginRegistrationReducer from '../reducers/loginRegistration.reducer';
+import sidebarReducer from '../reducers/sidebar.reducer';
+import storiesReducer from '../reducers/stories.reducer';
+import userReducer from '../reducers/user.reducer';
 
 export const ReducerNames = {
     users: 'users',

@@ -1,5 +1,5 @@
-import { IUserState } from '../store/state';
 import * as UserActions from '../actions/user.actions';
+import { IUserState } from '../store/state';
 
 const initialState: IUserState = {
     users: [],

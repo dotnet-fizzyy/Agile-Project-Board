@@ -1,21 +1,20 @@
 import { Injectable } from '@angular/core';
-import { HttpService } from '../../services/http.service';
-import { Actions, createEffect, Effect, ofType } from '@ngrx/effects';
-import * as StoryActions from '../actions/stories.actions';
-import { catchError, map, mergeMap, withLatestFrom } from 'rxjs/operators';
-import { IStory } from '../../utils/interfaces';
-import { MainRoutes } from '../../utils/constants/routes';
-import { of } from 'rxjs';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { IStoreState } from '../store/state';
+import { of } from 'rxjs';
+import { catchError, map, mergeMap, withLatestFrom } from 'rxjs/operators';
+import { HttpService } from '../../services/http.service';
+import { MainRoutes } from '../../utils/constants/routes';
+import { IStory } from '../../utils/interfaces';
 import { ChangeSidebarStateAction } from '../actions/sidebar.actions';
+import * as StoryActions from '../actions/stories.actions';
 import { GetIsOpenedSidebarSelector } from '../selectors/sidebar.selectors';
+import { IStoreState } from '../store/state';
 
 @Injectable()
 export default class StoriesEffects {
     constructor(private actions$: Actions, private store$: Store<IStoreState>, private httpClient: HttpService) {}
 
-    @Effect({ dispatch: false })
     storiesRequest$ = createEffect(() =>
         this.actions$.pipe(
             ofType(StoryActions.StoryActions.GET_STORIES_REQUEST),
@@ -29,7 +28,6 @@ export default class StoriesEffects {
         )
     );
 
-    @Effect({ dispatch: false })
     viewDetails$ = createEffect(() =>
         this.actions$.pipe(
             ofType(StoryActions.StoryActions.VIEW_STORY_DETAILS),
