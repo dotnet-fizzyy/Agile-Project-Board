@@ -1,10 +1,10 @@
 <div class="column-container">
-  <div class="column-header">
-    <span>{{ column.label }}</span>
-  </div>
-  <div class="column-body">
-    <ng-container *ngFor="let story of stories$ | async">
-      <app-story [story]="story"></app-story>
-    </ng-container>
-  </div>
+    <div class="column-header">
+        <span>{{ column.label }}</span>
+    </div>
+    <div class="column-body">
+        <ng-container *ngFor="let story of stories$ | async">
+            <app-story [story]="story"></app-story>
+        </ng-container>
+    </div>
 </div>

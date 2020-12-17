@@ -35,6 +35,11 @@
             <span class="error-message" *ngIf="verifyPasswords()">Passwords must be same</span>
         </ng-container>
 
+        <div class="link-container">
+            <span>Have account already?</span>
+            <a routerLink="/sign-in">Sign In</a>
+        </div>
+
         <span class="account-creation" *ngIf="isRegistrationSuccessful | async">Your account was created!</span>
 
         <button mat-raised-button color="primary" class="sign-in-button" (click)="onClickCreateAccount()" [disabled]="registrationForm.invalid || verifyPasswords()">
