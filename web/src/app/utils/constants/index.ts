@@ -13,3 +13,9 @@ export const ColumnNames = {
     [ColumnIds.REVIEW]: 'Review',
     [ColumnIds.ACCEPTED]: 'Accepted',
 };
+
+export const UserRoles = {
+    CUSTOMER: 'Customer',
+    ENGINEER: 'Engineer',
+    TEAMMASTER: 'TeamMaster',
+};

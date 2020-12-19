@@ -4,7 +4,9 @@ import * as AppRoutes from '../app/utils/constants/routes';
 import { LoginComponent } from './components/login-registration/login/login.component';
 import { RegistrationComponent } from './components/login-registration/registration/registration.component';
 import { MainComponent } from './components/main/main.component';
+import { TeamManagementComponent } from './components/team-management/team-management.component';
 import { AuthGuard } from './guards/auth-guard.guard';
+import { CustomerGuard } from './guards/customer.guard';
 
 const routes: Routes = [
     {
@@ -19,6 +21,11 @@ const routes: Routes = [
     {
         path: AppRoutes.UiRoutes.REGISTRATION,
         component: RegistrationComponent,
+    },
+    {
+        path: AppRoutes.UiRoutes.TEAM,
+        component: TeamManagementComponent,
+        canActivate: [CustomerGuard],
     },
 ];
 

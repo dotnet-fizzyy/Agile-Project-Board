@@ -23,6 +23,7 @@ import { RegistrationComponent } from './components/login-registration/registrat
 import { MainComponent } from './components/main/main.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { StoryComponent } from './components/story/story.component';
+import { TeamManagementComponent } from './components/team-management/team-management.component';
 import Effects from './redux/effects';
 import Reducers from './redux/store';
 import { HttpService } from './services/http.service';
@@ -37,6 +38,7 @@ import { HttpService } from './services/http.service';
         SidebarComponent,
         LoginComponent,
         RegistrationComponent,
+        TeamManagementComponent,
     ],
     imports: [
         BrowserModule,

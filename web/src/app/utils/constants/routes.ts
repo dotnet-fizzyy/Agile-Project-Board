@@ -16,4 +16,5 @@ export const UiRoutes = {
     HOME: '',
     SIGN_IN: 'sign-in',
     REGISTRATION: 'registration',
+    TEAM: 'teams',
 };
