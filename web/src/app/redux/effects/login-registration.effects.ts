@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
+import { IUser } from 'src/app/utils/interfaces';
 import { HttpService } from '../../services/http.service';
 import { UserRoutes } from '../../utils/constants/routes';
 import * as LoginRegistrationActions from '../actions/login-registration.actions';
@@ -16,7 +17,9 @@ export default class LoginRegistrationEffects {
                 LoginRegistrationActions.LoginRegistrationActions.LOGIN_SIGN_IN_REQUEST
             ),
             mergeMap((action) => this.httpClient.post(UserRoutes.AUTHENTICATE_USER, action.payload)),
-            map(() => {
+            map((response: IUser) => {
+                localStorage.setItem('user', JSON.stringify(response));
+
                 return new LoginRegistrationActions.LoginSignInActionSuccess();
             }),
             catchError((error) => {

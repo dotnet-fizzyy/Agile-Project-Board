@@ -21,6 +21,7 @@ namespace WebAPI.Core.Constants
 		public const string TeamControllerUrl = "team";
         public const string TeamControllerGetAllTeamsUrl = TeamControllerUrl + "/all";
         public const string TeamControllerGetTeamUrl = TeamControllerUrl + "/{teamId}";
+        public const string TeamControllerGetUserTeamUrl = TeamControllerUrl + "/user/{userId}";
 
         public const string UserControllerUrl = "user";
         public const string UserControllerGetAllUsersUrl = UserControllerUrl + "/all";

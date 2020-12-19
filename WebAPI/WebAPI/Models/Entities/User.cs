@@ -1,4 +1,5 @@
 using System;
+using WebAPI.Core.Enums;
 
 namespace WebAPI.Models.Entities
 {
@@ -7,6 +8,8 @@ namespace WebAPI.Models.Entities
         public Guid UserId { get; set; }
 
         public Guid? TeamId { get; set; }
+
+        public UserRole UserRole { get; set; }
 
         public string Username { get; set; }
 

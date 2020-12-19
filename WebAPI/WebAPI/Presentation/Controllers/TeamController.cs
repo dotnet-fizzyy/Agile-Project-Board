@@ -37,6 +37,20 @@ namespace WebAPI.Presentation.Controllers
 	        return Ok(team);
         }
 
+        [HttpGet]
+        [Route(RouteConstants.TeamControllerGetUserTeamUrl)]
+        public async Task<IHttpActionResult> GetUserTeam(Guid userId)
+        {
+            var userTeam = await _teamService.GetUserTeamAsync(userId);
+
+            if (userTeam == null)
+            {
+	            return NotFound();
+            }
+
+	        return Ok(userTeam);
+        }
+
         [HttpPost]
         [Route(RouteConstants.TeamControllerUrl)]
         public async Task<IHttpActionResult> CreateTeam([FromBody] Team team)

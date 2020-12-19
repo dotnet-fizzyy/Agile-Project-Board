@@ -270,6 +270,7 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Core\Constants\Constants.cs" />
+    <Compile Include="Core\Enums\UserRole.cs" />
     <Compile Include="Core\Interfaces\Repository\IEpicRepository.cs" />
     <Compile Include="Core\Interfaces\Repository\IProjectRepository.cs" />
     <Compile Include="Core\Interfaces\Repository\ISprintRepository.cs" />

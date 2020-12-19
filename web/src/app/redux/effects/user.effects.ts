@@ -29,8 +29,12 @@ export default class UserEffects {
     private mapToUsers = (response: any) => {
         return response.map((user) => {
             return {
-                id: user.id,
-                name: user.name,
+                userId: user.userId,
+                username: user.username,
+                avatarLink: user.avatarLink,
+                isActive: user.isActive,
+                userRole: user.userRole,
+                teamId: user.teamId,
             } as IUser;
         });
     };

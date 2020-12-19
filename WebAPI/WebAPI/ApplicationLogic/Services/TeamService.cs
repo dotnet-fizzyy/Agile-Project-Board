@@ -41,6 +41,16 @@ namespace WebAPI.ApplicationLogic.Services
             return teamModel;
         }
 
+        public async Task<Team> GetUserTeamAsync(Guid userId)
+        {
+	        var teamEntity =
+		        await _teamRepository.SearchForMultipleItemsAsync(x => x.Users.Any(src => src.UserId == userId));
+
+	        var teamModel = _mapper.Map<Team>(teamEntity);
+
+	        return teamModel;
+        }
+
         public async Task<Team> CreateTeamAsync(Team team)
         {
             var teamEntity = _mapper.Map<Models.Entities.Team>(team);

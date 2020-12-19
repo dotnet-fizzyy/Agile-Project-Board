@@ -11,6 +11,8 @@ namespace WebAPI.Core.Interfaces.Services
 
         Task<Team> GetTeamAsync(Guid teamId);
 
+        Task<Team> GetUserTeamAsync(Guid userId);
+
         Task<Team> CreateTeamAsync(Team team);
 
         Task<Team> UpdateTeamAsync(Team team);

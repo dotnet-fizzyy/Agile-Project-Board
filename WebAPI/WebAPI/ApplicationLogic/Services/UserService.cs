@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using WebAPI.Core.Enums;
 using WebAPI.Core.Interfaces.Repository;
 using WebAPI.Core.Interfaces.Services;
 using WebAPI.Models.Result;
@@ -66,6 +67,7 @@ namespace WebAPI.ApplicationLogic.Services
         {
 	        var userEntity = _mapper.Map<Models.Entities.User>(authUser);
 	        userEntity.Password = PasswordHashing.GeneratePassword(userEntity.Password);
+	        userEntity.UserRole = UserRole.Customer;
 
             var userModel = await PerformUserCreation(userEntity);
 

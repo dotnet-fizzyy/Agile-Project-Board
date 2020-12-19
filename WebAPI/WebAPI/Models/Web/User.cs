@@ -8,6 +8,8 @@ namespace WebAPI.Models.Web
 
         public Guid? TeamId { get; set; }
 
+        public string UserRole { get; set; }
+
         public string Username { get; set; }
 
         public string Password { get; set; }
