@@ -21,6 +21,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { LoginComponent } from './components/login-registration/login/login.component';
 import { RegistrationComponent } from './components/login-registration/registration/registration.component';
 import { MainComponent } from './components/main/main.component';
+import { ProjectManagementComponent } from './components/project-management/project-management.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { StoryComponent } from './components/story/story.component';
 import { TeamManagementComponent } from './components/team-management/team-management.component';
@@ -39,6 +40,7 @@ import { HttpService } from './services/http.service';
         LoginComponent,
         RegistrationComponent,
         TeamManagementComponent,
+        ProjectManagementComponent,
     ],
     imports: [
         BrowserModule,

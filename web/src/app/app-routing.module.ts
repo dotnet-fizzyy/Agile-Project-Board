@@ -4,6 +4,7 @@ import * as AppRoutes from '../app/utils/constants/routes';
 import { LoginComponent } from './components/login-registration/login/login.component';
 import { RegistrationComponent } from './components/login-registration/registration/registration.component';
 import { MainComponent } from './components/main/main.component';
+import { ProjectManagementComponent } from './components/project-management/project-management.component';
 import { TeamManagementComponent } from './components/team-management/team-management.component';
 import { AuthGuard } from './guards/auth-guard.guard';
 import { CustomerGuard } from './guards/customer.guard';
@@ -27,11 +28,16 @@ const routes: Routes = [
         component: TeamManagementComponent,
         canActivate: [CustomerGuard],
     },
+    {
+        path: AppRoutes.UiRoutes.PROJECT,
+        component: ProjectManagementComponent,
+        canActivate: [CustomerGuard],
+    },
 ];
 
 @NgModule({
     imports: [RouterModule.forRoot(routes)],
     exports: [RouterModule],
-    providers: [AuthGuard],
+    providers: [AuthGuard, CustomerGuard],
 })
 export class AppRoutingModule {}

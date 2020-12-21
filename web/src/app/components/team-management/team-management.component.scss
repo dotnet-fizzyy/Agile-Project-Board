@@ -1,0 +1,17 @@
+.flex-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.team-management-main-container {
+    width: 100%;
+    height: 100%;
+}
+
+.inner-container {
+    @extend .flex-container;
+    padding: 0 30px;
+    height: 100%;
+    flex-direction: column;
+}
