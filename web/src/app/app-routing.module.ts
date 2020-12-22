@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import * as AppRoutes from '../app/utils/constants/routes';
 import { LoginComponent } from './components/login-registration/login/login.component';
 import { RegistrationComponent } from './components/login-registration/registration/registration.component';
 import { MainComponent } from './components/main/main.component';
@@ -11,25 +10,25 @@ import { CustomerGuard } from './guards/customer.guard';
 
 const routes: Routes = [
     {
-        path: AppRoutes.UiRoutes.HOME,
+        path: '',
         component: MainComponent,
         canActivate: [AuthGuard],
     },
     {
-        path: AppRoutes.UiRoutes.SIGN_IN,
+        path: 'sign-in',
         component: LoginComponent,
     },
     {
-        path: AppRoutes.UiRoutes.REGISTRATION,
+        path: 'registration',
         component: RegistrationComponent,
     },
     {
-        path: AppRoutes.UiRoutes.TEAM,
+        path: 'team',
         component: TeamManagementComponent,
         canActivate: [CustomerGuard],
     },
     {
-        path: AppRoutes.UiRoutes.PROJECT,
+        path: 'project',
         component: ProjectManagementComponent,
         canActivate: [CustomerGuard],
     },

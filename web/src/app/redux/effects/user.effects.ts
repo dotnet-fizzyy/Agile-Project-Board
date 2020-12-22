@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { HttpService } from '../../services/http.service';
-import { MainRoutes } from '../../utils/constants/routes';
+import { MainRoutes } from '../../utils/constants/webapi-routes';
 import { IUser } from '../../utils/interfaces';
 import * as UserActions from '../actions/user.actions';
 

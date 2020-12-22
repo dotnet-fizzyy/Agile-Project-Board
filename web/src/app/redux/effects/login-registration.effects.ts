@@ -4,7 +4,7 @@ import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { IUser } from 'src/app/utils/interfaces';
 import { HttpService } from '../../services/http.service';
-import { UserRoutes } from '../../utils/constants/routes';
+import { UserRoutes } from '../../utils/constants/webapi-routes';
 import * as LoginRegistrationActions from '../actions/login-registration.actions';
 
 @Injectable()

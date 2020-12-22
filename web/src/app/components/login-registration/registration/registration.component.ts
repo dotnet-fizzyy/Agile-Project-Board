@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { RegistrationCreateAccountActionRequest } from 'src/app/redux/actions/login-registration.actions';
 import { ILoginCreationsState } from 'src/app/redux/store/state';
 import { IAuthenticationUser } from 'src/app/utils/interfaces';
+import * as loaderSelectors from '../../../redux/selectors/loader.selectors';
 import * as loginRegistrationSelectors from '../../../redux/selectors/loginRegistration.selectors';
 
 @Component({
@@ -18,9 +19,10 @@ export class RegistrationComponent implements OnInit {
     readonly name = 'name';
     readonly password = 'password';
     readonly repeatedPassword = 'repeatedPassword';
-    readonly isRegistrationSuccessful: Observable<boolean> = this.store$.select(
+    readonly isRegistrationSuccessful$: Observable<boolean> = this.store$.select(
         loginRegistrationSelectors.getIsRegistrationSuccessful
     );
+    readonly isLoading$: Observable<boolean> = this.store$.select(loaderSelectors.getIsLoading);
 
     registrationForm: FormGroup;
 

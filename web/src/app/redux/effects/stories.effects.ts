@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 import { catchError, map, mergeMap, withLatestFrom } from 'rxjs/operators';
 import { HttpService } from '../../services/http.service';
-import { MainRoutes } from '../../utils/constants/routes';
+import { MainRoutes } from '../../utils/constants/webapi-routes';
 import { IStory } from '../../utils/interfaces';
 import { ChangeSidebarStateAction } from '../actions/sidebar.actions';
 import * as StoryActions from '../actions/stories.actions';

@@ -9,7 +9,7 @@ export default function loaderReducer(state = initialState, action: LoaderAction
     switch (action.type) {
         case LoaderActions.LoaderActions.ENABLE_LOADING:
             return handleSetLoaderEnabled(state);
-        case LoaderActions.LoaderActions.ENABLE_LOADING:
+        case LoaderActions.LoaderActions.DISABLE_LOADING:
             return handleSetLoaderDisabled(state);
         default:
             return state;

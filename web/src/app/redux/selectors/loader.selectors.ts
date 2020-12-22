@@ -1,4 +1,3 @@
-import { createFeatureSelector } from '@ngrx/store';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { ReducerNames } from '../store';
 import { ILoaderState } from '../store/state';

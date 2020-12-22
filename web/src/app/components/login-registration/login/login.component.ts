@@ -3,9 +3,11 @@ import { FormGroup, Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { ILoginCreationsState } from 'src/app/redux/store/state';
 import { IAuthenticationUser } from 'src/app/utils/interfaces';
 import { LoginSignInActionRequest } from '../../../redux/actions/login-registration.actions';
+import * as loaderSelectors from '../../../redux/selectors/loader.selectors';
 import * as LoginRegistrationSelectors from '../../../redux/selectors/loginRegistration.selectors';
 
 @Component({
@@ -21,6 +23,8 @@ export class LoginComponent implements OnInit, DoCheck {
     readonly successLogin$ = this.store$
         .select(LoginRegistrationSelectors.getIsSignInSuccessful)
         .subscribe((x) => (this.isSuccessfulSignIn = x));
+
+    readonly isLoading$: Observable<boolean> = this.store$.select(loaderSelectors.getIsLoading);
 
     profileForm: FormGroup;
 

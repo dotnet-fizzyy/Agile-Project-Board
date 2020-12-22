@@ -1,5 +1,4 @@
 import { Router } from '@angular/router';
-import { UiRoutes } from '../utils/constants/routes';
 import { isUserAuthenticated } from '../utils/helpers';
 
 export class BaseGuard {
@@ -11,7 +10,7 @@ export class BaseGuard {
 
     isUserAuthenticated(): Promise<boolean> {
         if (!isUserAuthenticated()) {
-            return this.router.navigateByUrl(UiRoutes.SIGN_IN);
+            return this.router.navigateByUrl('sign-in');
         }
     }
 }

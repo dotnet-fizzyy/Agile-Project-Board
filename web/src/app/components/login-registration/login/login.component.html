@@ -19,6 +19,8 @@
                 <a routerLink="/registration">Create a new account</a>
             </div>
 
+            <mat-spinner *ngIf="isLoading$ | async" class="loader" [diameter]="30"></mat-spinner>
+
             <button mat-raised-button color="primary" class="sign-in-button" (click)="onClickSignIn()" [disabled]="profileForm.invalid">Sign in</button>
         </div>
     </div>
