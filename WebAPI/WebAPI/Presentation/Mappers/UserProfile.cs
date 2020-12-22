@@ -9,7 +9,8 @@ namespace WebAPI.Presentation.Mappers
 		public UserProfile()
 		{
 			CreateMap<Models.Entities.User, Models.Web.User>()
-				.ForMember(x => x.UserRole, opt => opt.MapFrom(src => src.UserRole.ToString()));
+				.ForMember(x => x.UserRole, opt => opt.MapFrom(src => src.UserRole.ToString()))
+				.ForMember(x => x.Password, opt => opt.Ignore());
 			CreateMap<Models.Web.User, Models.Entities.User>()
 				.ForMember(x => x.UserRole, opt => opt.MapFrom(src => (UserRole)Enum.Parse(typeof(UserRole), src.UserRole)));
 

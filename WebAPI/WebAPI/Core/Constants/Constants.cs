@@ -19,6 +19,7 @@ namespace WebAPI.Core.Constants
 	    public const string StoryControllerGetStoryUrl = StoryControllerUrl + "/{storyId}";
 
 		public const string TeamControllerUrl = "team";
+		public const string TeamControllerCreateTeamWithCustomerUrl = "team/cutomer";
         public const string TeamControllerGetAllTeamsUrl = TeamControllerUrl + "/all";
         public const string TeamControllerGetTeamUrl = TeamControllerUrl + "/{teamId}";
         public const string TeamControllerGetUserTeamUrl = TeamControllerUrl + "/user/{userId}";
@@ -28,5 +29,10 @@ namespace WebAPI.Core.Constants
         public const string UserControllerGetUserUrl = UserControllerUrl + "/{userId}";
         public const string UserControllerAuthenticateUrl = UserControllerUrl + "/auth";
         public const string UserControllerCreateCustomerUrl = UserControllerUrl + "/customer";
+    }
+
+    public static class Headers
+    {
+	    public const string UserHeader = "x-end-user";
     }
 }

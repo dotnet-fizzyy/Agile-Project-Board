@@ -56,7 +56,7 @@ namespace WebAPI.ApplicationLogic.Services
 	        var userEntity = _mapper.Map<Models.Entities.User>(authUser);
 	        userEntity.Password = PasswordHashing.GeneratePassword(userEntity.Password);
 
-	        var foundUserEntity = await _userRepository.AuthenticateUser(userEntity);
+	        var foundUserEntity = await _userRepository.AuthenticateUserAsync(userEntity);
 
 	        var userModel = _mapper.Map<User>(foundUserEntity);
 

@@ -19,6 +19,8 @@ namespace WebAPI.Models.Entities
 
         public DateTime EndDate { get; set; }
 
+        public Guid CustomerId { get; set; }
+
         public IList<Team> Teams { get; set; }
 
         public IList<Epic> Epics { get; set; }

@@ -12,11 +12,13 @@ namespace WebAPI.ApplicationLogic.Services
     public class TeamService : ITeamService
     {
         private readonly ITeamRepository _teamRepository;
+        private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
 
-        public TeamService(ITeamRepository teamRepository, IMapper mapper)
+        public TeamService(ITeamRepository teamRepository, IUserRepository userRepository, IMapper mapper)
         {
             _teamRepository = teamRepository;
+            _userRepository = userRepository;
             _mapper = mapper;
         }
 
@@ -60,6 +62,19 @@ namespace WebAPI.ApplicationLogic.Services
             var teamModel = _mapper.Map<Team>(createdEntity);
 
             return teamModel;
+        }
+
+        public async Task<Team> CreateTeamWithCustomerAsync(Team team, Guid customerId)
+        {
+	        var teamEntity = _mapper.Map<Models.Entities.Team>(team);
+
+	        var createdEntity = await _teamRepository.CreateItemAsync(teamEntity);
+
+	        await _userRepository.UpdateUserTeamAsync(customerId, createdEntity.TeamId);
+
+	        var teamModel = _mapper.Map<Team>(createdEntity);
+
+	        return teamModel;
         }
 
         public async Task<Team> UpdateTeamAsync(Team team)

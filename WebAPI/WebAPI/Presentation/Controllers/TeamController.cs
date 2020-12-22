@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -56,6 +57,22 @@ namespace WebAPI.Presentation.Controllers
         public async Task<IHttpActionResult> CreateTeam([FromBody] Team team)
         {
 	        var createdTeam = await _teamService.CreateTeamAsync(team);
+
+	        return Created(nameof(TeamController), createdTeam);
+        }
+
+        [HttpPost]
+        [Route(RouteConstants.TeamControllerCreateTeamWithCustomerUrl)]
+        public async Task<IHttpActionResult> CreateTeamWithCustomer([FromBody] Team team)
+        {
+	        var userId = Request.Headers.GetValues(Headers.UserHeader).FirstOrDefault();
+
+	        if (userId == null)
+	        {
+		        return BadRequest();
+	        }
+
+	        var createdTeam = await _teamService.CreateTeamWithCustomerAsync(team, new Guid(userId));
 
 	        return Created(nameof(TeamController), createdTeam);
         }
