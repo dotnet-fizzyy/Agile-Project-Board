@@ -1,3 +1,4 @@
+import loaderReducer from '../reducers/loader.reducer';
 import loginRegistrationReducer from '../reducers/loginRegistration.reducer';
 import sidebarReducer from '../reducers/sidebar.reducer';
 import storiesReducer from '../reducers/stories.reducer';
@@ -8,6 +9,7 @@ export const ReducerNames = {
     stories: 'stories',
     sidebar: 'sidebar',
     loginRegistration: 'loginRegistration',
+    loader: 'loader',
 };
 
 const Reducers = {
@@ -15,6 +17,7 @@ const Reducers = {
     [ReducerNames.stories]: storiesReducer,
     [ReducerNames.sidebar]: sidebarReducer,
     [ReducerNames.loginRegistration]: loginRegistrationReducer,
+    [ReducerNames.loader]: loaderReducer,
 };
 
 export default Reducers;

@@ -24,3 +24,7 @@ export interface IStoreState {
     sidebar: ISidebarState;
     loginRegistration: ILoginCreationsState;
 }
+
+export interface ILoaderState {
+    isLoading: boolean;
+}

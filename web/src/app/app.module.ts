@@ -1,5 +1,5 @@
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -25,6 +25,7 @@ import { ProjectManagementComponent } from './components/project-management/proj
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { StoryComponent } from './components/story/story.component';
 import { TeamManagementComponent } from './components/team-management/team-management.component';
+import { LoaderInterceptor } from './interceptors/loader-interceptor.interceptor';
 import Effects from './redux/effects';
 import Reducers from './redux/store';
 import { HttpService } from './services/http.service';
@@ -59,7 +60,7 @@ import { HttpService } from './services/http.service';
         MatInputModule,
         MatButtonModule,
     ],
-    providers: [HttpService],
+    providers: [HttpService, { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }],
     bootstrap: [AppComponent],
 })
 export class AppModule {
