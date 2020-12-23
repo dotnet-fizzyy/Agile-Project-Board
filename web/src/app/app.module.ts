@@ -24,6 +24,7 @@ import { RegistrationComponent } from './components/login-registration/registrat
 import { MainComponent } from './components/main/main.component';
 import { ProjectManagementComponent } from './components/project-management/project-management.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { StartPromptComponent } from './components/start-prompt/start-prompt.component';
 import { StoryComponent } from './components/story/story.component';
 import { TeamManagementComponent } from './components/team-management/team-management.component';
 import { LoaderInterceptor } from './interceptors/loader-interceptor.interceptor';
@@ -43,6 +44,7 @@ import { HttpService } from './services/http.service';
         RegistrationComponent,
         TeamManagementComponent,
         ProjectManagementComponent,
+        StartPromptComponent,
     ],
     imports: [
         BrowserModule,

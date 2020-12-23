@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login-registration/login/login.component';
 import { RegistrationComponent } from './components/login-registration/registration/registration.component';
-import { MainComponent } from './components/main/main.component';
 import { ProjectManagementComponent } from './components/project-management/project-management.component';
+import { StartPromptComponent } from './components/start-prompt/start-prompt.component';
 import { TeamManagementComponent } from './components/team-management/team-management.component';
 import { AuthGuard } from './guards/auth-guard.guard';
 import { CustomerGuard } from './guards/customer.guard';
@@ -11,7 +11,7 @@ import { CustomerGuard } from './guards/customer.guard';
 const routes: Routes = [
     {
         path: '',
-        component: MainComponent,
+        component: StartPromptComponent,
         canActivate: [AuthGuard],
     },
     {

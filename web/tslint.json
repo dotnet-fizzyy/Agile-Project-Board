@@ -2,6 +2,7 @@
   "extends": "tslint:recommended",
   "semicolon": [true, "always", "ignore-bound-class-methods"],
   "rules": {
+    "no-unused-variable": true,
     "align": {
       "options": [
         "parameters",
