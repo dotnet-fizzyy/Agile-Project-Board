@@ -17,6 +17,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { BoardComponent } from './components/board/board.component';
 import { ColumnComponent } from './components/column/column.component';
 import { HeaderComponent } from './components/header/header.component';
 import { LoginComponent } from './components/login-registration/login/login.component';
@@ -45,6 +46,7 @@ import { HttpService } from './services/http.service';
         TeamManagementComponent,
         ProjectManagementComponent,
         StartPromptComponent,
+        BoardComponent,
     ],
     imports: [
         BrowserModule,

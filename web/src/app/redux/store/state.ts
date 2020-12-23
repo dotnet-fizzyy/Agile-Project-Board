@@ -1,6 +1,7 @@
 import { IStory, IUser } from '../../utils/interfaces';
 
 export interface IUserState {
+    currentUser?: IUser;
     users: IUser[];
 }
 

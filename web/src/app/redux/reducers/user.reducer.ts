@@ -1,7 +1,9 @@
+import { NullTemplateVisitor } from '@angular/compiler';
 import * as UserActions from '../actions/user.actions';
 import { IUserState } from '../store/state';
 
 const initialState: IUserState = {
+    currentUser: null,
     users: [],
 };
 

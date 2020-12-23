@@ -4,8 +4,10 @@ import { IUserState } from '../store/state';
 
 const SelectUsersFeature = createFeatureSelector(ReducerNames.users);
 
-export const UsersSelector = createSelector(SelectUsersFeature, (state: IUserState) => state.users);
+export const GetUsersSelector = createSelector(SelectUsersFeature, (state: IUserState) => state.users);
 
-export const GetCurrentUserSelector = createSelector(SelectUsersFeature, (userId: string) => (state: IUserState) =>
-    state.users.find((user) => user.id === userId)
+export const GetCurrentUser = createSelector(SelectUsersFeature, (state: IUserState) => state.currentUser);
+
+export const GetUserByIdSelector = createSelector(SelectUsersFeature, (userId: string) => (state: IUserState) =>
+    state.users.find((user) => user.userId === userId)
 );

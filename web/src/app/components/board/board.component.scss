@@ -1,0 +1,30 @@
+.main-div {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.main-header {
+    width: 100%;
+    height: 50px;
+    background-color: black;
+}
+
+.main-body {
+    width: 100%;
+    height: 100%;
+    background-color: yellow;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.sidebar-container {
+    position: absolute;
+    right: 0;
+    height: 100%;
+}
+
+.sidebar-content {
+    width: 392px;
+}
