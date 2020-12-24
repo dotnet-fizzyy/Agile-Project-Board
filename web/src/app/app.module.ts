@@ -28,6 +28,8 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { StartPromptComponent } from './components/start-prompt/start-prompt.component';
 import { StoryComponent } from './components/story/story.component';
 import { TeamManagementComponent } from './components/team-management/team-management.component';
+import { InputWrapperComponent } from './components/wrappers/input-wrapper/input-wrapper.component';
+import { SelectWrapperComponent } from './components/wrappers/select-wrapper/select-wrapper.component';
 import { LoaderInterceptor } from './interceptors/loader-interceptor.interceptor';
 import Effects from './redux/effects';
 import Reducers from './redux/store';
@@ -47,6 +49,8 @@ import { HttpService } from './services/http.service';
         ProjectManagementComponent,
         StartPromptComponent,
         BoardComponent,
+        InputWrapperComponent,
+        SelectWrapperComponent,
     ],
     imports: [
         BrowserModule,
