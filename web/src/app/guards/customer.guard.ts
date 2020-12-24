@@ -1,7 +1,6 @@
 import { Location } from '@angular/common';
 import { Injectable } from '@angular/core';
-import { Router, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 import { UserRoles } from '../utils/constants';
 import { getUser } from '../utils/helpers';
 import { BaseGuard } from './base-guard';
@@ -12,7 +11,7 @@ export class CustomerGuard extends BaseGuard {
         super(router);
     }
 
-    public willActivate(): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
+    public willActivate(): boolean {
         const user = getUser();
 
         if (user.userRole !== UserRoles.CUSTOMER) {

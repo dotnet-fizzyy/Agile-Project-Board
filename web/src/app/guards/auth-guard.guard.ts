@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Router, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 import { BaseGuard } from './base-guard';
 
 @Injectable()
@@ -9,7 +8,7 @@ export class AuthGuard extends BaseGuard {
         super(router);
     }
 
-    public willActivate(): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
+    public willActivate(): boolean {
         return true;
     }
 }

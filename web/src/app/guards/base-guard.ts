@@ -19,5 +19,5 @@ export abstract class BaseGuard implements CanActivate {
         return this.willActivate();
     }
 
-    public abstract willActivate(): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree>;
+    public abstract willActivate(): boolean;
 }
