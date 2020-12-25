@@ -1,1 +1,8 @@
-<p>select-wrapper works!</p>
+<mat-form-field appearance="fill">
+    <mat-label>{{ label }}</mat-label>
+    <mat-select [(value)]="selectedItem.value">
+        <mat-option *ngFor="let option of options" [value]="option.value">
+            {{option.label}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
