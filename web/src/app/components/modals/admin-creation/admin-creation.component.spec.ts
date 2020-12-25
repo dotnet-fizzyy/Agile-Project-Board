@@ -1,0 +1,24 @@
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { AdminCreationComponent } from './admin-creation.component';
+
+describe('ProjectCreationComponent', () => {
+    let component: AdminCreationComponent;
+    let fixture: ComponentFixture<AdminCreationComponent>;
+
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [AdminCreationComponent],
+        }).compileComponents();
+    }));
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent(AdminCreationComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
+
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
+});

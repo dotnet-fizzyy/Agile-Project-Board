@@ -40,16 +40,16 @@ export interface IProject {
 }
 
 export interface IEpic {
-    epicId: string;
-    projectId: string;
+    epicId?: string;
+    projectId?: string;
     epicName: string;
     startDate: Date;
     endDate: Date;
 }
 
 export interface ISprint {
-    sprintId: string;
-    epicId: string;
+    sprintId?: string;
+    epicId?: string;
     sprintName: string;
     startDate: Date;
     endDate: Date;

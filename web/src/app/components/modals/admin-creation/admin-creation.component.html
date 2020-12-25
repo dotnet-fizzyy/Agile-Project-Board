@@ -1,7 +1,7 @@
-<h2>Project creation</h2>
-<form [formGroup]="projectForm">
+<h2>{{ label }} creation</h2>
+<form [formGroup]="formGroup">
     <div class="project-creation-form-container">
-        <app-input-wrapper [formControlName]="projectName" type="text" label="Project name" required="true"></app-input-wrapper>
+        <app-input-wrapper [formControlName]="name" type="text" label="{{ label }} name" required="true"></app-input-wrapper>
         <app-input-wrapper [formControlName]="startDate" type="date" label="Start date" required="true"></app-input-wrapper>
         <app-input-wrapper [formControlName]="endDate" type="date" label="End date" required="true"></app-input-wrapper>
     </div>
@@ -9,8 +9,8 @@
 <button 
     mat-raised-button 
     color="primary" 
-    [disabled]="projectForm.invalid" 
-    (click)="onClickCreateProject()"
+    [disabled]="formGroup.invalid" 
+    (click)="onClickCreate()"
 >
-    Create project
+    Create {{ label }}
 </button>

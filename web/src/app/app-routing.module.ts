@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BoardComponent } from './components/board/board.component';
 import { LoginComponent } from './components/login-registration/login/login.component';
 import { RegistrationComponent } from './components/login-registration/registration/registration.component';
 import { ProjectManagementComponent } from './components/project-management/project-management.component';
@@ -31,6 +32,11 @@ const routes: Routes = [
         path: 'project',
         component: ProjectManagementComponent,
         canActivate: [CustomerGuard],
+    },
+    {
+        path: 'board/:projectId',
+        component: BoardComponent,
+        canActivate: [AuthGuard],
     },
 ];
 

@@ -24,7 +24,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { LoginComponent } from './components/login-registration/login/login.component';
 import { RegistrationComponent } from './components/login-registration/registration/registration.component';
 import { MainComponent } from './components/main/main.component';
-import { ProjectCreationComponent } from './components/modals/project-creation/project-creation.component';
+import { AdminCreationComponent } from './components/modals/admin-creation/admin-creation.component';
 import { ProjectManagementComponent } from './components/project-management/project-management.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { StartPromptComponent } from './components/start-prompt/start-prompt.component';
@@ -53,7 +53,7 @@ import { HttpService } from './services/http.service';
         BoardComponent,
         InputWrapperComponent,
         SelectWrapperComponent,
-        ProjectCreationComponent,
+        AdminCreationComponent,
     ],
     imports: [
         BrowserModule,

@@ -19,3 +19,9 @@ export const UserRoles = {
     ENGINEER: 'Engineer',
     TEAMMASTER: 'TeamMaster',
 };
+
+export const enum ModalCreationType {
+    Project,
+    Epic,
+    Sprint,
+}

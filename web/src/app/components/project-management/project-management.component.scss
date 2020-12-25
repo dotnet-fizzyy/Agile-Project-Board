@@ -36,8 +36,15 @@
 }
 
 .list-container {
+    position: relative;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
     align-items: center;
+}
+
+.add-item-button {
+    position: absolute;
+    right: 1%;
+    top: 1%;
 }

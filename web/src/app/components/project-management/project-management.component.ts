@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
+import { ModalCreationType } from 'src/app/utils/constants';
 import * as ProjectActions from '../../redux/actions/project.actions';
 import * as ProjectSelectors from '../../redux/selectors/project.selectors';
+import { AdminCreationComponent } from '../modals/admin-creation/admin-creation.component';
 import { IProjectState } from './../../redux/store/state';
-import { ProjectCreationComponent } from './../modals/project-creation/project-creation.component';
 
 @Component({
     selector: 'app-project-management',
@@ -22,7 +23,19 @@ export class ProjectManagementComponent implements OnInit {
         this.store$.dispatch(new ProjectActions.GetProjectRequest());
     }
 
-    onClickCreateButton = (): void => {
-        this.dialog.open(ProjectCreationComponent, { width: '400px' });
+    onClickCreateProjectButton = (): void => {
+        this.openModal(ModalCreationType.Project);
+    };
+
+    onClickAddEpicButton = (): void => {
+        this.openModal(ModalCreationType.Epic);
+    };
+
+    onClickAddSprintButton = (): void => {
+        this.openModal(ModalCreationType.Sprint);
+    };
+
+    private openModal = (modalType: ModalCreationType): void => {
+        this.dialog.open(AdminCreationComponent, { width: '400px', data: modalType });
     };
 }

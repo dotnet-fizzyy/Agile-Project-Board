@@ -17,3 +17,5 @@ export function getUser(): IUser {
 
     return JSON.parse(jsonUser);
 }
+
+export const nameof = <T>(name: keyof T) => name;
