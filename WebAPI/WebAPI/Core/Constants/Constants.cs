@@ -5,8 +5,9 @@ namespace WebAPI.Core.Constants
 	    public const string ProjectControllerUrl = "project";
 	    public const string ProjectControllerGetAllProjectsUrl = ProjectControllerUrl + "/all";
 	    public const string ProjectControllerGetProjectUrl = ProjectControllerUrl + "/{projectId}";
+	    public const string ProjectControllerCreateProjectWithCustomerUrl = ProjectControllerUrl + "/customer";
 
-	    public const string EpicControllerUrl = "epic";
+		public const string EpicControllerUrl = "epic";
 	    public const string EpicControllerGetAllEpicsUrl = EpicControllerUrl + "/all";
 	    public const string EpicControllerGetEpicUrl = EpicControllerUrl + "/{epicId}";
 
@@ -19,7 +20,7 @@ namespace WebAPI.Core.Constants
 	    public const string StoryControllerGetStoryUrl = StoryControllerUrl + "/{storyId}";
 
 		public const string TeamControllerUrl = "team";
-		public const string TeamControllerCreateTeamWithCustomerUrl = "team/cutomer";
+		public const string TeamControllerCreateTeamWithCustomerUrl = TeamControllerUrl + "/cutomer";
         public const string TeamControllerGetAllTeamsUrl = TeamControllerUrl + "/all";
         public const string TeamControllerGetTeamUrl = TeamControllerUrl + "/{teamId}";
         public const string TeamControllerGetUserTeamUrl = TeamControllerUrl + "/user/{userId}";

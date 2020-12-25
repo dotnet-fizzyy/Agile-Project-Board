@@ -11,7 +11,11 @@ namespace WebAPI.Core.Interfaces.Services
 
         Task<Project> GeProjectAsync(Guid projectId);
 
+        Task<FullProjectDescription> GetCustomerProject(Guid userId);
+
         Task<Project> CreateProjectAsync(Project project);
+
+        Task<Project> CreateProjectWithCustomerAsync(Project project, Guid userId);
 
         Task<Project> UpdateProjectAsync(Project project);
 

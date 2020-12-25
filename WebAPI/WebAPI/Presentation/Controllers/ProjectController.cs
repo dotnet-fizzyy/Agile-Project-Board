@@ -13,10 +13,12 @@ namespace WebAPI.Presentation.Controllers
     public class ProjectController : ApiController
     {
         private readonly IProjectService _projectService;
+        private readonly IRequestHeadersProvider _requestHeadersProvider;
 
-        public ProjectController(IProjectService projectService)
+        public ProjectController(IProjectService projectService, IRequestHeadersProvider requestHeadersProvider)
         {
             _projectService = projectService;
+            _requestHeadersProvider = requestHeadersProvider;
         }
 
         [HttpGet]
@@ -37,6 +39,27 @@ namespace WebAPI.Presentation.Controllers
             return Ok(project);
         }
 
+        [HttpGet]
+        [Route(RouteConstants.ProjectControllerCreateProjectWithCustomerUrl)]
+        public async Task<IHttpActionResult> GetProjectByCustomerId()
+        {
+	        var userId = _requestHeadersProvider.GetUserId(Request);
+
+	        if (userId == null)
+	        {
+		        return BadRequest();
+	        }
+
+            var project = await _projectService.GetCustomerProject((Guid)userId);
+
+	        if (project == null)
+	        {
+		        return NotFound();
+	        }
+
+	        return Ok(project);
+        }
+
         [HttpPost]
         [Route(RouteConstants.ProjectControllerUrl)]
         public async Task<IHttpActionResult> CreateProject([FromBody] Project project)
@@ -44,6 +67,22 @@ namespace WebAPI.Presentation.Controllers
             var createdProject = await _projectService.CreateProjectAsync(project);
 
             return Created(nameof(ProjectController), createdProject);
+        }
+
+        [HttpPost]
+        [Route(RouteConstants.ProjectControllerCreateProjectWithCustomerUrl)]
+        public async Task<IHttpActionResult> CreateProjectWithCustomer([FromBody] Project project)
+        {
+	        var userId = _requestHeadersProvider.GetUserId(Request);
+
+	        if (userId == null)
+	        {
+		        return BadRequest();
+	        }
+
+	        var createdProject = await _projectService.CreateProjectWithCustomerAsync(project, (Guid)userId);
+
+	        return Created(nameof(ProjectController), createdProject);
         }
 
         [HttpPut]

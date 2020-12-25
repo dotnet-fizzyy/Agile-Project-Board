@@ -1,7 +1,15 @@
 <div class="root-project-management">
     <div class="main-project-main-container">
         <div class="project-description-container">
-            <div *ngIf="project$ | async; else create"></div>
+            <div *ngIf="project$ | async; else create" class="create-button-container">
+                <h2>{{ (project$ | async).projectName }}</h2>
+                <p>Start date: {{ (project$ | async).startDate | date: 'dd-MM-yyyy' }}</p>
+                <p>End date: {{ (project$ | async).endDate | date: 'dd-MM-yyyy' }}</p>
+                <div class="manage-buttons-container">
+                    <button mat-raised-button color="primary">Update project info</button>
+                    <button mat-raised-button color="warn">Remove project</button>
+                </div>
+            </div>
             <ng-template #create>
                 <div class="create-button-container">
                     <button mat-raised-button color="primary" (click)="onClickCreateProjectButton()">Create project</button>

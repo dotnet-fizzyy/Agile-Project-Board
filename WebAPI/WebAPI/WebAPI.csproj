@@ -259,6 +259,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationLogic\PasswordHashing.cs" />
+    <Compile Include="ApplicationLogic\RequestHeadersProvider.cs" />
     <Compile Include="ApplicationLogic\Services\EpicService.cs" />
     <Compile Include="ApplicationLogic\Services\ProjectService.cs" />
     <Compile Include="ApplicationLogic\Services\SprintService.cs" />
@@ -278,6 +279,7 @@
     <Compile Include="Core\Interfaces\Repository\ITeamRepository.cs" />
     <Compile Include="Core\Interfaces\Services\IEpicService.cs" />
     <Compile Include="Core\Interfaces\Services\IProjectService.cs" />
+    <Compile Include="Core\Interfaces\Services\IRequestHeadersProvider.cs" />
     <Compile Include="Core\Interfaces\Services\ISprintService.cs" />
     <Compile Include="Core\Interfaces\Services\IStoryService.cs" />
     <Compile Include="Core\Interfaces\Services\ITeamService.cs" />
@@ -305,6 +307,7 @@
     <Compile Include="Models\Result\CollectionResponse.cs" />
     <Compile Include="Models\Web\AuthUser.cs" />
     <Compile Include="Models\Web\Epic.cs" />
+    <Compile Include="Models\Web\FullProjectDescription.cs" />
     <Compile Include="Models\Web\Project.cs" />
     <Compile Include="Models\Web\Sprint.cs" />
     <Compile Include="Models\Web\Story.cs" />

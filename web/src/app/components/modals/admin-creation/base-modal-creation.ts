@@ -43,14 +43,14 @@ export default abstract class BaseModalCreation {
                     ...dates,
                     sprintName: this.formGroup.get(this.name).value,
                 };
-                this.store$.dispatch(new ProjectActions.CreateProjectRequest(sprint as any));
+                this.store$.dispatch(new ProjectActions.CreateSprintRequest(sprint));
                 break;
             case ModalCreationType.Epic:
                 const epic: IEpic = {
                     ...dates,
                     epicName: this.formGroup.get(this.name).value,
                 };
-                this.store$.dispatch(new ProjectActions.CreateProjectRequest(epic as any));
+                this.store$.dispatch(new ProjectActions.CreateEpicRequest(epic));
                 break;
             default:
                 break;

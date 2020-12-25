@@ -2,6 +2,7 @@ using System.Reflection;
 using AutoMapper;
 using Ninject.Modules;
 using Ninject.Web.Common;
+using WebAPI.ApplicationLogic;
 using WebAPI.ApplicationLogic.Services;
 using WebAPI.Core.Interfaces.Repository;
 using WebAPI.Core.Interfaces.Services;
@@ -28,6 +29,7 @@ namespace WebAPI.App_Start
             Bind<ISprintService>().To<SprintService>().InRequestScope();
             Bind<IEpicService>().To<EpicService>().InRequestScope();
             Bind<IStoryService>().To<StoryService>().InRequestScope();
+            Bind<IRequestHeadersProvider>().To<RequestHeadersProvider>().InRequestScope();
 
             //Mapper
             var mapperConfig = new MapperConfiguration(cfg =>

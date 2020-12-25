@@ -1,8 +1,9 @@
+import { getUser } from 'src/app/utils/helpers';
 import * as UserActions from '../actions/user.actions';
 import { IUserState } from '../store/state';
 
 const initialState: IUserState = {
-    currentUser: null,
+    currentUser: getUser() || null,
     users: [],
 };
 

@@ -54,3 +54,8 @@ export interface ISprint {
     startDate: Date;
     endDate: Date;
 }
+
+export interface IFullProjectDescription {
+    project: IProject;
+    epics: IEpic[];
+}
