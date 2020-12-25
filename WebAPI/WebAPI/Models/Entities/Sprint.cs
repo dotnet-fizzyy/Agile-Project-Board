@@ -14,7 +14,7 @@ namespace WebAPI.Models.Entities
 
         public Guid EpicId { get; set; }
 
-        public string Name { get; set; }
+        public string SprintName { get; set; }
 
         public DateTime StartDate { get; set; }
 
