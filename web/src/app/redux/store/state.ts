@@ -1,4 +1,5 @@
 import { IStory, IUser } from '../../utils/interfaces';
+import { IEpic, IProject, ISprint } from './../../utils/interfaces/index';
 
 export interface IUserState {
     currentUser?: IUser;
@@ -28,4 +29,10 @@ export interface IStoreState {
 
 export interface ILoaderState {
     isLoading: boolean;
+}
+
+export interface IProjectState {
+    project?: IProject;
+    epics: IEpic[];
+    sprints: ISprint[];
 }

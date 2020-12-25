@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -23,6 +24,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { LoginComponent } from './components/login-registration/login/login.component';
 import { RegistrationComponent } from './components/login-registration/registration/registration.component';
 import { MainComponent } from './components/main/main.component';
+import { ProjectCreationComponent } from './components/modals/project-creation/project-creation.component';
 import { ProjectManagementComponent } from './components/project-management/project-management.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { StartPromptComponent } from './components/start-prompt/start-prompt.component';
@@ -51,6 +53,7 @@ import { HttpService } from './services/http.service';
         BoardComponent,
         InputWrapperComponent,
         SelectWrapperComponent,
+        ProjectCreationComponent,
     ],
     imports: [
         BrowserModule,
@@ -69,6 +72,7 @@ import { HttpService } from './services/http.service';
         MatInputModule,
         MatButtonModule,
         MatProgressSpinnerModule,
+        MatDialogModule,
     ],
     providers: [HttpService, { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }],
     bootstrap: [AppComponent],

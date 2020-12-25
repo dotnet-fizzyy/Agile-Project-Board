@@ -13,7 +13,7 @@
     "arrow-return-shorthand": true,
     "curly": true,
     "deprecation": {
-      "severity": "warning"
+      "severity": "error"
     },
     "component-class-suffix": true,
     "contextual-lifecycle": true,
@@ -123,7 +123,8 @@
       "options": [
         "ban-keywords",
         "check-format",
-        "allow-pascal-case"
+        "allow-pascal-case",
+        "allow-leading-underscore"
       ]
     },
     "whitespace": {

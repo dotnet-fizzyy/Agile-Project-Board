@@ -30,3 +30,27 @@ export interface IAuthenticationUser {
     username: string;
     password: string;
 }
+
+export interface IProject {
+    projectId?: string;
+    projectName: string;
+    startDate: Date;
+    endDate: Date;
+    customerId?: string;
+}
+
+export interface IEpic {
+    epicId: string;
+    projectId: string;
+    epicName: string;
+    startDate: Date;
+    endDate: Date;
+}
+
+export interface ISprint {
+    sprintId: string;
+    epicId: string;
+    sprintName: string;
+    startDate: Date;
+    endDate: Date;
+}

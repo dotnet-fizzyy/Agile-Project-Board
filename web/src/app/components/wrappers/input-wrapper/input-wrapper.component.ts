@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input, OnInit } from '@angular/core';
+import { Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -13,23 +13,20 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
         },
     ],
 })
-export class InputWrapperComponent implements OnInit, ControlValueAccessor {
+export class InputWrapperComponent implements ControlValueAccessor {
     private onChange: (value: any) => void;
     private onTouch: () => void;
 
-    private value: any;
-    private disabled: boolean;
+    private _value: any;
 
+    @Input() label: string;
     @Input() required: boolean;
+    @Input() type: string;
 
-    constructor() {
-        console.log(this.value, this.disabled, this.onChange, this.onTouch);
-    }
+    constructor() {}
 
-    ngOnInit(): void {}
-
-    writeValue(outSideValue: any): void {
-        this.value = outSideValue;
+    writeValue(value: any): void {
+        this._value = value;
     }
 
     registerOnChange(fn: any): void {
@@ -38,5 +35,16 @@ export class InputWrapperComponent implements OnInit, ControlValueAccessor {
 
     registerOnTouched(fn: any): void {
         this.onTouch = fn;
+    }
+
+    public get value(): any {
+        return this._value;
+    }
+
+    @Input()
+    public set value(value: any) {
+        this._value = value;
+        this.onChange(value);
+        this.onTouch();
     }
 }

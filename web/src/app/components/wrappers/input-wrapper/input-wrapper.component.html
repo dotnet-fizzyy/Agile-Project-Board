@@ -1,4 +1,4 @@
-<mat-form-field>
-    <mat-label>Name</mat-label>
-    <input matInput [formControlName] required="required" />
+<mat-form-field class="form-input">
+    <mat-label>{{ label }}</mat-label>
+    <input matInput [(ngModel)]="value" [type]="type" required="required" />
 </mat-form-field>

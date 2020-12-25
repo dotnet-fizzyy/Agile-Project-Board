@@ -1,3 +1,32 @@
-<div>
-    <p></p>
+<div class="root-project-management">
+    <div class="main-project-main-container">
+        <div class="project-description-container">
+            <div *ngIf="project$ | async; else create"></div>
+            <ng-template #create>
+                <div class="create-button-container">
+                    <button mat-raised-button color="primary" (click)="onClickCreateButton()">Create project</button>
+                </div>
+            </ng-template>
+        </div>
+        <div class="project-sprints-epics-container">
+            <div class="list-container">
+                <h3>Epics</h3>
+                <div *ngIf="(epics$ | async).length; else emptyEpics">
+                    <div *ngFor="let epic of epics$ | async"></div>
+                </div>
+                <ng-template #emptyEpics>
+                    <p>No epics created yet...</p>
+                </ng-template>
+            </div>
+            <div class="list-container">
+                <h3>Sprints</h3>
+                <div *ngIf="(sprints$ | async).length; else emptySprints">
+                    <div *ngFor="let sprint of sprints$ | async"></div>
+                </div>
+                <ng-template #emptySprints>
+                    <p>No sprints created yet...</p>
+                </ng-template>
+            </div>
+        </div>
+    </div>
 </div>
