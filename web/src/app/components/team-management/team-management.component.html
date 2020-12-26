@@ -1,8 +1,11 @@
 <div class="team-management-main-container">
     <div class="inner-container">
-        <div class="team-description-container">
-            <div *ngIf="!team; else createTeam">
-
+        <div class="team-description-container" [ngClass]="{ 'flex-container': !team.teamId }">
+            <div *ngIf="team.teamId; else createTeam">
+                <h2>{{ team.teamName }}</h2>
+                <p>Location: {{ team.location }}</p>
+                <button mat-raised-button color="primary" (click)="onClickUpdateTeam()">Update team</button>
+                <button mat-raised-button color="warn" class="remove-button" (click)="onClickRemoveTeam()">Remove team</button>
             </div>
             <ng-template #createTeam>
                 <button mat-raised-button color="primary" (click)="onClickCreateTeam()">Create team</button>
@@ -11,11 +14,34 @@
         <div class="members-description-container">
             <div class="members-header">
                 <h3>Members:</h3>
-                <button class="add-member-button" mat-raised-button color="primary">Add member</button>
+                <button
+                    class="add-member-button"
+                    mat-raised-button color="primary"
+                    (click)='onClickCreateTeamMember()'
+                >
+                    Add member
+                </button>
             </div>
-            <div *ngFor="let user of team.users">
-                
-            </div>
+            <ng-container *ngIf="team.users.length; else emptyUsers">
+                <div class="user-item" *ngFor="let user of team.users">
+                    <span>{{ user.username }} | {{ user.userRole }}</span>
+                    <span class="user-status" [ngClass]="{ 'blocked-user': !user.isActive }">
+                        {{ user.isActive ? 'Active' : 'Blocked' }}
+                    </span>
+                    <button mat-raised-button color="primary" (click)='onClickUpdateUser()'>Update</button>
+                    <button
+                        mat-raised-button
+                        [color]="user.isActive ? 'warn' : 'primary'"
+                        class="remove-button"
+                        (click)='onClickChangeUserStatus(user.userId, user.isActive)'
+                    >
+                        {{ user.isActive ? 'Block' : 'Activate' }}
+                    </button>
+                </div>
+            </ng-container>
+            <ng-template #emptyUsers>
+                <h3 class="empty-users">No users created yet...</h3>
+            </ng-template>
         </div>
     </div>
 </div>

@@ -1,5 +1,5 @@
 import * as TeamActions from '../actions/team.actions';
-import { ITeamState } from './../store/state';
+import { ITeamState } from '../store/state';
 
 const initialState: ITeamState = {
     teamId: '',

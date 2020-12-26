@@ -17,15 +17,14 @@
 }
 
 .team-description-container {
-    @extend .flex-container;
-    flex-grow: 1;
+    height: 20%;
     width: 100%;
 }
 
 .members-description-container {
     display: flex;
     flex-direction: column;
-    flex-grow: 2;
+    min-height: 80%;
     width: 100%;
 }
 
@@ -38,4 +37,32 @@
 .add-member-button {
     margin: 0 5px 0 auto;
     height: 36px;
+}
+
+.remove-button {
+    margin-left: 10px;
+}
+
+.user-item {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+
+    span {
+       font-size: 18px;
+    }
+}
+
+.user-status {
+    margin: 0 10px;
+    color: green;
+}
+
+.blocked-user {
+    color: red;
+}
+
+.empty-users {
+    text-align: center;
 }

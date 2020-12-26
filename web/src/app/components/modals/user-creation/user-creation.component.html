@@ -1,1 +1,32 @@
-<p>user-creation works!</p>
+<h2>{{ label }} creation</h2>
+<form [formGroup]="formGroup">
+    <div class="project-creation-form-container">
+        <app-input-wrapper
+            [formControlName]="username"
+            type="text"
+            label="{{ label }} name"
+            required="true"
+        ></app-input-wrapper>
+        <app-input-wrapper
+            [formControlName]="password"
+            type="password"
+            label="Password"
+            required="true"
+        ></app-input-wrapper>
+        <app-select-wrapper
+            [formControlName]="userRole"
+            type="text"
+            label="Select role"
+            [options]="userRoleOptions"
+            required="true"
+        ></app-select-wrapper>
+    </div>
+</form>
+<button
+    mat-raised-button
+    color="primary"
+    [disabled]="formGroup.invalid"
+    (click)="onClickCreate()"
+>
+    Create {{ label }}
+</button>

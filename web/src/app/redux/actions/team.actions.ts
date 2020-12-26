@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { ITeam, IUser } from './../../utils/interfaces/index';
+import { ITeam, IUser } from '../../utils/interfaces';
 
 export const TeamActions = {
     GET_TEAM_REQUEST: '[team] get_team_request',
@@ -11,6 +11,9 @@ export const TeamActions = {
     CREATE_TEAM_MEMBER_REQUEST: '[team] create_team_member_request',
     CREATE_TEAM_MEMBER_SUCCESS: '[team] create_team_member_success',
     CREATE_TEAM_MEMBER_FAILURE: '[team] create_team_member_failure',
+    UPDATE_TEAM_MEMBER_STATUS_REQUEST: '[team] update_team_member_status_request',
+    UPDATE_TEAM_MEMBER_STATUS_SUCCESS: '[team] update_team_member_status_success',
+    UPDATE_TEAM_MEMBER_STATUS_FAILURE: '[team] update_team_member_status_failure',
 };
 
 export class GetTeamRequest implements Action {
@@ -57,4 +60,22 @@ export class CreateTeamMemberFailure implements Action {
     readonly type: string = TeamActions.CREATE_TEAM_MEMBER_FAILURE;
 }
 
-export type TeamActionTypes = GetTeamSuccess & CreateTeamMemberSuccess & CreateTeamSuccess;
+export class UpdateTeamMemberStatusRequest implements Action {
+    constructor(public payload: IUser) {}
+    readonly type: string = TeamActions.UPDATE_TEAM_MEMBER_STATUS_REQUEST;
+}
+
+export class UpdateTeamMemberStatusSuccess implements Action {
+    constructor(public payload: IUser) {}
+    readonly type: string = TeamActions.UPDATE_TEAM_MEMBER_STATUS_SUCCESS;
+}
+
+export class UpdateTeamMemberStatusFailure implements Action {
+    constructor(public payload: Error) {}
+    readonly type: string = TeamActions.UPDATE_TEAM_MEMBER_STATUS_FAILURE;
+}
+
+export type TeamActionTypes = GetTeamSuccess &
+    CreateTeamMemberSuccess &
+    CreateTeamSuccess &
+    UpdateTeamMemberStatusSuccess;

@@ -26,4 +26,5 @@ export const enum ModalCreationType {
     Sprint,
     Team,
     Member,
+    User,
 }

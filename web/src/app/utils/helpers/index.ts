@@ -1,6 +1,6 @@
 import * as moment from 'moment';
-import { IStory, IUser } from '../interfaces';
-import { IEpic, ISelectItem } from './../interfaces/index';
+import { UserRoles } from '../constants';
+import { IEpic, ISelectItem, IStory, IUser } from '../interfaces';
 
 export function columnStoriesSorting(a: IStory, b: IStory): number {
     if (a.columnIndex > b.columnIndex) {
@@ -27,6 +27,15 @@ export function getEpicsDropdownItems(epics: IEpic[]): ISelectItem[] {
         return {
             value: x.epicId,
             label: x.epicName,
+        } as ISelectItem;
+    });
+}
+
+export function getUserRolesDropdownItems(): ISelectItem[] {
+    return Object.entries(UserRoles).map((x) => {
+        return {
+            value: x[0],
+            label: x[1],
         } as ISelectItem;
     });
 }

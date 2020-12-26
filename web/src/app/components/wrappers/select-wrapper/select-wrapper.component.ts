@@ -1,6 +1,6 @@
 import { Component, forwardRef, Input, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { ISelectItem } from './../../../utils/interfaces/index';
+import { ISelectItem } from '../../../utils/interfaces';
 
 @Component({
     selector: 'app-select-wrapper',
@@ -18,7 +18,7 @@ export class SelectWrapperComponent implements OnInit, ControlValueAccessor {
     private onChange: (value: string) => void;
     private onTouch: () => void;
 
-    private _selectedValue: string;
+    private _value: string;
 
     @Input() label: string;
     @Input() options: ISelectItem[];
@@ -28,7 +28,7 @@ export class SelectWrapperComponent implements OnInit, ControlValueAccessor {
     ngOnInit(): void {}
 
     writeValue(selectedItem: string): void {
-        this._selectedValue = selectedItem;
+        this._value = selectedItem;
     }
 
     registerOnChange(fn: any): void {
@@ -40,12 +40,12 @@ export class SelectWrapperComponent implements OnInit, ControlValueAccessor {
     }
 
     public get value(): string {
-        return this._selectedValue;
+        return this._value;
     }
 
     @Input()
     public set value(selectedItem: string) {
-        this._selectedValue = selectedItem;
+        this._value = selectedItem;
         this.onChange(selectedItem);
         this.onTouch();
     }

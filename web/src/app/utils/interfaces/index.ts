@@ -4,12 +4,13 @@ export interface ISelectItem {
 }
 
 export interface IUser {
-    userId: string;
-    teamId: string;
+    userId?: string;
+    teamId?: string;
     username: string;
     userRole: string;
-    avatarLink: string;
+    avatarLink?: string;
     isActive: boolean;
+    password?: string;
 }
 
 export interface IStory {

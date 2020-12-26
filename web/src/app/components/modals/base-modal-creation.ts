@@ -26,6 +26,8 @@ export default abstract class BaseModalCreation {
                 return 'Team';
             case ModalCreationType.Member:
                 return 'Member';
+            case ModalCreationType.User:
+                return 'User';
             default:
                 return '';
         }
