@@ -4,8 +4,10 @@ import { Store } from '@ngrx/store';
 import { ModalCreationType } from 'src/app/utils/constants';
 import * as ProjectActions from '../../redux/actions/project.actions';
 import * as ProjectSelectors from '../../redux/selectors/project.selectors';
-import { AdminCreationComponent } from '../modals/admin-creation/admin-creation.component';
+import { ProjectCreationComponent } from '../modals/project-creation/project-creation.component';
 import { IProjectState } from './../../redux/store/state';
+import { EpicCreationComponent } from './../modals/epic-creation/epic-creation.component';
+import { SprintCreationComponent } from './../modals/sprint-creation/sprint-creation.component';
 
 @Component({
     selector: 'app-project-management',
@@ -24,18 +26,14 @@ export class ProjectManagementComponent implements OnInit {
     }
 
     onClickCreateProjectButton = (): void => {
-        this.openModal(ModalCreationType.Project);
+        this.dialog.open(ProjectCreationComponent, { width: '400px', data: ModalCreationType.Project });
     };
 
     onClickAddEpicButton = (): void => {
-        this.openModal(ModalCreationType.Epic);
+        this.dialog.open(EpicCreationComponent, { width: '400px', data: ModalCreationType.Epic });
     };
 
     onClickAddSprintButton = (): void => {
-        this.openModal(ModalCreationType.Sprint);
-    };
-
-    private openModal = (modalType: ModalCreationType): void => {
-        this.dialog.open(AdminCreationComponent, { width: '400px', data: modalType });
+        this.dialog.open(SprintCreationComponent, { width: '400px', data: ModalCreationType.Sprint });
     };
 }

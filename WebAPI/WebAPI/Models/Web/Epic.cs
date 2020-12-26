@@ -7,7 +7,7 @@ namespace WebAPI.Models.Web
     {
         public Epic()
         {
-            Sprints = new List<Entities.Sprint>();
+            Sprints = new List<Sprint>();
         }
 
         public Guid EpicId { get; set; }
@@ -20,6 +20,6 @@ namespace WebAPI.Models.Web
 
         public DateTime EndDate { get; set; }
 
-        public IList<Entities.Sprint> Sprints { get; set; }
+        public IList<Sprint> Sprints { get; set; }
     }
 }

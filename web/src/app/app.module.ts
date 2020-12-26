@@ -25,7 +25,11 @@ import { HeaderComponent } from './components/header/header.component';
 import { LoginComponent } from './components/login-registration/login/login.component';
 import { RegistrationComponent } from './components/login-registration/registration/registration.component';
 import { MainComponent } from './components/main/main.component';
-import { AdminCreationComponent } from './components/modals/admin-creation/admin-creation.component';
+import { EpicCreationComponent } from './components/modals/epic-creation/epic-creation.component';
+import { ProjectCreationComponent } from './components/modals/project-creation/project-creation.component';
+import { SprintCreationComponent } from './components/modals/sprint-creation/sprint-creation.component';
+import { StoryCreationComponent } from './components/modals/story-creation/story-creation.component';
+import { UserCreationComponent } from './components/modals/user-creation/user-creation.component';
 import { ProjectManagementComponent } from './components/project-management/project-management.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { StartPromptComponent } from './components/start-prompt/start-prompt.component';
@@ -54,7 +58,11 @@ import { HttpService } from './services/http.service';
         BoardComponent,
         InputWrapperComponent,
         SelectWrapperComponent,
-        AdminCreationComponent,
+        ProjectCreationComponent,
+        UserCreationComponent,
+        EpicCreationComponent,
+        SprintCreationComponent,
+        StoryCreationComponent,
     ],
     imports: [
         BrowserModule,

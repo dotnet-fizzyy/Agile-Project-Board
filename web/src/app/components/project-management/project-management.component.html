@@ -19,7 +19,14 @@
         <div class="project-sprints-epics-container">
             <div class="list-container">
                 <h3>Epics</h3>
-                <button class="add-item-button" mat-raised-button color="primary" (click)="onClickAddEpicButton()">Add epic</button>
+                <button 
+                    class="add-item-button" 
+                    mat-raised-button color="primary" 
+                    (click)="onClickAddEpicButton()" 
+                    [disabled]="!(project$ | async)"
+                >
+                    Add epic
+                </button>
                 <div *ngIf="(epics$ | async).length; else emptyEpics">
                     <div *ngFor="let epic of epics$ | async"></div>
                 </div>
@@ -28,7 +35,14 @@
                 </ng-template>
             </div>
             <div class="list-container">
-                <button class="add-item-button" mat-raised-button color="primary" (click)="onClickAddSprintButton()">Add sprint</button>
+                <button 
+                    class="add-item-button" 
+                    mat-raised-button color="primary" 
+                    (click)="onClickAddSprintButton()" 
+                    [disabled]="!(project$ | async)"
+                >
+                    Add sprint
+                </button>
                 <h3>Sprints</h3>
                 <div *ngIf="(sprints$ | async).length; else emptySprints">
                     <div *ngFor="let sprint of sprints$ | async"></div>
