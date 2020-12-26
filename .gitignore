@@ -6,3 +6,13 @@ WebAPI/WebAPI/obj/
 WebAPI/WebAPI/bin/
 
 WebAPI/.vs/
+
+node_modules/
+
+.idea/
+
+src/.DS_Store
+
+src/app/.DS_Store
+
+.DS_Store
