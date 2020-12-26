@@ -3,7 +3,6 @@ import { IEpic, IProject, ISprint } from './../../utils/interfaces/index';
 
 export interface IUserState {
     currentUser?: IUser;
-    users: IUser[];
 }
 
 export interface IStoriesState {
@@ -25,6 +24,7 @@ export interface IStoreState {
     story: IStoriesState;
     sidebar: ISidebarState;
     loginRegistration: ILoginCreationsState;
+    team: ITeamState;
 }
 
 export interface ILoaderState {
@@ -35,4 +35,12 @@ export interface IProjectState {
     project?: IProject;
     epics: IEpic[];
     sprints: ISprint[];
+}
+
+export interface ITeamState {
+    teamId: string;
+    teamName: string;
+    projectId: string;
+    location: string;
+    users: IUser[];
 }

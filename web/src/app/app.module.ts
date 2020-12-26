@@ -29,6 +29,7 @@ import { EpicCreationComponent } from './components/modals/epic-creation/epic-cr
 import { ProjectCreationComponent } from './components/modals/project-creation/project-creation.component';
 import { SprintCreationComponent } from './components/modals/sprint-creation/sprint-creation.component';
 import { StoryCreationComponent } from './components/modals/story-creation/story-creation.component';
+import { TeamManageComponent } from './components/modals/team-manage/team-manage.component';
 import { UserCreationComponent } from './components/modals/user-creation/user-creation.component';
 import { ProjectManagementComponent } from './components/project-management/project-management.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
@@ -63,6 +64,7 @@ import { HttpService } from './services/http.service';
         EpicCreationComponent,
         SprintCreationComponent,
         StoryCreationComponent,
+        TeamManageComponent,
     ],
     imports: [
         BrowserModule,

@@ -24,4 +24,6 @@ export const enum ModalCreationType {
     Project,
     Epic,
     Sprint,
+    Team,
+    Member,
 }

@@ -22,6 +22,10 @@ export default abstract class BaseModalCreation {
                 return 'Epic';
             case ModalCreationType.Sprint:
                 return 'Sprint';
+            case ModalCreationType.Team:
+                return 'Team';
+            case ModalCreationType.Member:
+                return 'Member';
             default:
                 return '';
         }

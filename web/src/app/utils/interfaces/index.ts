@@ -59,3 +59,11 @@ export interface IFullProjectDescription {
     project: IProject;
     epics: IEpic[];
 }
+
+export interface ITeam {
+    teamId?: string;
+    teamName: string;
+    projectId: string;
+    location: string;
+    users?: IUser[];
+}

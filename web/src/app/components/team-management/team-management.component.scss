@@ -15,3 +15,27 @@
     height: 100%;
     flex-direction: column;
 }
+
+.team-description-container {
+    @extend .flex-container;
+    flex-grow: 1;
+    width: 100%;
+}
+
+.members-description-container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 2;
+    width: 100%;
+}
+
+.members-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.add-member-button {
+    margin: 0 5px 0 auto;
+    height: 36px;
+}

@@ -1,5 +1,5 @@
 <app-header></app-header>
-<router-outlet *ngIf="(currentUser$ | async).length; else prompt"></router-outlet>
+<!-- <router-outlet *ngIf="(currentUser$ | async).length; else prompt"></router-outlet> -->
 <ng-template #prompt>
     <app-start-prompt></app-start-prompt>
 </ng-template>

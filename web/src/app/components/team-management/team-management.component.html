@@ -1,5 +1,21 @@
 <div class="team-management-main-container">
     <div class="inner-container">
-            
+        <div class="team-description-container">
+            <div *ngIf="!team; else createTeam">
+
+            </div>
+            <ng-template #createTeam>
+                <button mat-raised-button color="primary" (click)="onClickCreateTeam()">Create team</button>
+            </ng-template>
+        </div>
+        <div class="members-description-container">
+            <div class="members-header">
+                <h3>Members:</h3>
+                <button class="add-member-button" mat-raised-button color="primary">Add member</button>
+            </div>
+            <div *ngFor="let user of team.users">
+                
+            </div>
+        </div>
     </div>
 </div>

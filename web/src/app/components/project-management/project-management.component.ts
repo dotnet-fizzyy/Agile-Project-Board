@@ -25,7 +25,7 @@ export class ProjectManagementComponent implements OnInit {
     epics$ = this.store$.select(ProjectSelectors.getEpics).subscribe((x) => (this.epics = x));
     sprints$ = this.store$.select(ProjectSelectors.getSprints).subscribe((x) => (this.sprints = x));
 
-    constructor(private store$: Store<IProjectState>, public dialog: MatDialog) {}
+    constructor(private store$: Store<IProjectState>, private dialog: MatDialog) {}
 
     ngOnInit(): void {
         this.store$.dispatch(new ProjectActions.GetProjectRequest());
