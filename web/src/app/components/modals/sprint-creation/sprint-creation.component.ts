@@ -2,7 +2,6 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import * as moment from 'moment';
 import { IProjectState } from 'src/app/redux/store/state';
 import { ModalCreationType } from 'src/app/utils/constants';
 import * as ProjectActions from '../../../redux/actions/project.actions';

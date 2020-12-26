@@ -1,10 +1,10 @@
 <div class="root-project-management">
     <div class="main-project-main-container">
         <div class="project-description-container">
-            <div *ngIf="project$ | async; else create" class="create-button-container">
-                <h2>{{ (project$ | async).projectName }}</h2>
-                <p>Start date: {{ (project$ | async).startDate | date: 'dd-MM-yyyy' }}</p>
-                <p>End date: {{ (project$ | async).endDate | date: 'dd-MM-yyyy' }}</p>
+            <div *ngIf="project; else create" class="create-button-container">
+                <h2>{{ project.projectName }}</h2>
+                <p>Start date: {{ project.startDate | date: 'dd-MM-yyyy' }}</p>
+                <p>End date: {{ project.endDate | date: 'dd-MM-yyyy' }}</p>
                 <div class="manage-buttons-container">
                     <button mat-raised-button color="primary">Update project info</button>
                     <button mat-raised-button color="warn">Remove project</button>
@@ -23,12 +23,12 @@
                     class="add-item-button" 
                     mat-raised-button color="primary" 
                     (click)="onClickAddEpicButton()" 
-                    [disabled]="!(project$ | async)"
+                    [disabled]="!project"
                 >
                     Add epic
                 </button>
-                <div *ngIf="(epics$ | async).length; else emptyEpics">
-                    <div *ngFor="let epic of epics$ | async"></div>
+                <div *ngIf="epics.length; else emptyEpics">
+                    <div *ngFor="let epic of epics"></div>
                 </div>
                 <ng-template #emptyEpics>
                     <p>No epics created yet...</p>
@@ -39,13 +39,13 @@
                     class="add-item-button" 
                     mat-raised-button color="primary" 
                     (click)="onClickAddSprintButton()" 
-                    [disabled]="!(project$ | async)"
+                    [disabled]="!project"
                 >
                     Add sprint
                 </button>
                 <h3>Sprints</h3>
-                <div *ngIf="(sprints$ | async).length; else emptySprints">
-                    <div *ngFor="let sprint of sprints$ | async"></div>
+                <div *ngIf="sprints.length; else emptySprints">
+                    <div *ngFor="let sprint of sprints"></div>
                 </div>
                 <ng-template #emptySprints>
                     <p>No sprints created yet...</p>
