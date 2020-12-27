@@ -2,12 +2,11 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { ModalCreationType } from 'src/app/utils/constants';
 import * as TeamActions from '../../../redux/actions/team.actions';
 import * as TeamSelectors from '../../../redux/selectors/team.selectors';
-import { IProjectState } from '../../../redux/store/state';
+import { IStoreState } from '../../../redux/store/state';
 import { getUserRolesDropdownItems } from '../../../utils/helpers';
-import { IUser } from '../../../utils/interfaces';
+import { IModalData, ISelectItem, IUser } from '../../../utils/interfaces';
 import BaseModalCreation from '../base-modal-creation';
 
 @Component({
@@ -19,17 +18,17 @@ export class UserCreationComponent extends BaseModalCreation implements OnInit {
     public readonly username: string = 'username';
     public readonly password: string = 'password';
     public readonly userRole: string = 'userRole';
-    public userRoleOptions = getUserRolesDropdownItems();
+    public userRoleOptions: ISelectItem[] = getUserRolesDropdownItems();
     public formGroup: FormGroup;
 
     private teamId: string;
 
     constructor(
-        @Inject(MAT_DIALOG_DATA) data: ModalCreationType,
-        private store$: Store<IProjectState>,
+        @Inject(MAT_DIALOG_DATA) private data: IModalData,
+        private store$: Store<IStoreState>,
         private fb: FormBuilder
     ) {
-        super(data);
+        super(data.modalType);
     }
 
     ngOnInit(): void {
@@ -37,11 +36,11 @@ export class UserCreationComponent extends BaseModalCreation implements OnInit {
 
         this.formGroup = this.fb.group({
             [this.username]: [
-                '',
+                (this.data.model as IUser).username,
                 Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(16)]),
             ],
             [this.password]: ['', Validators.compose([Validators.required])],
-            [this.userRole]: ['', Validators.required],
+            [this.userRole]: [(this.data.model as IUser).userRole, Validators.required],
         });
     }
 

@@ -3,11 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { IProjectState } from 'src/app/redux/store/state';
-import { ModalCreationType } from 'src/app/utils/constants';
 import * as TeamActions from '../../../redux/actions/team.actions';
 import * as ProjectSelectors from '../../../redux/selectors/project.selectors';
+import { IModalData, ITeam } from '../../../utils/interfaces';
 import BaseModalCreation from '../base-modal-creation';
-import { ITeam } from './../../../utils/interfaces/index';
 
 @Component({
     selector: 'app-team-manage',
@@ -23,19 +22,19 @@ export class TeamManageComponent extends BaseModalCreation implements OnInit {
     private projectId: string;
 
     constructor(
-        @Inject(MAT_DIALOG_DATA) data: ModalCreationType,
+        @Inject(MAT_DIALOG_DATA) private data: IModalData,
         private fb: FormBuilder,
         private store$: Store<IProjectState>
     ) {
-        super(data);
+        super(data.modalType);
     }
 
     ngOnInit(): void {
         this.store$.select(ProjectSelectors.getProject).subscribe((x) => (this.projectId = x.projectId));
 
         this.formGroup = this.fb.group({
-            [this.teamName]: ['', Validators.required],
-            [this.location]: ['', Validators.required],
+            [this.teamName]: [(this.data.model as ITeam).teamName, Validators.required],
+            [this.location]: [(this.data.model as ITeam).location, Validators.required],
         });
     }
 

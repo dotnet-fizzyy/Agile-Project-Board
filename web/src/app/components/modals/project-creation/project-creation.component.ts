@@ -2,11 +2,10 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { ModalCreationType } from 'src/app/utils/constants';
-import { getCurrentDate } from 'src/app/utils/helpers';
-import { IProject } from 'src/app/utils/interfaces';
+import { getFormattedDate } from 'src/app/utils/helpers';
+import { IModalData, IProject } from 'src/app/utils/interfaces';
 import * as ProjectActions from '../../../redux/actions/project.actions';
-import { IProjectState } from '../../../redux/store/state';
+import { IStoreState } from '../../../redux/store/state';
 import BaseModalCreation from '../base-modal-creation';
 
 @Component({
@@ -20,18 +19,18 @@ export class ProjectCreationComponent extends BaseModalCreation implements OnIni
     public formGroup: FormGroup;
 
     constructor(
-        @Inject(MAT_DIALOG_DATA) data: ModalCreationType,
+        @Inject(MAT_DIALOG_DATA) private data: IModalData,
         private fb: FormBuilder,
-        private store$: Store<IProjectState>
+        private store$: Store<IStoreState>
     ) {
-        super(data);
+        super(data.modalType);
     }
 
     ngOnInit(): void {
         this.formGroup = this.fb.group({
-            [this.projectName]: ['', Validators.required],
-            [this.startDate]: [getCurrentDate(), Validators.required],
-            [this.endDate]: [getCurrentDate(), Validators.required],
+            [this.projectName]: [(this.data.model as IProject).projectName, Validators.required],
+            [this.startDate]: [getFormattedDate((this.data.model as IProject).startDate), Validators.required],
+            [this.endDate]: [getFormattedDate((this.data.model as IProject).endDate), Validators.required],
         });
     }
 

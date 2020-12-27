@@ -40,4 +40,4 @@ export function getUserRolesDropdownItems(): ISelectItem[] {
     });
 }
 
-export const getCurrentDate = (): string => moment().format('yyyy-MM-DD');
+export const getFormattedDate = (date: Date): string => moment(date).format('yyyy-MM-DD');

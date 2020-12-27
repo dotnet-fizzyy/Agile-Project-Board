@@ -9,8 +9,11 @@ const initialState: IProjectState = {
         endDate: null,
         customerId: '',
     },
-    epics: [],
-    sprints: [],
+    epics: [
+        { epicName: 'test', endDate: new Date(), startDate: new Date() },
+        { epicName: 'test', endDate: new Date(), startDate: new Date() },
+    ],
+    sprints: [{ sprintName: 'sprint', startDate: new Date(), endDate: new Date() }],
 };
 
 export default function projectReducer(state = initialState, action: ProjectActions.ProjectActionTypes): IProjectState {

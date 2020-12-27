@@ -1,3 +1,10 @@
+import { ComponentType } from '@angular/cdk/overlay';
+import { EpicCreationComponent } from '../../components/modals/epic-creation/epic-creation.component';
+import { ProjectCreationComponent } from '../../components/modals/project-creation/project-creation.component';
+import { SprintCreationComponent } from '../../components/modals/sprint-creation/sprint-creation.component';
+import { TeamManageComponent } from '../../components/modals/team-manage/team-manage.component';
+import { UserCreationComponent } from '../../components/modals/user-creation/user-creation.component';
+
 export const ColumnIds = {
     IDEA: 'IDEA',
     TODO: 'TODO',
@@ -28,3 +35,11 @@ export const enum ModalCreationType {
     Member,
     User,
 }
+
+export type ModalComponentTypes = ComponentType<
+    | EpicCreationComponent
+    | SprintCreationComponent
+    | ProjectCreationComponent
+    | TeamManageComponent
+    | UserCreationComponent
+>;

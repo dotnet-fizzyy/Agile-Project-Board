@@ -28,7 +28,7 @@
                     <span class="user-status" [ngClass]="{ 'blocked-user': !user.isActive }">
                         {{ user.isActive ? 'Active' : 'Blocked' }}
                     </span>
-                    <button mat-raised-button color="primary" (click)='onClickUpdateUser()'>Update</button>
+                    <button mat-raised-button color="primary" (click)='onClickUpdateUser(user)'>Update</button>
                     <button
                         mat-raised-button
                         [color]="user.isActive ? 'warn' : 'primary'"

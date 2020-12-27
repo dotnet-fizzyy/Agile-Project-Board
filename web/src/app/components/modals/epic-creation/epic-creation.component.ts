@@ -2,13 +2,12 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { IProjectState } from 'src/app/redux/store/state';
-import { ModalCreationType } from 'src/app/utils/constants';
-import { getCurrentDate } from 'src/app/utils/helpers';
+import { IStoreState } from 'src/app/redux/store/state';
+import { getFormattedDate } from 'src/app/utils/helpers';
+import { IEpic, IModalData } from '../../../utils/interfaces';
 import BaseModalCreation from '../base-modal-creation';
 import * as ProjectActions from './../../../redux/actions/project.actions';
 import * as ProjectSelectors from './../../../redux/selectors/project.selectors';
-import { IEpic } from './../../../utils/interfaces/index';
 
 @Component({
     selector: 'app-epic-creation',
@@ -22,20 +21,20 @@ export class EpicCreationComponent extends BaseModalCreation implements OnInit {
     public formGroup: FormGroup;
 
     constructor(
-        @Inject(MAT_DIALOG_DATA) data: ModalCreationType,
+        @Inject(MAT_DIALOG_DATA) private data: IModalData,
         private fb: FormBuilder,
-        private store$: Store<IProjectState>
+        private store$: Store<IStoreState>
     ) {
-        super(data);
+        super(data.modalType);
     }
 
     ngOnInit(): void {
         this.store$.select(ProjectSelectors.getProject).subscribe((x) => (this.projectId = x.projectId));
 
         this.formGroup = this.fb.group({
-            [this.epicName]: ['', Validators.required],
-            [this.startDate]: [getCurrentDate(), Validators.required],
-            [this.endDate]: [getCurrentDate(), Validators.required],
+            [this.epicName]: [(this.data.model as IEpic).epicName, Validators.required],
+            [this.startDate]: [getFormattedDate((this.data.model as IEpic).startDate), Validators.required],
+            [this.endDate]: [getFormattedDate((this.data.model as IEpic).endDate), Validators.required],
         });
     }
 

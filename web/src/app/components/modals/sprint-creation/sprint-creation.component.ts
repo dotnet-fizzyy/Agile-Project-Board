@@ -2,13 +2,12 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { IProjectState } from 'src/app/redux/store/state';
-import { ModalCreationType } from 'src/app/utils/constants';
+import { IStoreState } from 'src/app/redux/store/state';
 import * as ProjectActions from '../../../redux/actions/project.actions';
 import * as ProjectSelectors from '../../../redux/selectors/project.selectors';
+import { getFormattedDate } from '../../../utils/helpers';
+import { IModalData, ISelectItem, ISprint } from '../../../utils/interfaces';
 import BaseModalCreation from '../base-modal-creation';
-import { getCurrentDate } from './../../../utils/helpers/index';
-import { ISelectItem, ISprint } from './../../../utils/interfaces/index';
 
 @Component({
     selector: 'app-sprint-creation',
@@ -23,21 +22,21 @@ export class SprintCreationComponent extends BaseModalCreation implements OnInit
     public formGroup: FormGroup;
 
     constructor(
-        @Inject(MAT_DIALOG_DATA) data: ModalCreationType,
+        @Inject(MAT_DIALOG_DATA) private data: IModalData,
         private fb: FormBuilder,
-        private store$: Store<IProjectState>
+        private store$: Store<IStoreState>
     ) {
-        super(data);
+        super(data.modalType);
     }
 
     ngOnInit(): void {
         this.store$.select(ProjectSelectors.getEpicsForSelect).subscribe((x) => (this.epics = x));
 
         this.formGroup = this.fb.group({
-            [this.sprintName]: ['', Validators.required],
-            [this.startDate]: [getCurrentDate(), Validators.required],
-            [this.endDate]: [getCurrentDate(), Validators.required],
-            [this.epicId]: ['', Validators.required],
+            [this.sprintName]: [(this.data.model as ISprint).sprintName, Validators.required],
+            [this.startDate]: [getFormattedDate((this.data.model as ISprint).startDate), Validators.required],
+            [this.endDate]: [getFormattedDate((this.data.model as ISprint).endDate), Validators.required],
+            [this.epicId]: [(this.data.model as ISprint).epicId, Validators.required],
         });
     }
 
@@ -46,7 +45,7 @@ export class SprintCreationComponent extends BaseModalCreation implements OnInit
             sprintName: this.formGroup.get(this.sprintName).value,
             startDate: this.formGroup.get(this.startDate).value,
             endDate: this.formGroup.get(this.endDate).value,
-            epicId: this.epicId,
+            epicId: this.formGroup.get(this.epicId).value,
         };
 
         this.store$.dispatch(new ProjectActions.CreateSprintRequest(sprint));

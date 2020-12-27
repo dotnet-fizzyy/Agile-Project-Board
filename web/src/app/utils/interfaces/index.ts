@@ -1,3 +1,5 @@
+import { ModalCreationType } from '../constants';
+
 export interface ISelectItem {
     label: string;
     value: string;
@@ -67,4 +69,9 @@ export interface ITeam {
     projectId: string;
     location: string;
     users?: IUser[];
+}
+
+export interface IModalData {
+    modalType: ModalCreationType;
+    model: ISprint | IEpic | IProject | ITeam | IUser;
 }
