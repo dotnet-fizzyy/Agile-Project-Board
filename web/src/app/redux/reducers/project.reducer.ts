@@ -1,8 +1,14 @@
 import * as ProjectActions from '../actions/project.actions';
-import { IProjectState } from './../store/state';
+import { IProjectState } from '../store/state';
 
 const initialState: IProjectState = {
-    project: null,
+    project: {
+        projectId: '',
+        projectName: '',
+        startDate: null,
+        endDate: null,
+        customerId: '',
+    },
     epics: [],
     sprints: [],
 };

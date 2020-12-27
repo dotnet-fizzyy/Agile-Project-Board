@@ -26,6 +26,7 @@ const routes: Routes = [
     {
         path: 'team',
         component: TeamManagementComponent,
+        canActivate: [CustomerGuard],
     },
     {
         path: 'project',

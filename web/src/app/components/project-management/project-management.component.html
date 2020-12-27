@@ -1,17 +1,17 @@
 <div class="root-project-management">
     <div class="main-project-main-container">
         <div class="project-description-container">
-            <div *ngIf="project; else create" class="create-button-container">
+            <div *ngIf="project.projectId; else create" class="create-button-container">
                 <h2>{{ project.projectName }}</h2>
                 <p>Start date: {{ project.startDate | date: 'dd-MM-yyyy' }}</p>
                 <p>End date: {{ project.endDate | date: 'dd-MM-yyyy' }}</p>
                 <div class="manage-buttons-container">
                     <button mat-raised-button color="primary">Update project info</button>
-                    <button mat-raised-button color="warn">Remove project</button>
+                    <button mat-raised-button color="warn" class="remove-button">Remove project</button>
                 </div>
             </div>
             <ng-template #create>
-                <div class="create-button-container">
+                <div class="create-button-container flex-alignment">
                     <button mat-raised-button color="primary" (click)="onClickCreateProjectButton()">Create project</button>
                 </div>
             </ng-template>
@@ -19,34 +19,69 @@
         <div class="project-sprints-epics-container">
             <div class="list-container">
                 <h3>Epics</h3>
-                <button 
-                    class="add-item-button" 
-                    mat-raised-button color="primary" 
-                    (click)="onClickAddEpicButton()" 
+                <button
+                    class="add-item-button"
+                    mat-raised-button color="primary"
+                    (click)="onClickAddEpicButton()"
                     [disabled]="!project"
                 >
                     Add epic
                 </button>
-                <div *ngIf="epics.length; else emptyEpics">
-                    <div *ngFor="let epic of epics"></div>
-                </div>
+                <ng-container *ngIf="epics.length; else emptyEpics">
+                    <div *ngFor="let epic of epics" class="list-item">
+                        <span>
+                            {{ epic.epicName }} |
+                            {{ epic.startDate | date: 'yyyy.MM.dd' }} -
+                            {{ epic.endDate | date: 'yyyy.MM.dd' }}
+                        </span>
+                        <button
+                            mat-raised-button
+                            color="primary"
+                            (click)="onClickViewSprintsFromEpic(epic.epicId)"
+                        >
+                            View sprints
+                        </button>
+                        <button
+                            mat-raised-button
+                            color="primary"
+                            (click)="onClickUpdateEpic(epic)"
+                        >
+                            Update
+                        </button>
+                        <button mat-raised-button color="warn" (click)="onClickRemoveEpic(epic.epicId)">Remove</button>
+                    </div>
+                </ng-container>
                 <ng-template #emptyEpics>
                     <p>No epics created yet...</p>
                 </ng-template>
             </div>
             <div class="list-container">
-                <button 
-                    class="add-item-button" 
-                    mat-raised-button color="primary" 
-                    (click)="onClickAddSprintButton()" 
+                <button
+                    class="add-item-button"
+                    mat-raised-button color="primary"
+                    (click)="onClickAddSprintButton()"
                     [disabled]="!project"
                 >
                     Add sprint
                 </button>
                 <h3>Sprints</h3>
-                <div *ngIf="sprints.length; else emptySprints">
-                    <div *ngFor="let sprint of sprints"></div>
-                </div>
+                <ng-container *ngIf="sprints.length; else emptySprints">
+                    <div *ngFor="let sprint of sprints" class="list-item">
+                        <span>
+                            {{ sprint.sprintName }} |
+                            {{ sprint.startDate | date: 'yyyy.MM.dd' }} -
+                            {{ sprint.endDate | date: 'yyyy.MM.dd' }}
+                        </span>
+                        <button
+                            mat-raised-button
+                            color="primary"
+                            (click)="onClickUpdateSprint(sprint)"
+                        >
+                            Update
+                        </button>
+                        <button mat-raised-button color="warn" (click)="onClickRemoveSprint(sprint.sprintId)">Remove</button>
+                    </div>
+                </ng-container>
                 <ng-template #emptySprints>
                     <p>No sprints created yet...</p>
                 </ng-template>
