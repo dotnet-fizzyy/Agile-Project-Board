@@ -1,5 +1,37 @@
 <app-header></app-header>
-<!-- <router-outlet *ngIf="(currentUser$ | async).length; else prompt"></router-outlet> -->
+<ng-container *ngIf="project.projectId && team.teamId; else prompt">
+    <div class="root-main-container">
+        <div class="inner-container">
+            <div class="main-part">
+                <h2>Welcome back, {{ currentUser.username }}!</h2>
+                <h3>{{ project.projectName }}</h3>
+                <div class="project-description">
+                    <span>Start date: {{ project.startDate | date:"yyyy.MM.dd" }}</span>
+                    <span>End date: {{ project.endDate | date:"yyyy.MM.dd" }}</span>
+                </div>
+                <div class="buttons-container">
+                    <button mat-raised-button color="primary" (click)="onClickViewBoard()">View board</button>
+                    <button mat-raised-button color="primary" (click)="onClickViewProjectSettings()">View settings</button>
+                </div>
+            </div>
+            <div class="main-part">
+                <h3>{{ team.teamName }}</h3>
+                <p>Team members: </p>
+                <ng-container *ngIf="team.users.length; else emptyUsers">
+                    <span *ngFor="let user of team.users" class="team-member">
+                        {{ user.username }} | {{ user.userRole }} |
+                        <span [ngClass]="{ 'active-user': user.isActive, 'blocked-user': !user.isActive }">
+                            {{ user.isActive ? 'Active' : 'Blocked' }}
+                        </span>
+                    </span>
+                </ng-container>
+                <ng-template #emptyUsers>
+                    <p>No users added yet...</p>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</ng-container>
 <ng-template #prompt>
     <app-start-prompt></app-start-prompt>
 </ng-template>

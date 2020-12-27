@@ -5,7 +5,3 @@ import { IUserState } from '../store/state';
 const SelectUsersFeature = createFeatureSelector(ReducerNames.currentUser);
 
 export const GetCurrentUser = createSelector(SelectUsersFeature, (state: IUserState) => state.currentUser);
-
-// export const GetUserByIdSelector = createSelector(SelectUsersFeature, (userId: string) => (state: IUserState) =>
-//     state.users.find((user) => user.userId === userId)
-// );

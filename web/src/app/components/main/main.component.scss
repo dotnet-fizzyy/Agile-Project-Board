@@ -1,30 +1,49 @@
-.main-div {
-  width: 100%;
-  height: 100%;
-  position: relative;
+.root-main-container {
+    width: 100%;
+    height: 100%;
+    margin: 0;
 }
 
-.main-header {
-  width: 100%;
-  height: 50px;
-  background-color: black;
+.inner-container {
+    height: 100%;
+    margin: 0 30px;
+    display: flex;
+    flex-direction: row;
 }
 
-.main-body {
-  width: 100%;
-  height: 100%;
-  background-color: yellow;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+.main-part {
+    display: flex;
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: 0;
+    flex-direction: column;
 }
 
-.sidebar-container {
-  position: absolute;
-  right: 0;
-  height: 100%;
+.project-description {
+    display: flex;
+    flex-direction: column;
+
+    span {
+        margin-top: 5px;
+    }
 }
 
-.sidebar-content {
-  width: 392px;
+.buttons-container {
+    margin-top: 20px;
+
+    button {
+        margin-right: 10px;
+    }
+}
+
+.team-member {
+    margin-top: 10px;
+}
+
+.active-user {
+    color: green;
+}
+
+.blocked-user {
+    color: red;
 }

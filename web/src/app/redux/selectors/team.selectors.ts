@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { ReducerNames } from './../store/index';
-import { ITeamState } from './../store/state';
+import { ReducerNames } from '../store';
+import { ITeamState } from '../store/state';
 
-const teamFeautureSelector = createFeatureSelector(ReducerNames.team);
+const teamFeatureSelector = createFeatureSelector(ReducerNames.team);
 
-export const getTeam = createSelector(teamFeautureSelector, (state: ITeamState) => state);
+export const getTeam = createSelector(teamFeatureSelector, (state: ITeamState) => state);
