@@ -2,23 +2,12 @@
     <div class="fields-container">
         <p class="header">Sign in</p>
         <div [formGroup]="profileForm" class="form-container">
-            <mat-form-field>
-                <mat-label>Name</mat-label>
-                <input matInput [formControlName]="name" required />
-            </mat-form-field>
-            <span class="error-message" *ngIf="profileForm.controls[name].touched && profileForm.controls[name].invalid">Name is required</span>
-
-            <mat-form-field>
-                <mat-label>Password</mat-label>
-                <input matInput type="password" [formControlName]="password" required />
-            </mat-form-field>
-            <span class="error-message" *ngIf="profileForm.controls[password].touched && profileForm.controls[password].invalid">Password is required</span>
-
+            <app-input-wrapper [formControlName]="name" label="Name" type="text" required="true"></app-input-wrapper>
+            <app-input-wrapper [formControlName]="password" label="Password" type="password" required="true"></app-input-wrapper>
             <div class="link-container">
                 <span>First time?</span>
                 <a routerLink="/registration">Create a new account</a>
             </div>
-
             <mat-spinner *ngIf="isLoading$ | async" class="loader" [diameter]="30"></mat-spinner>
 
             <button mat-raised-button color="primary" class="sign-in-button" (click)="onClickSignIn()" [disabled]="profileForm.invalid">Sign in</button>

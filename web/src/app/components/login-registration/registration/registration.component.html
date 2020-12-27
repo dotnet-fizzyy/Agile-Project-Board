@@ -1,49 +1,15 @@
 <div class="registration-main-container">
     <div class="fields-container" [formGroup]="registrationForm">
         <p class="header">Registration</p>
-        <mat-form-field>
-            <mat-label>Name</mat-label>
-            <input matInput [formControlName]="name" required />
-        </mat-form-field>
-        <ng-container *ngIf="registrationForm.get(name).touched">
-            <span 
-                class="error-message" 
-                *ngIf="registrationForm.get(name).hasError('required')"
-            >
-                The name is required
-            </span>
-            <span 
-                class="error-message" 
-                *ngIf="registrationForm.get(name).hasError('minlength') || registrationForm.get(name).hasError('maxlength')"
-            >
-                This name length should be between 4 and 16 symbols
-            </span>
-        </ng-container>
-
-        <mat-form-field>
-            <mat-label>Password</mat-label>
-            <input matInput type="password" [formControlName]="password" required />
-        </mat-form-field>
-        <span class="error-message" *ngIf="registrationForm.get(password).touched && registrationForm.get(password).hasError('required')">The password is required</span>
-
-        <mat-form-field>
-            <mat-label>Confirm your password</mat-label>
-            <input matInput type="password" [formControlName]="repeatedPassword" required />
-        </mat-form-field>
-        <ng-container *ngIf="registrationForm.get(repeatedPassword).touched">
-            <span class="error-message" *ngIf="registrationForm.get(repeatedPassword).hasError('required')">Confirmation is required</span>
-            <span class="error-message" *ngIf="verifyPasswords()">Passwords must be same</span>
-        </ng-container>
-
+        <app-input-wrapper [formControlName]="name" label="Name" type="text" required="true"></app-input-wrapper>
+        <app-input-wrapper [formControlName]="password" label="Password" type="password" required="true"></app-input-wrapper>
+        <app-input-wrapper [formControlName]="repeatedPassword" label="Confirm your password" type="password" required="true"></app-input-wrapper>
         <div class="link-container">
             <span>Have account already?</span>
             <a routerLink="/sign-in">Sign In</a>
         </div>
-
         <span class="account-creation" *ngIf="isRegistrationSuccessful$ | async">Your account was created!</span>
-
         <mat-spinner *ngIf="isLoading$ | async" class="loader" [diameter]="30"></mat-spinner>
-
         <button mat-raised-button color="primary" class="sign-in-button" (click)="onClickCreateAccount()" [disabled]="registrationForm.invalid || verifyPasswords()">
             Create account
         </button>

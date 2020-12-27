@@ -2,3 +2,14 @@
     <mat-label>{{ label }}</mat-label>
     <input matInput [(ngModel)]="value" [type]="type" required="required" />
 </mat-form-field>
+<div class="error-container" *ngFor="let error of errors">
+    <span class="error-message" [ngSwitch]="error[0]">
+        <ng-template ngSwitchCase="required">This field is required</ng-template>
+        <ng-template ngSwitchCase="minlength">
+            The min length of this field is {{ error[1].requiredLength }} symbols
+        </ng-template>
+        <ng-template ngSwitchCase="maxlength">
+            The max length of this field is {{ error[1].requiredLength }} symbols
+        </ng-template>
+    </span>
+</div>
