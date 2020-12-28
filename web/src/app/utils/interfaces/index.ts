@@ -72,3 +72,7 @@ export interface ITeam {
 export interface IModalData {
     data: ISprint | IEpic | IProject | ITeam | IUser;
 }
+
+export interface IValidationMessage {
+    length?: number;
+}

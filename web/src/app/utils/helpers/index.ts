@@ -41,3 +41,5 @@ export function getUserRolesDropdownItems(): ISelectItem[] {
 }
 
 export const getFormattedDate = (date: Date): string => moment(date).format('yyyy-MM-DD');
+
+export const matchToRegex = (value: string): boolean => new RegExp('^[a-zA-Z0-9_]*$').test(value);
