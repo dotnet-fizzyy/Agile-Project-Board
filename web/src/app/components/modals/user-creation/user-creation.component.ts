@@ -7,14 +7,13 @@ import * as TeamSelectors from '../../../redux/selectors/team.selectors';
 import { IStoreState } from '../../../redux/store/state';
 import { getUserRolesDropdownItems } from '../../../utils/helpers';
 import { IModalData, ISelectItem, IUser } from '../../../utils/interfaces';
-import BaseModalCreation from '../base-modal-creation';
 
 @Component({
     selector: 'app-user-creation',
     templateUrl: './user-creation.component.html',
     styleUrls: ['./user-creation.component.scss'],
 })
-export class UserCreationComponent extends BaseModalCreation implements OnInit {
+export class UserCreationComponent implements OnInit {
     public readonly username: string = 'username';
     public readonly password: string = 'password';
     public readonly userRole: string = 'userRole';
@@ -24,24 +23,22 @@ export class UserCreationComponent extends BaseModalCreation implements OnInit {
     private teamId: string;
 
     constructor(
-        @Inject(MAT_DIALOG_DATA) private data: IModalData,
+        @Inject(MAT_DIALOG_DATA) modalData: IModalData,
         private store$: Store<IStoreState>,
         private fb: FormBuilder
     ) {
-        super(data.modalType);
+        this.formGroup = this.fb.group({
+            [this.username]: [
+                (modalData.data as IUser).username,
+                Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(16)]),
+            ],
+            [this.password]: ['', Validators.compose([Validators.required])],
+            [this.userRole]: [(modalData.data as IUser).userRole, Validators.required],
+        });
     }
 
     ngOnInit(): void {
         this.store$.select(TeamSelectors.getTeam).subscribe((x) => (this.teamId = x.teamId));
-
-        this.formGroup = this.fb.group({
-            [this.username]: [
-                (this.data.model as IUser).username,
-                Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(16)]),
-            ],
-            [this.password]: ['', Validators.compose([Validators.required])],
-            [this.userRole]: [(this.data.model as IUser).userRole, Validators.required],
-        });
     }
 
     public onClickCreate = () => {

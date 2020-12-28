@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { ModalComponentTypes, ModalCreationType } from 'src/app/utils/constants';
+import { ModalComponentTypes } from 'src/app/utils/constants';
 import { IModalData, ITeam, IUser } from 'src/app/utils/interfaces';
 import * as TeamSelectors from '../../redux/selectors/team.selectors';
 import { ITeamState } from '../../redux/store/state';
@@ -28,15 +28,13 @@ export class TeamManagementComponent implements OnInit {
 
     public onClickCreateTeam = (): void => {
         this.openDialog(TeamManageComponent, {
-            modalType: ModalCreationType.Team,
-            model: InitialStates.teamInitialState,
+            data: InitialStates.teamInitialState,
         });
     };
 
     public onClickUpdateTeam = (): void => {
         this.openDialog(TeamManageComponent, {
-            modalType: ModalCreationType.Team,
-            model: this.team,
+            data: this.team,
         });
     };
 
@@ -44,15 +42,13 @@ export class TeamManagementComponent implements OnInit {
 
     public onClickCreateTeamMember = (): void => {
         this.openDialog(UserCreationComponent, {
-            modalType: ModalCreationType.User,
-            model: InitialStates.teamMemberInitialState,
+            data: InitialStates.teamMemberInitialState,
         });
     };
 
     public onClickUpdateUser = (teamMember: IUser): void => {
         this.openDialog(UserCreationComponent, {
-            modalType: ModalCreationType.User,
-            model: teamMember,
+            data: teamMember,
         });
     };
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { ModalComponentTypes, ModalCreationType } from 'src/app/utils/constants';
+import { ModalComponentTypes } from 'src/app/utils/constants';
 import { IModalData, IProject } from 'src/app/utils/interfaces';
 import * as ProjectActions from '../../redux/actions/project.actions';
 import * as ProjectSelectors from '../../redux/selectors/project.selectors';
@@ -34,35 +34,32 @@ export class ProjectManagementComponent implements OnInit {
 
     public onClickCreateProjectButton = (): void => {
         this.openDialog(ProjectCreationComponent, {
-            modalType: ModalCreationType.Project,
-            model: InitialStates.projectInitialState,
+            data: InitialStates.projectInitialState,
         });
     };
 
     public onClickAddEpicButton = (): void => {
         this.openDialog(EpicCreationComponent, {
-            modalType: ModalCreationType.Epic,
-            model: InitialStates.epicInitialState,
+            data: InitialStates.epicInitialState,
         });
     };
 
     public onClickAddSprintButton = (): void => {
         this.openDialog(SprintCreationComponent, {
-            modalType: ModalCreationType.Sprint,
-            model: InitialStates.sprintInitialState,
+            data: InitialStates.sprintInitialState,
         });
     };
 
     public onClickViewSprintsFromEpic = (epicId: string): void => {};
 
     public onClickUpdateEpic = (epic: IEpic): void => {
-        this.openDialog(EpicCreationComponent, { modalType: ModalCreationType.Epic, model: epic });
+        this.openDialog(EpicCreationComponent, { data: epic });
     };
 
     public onClickRemoveEpic = (epicId: string): void => {};
 
     public onClickUpdateSprint = (sprint: ISprint): void => {
-        this.openDialog(SprintCreationComponent, { modalType: ModalCreationType.Sprint, model: sprint });
+        this.openDialog(SprintCreationComponent, { data: sprint });
     };
 
     public onClickRemoveSprint = (sprintId: string): void => {};
