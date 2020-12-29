@@ -1,0 +1,20 @@
+<div class="root-board-header">
+    <div class="inner-container">
+        <div>
+            <span>Project > {{ project.projectName }}</span>
+        </div>
+        <div class="general-items-container">
+            <div class="epic-container">
+                <span class="epic-label">Epics:</span>
+                <app-select-wrapper
+                    [ngModel]="selectedEpic"
+                    (ngModelChange)="onChangeEpic($event)"
+                    [options]="epics"
+                ></app-select-wrapper>
+            </div>
+            <div class="add-story-button-container">
+                <button mat-raised-button color="primary" (click)="onClickAddStory()">Add story</button>
+            </div>
+        </div>
+    </div>
+</div>

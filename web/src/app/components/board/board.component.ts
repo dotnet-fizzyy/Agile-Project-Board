@@ -3,11 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/internal/Observable';
 import { GetIsOpenedSidebarSelector } from 'src/app/redux/selectors/sidebar.selectors';
-import { ChangeStoryColumnAction, GetStoriesRequestAction } from './../../redux/actions/stories.actions';
-import { GetUsersRequestAction } from './../../redux/actions/user.actions';
-import { IStoreState } from './../../redux/store/state';
-import { ColumnNames } from './../../utils/constants/index';
-import { ISelectItem, IStory } from './../../utils/interfaces/index';
+import { ChangeStoryColumnAction, GetStoriesRequestAction } from '../../redux/actions/stories.actions';
+import { GetUsersRequestAction } from '../../redux/actions/user.actions';
+import { IStoreState } from '../../redux/store/state';
+import { ColumnNames } from '../../utils/constants';
+import { ISelectItem, IStory } from '../../utils/interfaces';
 
 @Component({
     selector: 'app-board',

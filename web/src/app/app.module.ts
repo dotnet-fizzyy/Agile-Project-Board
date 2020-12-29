@@ -21,7 +21,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BoardComponent } from './components/board/board.component';
 import { ColumnComponent } from './components/column/column.component';
-import { HeaderComponent } from './components/header/header.component';
+import { BoardHeaderComponent } from './components/headers/board-header/board-header.component';
+import { MainHeaderComponent } from './components/headers/main-header/main-header.component';
 import { LoginRegistrationModule } from './components/login-registration/login-registration.module';
 import { MainComponent } from './components/main/main.component';
 import { EpicCreationComponent } from './components/modals/epic-creation/epic-creation.component';
@@ -45,7 +46,7 @@ import { HttpService } from './services/http.service';
 @NgModule({
     declarations: [
         AppComponent,
-        HeaderComponent,
+        MainHeaderComponent,
         ColumnComponent,
         MainComponent,
         StoryComponent,
@@ -61,6 +62,7 @@ import { HttpService } from './services/http.service';
         StoryCreationComponent,
         TeamManageComponent,
         UndefinedPageComponent,
+        BoardHeaderComponent,
     ],
     imports: [
         BrowserModule,

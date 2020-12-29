@@ -1,0 +1,31 @@
+.row-flex-alignment {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.root-board-header {
+    width: 100%;
+    height: 100%;
+}
+
+.inner-container {
+    @extend .row-flex-alignment;
+    margin: 0 30px;
+    height: 100%;
+    justify-content: space-between;
+}
+
+.epic-container {
+    @extend .row-flex-alignment;
+    margin-right: 50px;
+}
+
+.epic-label {
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.general-items-container {
+    @extend .row-flex-alignment;
+}

@@ -1,4 +1,7 @@
 <div class="main-div">
+    <div class="main-header">
+        <app-board-header></app-board-header>
+    </div>
     <div class="main-body" cdkDropListGroup>
     <div *ngFor="let column of columns"
          id="{{column.value}}"
