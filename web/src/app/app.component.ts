@@ -7,15 +7,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
     public readonly title = 'myapp';
-    public readonly showHeader: boolean;
-
-    constructor() {
-        this.showHeader = this.displayHeader();
-    }
-
-    private displayHeader = (): boolean => {
-        const route = window.location.pathname.replace('/', '');
-
-        return route !== 'sign-in' && route !== 'registration';
-    };
 }

@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BoardComponent } from './components/board/board.component';
-import { LoginComponent } from './components/login-registration/login/login.component';
-import { RegistrationComponent } from './components/login-registration/registration/registration.component';
+import { LoginRegistrationRoutingModule } from './components/login-registration/login-registration-routing.module';
 import { MainComponent } from './components/main/main.component';
 import { ProjectManagementComponent } from './components/project-management/project-management.component';
 import { TeamManagementComponent } from './components/team-management/team-management.component';
@@ -15,14 +14,6 @@ const routes: Routes = [
         path: '',
         component: MainComponent,
         canActivate: [AuthGuard],
-    },
-    {
-        path: 'sign-in',
-        component: LoginComponent,
-    },
-    {
-        path: 'registration',
-        component: RegistrationComponent,
     },
     {
         path: 'team',
@@ -46,7 +37,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
+    imports: [RouterModule.forRoot(routes), LoginRegistrationRoutingModule],
     exports: [RouterModule],
     providers: [AuthGuard, CustomerGuard],
 })

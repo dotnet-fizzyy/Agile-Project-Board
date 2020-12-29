@@ -22,8 +22,7 @@ import { AppComponent } from './app.component';
 import { BoardComponent } from './components/board/board.component';
 import { ColumnComponent } from './components/column/column.component';
 import { HeaderComponent } from './components/header/header.component';
-import { LoginComponent } from './components/login-registration/login/login.component';
-import { RegistrationComponent } from './components/login-registration/registration/registration.component';
+import { LoginRegistrationModule } from './components/login-registration/login-registration.module';
 import { MainComponent } from './components/main/main.component';
 import { EpicCreationComponent } from './components/modals/epic-creation/epic-creation.component';
 import { ProjectCreationComponent } from './components/modals/project-creation/project-creation.component';
@@ -37,7 +36,6 @@ import { StartPromptComponent } from './components/start-prompt/start-prompt.com
 import { StoryComponent } from './components/story/story.component';
 import { TeamManagementComponent } from './components/team-management/team-management.component';
 import { UndefinedPageComponent } from './components/undefined-page/undefined-page.component';
-import { InputWrapperComponent } from './components/wrappers/input-wrapper/input-wrapper.component';
 import { SelectWrapperComponent } from './components/wrappers/select-wrapper/select-wrapper.component';
 import { LoaderInterceptor } from './interceptors/loader-interceptor.interceptor';
 import Effects from './redux/effects';
@@ -52,13 +50,10 @@ import { HttpService } from './services/http.service';
         MainComponent,
         StoryComponent,
         SidebarComponent,
-        LoginComponent,
-        RegistrationComponent,
         TeamManagementComponent,
         ProjectManagementComponent,
         StartPromptComponent,
         BoardComponent,
-        InputWrapperComponent,
         SelectWrapperComponent,
         ProjectCreationComponent,
         UserCreationComponent,
@@ -87,6 +82,7 @@ import { HttpService } from './services/http.service';
         MatProgressSpinnerModule,
         MatDialogModule,
         MatSelectModule,
+        LoginRegistrationModule,
     ],
     providers: [HttpService, { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }],
     bootstrap: [AppComponent],
