@@ -36,7 +36,7 @@ import { StartPromptComponent } from './components/start-prompt/start-prompt.com
 import { StoryComponent } from './components/story/story.component';
 import { TeamManagementComponent } from './components/team-management/team-management.component';
 import { UndefinedPageComponent } from './components/undefined-page/undefined-page.component';
-import { SelectWrapperComponent } from './components/wrappers/select-wrapper/select-wrapper.component';
+import { WrappersModule } from './components/wrappers/wrappers.module';
 import { LoaderInterceptor } from './interceptors/loader-interceptor.interceptor';
 import Effects from './redux/effects';
 import Reducers from './redux/store';
@@ -54,7 +54,6 @@ import { HttpService } from './services/http.service';
         ProjectManagementComponent,
         StartPromptComponent,
         BoardComponent,
-        SelectWrapperComponent,
         ProjectCreationComponent,
         UserCreationComponent,
         EpicCreationComponent,
@@ -83,6 +82,7 @@ import { HttpService } from './services/http.service';
         MatDialogModule,
         MatSelectModule,
         LoginRegistrationModule,
+        WrappersModule,
     ],
     providers: [HttpService, { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }],
     bootstrap: [AppComponent],
