@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { ChangeSidebarStateAction } from '../../redux/actions/sidebar.actions';
+import * as SidebarActions from '../../redux/actions/sidebar.actions';
 import { ISidebarState } from '../../redux/store/state';
 
 @Component({
@@ -13,7 +13,7 @@ export class SidebarComponent implements OnInit {
 
     ngOnInit(): void {}
 
-    onCloseSidebar = () => {
-        this.store$.dispatch(new ChangeSidebarStateAction());
+    public onCloseClick = (): void => {
+        this.store$.dispatch(new SidebarActions.ChangeSidebarStateAction());
     };
 }
