@@ -76,3 +76,8 @@ export interface IModalData {
 export interface IValidationMessage {
     length?: number;
 }
+
+export interface IUpdateUserStatus {
+    userId: string;
+    isActive: boolean;
+}

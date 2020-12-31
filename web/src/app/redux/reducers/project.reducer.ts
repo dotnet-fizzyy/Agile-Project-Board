@@ -21,6 +21,14 @@ export default function projectReducer(state = initialState, action: ProjectActi
             return handleCreateEpicSuccess(state, action);
         case ProjectActions.ProjectActions.CREATE_SPRINT_SUCCESS:
             return handleCreateSprintSuccess(state, action);
+        case ProjectActions.ProjectActions.UPDATE_PROJECT_SUCCESS:
+            return handleUpdateProjectSuccess(state, action);
+        case ProjectActions.ProjectActions.UPDATE_EPIC_SUCCESS:
+            return handleUpdateEpicSuccess(state, action);
+        case ProjectActions.ProjectActions.UPDATE_SPRINT_SUCCESS:
+            return handleUpdateSprintSuccess(state, action);
+        case ProjectActions.ProjectActions.GET_SPRINTS_FROM_EPIC_REQUEST:
+            return handleGetSprintsFromEpicSuccess(state, action);
         default:
             return state;
     }
@@ -48,5 +56,36 @@ function handleCreateSprintSuccess(state: IProjectState, action: ProjectActions.
     return {
         ...state,
         sprints: state.sprints.concat(action.payload),
+    };
+}
+
+function handleUpdateProjectSuccess(state: IProjectState, action: ProjectActions.UpdateProjectSuccess): IProjectState {
+    return {
+        ...state,
+        project: { ...action.payload },
+    };
+}
+
+function handleUpdateEpicSuccess(state: IProjectState, action: ProjectActions.UpdateEpicSuccess): IProjectState {
+    return {
+        ...state,
+        epics: state.epics.map((x) => (x.epicId === action.payload.epicId ? { ...action.payload } : x)),
+    };
+}
+
+function handleUpdateSprintSuccess(state: IProjectState, action: ProjectActions.UpdateSprintSuccess): IProjectState {
+    return {
+        ...state,
+        sprints: state.sprints.map((x) => (x.sprintId === action.payload.sprintId ? { ...action.payload } : x)),
+    };
+}
+
+function handleGetSprintsFromEpicSuccess(
+    state: IProjectState,
+    action: ProjectActions.GetSprintsFromEpicSuccess
+): IProjectState {
+    return {
+        ...state,
+        sprints: action.payload,
     };
 }

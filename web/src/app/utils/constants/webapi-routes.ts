@@ -6,6 +6,7 @@ export const MainRoutes = {
     PROJECTS: environment.webApiUrl + '/project',
     SPRINTS: environment.webApiUrl + '/sprint',
     EPICS: environment.webApiUrl + '/epic',
+    TEAMS: environment.webApiUrl + '/team',
 };
 
 export const UserRoutes = {
@@ -15,6 +16,12 @@ export const UserRoutes = {
 
 export const ProjectRoutes = {
     CREATE_PROJECT: MainRoutes.PROJECTS + '/customer',
+    CREATE_SPRINT: '',
+    CREATE_EPIC: '',
+    UPDATE_PROJECT: '',
+    UPDATE_EPIC: '',
+    UPDATE_SPRINT: '',
+    GET_EPIC_SPRINTS: '',
 };
 
 export const SprintRoutes = {
@@ -23,4 +30,12 @@ export const SprintRoutes = {
 
 export const EpicRoutes = {
     CREATE_EPIC: MainRoutes.EPICS,
+};
+
+export const TeamRoutes = {
+    CREATE_TEAM: MainRoutes.TEAMS,
+    CREATE_TEAM_MEMBER: '',
+    UPDATE_TEAM: '',
+    UPDATE_TEAM_MEMBER: '',
+    UPDATE_TEAM_MEMBER_STATUS: '',
 };

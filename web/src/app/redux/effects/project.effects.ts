@@ -3,11 +3,11 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { IFullProjectDescription, IProject, ISprint } from 'src/app/utils/interfaces';
+import { HttpService } from '../../services/http.service';
 import * as WebApiRoutes from '../../utils/constants/webapi-routes';
+import { IEpic } from '../../utils/interfaces';
 import * as ProjectActions from '../actions/project.actions';
-import { HttpService } from './../../services/http.service';
-import { IEpic } from './../../utils/interfaces/index';
-import { IProjectState } from './../store/state';
+import { IProjectState } from '../store/state';
 
 @Injectable()
 export default class ProjectEffects {
@@ -75,6 +75,76 @@ export default class ProjectEffects {
             }),
             catchError((error, caught) => {
                 this.store$.dispatch(new ProjectActions.CreateSprintFailure(error));
+
+                return caught;
+            })
+        )
+    );
+
+    getSprintsFromEpic$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType<ProjectActions.GetSprintsFromEpicRequest>(
+                ProjectActions.ProjectActions.GET_SPRINTS_FROM_EPIC_REQUEST
+            ),
+            mergeMap((action) => this.httpService.get(WebApiRoutes.ProjectRoutes.GET_EPIC_SPRINTS + action.payload)),
+            map((response: any) => {
+                const sprints: ISprint[] = response.map((s) => ProjectEffects.mapToSprint(s));
+
+                return new ProjectActions.GetSprintsFromEpicSuccess(sprints);
+            }),
+            catchError((error, caught) => {
+                this.store$.dispatch(new ProjectActions.GetSprintsFromEpicFailure(error));
+
+                return caught;
+            })
+        )
+    );
+
+    updateProject$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType<ProjectActions.UpdateProjectRequest>(ProjectActions.ProjectActions.UPDATE_PROJECT_REQUEST),
+            mergeMap((action) => this.httpService.put(WebApiRoutes.ProjectRoutes.UPDATE_PROJECT, action.payload)),
+            map((response: any) => {
+                const updatedProject: IProject = ProjectEffects.mapToProject(response);
+
+                return new ProjectActions.UpdateProjectSuccess(updatedProject);
+            }),
+            catchError((error, caught) => {
+                this.store$.dispatch(new ProjectActions.UpdateProjectFailure(error));
+
+                return caught;
+            })
+        )
+    );
+
+    updateEpic$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType<ProjectActions.UpdateEpicRequest>(ProjectActions.ProjectActions.UPDATE_EPIC_REQUEST),
+            mergeMap((action) => this.httpService.put(WebApiRoutes.ProjectRoutes.UPDATE_EPIC, action.payload)),
+            map((response: any) => {
+                const updatedEpic: IEpic = ProjectEffects.mapToEpic(response);
+
+                return new ProjectActions.UpdateEpicSuccess(updatedEpic);
+            }),
+            catchError((error, caught) => {
+                this.store$.dispatch(new ProjectActions.UpdateEpicFailure(error));
+
+                return caught;
+            })
+        )
+    );
+
+    updateSprint$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType<ProjectActions.UpdateSprintRequest>(ProjectActions.ProjectActions.UPDATE_SPRINT_REQUEST),
+            mergeMap((action) => this.httpService.put(WebApiRoutes.ProjectRoutes.UPDATE_SPRINT, action.payload)),
+            map((response: any) => {
+                const updatedSprint: ISprint = ProjectEffects.mapToSprint(response);
+
+                return new ProjectActions.UpdateSprintSuccess(updatedSprint);
+            }),
+            catchError((error, caught) => {
+                this.store$.dispatch(new ProjectActions.UpdateSprintFailure(error));
 
                 return caught;
             })
