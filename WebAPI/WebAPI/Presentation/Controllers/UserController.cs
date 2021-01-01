@@ -78,6 +78,15 @@ namespace WebAPI.Presentation.Controllers
             return Ok(updatedUser);
         }
 
+        [HttpPut]
+        [Route(RouteConstants.UserControllerUpdateUserStatusUrl)]
+        public async Task<HttpResponseMessage> UpdateUserStatus([FromBody]User user)
+        {
+	        await _userService.UpdateUserStatusAsync(user);
+
+            return new HttpResponseMessage(HttpStatusCode.NoContent);
+        }
+
         [HttpDelete]
         [Route(RouteConstants.UserControllerGetUserUrl)]
         public async Task<HttpResponseMessage> RemoveUser(Guid userId)

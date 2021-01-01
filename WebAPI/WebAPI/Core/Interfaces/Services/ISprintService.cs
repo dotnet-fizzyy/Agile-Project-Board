@@ -9,6 +9,8 @@ namespace WebAPI.Core.Interfaces.Services
     {
         Task<CollectionResponse<Sprint>> GetSprintsAsync();
 
+        Task<CollectionResponse<Sprint>> GetSprintsFromEpicAsync(Guid epicId);
+
         Task<Sprint> GetSprintAsync(Guid sprintId);
 
         Task<Sprint> CreateSprintAsync(Sprint sprint);

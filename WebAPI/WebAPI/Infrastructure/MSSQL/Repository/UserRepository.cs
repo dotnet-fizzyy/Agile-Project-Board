@@ -14,9 +14,19 @@ namespace WebAPI.Infrastructure.MSSQL.Repository
 
         public async Task<User> AuthenticateUserAsync(User user)
         {
-	        var foundUser = await _databaseContext.Users.FirstOrDefaultAsync(x => x.Username == user.Username && x.Password == user.Password);
+	        var foundUser = await _databaseContext.Users.FirstOrDefaultAsync(x => x.Username == user.Username && x.Password == user.Password && x.IsActive);
 
 	        return foundUser;
+        }
+
+        public async Task UpdateUserStatusAsync(Guid userId, bool isActive)
+        {
+	        var userUpdateEntity = new User { UserId = userId, IsActive = isActive };
+
+	        _databaseContext.Users.Attach(userUpdateEntity);
+	        _databaseContext.Entry(userUpdateEntity).Property(x => x.IsActive).IsModified = true;
+
+	        await _databaseContext.SaveChangesAsync();
         }
 
         public async Task UpdateUserTeamAsync(Guid userId, Guid teamId)
@@ -26,7 +36,7 @@ namespace WebAPI.Infrastructure.MSSQL.Repository
 	        _databaseContext.Users.Attach(userUpdateEntity);
 	        _databaseContext.Entry(userUpdateEntity).Property(x => x.TeamId).IsModified = true;
 
-	        await _databaseContext.SaveChangesAsync();
+            await _databaseContext.SaveChangesAsync();
         }
     }
 }

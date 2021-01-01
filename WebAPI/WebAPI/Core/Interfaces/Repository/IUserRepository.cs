@@ -8,6 +8,8 @@ namespace WebAPI.Core.Interfaces.Repository
 	{
 		Task<User> AuthenticateUserAsync(User user);
 
+		Task UpdateUserStatusAsync(Guid userId, bool isActive);
+
 		Task UpdateUserTeamAsync(Guid userId, Guid teamId);
 	}
 }

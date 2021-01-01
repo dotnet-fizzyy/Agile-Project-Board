@@ -37,6 +37,11 @@ namespace WebAPI.Presentation.Controllers
 	        return Ok(sprint);
         }
 
+        [HttpGet]
+        [Route(RouteConstants.SprintControllerGetSprintsFromEpicUrl)]
+        public async Task<CollectionResponse<Sprint>> GetSprintsFromEpic(Guid epicId) =>
+	        await _sprintService.GetSprintsFromEpicAsync(epicId);
+
         [HttpPost]
         [Route(RouteConstants.SprintControllerUrl)]
         public async Task<IHttpActionResult> CreateSprint([FromBody] Sprint sprint)

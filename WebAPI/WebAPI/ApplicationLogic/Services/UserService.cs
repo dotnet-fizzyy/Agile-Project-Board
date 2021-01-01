@@ -85,6 +85,11 @@ namespace WebAPI.ApplicationLogic.Services
             return userModel;
         }
 
+        public async Task UpdateUserStatusAsync(User user)
+        {
+	        await _userRepository.UpdateUserStatusAsync(user.UserId, user.IsActive);
+        }
+
         public async Task RemoveUserAsync(Guid userId)
         {
             await _userRepository.RemoveItemAsync(x => x.UserId == userId);

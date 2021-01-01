@@ -32,6 +32,18 @@ namespace WebAPI.ApplicationLogic.Services
             return collectionResponse;
         }
 
+        public async Task<CollectionResponse<Sprint>> GetSprintsFromEpicAsync(Guid epicId)
+        {
+	        var sprintEntities = await _sprintRepository.SearchForMultipleItemsAsync(x => x.EpicId == epicId);
+
+	        var collectionResponse = new CollectionResponse<Sprint>
+	        {
+		        Items = sprintEntities.Select(_mapper.Map<Sprint>).ToList(),
+	        };
+
+	        return collectionResponse;
+        }
+
         public async Task<Sprint> GetSprintAsync(Guid sprintId)
         {
             var sprintEntity = await _sprintRepository.SearchForSingleItemAsync(x => x.SprintId == sprintId);

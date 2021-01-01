@@ -14,6 +14,7 @@ namespace WebAPI.Core.Constants
 	    public const string SprintControllerUrl = "sprint";
 	    public const string SprintControllerGetAllSprintsUrl = SprintControllerUrl + "/all";
 	    public const string SprintControllerGetSprintUrl = SprintControllerUrl + "/{sprintId}";
+	    public const string SprintControllerGetSprintsFromEpicUrl = SprintControllerUrl + "/epic/{epicId}";
 
 	    public const string StoryControllerUrl = "story";
 	    public const string StoryControllerGetAllStoriesUrl = StoryControllerUrl + "/all";
@@ -30,6 +31,7 @@ namespace WebAPI.Core.Constants
         public const string UserControllerGetUserUrl = UserControllerUrl + "/{userId}";
         public const string UserControllerAuthenticateUrl = UserControllerUrl + "/auth";
         public const string UserControllerCreateCustomerUrl = UserControllerUrl + "/customer";
+        public const string UserControllerUpdateUserStatusUrl = UserControllerUrl + "/status";
     }
 
     public static class Headers
