@@ -27,6 +27,11 @@ export const UserRoles = {
     TEAMMASTER: 'TeamMaster',
 };
 
+export const enum ModalType {
+    CREATE,
+    UPDATE,
+}
+
 export type ModalComponentTypes = ComponentType<
     | EpicCreationComponent
     | SprintCreationComponent

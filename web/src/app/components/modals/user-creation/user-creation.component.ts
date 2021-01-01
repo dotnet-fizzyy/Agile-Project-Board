@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
+import { ModalType } from 'src/app/utils/constants';
 import * as TeamActions from '../../../redux/actions/team.actions';
 import * as TeamSelectors from '../../../redux/selectors/team.selectors';
 import { IStoreState } from '../../../redux/store/state';
@@ -23,7 +24,7 @@ export class UserCreationComponent implements OnInit {
     private teamId: string;
 
     constructor(
-        @Inject(MAT_DIALOG_DATA) modalData: IModalData,
+        @Inject(MAT_DIALOG_DATA) private modalData: IModalData,
         private store$: Store<IStoreState>,
         private fb: FormBuilder
     ) {
@@ -43,6 +44,7 @@ export class UserCreationComponent implements OnInit {
 
     public onClickCreate = () => {
         const user: IUser = {
+            userId: (this.modalData.data as IUser).userId,
             username: this.formGroup.get(this.username).value,
             password: this.formGroup.get(this.password).value,
             userRole: this.formGroup.get(this.userRole).value,
@@ -50,6 +52,10 @@ export class UserCreationComponent implements OnInit {
             teamId: this.teamId,
         };
 
-        this.store$.dispatch(new TeamActions.CreateTeamMemberRequest(user));
+        if (this.modalData.type === ModalType.CREATE) {
+            this.store$.dispatch(new TeamActions.CreateTeamMemberRequest(user));
+        } else {
+            this.store$.dispatch(new TeamActions.UpdateTeamMemberRequest(user));
+        }
     };
 }

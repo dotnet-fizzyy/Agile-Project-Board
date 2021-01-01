@@ -46,7 +46,6 @@ namespace WebAPI.ApplicationLogic.Services
         public async Task<FullProjectDescription> GetCustomerProject(Guid userId)
         {
 	        var projectEntity = await _projectRepository.SearchForSingleItemAsync(x => x.CustomerId == userId);
-
 	        if (projectEntity == null)
 	        {
 		        return null;
@@ -74,16 +73,15 @@ namespace WebAPI.ApplicationLogic.Services
             return projectModel;
         }
 
-        public async Task<Project> CreateProjectWithCustomerAsync(Project project, Guid userId)
+        public async Task<Project> CreateProjectAsync(Project project)
         {
-	        var projectEntity = _mapper.Map<Models.Entities.Project>(project);
-	        projectEntity.CustomerId = userId;
+            var projectEntity = _mapper.Map<Models.Entities.Project>(project);
 
-	        var createdEntity = await _projectRepository.CreateItemAsync(projectEntity);
+            var createdEntity = await _projectRepository.CreateItemAsync(projectEntity);
 
-	        var projectModel = _mapper.Map<Project>(createdEntity);
+            var projectModel = _mapper.Map<Project>(createdEntity);
 
-	        return projectModel;
+            return projectModel;
         }
 
         public async Task<Project> UpdateProjectAsync(Project project)

@@ -6,13 +6,13 @@
                 <p>Start date: {{ project.startDate | date: 'dd-MM-yyyy' }}</p>
                 <p>End date: {{ project.endDate | date: 'dd-MM-yyyy' }}</p>
                 <div class="manage-buttons-container">
-                    <button mat-raised-button color="primary">Update project info</button>
+                    <button mat-raised-button color="primary" (click)="onClickUpdateProject()">Update project info</button>
                     <button mat-raised-button color="warn" class="remove-button">Remove project</button>
                 </div>
             </div>
             <ng-template #create>
                 <div class="create-button-container flex-alignment">
-                    <button mat-raised-button color="primary" (click)="onClickCreateProjectButton()">Create project</button>
+                    <button mat-raised-button color="primary" (click)="onClickCreateProject()">Create project</button>
                 </div>
             </ng-template>
         </div>
@@ -22,33 +22,35 @@
                 <button
                     class="add-item-button"
                     mat-raised-button color="primary"
-                    (click)="onClickAddEpicButton()"
+                    (click)="onClickAddEpic()"
                     [disabled]="!project"
                 >
                     Add epic
                 </button>
                 <ng-container *ngIf="epics.length; else emptyEpics">
                     <div *ngFor="let epic of epics" class="list-item">
-                        <span>
+                        <span class="list-item-label">
                             {{ epic.epicName }} |
                             {{ epic.startDate | date: 'yyyy.MM.dd' }} -
                             {{ epic.endDate | date: 'yyyy.MM.dd' }}
                         </span>
-                        <button
-                            mat-raised-button
-                            color="primary"
-                            (click)="onClickViewSprintsFromEpic(epic.epicId)"
-                        >
-                            View sprints
-                        </button>
-                        <button
-                            mat-raised-button
-                            color="primary"
-                            (click)="onClickUpdateEpic(epic)"
-                        >
-                            Update
-                        </button>
-                        <button mat-raised-button color="warn" (click)="onClickRemoveEpic(epic.epicId)">Remove</button>
+                        <div>
+                            <button
+                                mat-raised-button
+                                color="primary"
+                                (click)="onClickViewSprintsFromEpic(epic.epicId)"
+                            >
+                                View sprints
+                            </button>
+                            <button
+                                mat-raised-button
+                                color="primary"
+                                (click)="onClickUpdateEpic(epic)"
+                            >
+                                Update
+                            </button>
+                            <button mat-raised-button color="warn" (click)="onClickRemoveEpic(epic.epicId)">Remove</button>
+                        </div>
                     </div>
                 </ng-container>
                 <ng-template #emptyEpics>
@@ -59,7 +61,7 @@
                 <button
                     class="add-item-button"
                     mat-raised-button color="primary"
-                    (click)="onClickAddSprintButton()"
+                    (click)="onClickAddSprint()"
                     [disabled]="!project"
                 >
                     Add sprint
@@ -67,19 +69,21 @@
                 <h3>Sprints</h3>
                 <ng-container *ngIf="sprints.length; else emptySprints">
                     <div *ngFor="let sprint of sprints" class="list-item">
-                        <span>
+                        <span class="list-item-label">
                             {{ sprint.sprintName }} |
                             {{ sprint.startDate | date: 'yyyy.MM.dd' }} -
                             {{ sprint.endDate | date: 'yyyy.MM.dd' }}
                         </span>
-                        <button
-                            mat-raised-button
-                            color="primary"
-                            (click)="onClickUpdateSprint(sprint)"
-                        >
-                            Update
-                        </button>
-                        <button mat-raised-button color="warn" (click)="onClickRemoveSprint(sprint.sprintId)">Remove</button>
+                        <div>
+                            <button
+                                mat-raised-button
+                                color="primary"
+                                (click)="onClickUpdateSprint(sprint)"
+                            >
+                                Update
+                            </button>
+                            <button mat-raised-button color="warn" (click)="onClickRemoveSprint(sprint.sprintId)">Remove</button>
+                        </div>
                     </div>
                 </ng-container>
                 <ng-template #emptySprints>

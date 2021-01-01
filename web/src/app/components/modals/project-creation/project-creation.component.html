@@ -1,4 +1,4 @@
-<h2>Project creation</h2>
+<h2>Project {{ isCreation ? 'creation' : 'update' }}</h2>
 <form [formGroup]="formGroup">
     <div class="project-creation-form-container">
         <app-input-wrapper [formControlName]="projectName" label="Project name" type="text" required="true"></app-input-wrapper>
@@ -12,5 +12,5 @@
     [disabled]="formGroup.invalid"
     (click)="onClickCreate()"
 >
-    Create project
+    {{ isCreation ? 'Create' : 'Update' }} project
 </button>

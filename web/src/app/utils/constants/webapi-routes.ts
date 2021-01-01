@@ -15,21 +15,19 @@ export const UserRoutes = {
 };
 
 export const ProjectRoutes = {
-    CREATE_PROJECT: MainRoutes.PROJECTS + '/customer',
-    CREATE_SPRINT: '',
-    CREATE_EPIC: '',
-    UPDATE_PROJECT: '',
-    UPDATE_EPIC: '',
-    UPDATE_SPRINT: '',
-    GET_EPIC_SPRINTS: '',
+    CREATE_PROJECT: MainRoutes.PROJECTS,
+    UPDATE_PROJECT: MainRoutes.PROJECTS,
 };
 
 export const SprintRoutes = {
     CREATE_SPRINT: MainRoutes.SPRINTS,
+    GET_EPIC_SPRINTS: MainRoutes.SPRINTS + '/epic/',
+    UPDATE_SPRINT: MainRoutes.SPRINTS,
 };
 
 export const EpicRoutes = {
     CREATE_EPIC: MainRoutes.EPICS,
+    UPDATE_EPIC: MainRoutes.EPICS,
 };
 
 export const TeamRoutes = {

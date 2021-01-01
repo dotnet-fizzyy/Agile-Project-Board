@@ -86,9 +86,9 @@ export default class ProjectEffects {
             ofType<ProjectActions.GetSprintsFromEpicRequest>(
                 ProjectActions.ProjectActions.GET_SPRINTS_FROM_EPIC_REQUEST
             ),
-            mergeMap((action) => this.httpService.get(WebApiRoutes.ProjectRoutes.GET_EPIC_SPRINTS + action.payload)),
+            mergeMap((action) => this.httpService.get(WebApiRoutes.SprintRoutes.GET_EPIC_SPRINTS + action.payload)),
             map((response: any) => {
-                const sprints: ISprint[] = response.map((s) => ProjectEffects.mapToSprint(s));
+                const sprints: ISprint[] = response.items.map((s) => ProjectEffects.mapToSprint(s));
 
                 return new ProjectActions.GetSprintsFromEpicSuccess(sprints);
             }),
@@ -120,7 +120,7 @@ export default class ProjectEffects {
     updateEpic$ = createEffect(() =>
         this.actions$.pipe(
             ofType<ProjectActions.UpdateEpicRequest>(ProjectActions.ProjectActions.UPDATE_EPIC_REQUEST),
-            mergeMap((action) => this.httpService.put(WebApiRoutes.ProjectRoutes.UPDATE_EPIC, action.payload)),
+            mergeMap((action) => this.httpService.put(WebApiRoutes.EpicRoutes.UPDATE_EPIC, action.payload)),
             map((response: any) => {
                 const updatedEpic: IEpic = ProjectEffects.mapToEpic(response);
 
@@ -137,7 +137,7 @@ export default class ProjectEffects {
     updateSprint$ = createEffect(() =>
         this.actions$.pipe(
             ofType<ProjectActions.UpdateSprintRequest>(ProjectActions.ProjectActions.UPDATE_SPRINT_REQUEST),
-            mergeMap((action) => this.httpService.put(WebApiRoutes.ProjectRoutes.UPDATE_SPRINT, action.payload)),
+            mergeMap((action) => this.httpService.put(WebApiRoutes.SprintRoutes.UPDATE_SPRINT, action.payload)),
             map((response: any) => {
                 const updatedSprint: ISprint = ProjectEffects.mapToSprint(response);
 

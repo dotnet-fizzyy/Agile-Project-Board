@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { ModalComponentTypes } from 'src/app/utils/constants';
+import { ModalComponentTypes, ModalType } from 'src/app/utils/constants';
 import { IModalData, IProject } from 'src/app/utils/interfaces';
 import * as ProjectActions from '../../redux/actions/project.actions';
 import * as ProjectSelectors from '../../redux/selectors/project.selectors';
@@ -32,34 +32,52 @@ export class ProjectManagementComponent implements OnInit {
         this.store$.select(ProjectSelectors.getSprints).subscribe((x) => (this.sprints = x));
     }
 
-    public onClickCreateProjectButton = (): void => {
+    public onClickCreateProject = (): void => {
         this.openDialog(ProjectCreationComponent, {
+            type: ModalType.CREATE,
             data: InitialStates.projectInitialState,
         });
     };
 
-    public onClickAddEpicButton = (): void => {
+    public onClickUpdateProject = (): void => {
+        this.openDialog(ProjectCreationComponent, {
+            type: ModalType.UPDATE,
+            data: this.project,
+        });
+    };
+
+    public onClickAddEpic = (): void => {
         this.openDialog(EpicCreationComponent, {
+            type: ModalType.CREATE,
             data: InitialStates.epicInitialState,
         });
     };
 
-    public onClickAddSprintButton = (): void => {
+    public onClickAddSprint = (): void => {
         this.openDialog(SprintCreationComponent, {
+            type: ModalType.CREATE,
             data: InitialStates.sprintInitialState,
         });
     };
 
-    public onClickViewSprintsFromEpic = (epicId: string): void => {};
+    public onClickViewSprintsFromEpic = (epicId: string): void => {
+        this.store$.dispatch(new ProjectActions.GetSprintsFromEpicRequest(epicId));
+    };
 
     public onClickUpdateEpic = (epic: IEpic): void => {
-        this.openDialog(EpicCreationComponent, { data: epic });
+        this.openDialog(EpicCreationComponent, {
+            type: ModalType.UPDATE,
+            data: epic,
+        });
     };
 
     public onClickRemoveEpic = (epicId: string): void => {};
 
     public onClickUpdateSprint = (sprint: ISprint): void => {
-        this.openDialog(SprintCreationComponent, { data: sprint });
+        this.openDialog(SprintCreationComponent, {
+            type: ModalType.UPDATE,
+            data: sprint,
+        });
     };
 
     public onClickRemoveSprint = (sprintId: string): void => {};

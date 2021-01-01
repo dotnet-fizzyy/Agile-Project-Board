@@ -1,3 +1,5 @@
+import { ModalType } from '../constants';
+
 export interface ISelectItem {
     label: string;
     value: string;
@@ -70,6 +72,7 @@ export interface ITeam {
 }
 
 export interface IModalData {
+    type: ModalType;
     data: ISprint | IEpic | IProject | ITeam | IUser;
 }
 

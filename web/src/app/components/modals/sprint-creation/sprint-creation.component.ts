@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { IStoreState } from 'src/app/redux/store/state';
+import { ModalType } from 'src/app/utils/constants';
 import * as ProjectActions from '../../../redux/actions/project.actions';
 import * as ProjectSelectors from '../../../redux/selectors/project.selectors';
 import { getFormattedDate } from '../../../utils/helpers';
@@ -23,7 +24,7 @@ export class SprintCreationComponent implements OnInit {
     public formGroup: FormGroup;
 
     constructor(
-        @Inject(MAT_DIALOG_DATA) modalData: IModalData,
+        @Inject(MAT_DIALOG_DATA) private modalData: IModalData,
         private fb: FormBuilder,
         private store$: Store<IStoreState>
     ) {
@@ -41,12 +42,17 @@ export class SprintCreationComponent implements OnInit {
 
     public onClickCreate = (): void => {
         const sprint: ISprint = {
+            sprintId: (this.modalData.data as ISprint).sprintId,
             sprintName: this.formGroup.get(this.sprintName).value,
             startDate: this.formGroup.get(this.startDate).value,
             endDate: this.formGroup.get(this.endDate).value,
             epicId: this.formGroup.get(this.epicId).value,
         };
 
-        this.store$.dispatch(new ProjectActions.CreateSprintRequest(sprint));
+        if (this.modalData.type === ModalType.CREATE) {
+            this.store$.dispatch(new ProjectActions.CreateSprintRequest(sprint));
+        } else {
+            this.store$.dispatch(new ProjectActions.UpdateSprintRequest(sprint));
+        }
     };
 }

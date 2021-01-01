@@ -62,18 +62,8 @@ namespace WebAPI.Presentation.Controllers
 	        return Ok(project);
         }
 
-        [HttpPost]
-        [Route(RouteConstants.ProjectControllerUrl)]
-        public async Task<IHttpActionResult> CreateProject([FromBody] Project project)
-        {
-            var createdProject = await _projectService.CreateProjectAsync(project);
-
-            return Created(nameof(ProjectController), createdProject);
-        }
-
-        [HttpPost]
-        [Route(RouteConstants.ProjectControllerCreateProjectWithCustomerUrl)]
-        public async Task<IHttpActionResult> CreateProjectWithCustomer([FromBody] Project project)
+        [HttpGet]
+        public async Task<IHttpActionResult> GetProjectBoardIndex(Guid projectId)
         {
 	        var userId = _requestHeadersProvider.GetUserId(Request);
 
@@ -82,9 +72,18 @@ namespace WebAPI.Presentation.Controllers
 		        return BadRequest();
 	        }
 
-	        var createdProject = await _projectService.CreateProjectWithCustomerAsync(project, (Guid)userId);
+            var projectBoardModel = await _projectService.GetProjectBoardData(projectId, (Guid)userId);
 
-	        return Created(nameof(ProjectController), createdProject);
+            return Ok(projectBoardModel);
+        }
+
+        [HttpPost]
+        [Route(RouteConstants.ProjectControllerUrl)]
+        public async Task<IHttpActionResult> CreateProject([FromBody] Project project)
+        {
+            var createdProject = await _projectService.CreateProjectAsync(project);
+
+            return Created(nameof(ProjectController), createdProject);
         }
 
         [HttpPut]

@@ -21,13 +21,14 @@ export default function projectReducer(state = initialState, action: ProjectActi
             return handleCreateEpicSuccess(state, action);
         case ProjectActions.ProjectActions.CREATE_SPRINT_SUCCESS:
             return handleCreateSprintSuccess(state, action);
+        case ProjectActions.ProjectActions.CREATE_PROJECT_SUCCESS:
         case ProjectActions.ProjectActions.UPDATE_PROJECT_SUCCESS:
             return handleUpdateProjectSuccess(state, action);
         case ProjectActions.ProjectActions.UPDATE_EPIC_SUCCESS:
             return handleUpdateEpicSuccess(state, action);
         case ProjectActions.ProjectActions.UPDATE_SPRINT_SUCCESS:
             return handleUpdateSprintSuccess(state, action);
-        case ProjectActions.ProjectActions.GET_SPRINTS_FROM_EPIC_REQUEST:
+        case ProjectActions.ProjectActions.GET_SPRINTS_FROM_EPIC_SUCCESS:
             return handleGetSprintsFromEpicSuccess(state, action);
         default:
             return state;
