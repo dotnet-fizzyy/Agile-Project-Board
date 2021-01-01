@@ -7,9 +7,11 @@ using WebAPI.Core.Constants;
 using WebAPI.Core.Interfaces.Services;
 using WebAPI.Models.Result;
 using WebAPI.Models.Web;
+using WebAPI.Presentation.Filters;
 
 namespace WebAPI.Presentation.Controllers
 {
+	[RequestBodyFilter]
     public class ProjectController : ApiController
     {
         private readonly IProjectService _projectService;
