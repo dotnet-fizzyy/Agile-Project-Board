@@ -325,6 +325,7 @@
     <Compile Include="Core\Enums\Columns.cs" />
     <Compile Include="Core\Interfaces\Repository\IBaseCrudRepository.cs" />
     <Compile Include="Core\Interfaces\Repository\IUserRepository.cs" />
+    <Compile Include="Presentation\Filters\RequestBodyFilter.cs" />
     <Compile Include="Presentation\Mappers\EpicProfile.cs" />
     <Compile Include="Presentation\Mappers\ProjectProfile.cs" />
     <Compile Include="Presentation\Mappers\SprintProfile.cs" />
