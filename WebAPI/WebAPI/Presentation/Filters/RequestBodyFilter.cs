@@ -13,6 +13,8 @@ namespace WebAPI.Presentation.Filters
 	{
 		private const string BadRequestReasonMessage = "The request body required";
 
+		public override bool AllowMultiple => false;
+
 		public async Task<HttpResponseMessage> ExecuteActionFilterAsync(HttpActionContext actionContext, CancellationToken cancellationToken, Func<Task<HttpResponseMessage>> continuation)
 		{
 			var httpMethod = actionContext.Request.Method;

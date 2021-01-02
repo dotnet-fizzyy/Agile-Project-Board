@@ -5,6 +5,6 @@ namespace WebAPI.Core.Interfaces.Services
 {
 	public interface IRequestHeadersProvider
 	{
-		Guid? GetUserId(HttpRequestMessage httpRequest);
+		Guid GetUserId(HttpRequestMessage httpRequest);
 	}
 }

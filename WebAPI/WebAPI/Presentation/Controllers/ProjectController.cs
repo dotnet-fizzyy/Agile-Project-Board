@@ -50,18 +50,14 @@ namespace WebAPI.Presentation.Controllers
         /// <summary>
         /// Get exact project belongs to customer
         /// </summary>
+        [UserVerificationFilter]
         [HttpGet]
         [Route(RouteConstants.ProjectControllerCreateProjectWithCustomerUrl)]
         public async Task<IHttpActionResult> GetProjectByCustomerId()
         {
 	        var userId = _requestHeadersProvider.GetUserId(Request);
 
-	        if (userId == null)
-	        {
-		        return BadRequest();
-	        }
-
-            var project = await _projectService.GetCustomerProject((Guid)userId);
+	        var project = await _projectService.GetCustomerProject(userId);
 
 	        if (project == null)
 	        {
@@ -74,17 +70,13 @@ namespace WebAPI.Presentation.Controllers
         /// <summary>
         /// Get project data for board page
         /// </summary>
+        [UserVerificationFilter]
         [HttpGet]
         public async Task<IHttpActionResult> GetProjectBoardIndex(Guid projectId)
         {
 	        var userId = _requestHeadersProvider.GetUserId(Request);
 
-	        if (userId == null)
-	        {
-		        return BadRequest();
-	        }
-
-            var projectBoardModel = await _projectService.GetProjectBoardData(projectId, (Guid)userId);
+            var projectBoardModel = await _projectService.GetProjectBoardData(projectId, userId);
 
             return Ok(projectBoardModel);
         }

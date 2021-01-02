@@ -8,16 +8,6 @@ namespace WebAPI.ApplicationLogic
 {
 	public class RequestHeadersProvider : IRequestHeadersProvider
 	{
-		public Guid? GetUserId(HttpRequestMessage httpRequest)
-		{
-			var userId = httpRequest.Headers.GetValues(Headers.UserHeader).FirstOrDefault();
-
-			if (string.Equals(userId, string.Empty) || !Guid.TryParse(userId, out var parsedResult))
-			{
-				return null;
-			}
-
-			return parsedResult;
-		}
+		public Guid GetUserId(HttpRequestMessage httpRequest) => Guid.Parse(httpRequest.Headers.GetValues(Headers.UserHeader).First());
 	}
 }

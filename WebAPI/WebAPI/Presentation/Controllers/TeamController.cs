@@ -68,18 +68,14 @@ namespace WebAPI.Presentation.Controllers
         /// <summary>
         /// Get team for team management page, requires customer id
         /// </summary>
+        [UserVerificationFilter]
         [HttpGet]
         [Route(RouteConstants.TeamControllerTeamManagementUrl)]
         public async Task<IHttpActionResult> GetTeamManagementPageIndex()
         {
 	        var userId = _requestHeadersProvider.GetUserId(Request);
 
-	        if (userId == null)
-	        {
-		        return BadRequest();
-	        }
-
-	        var teamManagementPageData = await _teamService.GetTeamManagementPageData((Guid)userId);
+	        var teamManagementPageData = await _teamService.GetTeamManagementPageData(userId);
 
 	        if (teamManagementPageData == null)
 	        {
@@ -104,18 +100,14 @@ namespace WebAPI.Presentation.Controllers
         /// <summary>
         /// Create team and updated customer profile with owned team
         /// </summary>
+        [UserVerificationFilter]
         [HttpPost]
         [Route(RouteConstants.TeamControllerCreateTeamWithCustomerUrl)]
         public async Task<IHttpActionResult> CreateTeamWithCustomer([FromBody] Team team)
         {
 	        var userId = _requestHeadersProvider.GetUserId(Request);
 
-            if (userId == null)
-	        {
-		        return BadRequest();
-	        }
-
-	        var createdTeam = await _teamService.CreateTeamWithCustomerAsync(team, (Guid)userId);
+	        var createdTeam = await _teamService.CreateTeamWithCustomerAsync(team, userId);
 
 	        return Created(nameof(TeamController), createdTeam);
         }
