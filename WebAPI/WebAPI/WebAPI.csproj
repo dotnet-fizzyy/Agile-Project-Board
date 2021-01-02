@@ -298,6 +298,15 @@
     <Compile Include="Infrastructure\MSSQL\Repository\StoryRepository.cs" />
     <Compile Include="Infrastructure\MSSQL\Repository\TeamRepository.cs" />
     <Compile Include="Infrastructure\MSSQL\Repository\UserRepository.cs" />
+    <Compile Include="Migrations\202012251454260_InitialCreate.cs" />
+    <Compile Include="Migrations\202012251454260_InitialCreate.designer.cs">
+      <DependentUpon>202012251454260_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101021713108_initialMigration.cs" />
+    <Compile Include="Migrations\202101021713108_initialMigration.designer.cs">
+      <DependentUpon>202101021713108_initialMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Entities\Epic.cs" />
     <Compile Include="Models\Entities\Project.cs" />
     <Compile Include="Models\Entities\Sprint.cs" />
@@ -328,6 +337,7 @@
     <Compile Include="Core\Interfaces\Repository\IBaseCrudRepository.cs" />
     <Compile Include="Core\Interfaces\Repository\IUserRepository.cs" />
     <Compile Include="Presentation\Filters\RequestBodyFilter.cs" />
+    <Compile Include="Presentation\Filters\UserVerificationFilter.cs" />
     <Compile Include="Presentation\Mappers\EpicProfile.cs" />
     <Compile Include="Presentation\Mappers\ProjectProfile.cs" />
     <Compile Include="Presentation\Mappers\SprintProfile.cs" />
@@ -352,7 +362,14 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202012251454260_InitialCreate.resx">
+      <DependentUpon>202012251454260_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101021713108_initialMigration.resx">
+      <DependentUpon>202101021713108_initialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
