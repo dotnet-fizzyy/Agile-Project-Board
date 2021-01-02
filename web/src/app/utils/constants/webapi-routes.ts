@@ -12,9 +12,13 @@ export const MainRoutes = {
 export const UserRoutes = {
     AUTHENTICATE_USER: MainRoutes.USERS + '/auth',
     CREATE_CUSTOMER: MainRoutes.USERS + '/customer',
+    ADD_USER: MainRoutes.USERS,
+    UPDATE_USER: MainRoutes.USERS,
+    UPDATE_USER_STATUS: MainRoutes.USERS + '/status',
 };
 
 export const ProjectRoutes = {
+    GET_CUSTOMER_PROJECT: MainRoutes.PROJECTS + '/customer',
     CREATE_PROJECT: MainRoutes.PROJECTS,
     UPDATE_PROJECT: MainRoutes.PROJECTS,
 };
@@ -31,9 +35,7 @@ export const EpicRoutes = {
 };
 
 export const TeamRoutes = {
-    CREATE_TEAM: MainRoutes.TEAMS,
-    CREATE_TEAM_MEMBER: '',
-    UPDATE_TEAM: '',
-    UPDATE_TEAM_MEMBER: '',
-    UPDATE_TEAM_MEMBER_STATUS: '',
+    GET_CUSTOMER_TEAM: MainRoutes.TEAMS + '/management',
+    CREATE_TEAM: MainRoutes.TEAMS + '/customer',
+    UPDATE_TEAM: MainRoutes.TEAMS,
 };

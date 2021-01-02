@@ -27,13 +27,13 @@ export class GetTeamRequest implements Action {
 }
 
 export class GetTeamSuccess implements Action {
-    constructor(public payload: any) {}
+    constructor(public payload: ITeam) {}
     readonly type: string = TeamActions.GET_TEAM_SUCCESS;
 }
 
 export class GetTeamFailure implements Action {
     constructor(public payload: Error) {}
-    readonly type: string = TeamActions.GET_TEAM_SUCCESS;
+    readonly type: string = TeamActions.GET_TEAM_FAILURE;
 }
 
 export class CreateTeamRequest implements Action {

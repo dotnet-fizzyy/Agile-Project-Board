@@ -1,4 +1,7 @@
 <div class="root-project-management">
+    <div class="loader-container" *ngIf="isLoading">
+        <mat-spinner></mat-spinner>
+    </div>
     <div class="main-project-main-container">
         <div class="project-description-container">
             <div *ngIf="project.projectId; else create" class="create-button-container">

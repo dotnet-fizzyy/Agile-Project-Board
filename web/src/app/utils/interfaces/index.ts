@@ -65,7 +65,7 @@ export interface IFullProjectDescription {
 
 export interface ITeam {
     teamId?: string;
-    teamName: string;
+    name: string;
     projectId: string;
     location: string;
     users?: IUser[];
@@ -83,4 +83,9 @@ export interface IValidationMessage {
 export interface IUpdateUserStatus {
     userId: string;
     isActive: boolean;
+}
+
+export interface ITeamManagementModel {
+    project: IProject;
+    team: ITeam;
 }

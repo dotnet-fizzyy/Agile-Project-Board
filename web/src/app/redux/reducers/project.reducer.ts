@@ -23,6 +23,7 @@ export default function projectReducer(state = initialState, action: ProjectActi
             return handleCreateSprintSuccess(state, action);
         case ProjectActions.ProjectActions.CREATE_PROJECT_SUCCESS:
         case ProjectActions.ProjectActions.UPDATE_PROJECT_SUCCESS:
+        case ProjectActions.ProjectActions.ADD_PROJECT:
             return handleUpdateProjectSuccess(state, action);
         case ProjectActions.ProjectActions.UPDATE_EPIC_SUCCESS:
             return handleUpdateEpicSuccess(state, action);

@@ -13,12 +13,22 @@ namespace WebAPI.ApplicationLogic.Services
     {
         private readonly IProjectRepository _projectRepository;
         private readonly IEpicRepository _epicRepository;
+        private readonly ITeamRepository _teamRepository;
+        private readonly ISprintRepository _sprintRepository;
         private readonly IMapper _mapper;
 
-        public ProjectService(IProjectRepository projectRepository, IEpicRepository epicRepository, IMapper mapper)
+        public ProjectService(
+	        IProjectRepository projectRepository, 
+	        IEpicRepository epicRepository, 
+	        ITeamRepository teamRepository, 
+	        ISprintRepository sprintRepository, 
+	        IMapper mapper
+	        )
         {
             _projectRepository = projectRepository;
             _epicRepository = epicRepository;
+            _teamRepository = teamRepository;
+            _sprintRepository = sprintRepository;
             _mapper = mapper;
         }
 
@@ -62,15 +72,35 @@ namespace WebAPI.ApplicationLogic.Services
 	        return fullProjectDescription;
         }
 
-        public async Task<Project> CreateProjectAsync(Project project)
+        public async Task<ProjectBoardModel> GetProjectBoardData(Guid projectId, Guid userId)
         {
-            var projectEntity = _mapper.Map<Models.Entities.Project>(project);
+	        var projectEntity = await _projectRepository.SearchForSingleItemAsync(x => x.ProjectId == projectId);
+	        if (projectEntity == null)
+	        {
+		        return null;
+	        }
 
-            var createdEntity = await _projectRepository.CreateItemAsync(projectEntity);
+	        var teamEntity = await _teamRepository.SearchForSingleItemAsync(x => x.Users.Any(u => u.UserId == userId));
+	        if (teamEntity == null)
+	        {
+		        return null;
+	        }
 
-            var projectModel = _mapper.Map<Project>(createdEntity);
+            // In the scope of this request we currently focused on data of latest epic
+	        var epics = (await _epicRepository.SearchForMultipleItemsAsync(x => x.ProjectId == projectEntity.ProjectId)).ToArray();
+	        var latestEpic = epics.OrderBy(x => x.StartDate).FirstOrDefault();
 
-            return projectModel;
+	        var sprints = await _sprintRepository.SearchForMultipleItemsAsync(x => x.EpicId == latestEpic.EpicId, sprint => sprint.Stories);
+
+	        var projectBoardModel = new ProjectBoardModel
+	        {
+                Project = _mapper.Map<Project>(projectEntity),
+                Team = _mapper.Map<Team>(teamEntity),
+                Epics = epics.Select(_mapper.Map<Epic>),
+                EpicSprints = sprints.Select(_mapper.Map<Sprint>),
+	        };
+
+            return projectBoardModel;
         }
 
         public async Task<Project> CreateProjectAsync(Project project)

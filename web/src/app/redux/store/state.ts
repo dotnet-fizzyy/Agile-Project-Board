@@ -39,7 +39,7 @@ export interface IProjectState {
 
 export interface ITeamState {
     teamId: string;
-    teamName: string;
+    name: string;
     projectId: string;
     location: string;
     users: IUser[];

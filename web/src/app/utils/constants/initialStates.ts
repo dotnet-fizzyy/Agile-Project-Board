@@ -21,7 +21,7 @@ export const projectInitialState: IProject = {
 export const teamInitialState: ITeam = {
     location: '',
     projectId: '',
-    teamName: '',
+    name: '',
 };
 
 export const teamMemberInitialState: IUser = {

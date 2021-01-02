@@ -16,7 +16,7 @@ export default class ProjectEffects {
     getProjectDesc$ = createEffect(() =>
         this.actions$.pipe(
             ofType(ProjectActions.ProjectActions.GET_PROJECT_DESC_REQUEST),
-            mergeMap(() => this.httpService.get(WebApiRoutes.ProjectRoutes.CREATE_PROJECT)),
+            mergeMap(() => this.httpService.get(WebApiRoutes.ProjectRoutes.GET_CUSTOMER_PROJECT)),
             map((response) => {
                 const fullProjectDescription = ProjectEffects.mapToFullProject(response);
 

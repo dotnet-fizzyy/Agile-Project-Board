@@ -1,4 +1,4 @@
-<h2>User creation</h2>
+<h2>User {{ isCreation ? 'creation' : 'update' }}</h2>
 <form [formGroup]="formGroup">
     <div class="project-creation-form-container">
         <app-input-wrapper
@@ -8,6 +8,7 @@
             required="true"
         ></app-input-wrapper>
         <app-input-wrapper
+            *ngIf="isCreation"
             [formControlName]="password"
             type="password"
             label="Password"
@@ -28,5 +29,5 @@
     [disabled]="formGroup.invalid"
     (click)="onClickCreate()"
 >
-    Create user
+    {{ isCreation ? 'Create' : 'update' }} user
 </button>

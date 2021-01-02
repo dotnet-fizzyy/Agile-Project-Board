@@ -30,6 +30,18 @@ namespace WebAPI.Infrastructure.MSSQL.Repository
             return await _dbSet.Where(expression).AsNoTracking().ToListAsync();
         }
 
+        public async Task<IEnumerable<T>> SearchForMultipleItemsAsync(Expression<Func<T, bool>> expression, params Expression<Func<T, object>>[] includes)
+        {
+	        var query = _dbSet.Where(expression).AsNoTracking();
+
+            if (includes.Length != 0)
+	        {
+		        query = includes.Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
+	        }
+
+            return await query.ToListAsync();
+        }
+
         public async Task<T> SearchForSingleItemAsync(Expression<Func<T, bool>> expression, params Expression<Func<T, object>>[] includes)
         {
             try

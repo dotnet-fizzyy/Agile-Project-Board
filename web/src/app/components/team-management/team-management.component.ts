@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { ModalComponentTypes, ModalType } from 'src/app/utils/constants';
 import { IModalData, ITeam, IUser } from 'src/app/utils/interfaces';
+import * as LoaderSelectors from '../../redux/selectors/loader.selectors';
 import * as TeamSelectors from '../../redux/selectors/team.selectors';
 import { ITeamState } from '../../redux/store/state';
 import * as InitialStates from '../../utils/constants/initialStates';
@@ -17,6 +18,7 @@ import * as TeamActions from './../../redux/actions/team.actions';
 })
 export class TeamManagementComponent implements OnInit {
     public team: ITeam;
+    public isLoading: boolean;
 
     constructor(private store$: Store<ITeamState>, private dialog: MatDialog) {}
 
@@ -24,6 +26,7 @@ export class TeamManagementComponent implements OnInit {
         this.store$.dispatch(new TeamActions.GetTeamRequest());
 
         this.store$.select(TeamSelectors.getTeam).subscribe((x) => (this.team = x));
+        this.store$.select(LoaderSelectors.getIsLoading).subscribe((x) => (this.isLoading = x));
     }
 
     public onClickCreateTeam = (): void => {

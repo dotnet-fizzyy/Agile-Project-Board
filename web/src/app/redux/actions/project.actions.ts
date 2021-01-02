@@ -26,6 +26,7 @@ export const ProjectActions = {
     GET_SPRINTS_FROM_EPIC_REQUEST: '[project] get_sprints_from_epic_request',
     GET_SPRINTS_FROM_EPIC_SUCCESS: '[project] get_sprints_from_epic_success',
     GET_SPRINTS_FROM_EPIC_FAILURE: '[project] get_sprints_from_epic_failure',
+    ADD_PROJECT: '[project] add_project',
 };
 
 export class GetProjectRequest implements Action {
@@ -145,6 +146,11 @@ export class GetSprintsFromEpicSuccess implements Action {
 export class GetSprintsFromEpicFailure implements Action {
     constructor(public error: Error) {}
     readonly type: string = ProjectActions.GET_SPRINTS_FROM_EPIC_FAILURE;
+}
+
+export class AddProject implements Action {
+    constructor(public payload: IProject) {}
+    readonly type: string = ProjectActions.ADD_PROJECT;
 }
 
 export type ProjectActionTypes = CreateProjectSuccess &

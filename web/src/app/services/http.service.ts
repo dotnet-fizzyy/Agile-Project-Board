@@ -11,7 +11,5 @@ export class HttpService {
 
     public put = (url: string, body: any) => this.httpClient.put(url, body);
 
-    public patch = (url: string, body: any) => this.httpClient.patch(url, body);
-
     public delete = (url: string) => this.httpClient.delete(url);
 }

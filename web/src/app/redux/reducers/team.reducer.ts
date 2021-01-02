@@ -3,7 +3,7 @@ import { ITeamState } from '../store/state';
 
 const initialState: ITeamState = {
     teamId: '',
-    teamName: '',
+    name: '',
     projectId: '',
     location: '',
     users: [],
@@ -13,8 +13,9 @@ export default function teamReducer(state = initialState, action: TeamActions.Te
     switch (action.type) {
         case TeamActions.TeamActions.CREATE_TEAM_SUCCESS:
         case TeamActions.TeamActions.GET_TEAM_SUCCESS:
-        case TeamActions.TeamActions.UPDATE_TEAM_SUCCESS:
             return handleCreateTeamSuccess(state, action);
+        case TeamActions.TeamActions.UPDATE_TEAM_SUCCESS:
+            return handleUpdateTeamSuccess(state, action);
         case TeamActions.TeamActions.CREATE_TEAM_MEMBER_SUCCESS:
             return handleCreateTeamMemberSuccess(state, action);
         case TeamActions.TeamActions.UPDATE_TEAM_MEMBER_SUCCESS:
@@ -30,6 +31,16 @@ function handleCreateTeamSuccess(state: ITeamState, action: TeamActions.CreateTe
     return {
         ...state,
         ...action.payload,
+    };
+}
+
+function handleUpdateTeamSuccess(state: ITeamState, action: TeamActions.CreateTeamSuccess): ITeamState {
+    return {
+        ...state,
+        teamId: action.payload.teamId,
+        location: action.payload.location,
+        name: action.payload.name,
+        projectId: action.payload.projectId,
     };
 }
 

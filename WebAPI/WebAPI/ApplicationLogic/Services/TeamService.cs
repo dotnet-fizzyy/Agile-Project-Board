@@ -12,13 +12,15 @@ namespace WebAPI.ApplicationLogic.Services
     public class TeamService : ITeamService
     {
         private readonly ITeamRepository _teamRepository;
+        private readonly IProjectRepository _projectRepository;
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
 
-        public TeamService(ITeamRepository teamRepository, IUserRepository userRepository, IMapper mapper)
+        public TeamService(ITeamRepository teamRepository, IUserRepository userRepository, IProjectRepository projectRepository, IMapper mapper)
         {
             _teamRepository = teamRepository;
             _userRepository = userRepository;
+            _projectRepository = projectRepository;
             _mapper = mapper;
         }
 
@@ -46,11 +48,36 @@ namespace WebAPI.ApplicationLogic.Services
         public async Task<Team> GetUserTeamAsync(Guid userId)
         {
 	        var teamEntity =
-		        await _teamRepository.SearchForMultipleItemsAsync(x => x.Users.Any(src => src.UserId == userId));
+		        await _teamRepository.SearchForSingleItemAsync(x => x.Users.Any(src => src.UserId == userId));
+
+	        if (teamEntity == null)
+	        {
+                return null;
+	        }
 
 	        var teamModel = _mapper.Map<Team>(teamEntity);
 
 	        return teamModel;
+        }
+
+        public async Task<TeamManagementModel> GetTeamManagementPageData(Guid userId)
+        {
+	        var projectEntity = await _projectRepository.SearchForSingleItemAsync(x => x.CustomerId == userId);
+
+	        if (projectEntity == null)
+	        {
+		        return null;
+	        }
+
+	        var teamEntity = await _teamRepository.SearchForSingleItemAsync(x => x.Users.Any(u => u.UserId == userId), team => team.Users);
+
+            var teamManagementModel = new TeamManagementModel
+            {
+                Project = _mapper.Map<Project>(projectEntity),
+                Team = _mapper.Map<Team>(teamEntity),
+            };
+
+            return teamManagementModel;
         }
 
         public async Task<Team> CreateTeamAsync(Team team)

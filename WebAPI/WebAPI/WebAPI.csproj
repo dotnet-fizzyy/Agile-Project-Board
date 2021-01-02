@@ -309,9 +309,11 @@
     <Compile Include="Models\Web\Epic.cs" />
     <Compile Include="Models\Web\FullProjectDescription.cs" />
     <Compile Include="Models\Web\Project.cs" />
+    <Compile Include="Models\Web\ProjectBoardModel.cs" />
     <Compile Include="Models\Web\Sprint.cs" />
     <Compile Include="Models\Web\Story.cs" />
     <Compile Include="Models\Web\Team.cs" />
+    <Compile Include="Models\Web\TeamManagementModel.cs" />
     <Compile Include="Models\Web\User.cs" />
     <Compile Include="Presentation\Controllers\EpicController.cs" />
     <Compile Include="Presentation\Controllers\ProjectController.cs" />

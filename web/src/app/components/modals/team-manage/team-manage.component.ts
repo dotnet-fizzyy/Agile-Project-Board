@@ -16,29 +16,30 @@ import { IModalData, ITeam } from '../../../utils/interfaces';
 export class TeamManageComponent implements OnInit {
     public readonly teamName: string = 'teamName';
     public readonly location: string = 'location';
+    private readonly projectId: string = 'projectId';
     public formGroup: FormGroup;
-
-    private projectId: string;
 
     constructor(
         @Inject(MAT_DIALOG_DATA) private modalData: IModalData,
         private fb: FormBuilder,
         private store$: Store<IProjectState>
-    ) {
-        this.formGroup = this.fb.group({
-            [this.teamName]: [(modalData.data as ITeam).teamName, Validators.required],
-            [this.location]: [(modalData.data as ITeam).location, Validators.required],
-        });
-    }
+    ) {}
 
     ngOnInit(): void {
-        this.store$.select(ProjectSelectors.getProject).subscribe((x) => (this.projectId = x.projectId));
+        let projectId: string;
+        this.store$.select(ProjectSelectors.getProject).subscribe((x) => (projectId = x.projectId));
+
+        this.formGroup = this.fb.group({
+            [this.teamName]: [(this.modalData.data as ITeam).name, Validators.required],
+            [this.location]: [(this.modalData.data as ITeam).location, Validators.required],
+            [this.projectId]: [projectId],
+        });
     }
 
     public onClickCreate = () => {
         const team: ITeam = {
             teamId: (this.modalData.data as ITeam).teamId,
-            teamName: this.formGroup.get(this.teamName).value,
+            name: this.formGroup.get(this.teamName).value,
             location: this.formGroup.get(this.location).value,
             projectId: this.formGroup.get(this.projectId).value,
         };

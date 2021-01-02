@@ -14,7 +14,7 @@ export class CustomerGuard extends BaseGuard {
     public willActivate(): boolean {
         const user = getUser();
 
-        if (user.userRole !== UserRoles.CUSTOMER) {
+        if (user.userRole !== UserRoles.Customer) {
             this.location.back();
         }
 

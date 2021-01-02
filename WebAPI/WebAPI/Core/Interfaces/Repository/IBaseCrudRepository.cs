@@ -11,6 +11,9 @@ namespace WebAPI.Core.Interfaces.Repository
 
         Task<IEnumerable<T>> SearchForMultipleItemsAsync(Expression<Func<T, bool>> expression);
 
+        Task<IEnumerable<T>> SearchForMultipleItemsAsync(Expression<Func<T, bool>> expression,
+	        params Expression<Func<T, object>>[] includes);
+
         Task<T> SearchForSingleItemAsync(Expression<Func<T, bool>> expression, params Expression<Func<T, object>>[] includes);
 
         Task<T> CreateItemAsync(T item);

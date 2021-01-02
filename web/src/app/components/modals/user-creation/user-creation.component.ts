@@ -18,28 +18,31 @@ export class UserCreationComponent implements OnInit {
     public readonly username: string = 'username';
     public readonly password: string = 'password';
     public readonly userRole: string = 'userRole';
+    private readonly teamId: string = 'teamId';
     public userRoleOptions: ISelectItem[] = getUserRolesDropdownItems();
     public formGroup: FormGroup;
-
-    private teamId: string;
+    public isCreation: boolean;
 
     constructor(
         @Inject(MAT_DIALOG_DATA) private modalData: IModalData,
         private store$: Store<IStoreState>,
         private fb: FormBuilder
-    ) {
-        this.formGroup = this.fb.group({
-            [this.username]: [
-                (modalData.data as IUser).username,
-                Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(16)]),
-            ],
-            [this.password]: ['', Validators.compose([Validators.required])],
-            [this.userRole]: [(modalData.data as IUser).userRole, Validators.required],
-        });
-    }
+    ) {}
 
     ngOnInit(): void {
-        this.store$.select(TeamSelectors.getTeam).subscribe((x) => (this.teamId = x.teamId));
+        let teamId: string;
+        this.store$.select(TeamSelectors.getTeam).subscribe((x) => (teamId = x.teamId));
+
+        this.isCreation = this.modalData.type === ModalType.CREATE;
+        this.formGroup = this.fb.group({
+            [this.username]: [
+                (this.modalData.data as IUser).username,
+                Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(16)]),
+            ],
+            [this.password]: this.isCreation ? ['', Validators.compose([Validators.required])] : [''],
+            [this.userRole]: [(this.modalData.data as IUser).userRole, Validators.required],
+            [this.teamId]: [teamId],
+        });
     }
 
     public onClickCreate = () => {
@@ -49,7 +52,7 @@ export class UserCreationComponent implements OnInit {
             password: this.formGroup.get(this.password).value,
             userRole: this.formGroup.get(this.userRole).value,
             isActive: true,
-            teamId: this.teamId,
+            teamId: this.formGroup.get(this.teamId).value,
         };
 
         if (this.modalData.type === ModalType.CREATE) {

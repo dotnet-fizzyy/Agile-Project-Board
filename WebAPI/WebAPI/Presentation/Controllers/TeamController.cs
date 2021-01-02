@@ -16,10 +16,12 @@ namespace WebAPI.Presentation.Controllers
     public class TeamController : ApiController
     {
         private readonly ITeamService _teamService;
+        private readonly IRequestHeadersProvider _requestHeadersProvider;
 
-        public TeamController(ITeamService teamService)
+        public TeamController(ITeamService teamService, IRequestHeadersProvider requestHeadersProvider)
         {
             _teamService = teamService;
+            _requestHeadersProvider = requestHeadersProvider;
         }
 
         [HttpGet]
@@ -54,6 +56,27 @@ namespace WebAPI.Presentation.Controllers
 	        return Ok(userTeam);
         }
 
+        [HttpGet]
+        [Route(RouteConstants.TeamControllerTeamManagementUrl)]
+        public async Task<IHttpActionResult> GetTeamManagementPageIndex()
+        {
+	        var userId = _requestHeadersProvider.GetUserId(Request);
+
+	        if (userId == null)
+	        {
+		        return BadRequest();
+	        }
+
+	        var teamManagementPageData = await _teamService.GetTeamManagementPageData((Guid)userId);
+
+	        if (teamManagementPageData == null)
+	        {
+		        return NotFound();
+	        }
+
+            return Ok(teamManagementPageData);
+        }
+
         [HttpPost]
         [Route(RouteConstants.TeamControllerUrl)]
         public async Task<IHttpActionResult> CreateTeam([FromBody] Team team)
@@ -67,14 +90,14 @@ namespace WebAPI.Presentation.Controllers
         [Route(RouteConstants.TeamControllerCreateTeamWithCustomerUrl)]
         public async Task<IHttpActionResult> CreateTeamWithCustomer([FromBody] Team team)
         {
-	        var userId = Request.Headers.GetValues(Headers.UserHeader).FirstOrDefault();
+	        var userId = _requestHeadersProvider.GetUserId(Request);
 
-	        if (userId == null)
+            if (userId == null)
 	        {
 		        return BadRequest();
 	        }
 
-	        var createdTeam = await _teamService.CreateTeamWithCustomerAsync(team, new Guid(userId));
+	        var createdTeam = await _teamService.CreateTeamWithCustomerAsync(team, (Guid)userId);
 
 	        return Created(nameof(TeamController), createdTeam);
         }

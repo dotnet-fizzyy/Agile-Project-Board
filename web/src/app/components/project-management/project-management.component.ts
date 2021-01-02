@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { ModalComponentTypes, ModalType } from 'src/app/utils/constants';
 import { IModalData, IProject } from 'src/app/utils/interfaces';
 import * as ProjectActions from '../../redux/actions/project.actions';
+import * as LoaderSelectors from '../../redux/selectors/loader.selectors';
 import * as ProjectSelectors from '../../redux/selectors/project.selectors';
 import { IProjectState } from '../../redux/store/state';
 import * as InitialStates from '../../utils/constants/initialStates';
@@ -21,6 +22,7 @@ export class ProjectManagementComponent implements OnInit {
     public project: IProject;
     public epics: IEpic[];
     public sprints: ISprint[];
+    public isLoading: boolean;
 
     constructor(private store$: Store<IProjectState>, private dialog: MatDialog) {}
 
@@ -30,6 +32,7 @@ export class ProjectManagementComponent implements OnInit {
         this.store$.select(ProjectSelectors.getProject).subscribe((x) => (this.project = x));
         this.store$.select(ProjectSelectors.getEpics).subscribe((x) => (this.epics = x));
         this.store$.select(ProjectSelectors.getSprints).subscribe((x) => (this.sprints = x));
+        this.store$.select(LoaderSelectors.getIsLoading).subscribe((x) => (this.isLoading = x));
     }
 
     public onClickCreateProject = (): void => {

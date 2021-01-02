@@ -1,8 +1,11 @@
 <div class="team-management-main-container">
+    <div class="loader-container" *ngIf="isLoading">
+        <mat-spinner></mat-spinner>
+    </div>
     <div class="inner-container">
         <div class="team-description-container" [ngClass]="{ 'flex-container': !team.teamId }">
             <div *ngIf="team.teamId; else createTeam">
-                <h2>{{ team.teamName }}</h2>
+                <h2>{{ team.name }}</h2>
                 <p>Location: {{ team.location }}</p>
                 <button mat-raised-button color="primary" (click)="onClickUpdateTeam()">Update team</button>
                 <button mat-raised-button color="warn" class="remove-button" (click)="onClickRemoveTeam()">Remove team</button>
@@ -24,7 +27,7 @@
             </div>
             <ng-container *ngIf="team.users.length; else emptyUsers">
                 <div class="user-item" *ngFor="let user of team.users">
-                    <span>{{ user.username }} | {{ user.userRole }}</span>
+                    <span class="user-description">{{ user.username }} | {{ user.userRole }}</span>
                     <span class="user-status" [ngClass]="{ 'blocked-user': !user.isActive }">
                         {{ user.isActive ? 'Active' : 'Blocked' }}
                     </span>

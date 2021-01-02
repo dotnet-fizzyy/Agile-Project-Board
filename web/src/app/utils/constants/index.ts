@@ -22,9 +22,9 @@ export const ColumnNames = {
 };
 
 export const UserRoles = {
-    CUSTOMER: 'Customer',
-    ENGINEER: 'Engineer',
-    TEAMMASTER: 'TeamMaster',
+    Customer: 'Customer',
+    Engineer: 'Engineer',
+    TeamMaster: 'TeamMaster',
 };
 
 export const enum ModalType {
