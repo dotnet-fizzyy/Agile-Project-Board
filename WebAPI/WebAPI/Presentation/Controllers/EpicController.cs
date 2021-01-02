@@ -21,10 +21,16 @@ namespace WebAPI.Presentation.Controllers
             _epicService = epicService;
         }
 
+        /// <summary>
+        /// Get all epics (should be removed after development)
+        /// </summary>
         [HttpGet]
         [Route(RouteConstants.EpicControllerGetAllEpicsUrl)]
         public async Task<CollectionResponse<Epic>> GetAllEpics() => await _epicService.GetEpicsAsync();
 
+        /// <summary>
+        /// Get epic by its id
+        /// </summary>
         [HttpGet]
         [Route(RouteConstants.EpicControllerGetEpicUrl)]
         public async Task<IHttpActionResult> GetEpic(Guid epicId)
@@ -39,6 +45,9 @@ namespace WebAPI.Presentation.Controllers
 	        return Ok(epic);
         }
 
+        /// <summary>
+        /// Create epic
+        /// </summary>
         [HttpPost]
         [Route(RouteConstants.EpicControllerUrl)]
         public async Task<IHttpActionResult> CreateEpic([FromBody] Epic epic)
@@ -48,6 +57,9 @@ namespace WebAPI.Presentation.Controllers
 	        return Created(nameof(EpicController), createdEpic);
         }
 
+        /// <summary>
+        /// Update epic
+        /// </summary>
         [HttpPut]
         [Route(RouteConstants.EpicControllerUrl)]
         public async Task<IHttpActionResult> UpdateProject([FromBody] Epic epic)
@@ -57,6 +69,9 @@ namespace WebAPI.Presentation.Controllers
 	        return Ok(updatedEpic);
         }
 
+        /// <summary>
+        /// Remove epic via its id
+        /// </summary>
         [HttpDelete]
         [Route(RouteConstants.EpicControllerGetEpicUrl)]
         public async Task<HttpResponseMessage> RemoveProject(Guid epicId)

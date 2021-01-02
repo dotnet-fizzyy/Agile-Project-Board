@@ -21,10 +21,16 @@ namespace WebAPI.Presentation.Controllers
             _sprintService = sprintService;
         }
 
+        /// <summary>
+        /// Get all sprints (should be removed after development)
+        /// </summary>
         [HttpGet]
         [Route(RouteConstants.SprintControllerGetAllSprintsUrl)]
         public async Task<CollectionResponse<Sprint>> GetAllProjects() => await _sprintService.GetSprintsAsync();
 
+        /// <summary>
+        /// Get exact sprint by its id
+        /// </summary>
         [HttpGet]
         [Route(RouteConstants.SprintControllerGetSprintUrl)]
         public async Task<IHttpActionResult> GetSprint(Guid sprintId)
@@ -39,11 +45,17 @@ namespace WebAPI.Presentation.Controllers
 	        return Ok(sprint);
         }
 
+        /// <summary>
+        /// Get all sprints that belong to epic
+        /// </summary>
         [HttpGet]
         [Route(RouteConstants.SprintControllerGetSprintsFromEpicUrl)]
         public async Task<CollectionResponse<Sprint>> GetSprintsFromEpic(Guid epicId) =>
 	        await _sprintService.GetSprintsFromEpicAsync(epicId);
 
+        /// <summary>
+        /// Create sprint
+        /// </summary>
         [HttpPost]
         [Route(RouteConstants.SprintControllerUrl)]
         public async Task<IHttpActionResult> CreateSprint([FromBody] Sprint sprint)
@@ -53,18 +65,24 @@ namespace WebAPI.Presentation.Controllers
 	        return Created(nameof(SprintController), createdSprint);
         }
 
+        /// <summary>
+        /// Update sprint
+        /// </summary>
         [HttpPut]
         [Route(RouteConstants.SprintControllerUrl)]
-        public async Task<IHttpActionResult> UpdateProject([FromBody] Sprint sprint)
+        public async Task<IHttpActionResult> UpdateSprint([FromBody] Sprint sprint)
         {
 	        var updatedSprint = await _sprintService.UpdateSprintAsync(sprint);
 
 	        return Ok(updatedSprint);
         }
 
+        /// <summary>
+        /// Remove sprint via its id
+        /// </summary>
         [HttpDelete]
         [Route(RouteConstants.SprintControllerGetSprintUrl)]
-        public async Task<HttpResponseMessage> RemoveProject(Guid sprintId)
+        public async Task<HttpResponseMessage> RemoveSprint(Guid sprintId)
         {
 	        await _sprintService.RemoveSprintAsync(sprintId);
 

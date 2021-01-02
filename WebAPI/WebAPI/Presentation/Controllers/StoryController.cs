@@ -21,10 +21,16 @@ namespace WebAPI.Presentation.Controllers
             _storyService = storyService;
         }
 
+        /// <summary>
+        /// Get all stories (should be removed after development)
+        /// </summary>
         [HttpGet]
         [Route(RouteConstants.StoryControllerGetAllStoriesUrl)]
         public async Task<CollectionResponse<Story>> GetAllStories() => await _storyService.GeStoriesAsync();
 
+        /// <summary>
+        /// Get exact story by its id
+        /// </summary>
         [HttpGet]
         [Route(RouteConstants.StoryControllerGetStoryUrl)]
         public async Task<IHttpActionResult> GetStory(Guid storyId)
@@ -39,6 +45,9 @@ namespace WebAPI.Presentation.Controllers
 	        return Ok(story);
         }
 
+        /// <summary>
+        /// Create story
+        /// </summary>
         [HttpPost]
         [Route(RouteConstants.StoryControllerUrl)]
         public async Task<IHttpActionResult> CreateStory([FromBody] Story story)
@@ -48,6 +57,9 @@ namespace WebAPI.Presentation.Controllers
 	        return Created(nameof(StoryController), createdStory);
         }
 
+        /// <summary>
+        /// Update story
+        /// </summary>
         [HttpPut]
         [Route(RouteConstants.StoryControllerUrl)]
         public async Task<IHttpActionResult> UpdateStory([FromBody] Story story)
@@ -57,6 +69,9 @@ namespace WebAPI.Presentation.Controllers
 	        return Ok(updatedStory);
         }
 
+        /// <summary>
+        /// Remove story via its id
+        /// </summary>
         [HttpDelete]
         [Route(RouteConstants.StoryControllerGetStoryUrl)]
         public async Task<HttpResponseMessage> RemoveStory(Guid storyId)

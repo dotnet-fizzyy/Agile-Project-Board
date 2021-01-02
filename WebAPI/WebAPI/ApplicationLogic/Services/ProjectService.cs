@@ -80,7 +80,7 @@ namespace WebAPI.ApplicationLogic.Services
 		        return null;
 	        }
 
-	        var teamEntity = await _teamRepository.SearchForSingleItemAsync(x => x.Users.Any(u => u.UserId == userId));
+	        var teamEntity = await _teamRepository.SearchForSingleItemAsync(x => x.Users.Any(u => u.UserId == userId), team => team.Users);
 	        if (teamEntity == null)
 	        {
 		        return null;

@@ -24,10 +24,16 @@ namespace WebAPI.Presentation.Controllers
             _requestHeadersProvider = requestHeadersProvider;
         }
 
+        /// <summary>
+        /// Get all teams (should be removed after development)
+        /// </summary>
         [HttpGet]
         [Route(RouteConstants.TeamControllerGetAllTeamsUrl)]
         public async Task<CollectionResponse<Team>> GetTeams() => await _teamService.GetTeamsAsync();
 
+        /// <summary>
+        /// Get exact team by its id
+        /// </summary>
         [HttpGet]
         [Route(RouteConstants.TeamControllerGetTeamUrl)]
         public async Task<IHttpActionResult> GetTeam(Guid teamId)
@@ -42,6 +48,9 @@ namespace WebAPI.Presentation.Controllers
 	        return Ok(team);
         }
 
+        /// <summary>
+        /// Get exact team where user is attached
+        /// </summary>
         [HttpGet]
         [Route(RouteConstants.TeamControllerGetUserTeamUrl)]
         public async Task<IHttpActionResult> GetUserTeam(Guid userId)
@@ -56,6 +65,9 @@ namespace WebAPI.Presentation.Controllers
 	        return Ok(userTeam);
         }
 
+        /// <summary>
+        /// Get team for team management page, requires customer id
+        /// </summary>
         [HttpGet]
         [Route(RouteConstants.TeamControllerTeamManagementUrl)]
         public async Task<IHttpActionResult> GetTeamManagementPageIndex()
@@ -77,6 +89,9 @@ namespace WebAPI.Presentation.Controllers
             return Ok(teamManagementPageData);
         }
 
+        /// <summary>
+        /// Create team
+        /// </summary>
         [HttpPost]
         [Route(RouteConstants.TeamControllerUrl)]
         public async Task<IHttpActionResult> CreateTeam([FromBody] Team team)
@@ -86,6 +101,9 @@ namespace WebAPI.Presentation.Controllers
 	        return Created(nameof(TeamController), createdTeam);
         }
 
+        /// <summary>
+        /// Create team and updated customer profile with owned team
+        /// </summary>
         [HttpPost]
         [Route(RouteConstants.TeamControllerCreateTeamWithCustomerUrl)]
         public async Task<IHttpActionResult> CreateTeamWithCustomer([FromBody] Team team)
@@ -102,6 +120,9 @@ namespace WebAPI.Presentation.Controllers
 	        return Created(nameof(TeamController), createdTeam);
         }
 
+        /// <summary>
+        /// Update team
+        /// </summary>
         [HttpPut]
         [Route(RouteConstants.TeamControllerUrl)]
         public async Task<IHttpActionResult> UpdateTeam([FromBody] Team team)
@@ -111,6 +132,9 @@ namespace WebAPI.Presentation.Controllers
 	        return Ok(updatedTeam);
         }
 
+        /// <summary>
+        /// Remove team
+        /// </summary>
         [HttpDelete]
         [Route(RouteConstants.TeamControllerGetTeamUrl)]
         public async Task<HttpResponseMessage> RemoveTeam(Guid teamId)
