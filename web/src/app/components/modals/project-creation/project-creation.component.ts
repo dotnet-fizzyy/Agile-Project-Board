@@ -15,31 +15,31 @@ import { IStoreState } from '../../../redux/store/state';
     styleUrls: ['./project-creation.component.scss'],
 })
 export class ProjectCreationComponent implements OnInit {
+    private readonly customerId: string = 'customerId';
     public readonly projectName: string = 'projectName';
     public readonly startDate: string = 'startDate';
     public readonly endDate: string = 'endDate';
-    public readonly isCreation: boolean;
+    public isCreation: boolean;
 
     public formGroup: FormGroup;
-
-    private customerId: string;
 
     constructor(
         @Inject(MAT_DIALOG_DATA) private modalData: IModalData,
         private fb: FormBuilder,
         private store$: Store<IStoreState>
-    ) {
-        this.isCreation = modalData.type === ModalType.CREATE;
+    ) {}
 
+    ngOnInit(): void {
+        let customerId: string;
+        this.store$.select(UserSelectors.GetCurrentUser).subscribe((x) => (customerId = x.userId));
+
+        this.isCreation = this.modalData.type === ModalType.CREATE;
         this.formGroup = this.fb.group({
             [this.projectName]: [(this.modalData.data as IProject).projectName, Validators.required],
             [this.startDate]: [getFormattedDate((this.modalData.data as IProject).startDate), Validators.required],
             [this.endDate]: [getFormattedDate((this.modalData.data as IProject).endDate), Validators.required],
+            [this.customerId]: [customerId],
         });
-    }
-
-    ngOnInit(): void {
-        this.store$.select(UserSelectors.GetCurrentUser).subscribe((x) => (this.customerId = x.userId));
     }
 
     public onClickCreate = (): void => {
@@ -48,7 +48,7 @@ export class ProjectCreationComponent implements OnInit {
             projectName: this.formGroup.get(this.projectName).value,
             startDate: this.formGroup.get(this.startDate).value,
             endDate: this.formGroup.get(this.endDate).value,
-            customerId: this.customerId,
+            customerId: this.formGroup.get(this.customerId).value,
         };
 
         if (this.isCreation) {

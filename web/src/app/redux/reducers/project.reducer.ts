@@ -31,6 +31,8 @@ export default function projectReducer(state = initialState, action: ProjectActi
             return handleUpdateSprintSuccess(state, action);
         case ProjectActions.ProjectActions.GET_SPRINTS_FROM_EPIC_SUCCESS:
             return handleGetSprintsFromEpicSuccess(state, action);
+        case ProjectActions.ProjectActions.GET_INITIAL_PAGE_DATA_SUCCESS:
+            return handleGetMainPageDataSuccess(state, action);
         default:
             return state;
     }
@@ -89,5 +91,15 @@ function handleGetSprintsFromEpicSuccess(
     return {
         ...state,
         sprints: action.payload,
+    };
+}
+
+function handleGetMainPageDataSuccess(
+    state: IProjectState,
+    action: ProjectActions.GetProjectMainPageDataSuccess
+): IProjectState {
+    return {
+        ...state,
+        project: { ...action.payload.project },
     };
 }

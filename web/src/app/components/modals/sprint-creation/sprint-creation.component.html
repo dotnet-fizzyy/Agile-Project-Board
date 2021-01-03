@@ -1,4 +1,4 @@
-<h2>Sprint creation</h2>
+<h2>Sprint {{ isCreation ? 'creation' : 'update' }}</h2>
 <form [formGroup]="formGroup">
     <div class="project-creation-form-container">
         <app-input-wrapper [formControlName]="sprintName" label="Sprint name" type="text" required="true"></app-input-wrapper>
@@ -13,5 +13,5 @@
     [disabled]="formGroup.invalid"
     (click)="onClickCreate()"
 >
-    Create sprint
+    {{ isCreation ? 'Create' : 'Update' }} sprint
 </button>

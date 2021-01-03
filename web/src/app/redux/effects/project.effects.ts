@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { catchError, map, mergeMap } from 'rxjs/operators';
-import { IFullProjectDescription, IProject, ISprint } from 'src/app/utils/interfaces';
+import { IFullProjectDescription, IProject, ISprint, ITeam, ITeamManagementModel } from 'src/app/utils/interfaces';
 import { HttpService } from '../../services/http.service';
 import * as WebApiRoutes from '../../utils/constants/webapi-routes';
 import { IEpic } from '../../utils/interfaces';
@@ -12,6 +12,26 @@ import { IProjectState } from '../store/state';
 @Injectable()
 export default class ProjectEffects {
     constructor(private actions$: Actions, private httpService: HttpService, private store$: Store<IProjectState>) {}
+
+    getMainPageData$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(ProjectActions.ProjectActions.GET_INITIAL_PAGE_DATA_REQUEST),
+            mergeMap(() => this.httpService.get(WebApiRoutes.ProjectRoutes.GET_MAIN_PAGE_DATA)),
+            map((response: any) => {
+                const mainPageData: ITeamManagementModel = {
+                    project: ProjectEffects.mapToProject(response.project),
+                    team: ProjectEffects.mapToTeam(response.team),
+                };
+
+                return new ProjectActions.GetProjectMainPageDataSuccess(mainPageData);
+            }),
+            catchError((error, caught) => {
+                this.store$.dispatch(new ProjectActions.GetProjectMainPageDataFailure(error));
+
+                return caught;
+            })
+        )
+    );
 
     getProjectDesc$ = createEffect(() =>
         this.actions$.pipe(
@@ -157,6 +177,15 @@ export default class ProjectEffects {
             epics: response.epics.map((x: any) => ProjectEffects.mapToEpic(x)),
         } as IFullProjectDescription;
     }
+
+    private static mapToTeam = (response: any): ITeam => {
+        return {
+            teamId: response ? response.teamId : '',
+            name: response ? response.name : '',
+            location: response ? response.location : '',
+            projectId: response ? response.projectId : '',
+        } as ITeam;
+    };
 
     private static mapToProject(response: any): IProject {
         return {

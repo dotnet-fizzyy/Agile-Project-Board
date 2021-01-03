@@ -1,4 +1,4 @@
-<h2>Epic creation</h2>
+<h2>Epic {{ isCreation ? 'creation' : 'update' }}</h2>
 <form [formGroup]="formGroup">
     <div class="project-creation-form-container">
         <app-input-wrapper [formControlName]="epicName" label="Epic name" type="text" required="true"></app-input-wrapper>
@@ -12,5 +12,5 @@
     [disabled]="formGroup.invalid"
     (click)="onClickCreate()"
 >
-    Create epic
+    {{ isCreation ? 'Create' : 'Update' }} epic
 </button>

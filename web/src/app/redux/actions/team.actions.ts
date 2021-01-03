@@ -1,5 +1,6 @@
 import { Action } from '@ngrx/store';
 import { ITeam, IUpdateUserStatus, IUser } from '../../utils/interfaces';
+import { GetProjectMainPageDataSuccess } from './project.actions';
 
 export const TeamActions = {
     GET_TEAM_REQUEST: '[team] get_team_request',
@@ -116,4 +117,5 @@ export type TeamActionTypes = GetTeamSuccess &
     CreateTeamSuccess &
     UpdateTeamMemberStatusSuccess &
     UpdateTeamSuccess &
-    UpdateTeamMemberSuccess;
+    UpdateTeamMemberSuccess &
+    GetProjectMainPageDataSuccess;

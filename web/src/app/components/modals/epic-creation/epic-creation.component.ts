@@ -15,40 +15,44 @@ import * as ProjectSelectors from './../../../redux/selectors/project.selectors'
     styleUrls: ['./epic-creation.component.scss'],
 })
 export class EpicCreationComponent implements OnInit {
-    private projectId: string;
-
+    private readonly epicId: string = 'epicId';
+    private readonly projectId: string = 'projectId';
     public readonly epicName: string = 'epicName';
     public readonly startDate: string = 'startDate';
     public readonly endDate: string = 'endDate';
-
     public formGroup: FormGroup;
+    public isCreation: boolean;
 
     constructor(
         @Inject(MAT_DIALOG_DATA) private modalData: IModalData,
         private fb: FormBuilder,
         private store$: Store<IStoreState>
-    ) {
+    ) {}
+
+    ngOnInit(): void {
+        let projectId: string;
+        this.store$.select(ProjectSelectors.getProject).subscribe((x) => (projectId = x.projectId));
+
+        this.isCreation = this.modalData.type === ModalType.CREATE;
         this.formGroup = this.fb.group({
+            [this.epicId]: [(this.modalData.data as IEpic).epicId],
             [this.epicName]: [(this.modalData.data as IEpic).epicName, Validators.required],
             [this.startDate]: [getFormattedDate((this.modalData.data as IEpic).startDate), Validators.required],
             [this.endDate]: [getFormattedDate((this.modalData.data as IEpic).endDate), Validators.required],
+            [this.projectId]: [projectId],
         });
-    }
-
-    ngOnInit(): void {
-        this.store$.select(ProjectSelectors.getProject).subscribe((x) => (this.projectId = x.projectId));
     }
 
     public onClickCreate = (): void => {
         const epic: IEpic = {
-            epicId: (this.modalData.data as IEpic).epicId,
+            epicId: this.formGroup.get(this.epicId).value,
             epicName: this.formGroup.get(this.epicName).value,
             startDate: this.formGroup.get(this.startDate).value,
             endDate: this.formGroup.get(this.endDate).value,
-            projectId: this.projectId,
+            projectId: this.formGroup.get(this.projectId).value,
         };
 
-        if (this.modalData.type === ModalType.CREATE) {
+        if (this.isCreation) {
             this.store$.dispatch(new ProjectActions.CreateEpicRequest(epic));
         } else {
             this.store$.dispatch(new ProjectActions.UpdateEpicRequest(epic));

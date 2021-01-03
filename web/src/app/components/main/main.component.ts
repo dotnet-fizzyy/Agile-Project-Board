@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import * as ProjectActions from 'src/app/redux/actions/project.actions';
 import * as ProjectSelectors from '../../redux/selectors/project.selectors';
 import * as TeamSelectors from '../../redux/selectors/team.selectors';
 import * as UserSelectors from '../../redux/selectors/users.selectors';
@@ -27,7 +28,13 @@ export class MainComponent implements OnInit {
         this.router.navigate(['/project']);
     };
 
+    public onClickManageTeam = (): void => {
+        this.router.navigate(['/team']);
+    };
+
     ngOnInit(): void {
+        this.store$.dispatch(new ProjectActions.GetProjectMainPageDataRequest());
+
         this.store$.select(UserSelectors.GetCurrentUser).subscribe((x) => (this.currentUser = x));
         this.store$.select(ProjectSelectors.getProject).subscribe((x) => (this.project = x));
         this.store$.select(TeamSelectors.getTeam).subscribe((x) => (this.team = x));

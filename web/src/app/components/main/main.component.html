@@ -14,19 +14,9 @@
                 </div>
             </div>
             <div class="main-part">
-                <h3>{{ team.teamName }}</h3>
-                <p>Team members: </p>
-                <ng-container *ngIf="team.users.length; else emptyUsers">
-                    <span *ngFor="let user of team.users" class="team-member">
-                        {{ user.username }} | {{ user.userRole }} |
-                        <span [ngClass]="{ 'active-user': user.isActive, 'blocked-user': !user.isActive }">
-                            {{ user.isActive ? 'Active' : 'Blocked' }}
-                        </span>
-                    </span>
-                </ng-container>
-                <ng-template #emptyUsers>
-                    <p>No users added yet...</p>
-                </ng-template>
+                <h3>{{ team.name }}</h3>
+                <p>Location: {{ team.location }}</p>
+                <button mat-raised-button color="primary" class="manage-team" (click)="onClickManageTeam()">Manage team</button>
             </div>
         </div>
     </div>

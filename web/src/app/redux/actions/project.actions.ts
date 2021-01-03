@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { IEpic, IFullProjectDescription, IProject, ISprint } from '../../utils/interfaces';
+import { IEpic, IFullProjectDescription, IProject, ISprint, ITeamManagementModel } from '../../utils/interfaces';
 
 export const ProjectActions = {
     GET_PROJECT_DESC_REQUEST: '[project] get_project_desc_request',
@@ -27,6 +27,9 @@ export const ProjectActions = {
     GET_SPRINTS_FROM_EPIC_SUCCESS: '[project] get_sprints_from_epic_success',
     GET_SPRINTS_FROM_EPIC_FAILURE: '[project] get_sprints_from_epic_failure',
     ADD_PROJECT: '[project] add_project',
+    GET_INITIAL_PAGE_DATA_REQUEST: '[project] get_initial_page_data_request',
+    GET_INITIAL_PAGE_DATA_SUCCESS: '[project] get_initial_page_data_success',
+    GET_INITIAL_PAGE_DATA_FAILURE: '[project] get_initial_page_data_failure',
 };
 
 export class GetProjectRequest implements Action {
@@ -153,6 +156,20 @@ export class AddProject implements Action {
     readonly type: string = ProjectActions.ADD_PROJECT;
 }
 
+export class GetProjectMainPageDataRequest implements Action {
+    readonly type: string = ProjectActions.GET_INITIAL_PAGE_DATA_REQUEST;
+}
+
+export class GetProjectMainPageDataSuccess implements Action {
+    constructor(public payload: ITeamManagementModel) {}
+    readonly type: string = ProjectActions.GET_INITIAL_PAGE_DATA_SUCCESS;
+}
+
+export class GetProjectMainPageDataFailure implements Action {
+    constructor(public payload: Error) {}
+    readonly type: string = ProjectActions.GET_INITIAL_PAGE_DATA_FAILURE;
+}
+
 export type ProjectActionTypes = CreateProjectSuccess &
     GetProjectSuccess &
     CreateSprintSuccess &
@@ -160,4 +177,5 @@ export type ProjectActionTypes = CreateProjectSuccess &
     UpdateProjectSuccess &
     UpdateEpicSuccess &
     UpdateSprintSuccess &
-    GetSprintsFromEpicSuccess;
+    GetSprintsFromEpicSuccess &
+    GetProjectMainPageDataSuccess;

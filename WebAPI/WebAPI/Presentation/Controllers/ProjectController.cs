@@ -67,6 +67,9 @@ namespace WebAPI.Presentation.Controllers
 	        return Ok(project);
         }
 
+        /// <summary>
+        /// Get project data for main page
+        /// </summary>
         [UserVerificationFilter]
         [HttpGet]
         [Route(RouteConstants.ProjectControllerMainPageUrl)]

@@ -21,6 +21,7 @@ export const ProjectRoutes = {
     GET_CUSTOMER_PROJECT: MainRoutes.PROJECTS + '/customer',
     CREATE_PROJECT: MainRoutes.PROJECTS,
     UPDATE_PROJECT: MainRoutes.PROJECTS,
+    GET_MAIN_PAGE_DATA: MainRoutes.PROJECTS + '/main',
 };
 
 export const SprintRoutes = {

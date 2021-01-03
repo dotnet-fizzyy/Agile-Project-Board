@@ -1,3 +1,4 @@
+import * as ProjectActions from '../actions/project.actions';
 import * as TeamActions from '../actions/team.actions';
 import { ITeamState } from '../store/state';
 
@@ -22,6 +23,8 @@ export default function teamReducer(state = initialState, action: TeamActions.Te
             return handleUpdateTeamMemberSuccess(state, action);
         case TeamActions.TeamActions.UPDATE_TEAM_MEMBER_STATUS_SUCCESS:
             return handleUpdateTeamMemberStatusSuccess(state, action);
+        case ProjectActions.ProjectActions.GET_INITIAL_PAGE_DATA_SUCCESS:
+            return handleGetMainPageDataSuccess(state, action);
         default:
             return state;
     }
@@ -67,5 +70,15 @@ function handleUpdateTeamMemberStatusSuccess(
         users: state.users.map((x) =>
             x.userId === action.payload.userId ? { ...x, isActive: action.payload.isActive } : x
         ),
+    };
+}
+
+function handleGetMainPageDataSuccess(
+    state: ITeamState,
+    action: ProjectActions.GetProjectMainPageDataSuccess
+): ITeamState {
+    return {
+        ...state,
+        ...action.payload.team,
     };
 }
