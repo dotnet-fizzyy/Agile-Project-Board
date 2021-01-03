@@ -309,6 +309,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Entities\Epic.cs" />
     <Compile Include="Models\Entities\Project.cs" />
+    <Compile Include="Models\Entities\ProjectMainPageData.cs" />
     <Compile Include="Models\Entities\Sprint.cs" />
     <Compile Include="Models\Entities\Story.cs" />
     <Compile Include="Models\Entities\Team.cs" />
@@ -318,12 +319,14 @@
     <Compile Include="Models\Web\Epic.cs" />
     <Compile Include="Models\Web\FullProjectDescription.cs" />
     <Compile Include="Models\Web\Project.cs" />
-    <Compile Include="Models\Web\ProjectBoardModel.cs" />
+    <Compile Include="Models\Web\ProjectBoardPageModel.cs" />
+    <Compile Include="Models\Web\ProjectMainPageModel.cs" />
     <Compile Include="Models\Web\Sprint.cs" />
     <Compile Include="Models\Web\Story.cs" />
     <Compile Include="Models\Web\Team.cs" />
     <Compile Include="Models\Web\TeamManagementModel.cs" />
     <Compile Include="Models\Web\User.cs" />
+    <Compile Include="Models\Web\UserPasswordUpdateModel.cs" />
     <Compile Include="Presentation\Controllers\EpicController.cs" />
     <Compile Include="Presentation\Controllers\ProjectController.cs" />
     <Compile Include="Presentation\Controllers\SprintController.cs" />
@@ -339,6 +342,7 @@
     <Compile Include="Presentation\Filters\RequestBodyFilter.cs" />
     <Compile Include="Presentation\Filters\UserVerificationFilter.cs" />
     <Compile Include="Presentation\Mappers\EpicProfile.cs" />
+    <Compile Include="Presentation\Mappers\ProjectMainPageDataProfile.cs" />
     <Compile Include="Presentation\Mappers\ProjectProfile.cs" />
     <Compile Include="Presentation\Mappers\SprintProfile.cs" />
     <Compile Include="Presentation\Mappers\StoryProfile.cs" />

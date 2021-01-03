@@ -25,7 +25,7 @@ namespace WebAPI.ApplicationLogic.Services
         {
             var userEntities = await _userRepository.SearchForMultipleItemsAsync();
 
-            var collectionResponse = new CollectionResponse<User>()
+            var collectionResponse = new CollectionResponse<User>
             {
                 Items = userEntities.Select(_mapper.Map<User>).ToList(),
             };
@@ -78,11 +78,19 @@ namespace WebAPI.ApplicationLogic.Services
         {
             var userEntity = _mapper.Map<Models.Entities.User>(user);
 
-            var updatedEntity = await _userRepository.UpdateItemAsync(userEntity);
+            var updatedEntity = await _userRepository.UpdateUserWithoutPasswordAsync(userEntity);
 
             var userModel = _mapper.Map<User>(updatedEntity);
 
             return userModel;
+        }
+
+        public async Task UpdateUserPasswordAsync(UserPasswordUpdateModel passwordUpdate)
+        {
+	        var userId = passwordUpdate.UserId;
+	        var password = PasswordHashing.GeneratePassword(passwordUpdate.Password);
+
+	        await _userRepository.UpdateUserPasswordAsync(userId, password);
         }
 
         public async Task UpdateUserStatusAsync(User user)

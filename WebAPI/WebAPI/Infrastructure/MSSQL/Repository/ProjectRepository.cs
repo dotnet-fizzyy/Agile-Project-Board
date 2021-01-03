@@ -1,3 +1,7 @@
+using System;
+using System.Data.Entity;
+using System.Linq;
+using System.Threading.Tasks;
 using WebAPI.Core.Interfaces.Repository;
 using WebAPI.Models.Entities;
 
@@ -7,6 +11,26 @@ namespace WebAPI.Infrastructure.MSSQL.Repository
     {
         public ProjectRepository(DatabaseContext databaseContext) : base(databaseContext)
         {
+        }
+
+        public async Task<ProjectMainPageData> GetProjectMainPageDataAsync(Guid userId)
+        {
+	        var query =
+				from users in _databaseContext.Users
+				join teams in _databaseContext.Teams on users.TeamId equals teams.TeamId
+		        join projects in _databaseContext.Projects on teams.ProjectId equals projects.ProjectId
+		        where users.UserId == userId
+				select new { teams, projects };
+
+	        var result = (await query.ToListAsync()).FirstOrDefault();
+
+	        var mainPageDataModel = new ProjectMainPageData
+	        {
+				Project = result?.projects ?? new Project(),
+				Team = result?.teams ?? new Team(),
+	        };
+
+	        return mainPageDataModel;
         }
     }
 }

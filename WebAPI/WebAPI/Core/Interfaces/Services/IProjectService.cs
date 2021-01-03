@@ -13,7 +13,9 @@ namespace WebAPI.Core.Interfaces.Services
 
         Task<FullProjectDescription> GetCustomerProject(Guid userId);
 
-        Task<ProjectBoardModel> GetProjectBoardData(Guid projectId, Guid userId);
+        Task<ProjectMainPageModel> GetProjectMainPageData(Guid userId);
+
+	    Task<ProjectBoardPageModel> GetProjectBoardData(Guid projectId, Guid userId);
 
         Task<Project> CreateProjectAsync(Project project);
 

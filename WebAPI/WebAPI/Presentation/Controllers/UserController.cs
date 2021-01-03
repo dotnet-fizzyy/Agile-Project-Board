@@ -87,16 +87,29 @@ namespace WebAPI.Presentation.Controllers
         }
 
         /// <summary>
-        /// Update user
+        /// Update user (without password)
         /// </summary>
         [HttpPut]
         [Route(RouteConstants.UserControllerUrl)]
-        public async Task<IHttpActionResult> UpdateUser([FromBody] User user)
+        public async Task<IHttpActionResult> UpdateUser([FromBody]User user)
         {
             var updatedUser = await _userService.UpdateUserAsync(user);
 
             return Ok(updatedUser);
         }
+
+        /// <summary>
+        /// Update password for exact user
+        /// </summary>
+        [HttpPut]
+        [Route(RouteConstants.UserControllerUpdateUserPasswordUrl)]
+        public async Task<HttpResponseMessage> UpdateUserPassword([FromBody]UserPasswordUpdateModel user)
+        {
+	        await _userService.UpdateUserPasswordAsync(user);
+
+	        return new HttpResponseMessage(HttpStatusCode.NoContent);
+        }
+
 
         /// <summary>
         /// Update user status (active or blocked)

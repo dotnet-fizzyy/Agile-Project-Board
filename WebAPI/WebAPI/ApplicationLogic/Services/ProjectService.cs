@@ -72,7 +72,16 @@ namespace WebAPI.ApplicationLogic.Services
 	        return fullProjectDescription;
         }
 
-        public async Task<ProjectBoardModel> GetProjectBoardData(Guid projectId, Guid userId)
+        public async Task<ProjectMainPageModel> GetProjectMainPageData(Guid userId)
+        {
+	        var projectMainPageData = await _projectRepository.GetProjectMainPageDataAsync(userId);
+
+	        var projectMainPageDataModel = _mapper.Map<ProjectMainPageModel>(projectMainPageData);
+
+	        return projectMainPageDataModel;
+        }
+
+        public async Task<ProjectBoardPageModel> GetProjectBoardData(Guid projectId, Guid userId)
         {
 	        var projectEntity = await _projectRepository.SearchForSingleItemAsync(x => x.ProjectId == projectId);
 	        if (projectEntity == null)
@@ -92,7 +101,7 @@ namespace WebAPI.ApplicationLogic.Services
 
 	        var sprints = await _sprintRepository.SearchForMultipleItemsAsync(x => x.EpicId == latestEpic.EpicId, sprint => sprint.Stories);
 
-	        var projectBoardModel = new ProjectBoardModel
+	        var projectBoardModel = new ProjectBoardPageModel
 	        {
                 Project = _mapper.Map<Project>(projectEntity),
                 Team = _mapper.Map<Team>(teamEntity),

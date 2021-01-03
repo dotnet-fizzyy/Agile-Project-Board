@@ -67,18 +67,31 @@ namespace WebAPI.Presentation.Controllers
 	        return Ok(project);
         }
 
+        [UserVerificationFilter]
+        [HttpGet]
+        [Route(RouteConstants.ProjectControllerMainPageUrl)]
+        public async Task<ProjectMainPageModel> GetProjectMainPageDataIndex()
+        {
+	        var userId = _requestHeadersProvider.GetUserId(Request);
+
+	        var projectMainPageDataModel = await _projectService.GetProjectMainPageData(userId);
+
+            return projectMainPageDataModel;
+        }
+
         /// <summary>
         /// Get project data for board page
         /// </summary>
         [UserVerificationFilter]
         [HttpGet]
-        public async Task<IHttpActionResult> GetProjectBoardIndex(Guid projectId)
+        [Route(RouteConstants.ProjectControllerBoardPageUrl)]
+        public async Task<ProjectBoardPageModel> GetProjectBoardDataIndex(Guid projectId)
         {
 	        var userId = _requestHeadersProvider.GetUserId(Request);
 
             var projectBoardModel = await _projectService.GetProjectBoardData(projectId, userId);
 
-            return Ok(projectBoardModel);
+            return projectBoardModel;
         }
 
         /// <summary>

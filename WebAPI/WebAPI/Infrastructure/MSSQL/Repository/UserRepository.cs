@@ -19,6 +19,26 @@ namespace WebAPI.Infrastructure.MSSQL.Repository
 	        return foundUser;
         }
 
+        public async Task<User> UpdateUserWithoutPasswordAsync(User user)
+        {
+	        _databaseContext.Users.Attach(user);
+	        _databaseContext.Entry(user).Property(x => x.Password).IsModified = false;
+
+	        await _databaseContext.SaveChangesAsync();
+
+	        return user;
+        }
+
+        public async Task UpdateUserPasswordAsync(Guid userId, string password)
+        {
+	        var userUpdateEntity = new User { UserId = userId, Password = password };
+
+            _databaseContext.Users.Attach(userUpdateEntity);
+	        _databaseContext.Entry(userUpdateEntity).Property(x => x.Password).IsModified = true;
+
+	        await _databaseContext.SaveChangesAsync();
+        }
+
         public async Task UpdateUserStatusAsync(Guid userId, bool isActive)
         {
 	        var userUpdateEntity = new User { UserId = userId, IsActive = isActive };

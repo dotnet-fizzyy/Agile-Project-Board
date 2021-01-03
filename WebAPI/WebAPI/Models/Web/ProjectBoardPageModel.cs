@@ -2,9 +2,9 @@
 
 namespace WebAPI.Models.Web
 {
-	public class ProjectBoardModel
+	public class ProjectBoardPageModel
 	{
-		public ProjectBoardModel()
+		public ProjectBoardPageModel()
 		{
 			Epics = new List<Epic>();
 			EpicSprints = new List<Sprint>();

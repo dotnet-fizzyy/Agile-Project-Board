@@ -6,6 +6,8 @@ namespace WebAPI.Core.Constants
 	    public const string ProjectControllerGetAllProjectsUrl = ProjectControllerUrl + "/all";
 	    public const string ProjectControllerGetProjectUrl = ProjectControllerUrl + "/{projectId}";
 	    public const string ProjectControllerCreateProjectWithCustomerUrl = ProjectControllerUrl + "/customer";
+	    public const string ProjectControllerMainPageUrl = ProjectControllerUrl + "/main";
+	    public const string ProjectControllerBoardPageUrl = ProjectControllerUrl + "/board/{projectId}";
 
 		public const string EpicControllerUrl = "epic";
 	    public const string EpicControllerGetAllEpicsUrl = EpicControllerUrl + "/all";
@@ -33,6 +35,7 @@ namespace WebAPI.Core.Constants
         public const string UserControllerAuthenticateUrl = UserControllerUrl + "/auth";
         public const string UserControllerCreateCustomerUrl = UserControllerUrl + "/customer";
         public const string UserControllerUpdateUserStatusUrl = UserControllerUrl + "/status";
+        public const string UserControllerUpdateUserPasswordUrl = UserControllerUrl + "/password";
     }
 
     public static class Headers
