@@ -23,7 +23,6 @@ import { BoardComponent } from './components/board/board.component';
 import { ColumnComponent } from './components/column/column.component';
 import { BoardHeaderComponent } from './components/headers/board-header/board-header.component';
 import { MainHeaderComponent } from './components/headers/main-header/main-header.component';
-import { LoginRegistrationModule } from './components/login-registration/login-registration.module';
 import { MainComponent } from './components/main/main.component';
 import { EpicCreationComponent } from './components/modals/epic-creation/epic-creation.component';
 import { ProjectCreationComponent } from './components/modals/project-creation/project-creation.component';
@@ -37,8 +36,10 @@ import { StartPromptComponent } from './components/start-prompt/start-prompt.com
 import { StoryComponent } from './components/story/story.component';
 import { TeamManagementComponent } from './components/team-management/team-management.component';
 import { UndefinedPageComponent } from './components/undefined-page/undefined-page.component';
-import { WrappersModule } from './components/wrappers/wrappers.module';
 import { LoaderInterceptor } from './interceptors/loader-interceptor.interceptor';
+import { LoginRegistrationModule } from './modules/login-registration/login-registration.module';
+import { MainAppModule } from './modules/main-app/main-app.module';
+import { WrappersModule } from './modules/wrappers/wrappers.module';
 import Effects from './redux/effects';
 import Reducers from './redux/store';
 import { HttpService } from './services/http.service';
@@ -85,6 +86,7 @@ import { HttpService } from './services/http.service';
         MatSelectModule,
         LoginRegistrationModule,
         WrappersModule,
+        MainAppModule,
     ],
     providers: [HttpService, { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }],
     bootstrap: [AppComponent],
