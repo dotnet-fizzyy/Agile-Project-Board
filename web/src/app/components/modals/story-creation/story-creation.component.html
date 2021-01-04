@@ -1,1 +1,17 @@
-<p>story-creation works!</p>
+<h2>Story creation</h2>
+<form [formGroup]="storyForm">
+    <app-input-wrapper formControlName="title" label="Title" type="text" required="true"></app-input-wrapper>
+    <app-input-wrapper formControlName="description" label="Description" type="text" required="true"></app-input-wrapper>
+    <app-input-wrapper formControlName="estimation" label="Estimation" type="number" required="true"></app-input-wrapper>
+    <app-select-wrapper formControlName="sprintId" [options]="sprints" required="true" label="Select sprint"></app-select-wrapper>
+    <app-select-wrapper formControlName="userId" [options]="users" label="Select user"></app-select-wrapper>
+    <app-checkbox-wrapper formControlName="isDefect" label="Is defect?"></app-checkbox-wrapper>
+</form>
+<button
+    class="create-button"
+    mat-raised-button color="primary"
+    (click)="onClickCreateStory()"
+    [disabled]="storyForm.invalid"
+>
+    Create story
+</button>

@@ -11,4 +11,5 @@ import BaseWrapperDirective from '../base-wrapper';
 export class SelectWrapperComponent extends BaseWrapperDirective<string> {
     @Input() label: string;
     @Input() options: ISelectItem[];
+    @Input() required: boolean;
 }

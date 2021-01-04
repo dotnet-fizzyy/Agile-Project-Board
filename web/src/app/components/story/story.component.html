@@ -1,6 +1,6 @@
 <div class="story-container" cdkDrag [cdkDragData]="story">
   <div class="story-header">
-    <span (click)="onClick()" matTooltip="View Details">{{ story.id }}</span>
+    <span (click)="onClick()" matTooltip="View Details">{{ story.storyId }}</span>
     <div class="icons-container">
       <mat-icon matTooltip="Ready" class="story-ready-icon">done_outline</mat-icon>
       <mat-icon matTooltip="Block" class="story-ready-icon">block</mat-icon>
@@ -13,7 +13,7 @@
     <span>{{ story.title }}</span>
     <div class="story-user">
         <mat-icon class="user-icon">account_circle</mat-icon>
-        {{ story.user ? story.user : 'No Owner' }}
+        {{ story.userId ? story.userId : 'No Owner' }}
     </div>
   </div>
 </div>

@@ -39,3 +39,17 @@ export type ModalComponentTypes = ComponentType<
     | TeamManageComponent
     | UserCreationComponent
 >;
+
+export const StoryFields = {
+    storyId: 'storyId',
+    sprintId: 'sprintId',
+    title: 'title',
+    column: 'column',
+    isDefect: 'isDefect',
+    description: 'description',
+    estimation: 'estimation',
+    userId: 'userId',
+    isBlocked: 'isBlocked',
+    isReady: 'isReady',
+    blockReason: 'blockReason',
+};

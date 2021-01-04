@@ -17,6 +17,6 @@ export class StoryComponent implements OnInit {
     ngOnInit(): void {}
 
     onClick = () => {
-        this.store$.dispatch(new ViewStoryDetailsAction(this.story.id));
+        this.store$.dispatch(new ViewStoryDetailsAction(this.story.storyId));
     };
 }

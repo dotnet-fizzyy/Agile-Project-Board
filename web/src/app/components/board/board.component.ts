@@ -48,7 +48,7 @@ export class BoardComponent implements OnInit, AfterViewInit {
     public drop(event: CdkDragDrop<ISelectItem[]>): void {
         this.store$.dispatch(
             new ChangeStoryColumnAction({
-                storyId: (event.item.data as IStory).id,
+                storyId: (event.item.data as IStory).storyId,
                 storyColumn: event.container.id,
                 oldColumn: (event.item.data as IStory).column,
                 newColumnIndex: event.currentIndex,

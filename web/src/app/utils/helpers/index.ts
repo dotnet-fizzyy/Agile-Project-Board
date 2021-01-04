@@ -1,14 +1,6 @@
 import * as moment from 'moment';
 import { UserRoles } from '../constants';
-import { IEpic, ISelectItem, IStory, IUser } from '../interfaces';
-
-export function columnStoriesSorting(a: IStory, b: IStory): number {
-    if (a.columnIndex > b.columnIndex) {
-        return 1;
-    } else {
-        return -1;
-    }
-}
+import { IEpic, ISelectItem, ISprint, IUser } from '../interfaces';
 
 export function isUserAuthenticated(): boolean {
     return !!localStorage.getItem('user');
@@ -31,11 +23,29 @@ export function getEpicsDropdownItems(epics: IEpic[]): ISelectItem[] {
     });
 }
 
+export function getSprintsDropdownItems(sprints: ISprint[]): ISelectItem[] {
+    return sprints.map((x) => {
+        return {
+            value: x.sprintId,
+            label: x.sprintName,
+        } as ISelectItem;
+    });
+}
+
 export function getUserRolesDropdownItems(): ISelectItem[] {
     return Object.entries(UserRoles).map((x) => {
         return {
             value: x[0],
             label: x[1],
+        } as ISelectItem;
+    });
+}
+
+export function getTeamMembersDropdownItems(teamMembers: IUser[]): ISelectItem[] {
+    return teamMembers.map((x) => {
+        return {
+            value: x.userId,
+            label: x.username,
         } as ISelectItem;
     });
 }

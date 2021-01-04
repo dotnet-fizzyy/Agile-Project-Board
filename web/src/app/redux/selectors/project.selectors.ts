@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { getEpicsDropdownItems } from 'src/app/utils/helpers';
-import { ReducerNames } from './../store/index';
-import { IProjectState } from './../store/state';
+import { getEpicsDropdownItems, getSprintsDropdownItems } from 'src/app/utils/helpers';
+import { ReducerNames } from '../store';
+import { IProjectState } from '../store/state';
 
 const projectFeatureSelector = createFeatureSelector(ReducerNames.project);
 
@@ -13,4 +13,8 @@ export const getEpics = createSelector(projectFeatureSelector, (state: IProjectS
 
 export const getEpicsForSelect = createSelector(projectFeatureSelector, (state: IProjectState) =>
     getEpicsDropdownItems(state.epics)
+);
+
+export const getSprintsForSelect = createSelector(projectFeatureSelector, (state: IProjectState) =>
+    getSprintsDropdownItems(state.sprints)
 );

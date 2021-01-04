@@ -28,6 +28,6 @@ export class BoardHeaderComponent implements OnInit {
     };
 
     public onClickAddStory = () => {
-        this.dialog.open(StoryCreationComponent);
+        this.dialog.open(StoryCreationComponent, { width: '500px' });
     };
 }

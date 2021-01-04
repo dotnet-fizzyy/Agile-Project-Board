@@ -35,7 +35,7 @@ function handleViewStoryDetailsAction(
 ): IStoriesState {
     return {
         ...state,
-        selectedStory: state.stories.find((story) => story.id === action.payload),
+        selectedStory: state.stories.find((story) => story.storyId === action.payload),
     };
 }
 
@@ -46,23 +46,13 @@ function handleChangeStoryColumnAction(
     return {
         ...state,
         stories: state.stories.map((story) => {
-            return story.id === action.payload.storyId
+            return story.storyId === action.payload.storyId
                 ? {
                       ...story,
                       column: action.payload.storyColumn,
-                      columnIndex: action.payload.newColumnIndex,
                   }
                 : {
                       ...story,
-                      columnIndex:
-                          story.column === action.payload.storyColumn &&
-                          story.columnIndex >= action.payload.newColumnIndex
-                              ? story.columnIndex + 1
-                              : story.column === action.payload.oldColumn &&
-                                story.columnIndex >= action.payload.newColumnIndex &&
-                                story.columnIndex !== 0
-                              ? story.columnIndex - 1
-                              : story.columnIndex,
                   };
         }),
     };

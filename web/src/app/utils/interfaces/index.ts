@@ -16,17 +16,17 @@ export interface IUser {
 }
 
 export interface IStory {
-    id: string;
+    storyId?: string;
     title: string;
     column: string;
     isDefect: boolean;
     description: string;
-    points?: number;
-    columnIndex?: number;
-    user?: string;
+    estimation?: number;
+    userId?: string;
     isBlocked?: boolean;
     isReady?: boolean;
     blockReason?: string;
+    sprintId?: string;
 }
 
 export interface IAuthenticationUser {
@@ -78,6 +78,8 @@ export interface IModalData {
 
 export interface IValidationMessage {
     length?: number;
+    maxValue?: number;
+    minValue?: number;
 }
 
 export interface IUpdateUserStatus {

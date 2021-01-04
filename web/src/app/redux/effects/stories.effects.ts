@@ -43,13 +43,13 @@ export default class StoriesEffects {
     private mapToStories = (response: any): IStory[] => {
         return response.map((story) => {
             return {
-                id: story.id,
+                storyId: story.id,
                 title: story.title,
                 column: story.column,
                 isDefect: story.isDefect,
                 description: story.description,
-                points: story.points,
-                user: story.user,
+                estimation: story.points,
+                userId: story.user,
                 isBlocked: story.isBlocked,
                 isReady: story.isReady,
                 blockReason: story.blockReason,

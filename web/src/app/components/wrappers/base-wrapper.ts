@@ -2,10 +2,12 @@ import { Directive, Input, Optional, Self } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { IValidationMessage } from '../../utils/interfaces';
 
-export const ValidationMessage: { [key: string]: ({ length }: IValidationMessage) => string } = {
+export const ValidationMessage: { [key: string]: (message: IValidationMessage) => string } = {
     required: () => 'This field is required',
-    maxlength: (length) => `The max length of this field is ${length} symbols`,
-    minlength: (length) => `The min length of this field is ${length} symbols`,
+    maxlength: (message) => `The max length of this field is ${message.length} symbols`,
+    minlength: (message) => `The min length of this field is ${message.length} symbols`,
+    max: (message) => `The maximum value is ${message.maxValue}`,
+    min: (message) => `The minimum value is ${message.minValue}`,
 };
 
 @Directive()
@@ -45,7 +47,13 @@ export default abstract class BaseWrapperDirective<T> implements ControlValueAcc
 
         const mainError = errors[0];
 
-        return ValidationMessage[mainError[0]](mainError[1].requiredLength);
+        const requirements: IValidationMessage = {
+            length: mainError[1].requiredLength,
+            minValue: mainError[1].min,
+            maxValue: mainError[1].max,
+        };
+
+        return ValidationMessage[mainError[0]](requirements);
     }
 
     constructor(@Self() @Optional() private control: NgControl) {

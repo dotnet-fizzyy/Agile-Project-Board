@@ -28,7 +28,7 @@ const routes: Routes = [
     {
         path: 'board/:projectId',
         component: BoardComponent,
-        canActivate: [AuthGuard],
+        // canActivate: [AuthGuard],
     },
     {
         path: '**',
