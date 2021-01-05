@@ -20,6 +20,7 @@ export class LoginSignInActionSuccess implements Action {
 }
 
 export class LoginSignInActionFailure implements Action {
+    constructor(public error: Error) {}
     readonly type: string = LoginRegistrationActions.LOGIN_SIGN_IN_FAILURE;
 }
 
@@ -33,10 +34,11 @@ export class RegistrationCreateAccountActionSuccess implements Action {
 }
 
 export class RegistrationCreateAccountActionFailure implements Action {
+    constructor(public error: Error) {}
     readonly type: string = LoginRegistrationActions.REGISTRATION_CREATE_ACCOUNT_FAILURE;
 }
 
-export type LoginRegistrationActionTypes =
-    | LoginSignInActionSuccess
-    | LoginSignInActionFailure
-    | RegistrationCreateAccountActionSuccess;
+export type LoginRegistrationActionTypes = LoginSignInActionSuccess &
+    LoginSignInActionFailure &
+    RegistrationCreateAccountActionSuccess &
+    RegistrationCreateAccountActionFailure;

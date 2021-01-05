@@ -13,7 +13,7 @@ export abstract class BaseGuard implements CanActivate {
         state: RouterStateSnapshot
     ): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
         if (!isUserAuthenticated()) {
-            return this.router.navigateByUrl('sign-in');
+            return this.router.navigateByUrl('auth/sign-in');
         }
 
         return this.willActivate();

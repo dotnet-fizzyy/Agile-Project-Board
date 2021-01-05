@@ -6,7 +6,7 @@
         <app-input-wrapper [formControlName]="repeatedPassword" label="Confirm your password" type="password" required="true"></app-input-wrapper>
         <div class="link-container">
             <span>Have account already?</span>
-            <a routerLink="/sign-in">Sign In</a>
+            <a routerLink="/auth/sign-in">Sign In</a>
         </div>
         <span class="account-creation" *ngIf="isRegistrationSuccessful$ | async">Your account was created!</span>
         <mat-spinner *ngIf="isLoading$ | async" class="loader" [diameter]="30"></mat-spinner>

@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { of } from 'rxjs';
+import { Store } from '@ngrx/store';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { IUser } from 'src/app/utils/interfaces';
 import { HttpService } from '../../services/http.service';
 import { UserRoutes } from '../../utils/constants/webapi-routes';
 import * as LoginRegistrationActions from '../actions/login-registration.actions';
+import { IStoreState } from '../store/state';
 
 @Injectable()
 export default class LoginRegistrationEffects {
-    constructor(private actions$: Actions, private httpClient: HttpService) {}
+    constructor(private actions$: Actions, private store$: Store<IStoreState>, private httpClient: HttpService) {}
 
-    loginReguest$ = createEffect(() =>
+    loginRequest$ = createEffect(() =>
         this.actions$.pipe(
             ofType<LoginRegistrationActions.LoginSignInActionRequest>(
                 LoginRegistrationActions.LoginRegistrationActions.LOGIN_SIGN_IN_REQUEST
@@ -22,10 +23,10 @@ export default class LoginRegistrationEffects {
 
                 return new LoginRegistrationActions.LoginSignInActionSuccess();
             }),
-            catchError((error) => {
-                console.error(error);
+            catchError((error, caught) => {
+                this.store$.dispatch(new LoginRegistrationActions.LoginSignInActionFailure(error));
 
-                return of(new LoginRegistrationActions.LoginSignInActionFailure());
+                return caught;
             })
         )
     );
@@ -39,10 +40,10 @@ export default class LoginRegistrationEffects {
             map(() => {
                 return new LoginRegistrationActions.RegistrationCreateAccountActionSuccess();
             }),
-            catchError((error) => {
-                console.error(error);
+            catchError((error, caught) => {
+                this.store$.dispatch(new LoginRegistrationActions.RegistrationCreateAccountActionFailure(error));
 
-                return of(new LoginRegistrationActions.RegistrationCreateAccountActionFailure());
+                return caught;
             })
         )
     );
