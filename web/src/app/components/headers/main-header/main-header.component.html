@@ -1,2 +1,18 @@
 <div class="header-root">
+    <a routerLink="/app" class="main-link">Main</a>
+    <div>
+        <a *ngIf="isCustomer()" routerLink="/app/team" class="app-link">Team</a>
+        <a *ngIf="isCustomer()" routerLink="/app/project" class="app-link">Project</a>
+        <a [routerLink]="'/app/project/' + project.projectId" class="app-link">Board</a>
+    </div>
+    <div class="user-info-container">
+        <div class="user-info">
+            <span>{{ user.username }}</span>
+            <span>{{ user.userRole }}</span>
+        </div>
+        <mat-icon class="user-icon" [matMenuTriggerFor]="menu">account_circle</mat-icon>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="onClickLogOut()">Log out</button>
+        </mat-menu>
+    </div>
 </div>

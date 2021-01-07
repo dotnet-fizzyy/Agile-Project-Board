@@ -5,7 +5,6 @@ import { MainAppComponent } from '../../components/main-app/main-app.component';
 import { MainComponent } from '../../components/main/main.component';
 import { ProjectManagementComponent } from '../../components/project-management/project-management.component';
 import { TeamManagementComponent } from '../../components/team-management/team-management.component';
-import { UndefinedPageComponent } from '../../components/undefined-page/undefined-page.component';
 import { AuthGuard } from '../../guards/auth-guard.guard';
 import { CustomerGuard } from '../../guards/customer.guard';
 
@@ -33,10 +32,6 @@ const routes: Routes = [
                 path: 'board/:projectId',
                 component: BoardComponent,
                 canActivate: [AuthGuard],
-            },
-            {
-                path: '**',
-                component: UndefinedPageComponent,
             },
         ],
     },

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { UndefinedPageComponent } from './components/undefined-page/undefined-page.component';
 
 const routes: Routes = [
     {
@@ -15,6 +16,10 @@ const routes: Routes = [
         path: 'auth',
         loadChildren: () =>
             import('./modules/login-registration/login-registration.module').then((x) => x.LoginRegistrationModule),
+    },
+    {
+        path: '**',
+        component: UndefinedPageComponent,
     },
 ];
 

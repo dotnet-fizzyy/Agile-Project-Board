@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { of } from 'rxjs';
 import { catchError, map, mergeMap, withLatestFrom } from 'rxjs/operators';
 import { HttpService } from '../../services/http.service';
-import { MainRoutes } from '../../utils/constants/webapi-routes';
+import * as WebApiRoutes from '../../utils/constants/webapi-routes';
 import { IStory } from '../../utils/interfaces';
 import { ChangeSidebarStateAction } from '../actions/sidebar.actions';
 import * as StoryActions from '../actions/stories.actions';
@@ -14,19 +13,6 @@ import { IStoreState } from '../store/state';
 @Injectable()
 export default class StoriesEffects {
     constructor(private actions$: Actions, private store$: Store<IStoreState>, private httpClient: HttpService) {}
-
-    storiesRequest$ = createEffect(() =>
-        this.actions$.pipe(
-            ofType(StoryActions.StoryActions.GET_STORIES_REQUEST),
-            mergeMap(() => this.httpClient.get(MainRoutes.STORIES)),
-            map((response) => {
-                const mappedStories = this.mapToStories(response);
-
-                return new StoryActions.GetStoriesSuccessAction(mappedStories);
-            }),
-            catchError(() => of(new StoryActions.GetStoriesRequestAction()))
-        )
-    );
 
     viewDetails$ = createEffect(() =>
         this.actions$.pipe(
@@ -40,21 +26,35 @@ export default class StoriesEffects {
         )
     );
 
-    private mapToStories = (response: any): IStory[] => {
-        return response.map((story) => {
-            return {
-                storyId: story.id,
-                title: story.title,
-                column: story.column,
-                isDefect: story.isDefect,
-                description: story.description,
-                estimation: story.points,
-                userId: story.user,
-                isBlocked: story.isBlocked,
-                isReady: story.isReady,
-                blockReason: story.blockReason,
-                columnIndex: story.columnIndex,
-            } as IStory;
-        });
+    createStory$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType<StoryActions.CreateStoryRequestAction>(StoryActions.StoryActions.CREATE_STORY_REQUEST),
+            mergeMap((action) => this.httpClient.post(WebApiRoutes.MainRoutes.STORIES, action.payload)),
+            map((response) => {
+                const story: IStory = StoriesEffects.mapToStory(response);
+
+                return new StoryActions.CreateStorySuccessAction(story);
+            }),
+            catchError((error, caught) => {
+                this.store$.dispatch(new StoryActions.CreateStoryFailureAction(error));
+
+                return caught;
+            })
+        )
+    );
+
+    private static mapToStory = (response: any): IStory => {
+        return {
+            storyId: response.storyId,
+            title: response.title,
+            column: response.column,
+            isDefect: response.isDefect,
+            description: response.description,
+            estimation: response.points,
+            userId: response.userId,
+            isBlocked: response.isBlocked,
+            isReady: response.isReady,
+            blockReason: response.blockReason,
+        } as IStory;
     };
 }

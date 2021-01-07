@@ -14,6 +14,8 @@ export default function storiesReducer(state = initialState, action): IStoriesSt
             return handleViewStoryDetailsAction(state, action);
         case StoryActions.StoryActions.CHANGE_STORY_COLUMN:
             return handleChangeStoryColumnAction(state, action);
+        case StoryActions.StoryActions.CREATE_STORY_SUCCESS:
+            return handleCreateStorySuccess(state, action);
         default:
             return state;
     }
@@ -55,5 +57,12 @@ function handleChangeStoryColumnAction(
                       ...story,
                   };
         }),
+    };
+}
+
+function handleCreateStorySuccess(state: IStoriesState, action: StoryActions.CreateStorySuccessAction): IStoriesState {
+    return {
+        ...state,
+        stories: state.stories.concat(action.payload),
     };
 }
