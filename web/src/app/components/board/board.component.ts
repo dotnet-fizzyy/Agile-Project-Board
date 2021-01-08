@@ -8,9 +8,10 @@ import {
     ViewChild,
     ViewContainerRef,
 } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { ChangeStoryColumnAction, GetStoriesRequestAction } from '../../redux/actions/stories.actions';
-import { GetUsersRequestAction } from '../../redux/actions/user.actions';
+import * as ProjectActions from '../../redux/actions/project.actions';
+import * as StoryActions from '../../redux/actions/stories.actions';
 import * as SidebarSelectors from '../../redux/selectors/sidebar.selectors';
 import { IStoreState } from '../../redux/store/state';
 import { ColumnNames } from '../../utils/constants';
@@ -28,16 +29,20 @@ export class BoardComponent implements OnInit, AfterViewInit {
     @ViewChild('vf', { read: ViewContainerRef }) vf: ViewContainerRef;
     public columns: ISelectItem[] = [];
 
-    constructor(private store$: Store<IStoreState>, private componentFactoryResolver: ComponentFactoryResolver) {}
+    constructor(
+        private store$: Store<IStoreState>,
+        private route: ActivatedRoute,
+        private componentFactoryResolver: ComponentFactoryResolver
+    ) {}
 
     ngOnInit(): void {
         for (const [key, value] of Object.entries(ColumnNames)) {
             this.columns.push({ label: value, value: key } as ISelectItem);
         }
 
-        this.store$.dispatch(new GetUsersRequestAction());
-        this.store$.dispatch(new GetStoriesRequestAction());
+        const projectId = this.route.snapshot.paramMap.get('projectId');
 
+        this.store$.dispatch(new ProjectActions.GetProjectBoardDataRequest(projectId));
         this.store$.select(SidebarSelectors.GetIsOpenedSidebarSelector).subscribe(this.openSidebar);
     }
 
@@ -47,7 +52,7 @@ export class BoardComponent implements OnInit, AfterViewInit {
 
     public drop(event: CdkDragDrop<ISelectItem[]>): void {
         this.store$.dispatch(
-            new ChangeStoryColumnAction({
+            new StoryActions.ChangeStoryColumnAction({
                 storyId: (event.item.data as IStory).storyId,
                 storyColumn: event.container.id,
                 oldColumn: (event.item.data as IStory).column,

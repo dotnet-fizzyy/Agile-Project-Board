@@ -15,7 +15,7 @@ const initialState: IProjectState = {
 
 export default function projectReducer(state = initialState, action: ProjectActions.ProjectActionTypes): IProjectState {
     switch (action.type) {
-        case ProjectActions.ProjectActions.GET_PROJECT_DESC_SUCCESS:
+        case ProjectActions.ProjectActions.GET_PROJECT_FULL_DESC_SUCCESS:
             return handleGetProjectDescriptionSuccess(state, action);
         case ProjectActions.ProjectActions.CREATE_EPIC_SUCCESS:
             return handleCreateEpicSuccess(state, action);
@@ -23,6 +23,7 @@ export default function projectReducer(state = initialState, action: ProjectActi
             return handleCreateSprintSuccess(state, action);
         case ProjectActions.ProjectActions.CREATE_PROJECT_SUCCESS:
         case ProjectActions.ProjectActions.UPDATE_PROJECT_SUCCESS:
+        case ProjectActions.ProjectActions.GET_PROJECT_SUCCESS:
         case ProjectActions.ProjectActions.ADD_PROJECT:
             return handleUpdateProjectSuccess(state, action);
         case ProjectActions.ProjectActions.UPDATE_EPIC_SUCCESS:
@@ -33,6 +34,8 @@ export default function projectReducer(state = initialState, action: ProjectActi
             return handleGetSprintsFromEpicSuccess(state, action);
         case ProjectActions.ProjectActions.GET_INITIAL_PAGE_DATA_SUCCESS:
             return handleGetMainPageDataSuccess(state, action);
+        case ProjectActions.ProjectActions.GET_EPICS_SUCCESS:
+            return handleGetEpicsSuccess(state, action);
         default:
             return state;
     }
@@ -40,7 +43,7 @@ export default function projectReducer(state = initialState, action: ProjectActi
 
 function handleGetProjectDescriptionSuccess(
     state: IProjectState,
-    action: ProjectActions.GetProjectSuccess
+    action: ProjectActions.GetFullProjectSuccess
 ): IProjectState {
     return {
         ...state,
@@ -101,5 +104,12 @@ function handleGetMainPageDataSuccess(
     return {
         ...state,
         project: { ...action.payload.project },
+    };
+}
+
+function handleGetEpicsSuccess(state: IProjectState, action: ProjectActions.GetEpicsSuccess): IProjectState {
+    return {
+        ...state,
+        epics: action.payload,
     };
 }

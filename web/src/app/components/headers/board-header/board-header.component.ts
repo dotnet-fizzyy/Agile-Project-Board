@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
+import * as ProjectActions from '../../../redux/actions/project.actions';
 import * as ProjectSelectors from '../../../redux/selectors/project.selectors';
 import { IStoreState } from '../../../redux/store/state';
 import { IProject, ISelectItem } from '../../../utils/interfaces';
@@ -25,6 +26,7 @@ export class BoardHeaderComponent implements OnInit {
 
     public onChangeEpic = (value: string) => {
         this.selectedEpic = value;
+        this.store$.dispatch(new ProjectActions.GetFullSprintsFromEpicRequest(value));
     };
 
     public onClickAddStory = () => {

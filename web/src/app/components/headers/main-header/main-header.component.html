@@ -3,7 +3,7 @@
     <div>
         <a *ngIf="isCustomer()" routerLink="/app/team" class="app-link">Team</a>
         <a *ngIf="isCustomer()" routerLink="/app/project" class="app-link">Project</a>
-        <a [routerLink]="'/app/project/' + project.projectId" class="app-link">Board</a>
+        <a [routerLink]="['/app/project/', project.projectId]" class="app-link">Board</a>
     </div>
     <div class="user-info-container">
         <div class="user-info">

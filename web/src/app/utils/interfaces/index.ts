@@ -56,6 +56,7 @@ export interface ISprint {
     sprintName: string;
     startDate: Date;
     endDate: Date;
+    stories?: IStory[];
 }
 
 export interface IFullProjectDescription {

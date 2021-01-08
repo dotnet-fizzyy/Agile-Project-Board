@@ -22,11 +22,12 @@ export const ProjectRoutes = {
     CREATE_PROJECT: MainRoutes.PROJECTS,
     UPDATE_PROJECT: MainRoutes.PROJECTS,
     GET_MAIN_PAGE_DATA: MainRoutes.PROJECTS + '/main',
+    GET_BOARD_DATA: MainRoutes.PROJECTS + '/board/',
 };
 
 export const SprintRoutes = {
     CREATE_SPRINT: MainRoutes.SPRINTS,
-    GET_EPIC_SPRINTS: MainRoutes.SPRINTS + '/epic/',
+    GET_EPIC_SPRINTS: MainRoutes.SPRINTS + '/epic?',
     UPDATE_SPRINT: MainRoutes.SPRINTS,
 };
 

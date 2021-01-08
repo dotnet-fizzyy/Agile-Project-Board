@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -32,11 +33,22 @@ namespace WebAPI.ApplicationLogic.Services
             return collectionResponse;
         }
 
-        public async Task<CollectionResponse<Sprint>> GetSprintsFromEpicAsync(Guid epicId)
+        public async Task<CollectionResponse<Sprint>> GetSprintsFromEpicAsync(Guid epicId, bool includeChildren)
         {
-	        var sprintEntities = await _sprintRepository.SearchForMultipleItemsAsync(x => x.EpicId == epicId);
+            IEnumerable<Models.Entities.Sprint> sprintEntities;
+            if (includeChildren)
+            {
+                sprintEntities = await _sprintRepository.SearchForMultipleItemsAsync(
+                    x => x.EpicId == epicId, 
+                    x => x.Stories
+                    );
+            }
+            else
+            {
+                sprintEntities = await _sprintRepository.SearchForMultipleItemsAsync(x => x.EpicId == epicId);
+            }
 
-	        var collectionResponse = new CollectionResponse<Sprint>
+            var collectionResponse = new CollectionResponse<Sprint>
 	        {
 		        Items = sprintEntities.Select(_mapper.Map<Sprint>).ToList(),
 	        };

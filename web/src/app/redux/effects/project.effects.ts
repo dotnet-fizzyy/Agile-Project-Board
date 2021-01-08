@@ -1,12 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { catchError, map, mergeMap } from 'rxjs/operators';
-import { IFullProjectDescription, IProject, ISprint, ITeam, ITeamManagementModel } from 'src/app/utils/interfaces';
+import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
+import {
+    IFullProjectDescription,
+    IProject,
+    ISprint,
+    IStory,
+    ITeam,
+    ITeamManagementModel,
+} from 'src/app/utils/interfaces';
 import { HttpService } from '../../services/http.service';
 import * as WebApiRoutes from '../../utils/constants/webapi-routes';
 import { IEpic } from '../../utils/interfaces';
 import * as ProjectActions from '../actions/project.actions';
+import * as StoryActions from '../actions/stories.actions';
+import * as TeamActions from '../actions/team.actions';
 import { IProjectState } from '../store/state';
 
 @Injectable()
@@ -35,15 +44,15 @@ export default class ProjectEffects {
 
     getProjectDesc$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(ProjectActions.ProjectActions.GET_PROJECT_DESC_REQUEST),
+            ofType(ProjectActions.ProjectActions.GET_PROJECT_FULL_DESC_REQUEST),
             mergeMap(() => this.httpService.get(WebApiRoutes.ProjectRoutes.GET_CUSTOMER_PROJECT)),
             map((response) => {
                 const fullProjectDescription = ProjectEffects.mapToFullProject(response);
 
-                return new ProjectActions.GetProjectSuccess(fullProjectDescription);
+                return new ProjectActions.GetFullProjectSuccess(fullProjectDescription);
             }),
             catchError((error, caught) => {
-                this.store$.dispatch(new ProjectActions.GetProjectFailure(error));
+                this.store$.dispatch(new ProjectActions.GetFullProjectFailure(error));
 
                 return caught;
             })
@@ -106,7 +115,11 @@ export default class ProjectEffects {
             ofType<ProjectActions.GetSprintsFromEpicRequest>(
                 ProjectActions.ProjectActions.GET_SPRINTS_FROM_EPIC_REQUEST
             ),
-            mergeMap((action) => this.httpService.get(WebApiRoutes.SprintRoutes.GET_EPIC_SPRINTS + action.payload)),
+            mergeMap((action) =>
+                this.httpService.get(
+                    WebApiRoutes.SprintRoutes.GET_EPIC_SPRINTS + `epicId=${action.payload}&includeChildren=false`
+                )
+            ),
             map((response: any) => {
                 const sprints: ISprint[] = response.items.map((s) => ProjectEffects.mapToSprint(s));
 
@@ -165,6 +178,57 @@ export default class ProjectEffects {
             }),
             catchError((error, caught) => {
                 this.store$.dispatch(new ProjectActions.UpdateSprintFailure(error));
+
+                return caught;
+            })
+        )
+    );
+
+    getBoardData$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType<ProjectActions.GetProjectBoardDataRequest>(
+                ProjectActions.ProjectActions.GET_PROJECT_BOARD_DATA_REQUEST
+            ),
+            mergeMap((action) => this.httpService.get(WebApiRoutes.ProjectRoutes.GET_BOARD_DATA + action.payload)),
+            switchMap((response: any) => {
+                const project: IProject = response.project;
+                const sprints: ISprint[] = response.epicSprints;
+                const team: ITeam = response.team;
+                const epics: IEpic[] = response.epics;
+                const stories: IStory[] = sprints.reduce((acc, item) => acc.concat(item.stories), []);
+
+                return [
+                    new ProjectActions.GetProjectSuccess(project),
+                    new ProjectActions.GetEpicsSuccess(epics),
+                    new StoryActions.GetStoriesSuccessAction(stories),
+                    new TeamActions.GetTeamSuccess(team),
+                ];
+            }),
+            catchError((error, caught) => {
+                this.store$.dispatch(new ProjectActions.GetProjectBoardDataFailure(error));
+
+                return caught;
+            })
+        )
+    );
+
+    getFullSprintsFromEpic$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType<ProjectActions.GetFullSprintsFromEpicRequest>(
+                ProjectActions.ProjectActions.GET_FULL_SPRINTS_FROM_EPIC_REQUEST
+            ),
+            mergeMap((action) =>
+                this.httpService.get(
+                    WebApiRoutes.SprintRoutes.GET_EPIC_SPRINTS + `epicId=${action.payload}&includeChildren=true`
+                )
+            ),
+            map((response: any) => {
+                const epicSprints: ISprint[] = response.map(ProjectEffects.mapToSprint);
+
+                return new ProjectActions.GetFullSprintsFromEpicSuccess(epicSprints);
+            }),
+            catchError((error, caught) => {
+                this.store$.dispatch(new ProjectActions.GetFullSprintsFromEpicFailure(error));
 
                 return caught;
             })

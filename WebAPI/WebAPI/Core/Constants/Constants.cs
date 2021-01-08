@@ -16,7 +16,7 @@ namespace WebAPI.Core.Constants
 	    public const string SprintControllerUrl = "sprint";
 	    public const string SprintControllerGetAllSprintsUrl = SprintControllerUrl + "/all";
 	    public const string SprintControllerGetSprintUrl = SprintControllerUrl + "/{sprintId}";
-	    public const string SprintControllerGetSprintsFromEpicUrl = SprintControllerUrl + "/epic/{epicId}";
+	    public const string SprintControllerGetSprintsFromEpicUrl = SprintControllerUrl + "/epic";
 
 	    public const string StoryControllerUrl = "story";
 	    public const string StoryControllerGetAllStoriesUrl = StoryControllerUrl + "/all";

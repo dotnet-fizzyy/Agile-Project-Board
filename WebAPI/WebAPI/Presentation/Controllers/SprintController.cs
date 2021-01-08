@@ -50,8 +50,10 @@ namespace WebAPI.Presentation.Controllers
         /// </summary>
         [HttpGet]
         [Route(RouteConstants.SprintControllerGetSprintsFromEpicUrl)]
-        public async Task<CollectionResponse<Sprint>> GetSprintsFromEpic(Guid epicId) =>
-	        await _sprintService.GetSprintsFromEpicAsync(epicId);
+        public async Task<CollectionResponse<Sprint>> GetSprintsFromEpic(
+	        [FromUri]Guid epicId, 
+	        [FromUri]bool includeChildren
+	        ) => await _sprintService.GetSprintsFromEpicAsync(epicId, includeChildren);
 
         /// <summary>
         /// Create sprint

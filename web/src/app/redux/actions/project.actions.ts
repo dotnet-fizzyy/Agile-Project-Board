@@ -2,9 +2,9 @@ import { Action } from '@ngrx/store';
 import { IEpic, IFullProjectDescription, IProject, ISprint, ITeamManagementModel } from '../../utils/interfaces';
 
 export const ProjectActions = {
-    GET_PROJECT_DESC_REQUEST: '[project] get_project_desc_request',
-    GET_PROJECT_DESC_SUCCESS: '[project] get_project_desc_success',
-    GET_PROJECT_DESC_FAILURE: '[project] get_project_desc_failure',
+    GET_PROJECT_FULL_DESC_REQUEST: '[project] get_project_full_desc_request',
+    GET_PROJECT_FULL_DESC_SUCCESS: '[project] get_project_full_desc_success',
+    GET_PROJECT_FULL_DESC_FAILURE: '[project] get_project_full_desc_failure',
     CREATE_PROJECT_REQUEST: '[project] create_project_request',
     CREATE_PROJECT_SUCCESS: '[project] create_project_success',
     CREATE_PROJECT_FAILURE: '[project] create_project_failure',
@@ -30,20 +30,27 @@ export const ProjectActions = {
     GET_INITIAL_PAGE_DATA_REQUEST: '[project] get_initial_page_data_request',
     GET_INITIAL_PAGE_DATA_SUCCESS: '[project] get_initial_page_data_success',
     GET_INITIAL_PAGE_DATA_FAILURE: '[project] get_initial_page_data_failure',
+    GET_PROJECT_BOARD_DATA_REQUEST: '[project] get_project_board_data_request',
+    GET_PROJECT_BOARD_DATA_FAILURE: '[project] get_project_board_data_failure',
+    GET_EPICS_SUCCESS: '[project] get_epics_success',
+    GET_PROJECT_SUCCESS: '[project] get_project_success',
+    GET_FULL_SPRINTS_FROM_EPIC_REQUEST: '[project] get_full_sprints_from_epic_request',
+    GET_FULL_SPRINTS_FROM_EPIC_SUCCESS: '[project] get_full_sprints_from_epic_success',
+    GET_FULL_SPRINTS_FROM_EPIC_FAILURE: '[project] get_full_sprints_from_epic_failure',
 };
 
-export class GetProjectRequest implements Action {
-    readonly type: string = ProjectActions.GET_PROJECT_DESC_REQUEST;
+export class GetFullProjectRequest implements Action {
+    readonly type: string = ProjectActions.GET_PROJECT_FULL_DESC_REQUEST;
 }
 
-export class GetProjectFailure implements Action {
+export class GetFullProjectFailure implements Action {
     constructor(public error: Error) {}
-    readonly type: string = ProjectActions.GET_PROJECT_DESC_FAILURE;
+    readonly type: string = ProjectActions.GET_PROJECT_FULL_DESC_FAILURE;
 }
 
-export class GetProjectSuccess implements Action {
+export class GetFullProjectSuccess implements Action {
     constructor(public payload: IFullProjectDescription) {}
-    readonly type: string = ProjectActions.GET_PROJECT_DESC_SUCCESS;
+    readonly type: string = ProjectActions.GET_PROJECT_FULL_DESC_SUCCESS;
 }
 
 export class CreateProjectRequest implements Action {
@@ -170,12 +177,49 @@ export class GetProjectMainPageDataFailure implements Action {
     readonly type: string = ProjectActions.GET_INITIAL_PAGE_DATA_FAILURE;
 }
 
+export class GetProjectBoardDataRequest implements Action {
+    constructor(public payload: string) {}
+    readonly type: string = ProjectActions.GET_PROJECT_BOARD_DATA_REQUEST;
+}
+
+export class GetProjectBoardDataFailure implements Action {
+    constructor(public error: Error) {}
+    readonly type: string = ProjectActions.GET_PROJECT_BOARD_DATA_FAILURE;
+}
+
+export class GetEpicsSuccess implements Action {
+    constructor(public payload: IEpic[]) {}
+    readonly type: string = ProjectActions.GET_EPICS_SUCCESS;
+}
+
+export class GetProjectSuccess implements Action {
+    constructor(public payload: IProject) {}
+    readonly type: string = ProjectActions.GET_PROJECT_SUCCESS;
+}
+
+export class GetFullSprintsFromEpicRequest implements Action {
+    constructor(public payload: string) {}
+    readonly type: string = ProjectActions.GET_FULL_SPRINTS_FROM_EPIC_REQUEST;
+}
+
+export class GetFullSprintsFromEpicSuccess implements Action {
+    constructor(public payload: ISprint[]) {}
+    readonly type: string = ProjectActions.GET_FULL_SPRINTS_FROM_EPIC_SUCCESS;
+}
+
+export class GetFullSprintsFromEpicFailure implements Action {
+    constructor(public error: Error) {}
+    readonly type: string = ProjectActions.GET_FULL_SPRINTS_FROM_EPIC_FAILURE;
+}
+
 export type ProjectActionTypes = CreateProjectSuccess &
-    GetProjectSuccess &
+    GetFullProjectSuccess &
     CreateSprintSuccess &
     CreateEpicSuccess &
     UpdateProjectSuccess &
     UpdateEpicSuccess &
     UpdateSprintSuccess &
     GetSprintsFromEpicSuccess &
-    GetProjectMainPageDataSuccess;
+    GetProjectMainPageDataSuccess &
+    GetProjectSuccess &
+    GetEpicsSuccess;

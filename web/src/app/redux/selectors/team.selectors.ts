@@ -10,3 +10,8 @@ export const getTeam = createSelector(teamFeatureSelector, (state: ITeamState) =
 export const getTeamMembersForSelect = createSelector(teamFeatureSelector, (state: ITeamState) =>
     getTeamMembersDropdownItems(state.users)
 );
+
+export const getStoryOwner = createSelector(
+    teamFeatureSelector,
+    (state: ITeamState, userId: string) => state.users.find((x) => x.userId === userId).username
+);
