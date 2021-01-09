@@ -69,6 +69,16 @@ namespace WebAPI.Presentation.Controllers
 	        return Ok(updatedStory);
         }
 
+        [HttpPut]
+        [Route(RouteConstants.StoryControllerUpdateStoryColumnUrl)]
+        public async Task<HttpResponseMessage> UpdateStoryColumn([FromBody]UpdateStoryColumnModel storyColumn)
+        {
+	        await _storyService.UpdateStoryColumnAsync(storyColumn);
+
+            return new HttpResponseMessage(HttpStatusCode.NoContent);
+        }
+
+
         /// <summary>
         /// Remove story via its id
         /// </summary>

@@ -21,21 +21,23 @@ export class MainComponent implements OnInit {
     constructor(private store$: Store<IStoreState>, private router: Router) {}
 
     public onClickViewBoard = (): void => {
-        this.router.navigate([`/board/${this.project.projectId}`]);
+        this.router.navigate([`/app/board/${this.project.projectId}`]);
     };
 
     public onClickViewProjectSettings = (): void => {
-        this.router.navigate(['/project']);
+        this.router.navigate(['/app/project']);
     };
 
     public onClickManageTeam = (): void => {
-        this.router.navigate(['/team']);
+        this.router.navigate(['/app/team']);
     };
 
     ngOnInit(): void {
         this.store$.dispatch(new ProjectActions.GetProjectMainPageDataRequest());
 
-        this.store$.select(UserSelectors.GetCurrentUser).subscribe((x) => (this.currentUser = x));
+        this.store$.select(UserSelectors.GetCurrentUser).subscribe((x) => {
+            this.currentUser = x;
+        });
         this.store$.select(ProjectSelectors.getProject).subscribe((x) => (this.project = x));
         this.store$.select(TeamSelectors.getTeam).subscribe((x) => (this.team = x));
     }

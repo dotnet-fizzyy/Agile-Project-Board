@@ -6,11 +6,11 @@ import { TeamManageComponent } from '../../components/modals/team-manage/team-ma
 import { UserCreationComponent } from '../../components/modals/user-creation/user-creation.component';
 
 export const ColumnIds = {
-    IDEA: 'IDEA',
-    TODO: 'TODO',
-    PROGRESS: 'PROGRESS',
-    REVIEW: 'REVIEW',
-    ACCEPTED: 'ACCEPTED',
+    IDEA: 'Idea',
+    TODO: 'ToDo',
+    PROGRESS: 'Progress',
+    REVIEW: 'Review',
+    ACCEPTED: 'Accepted',
 };
 
 export const ColumnNames = {

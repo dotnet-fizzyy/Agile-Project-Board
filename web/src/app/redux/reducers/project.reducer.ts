@@ -31,6 +31,7 @@ export default function projectReducer(state = initialState, action: ProjectActi
         case ProjectActions.ProjectActions.UPDATE_SPRINT_SUCCESS:
             return handleUpdateSprintSuccess(state, action);
         case ProjectActions.ProjectActions.GET_SPRINTS_FROM_EPIC_SUCCESS:
+        case ProjectActions.ProjectActions.GET_FULL_SPRINTS_FROM_EPIC_SUCCESS:
             return handleGetSprintsFromEpicSuccess(state, action);
         case ProjectActions.ProjectActions.GET_INITIAL_PAGE_DATA_SUCCESS:
             return handleGetMainPageDataSuccess(state, action);

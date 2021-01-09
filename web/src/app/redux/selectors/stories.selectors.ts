@@ -13,3 +13,5 @@ export const GetColumnStories = createSelector(SelectStoriesFeature, (state: ISt
 export const GetCurrentStorySelector = createSelector(SelectStoriesFeature, (state: IStoriesState, props) =>
     state.stories.find((story) => story.storyId === props.storyId)
 );
+
+export const GetSelectedStory = createSelector(SelectStoriesFeature, (state: IStoriesState) => state.selectedStory);

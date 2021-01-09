@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using WebAPI.Core.Enums;
 using WebAPI.Core.Interfaces.Repository;
 using WebAPI.Core.Interfaces.Services;
 using WebAPI.Models.Result;
@@ -61,6 +62,13 @@ namespace WebAPI.ApplicationLogic.Services
             var storyModel = _mapper.Map<Story>(updatedEntity);
 
             return storyModel;
+        }
+
+        public async Task UpdateStoryColumnAsync(UpdateStoryColumnModel storyColumn)
+        {
+	        var column = (Columns)Enum.Parse(typeof(Columns), storyColumn.Column);
+
+	        await _storyRepository.UpdateStoryColumnAsync(storyColumn.StoryId, column);
         }
 
         public async Task RemoveStoryAsync(Guid storyId)

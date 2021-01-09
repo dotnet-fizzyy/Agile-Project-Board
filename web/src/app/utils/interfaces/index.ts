@@ -92,3 +92,8 @@ export interface ITeamManagementModel {
     project: IProject;
     team: ITeam;
 }
+
+export interface IUpdateStoryColumn {
+    storyId: string;
+    column: string;
+}

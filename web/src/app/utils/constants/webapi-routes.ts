@@ -41,3 +41,7 @@ export const TeamRoutes = {
     CREATE_TEAM: MainRoutes.TEAMS + '/customer',
     UPDATE_TEAM: MainRoutes.TEAMS,
 };
+
+export const StoryRoutes = {
+    CHANGE_STORY_COLUMN: MainRoutes.STORIES + '/column',
+};

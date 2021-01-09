@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { ViewStoryDetailsAction } from '../../redux/actions/stories.actions';
 import * as TeamSelectors from '../../redux/selectors/team.selectors';
 import { ISidebarState } from '../../redux/store/state';
+import { storyIdParser } from '../../utils/helpers';
 import { IStory } from '../../utils/interfaces';
 
 @Component({
@@ -13,6 +14,7 @@ import { IStory } from '../../utils/interfaces';
 export class StoryComponent implements OnInit {
     @Input() public story: IStory;
     public storyOwner = 'No owner';
+    public storyIdParser: (storyId: string, isDefect: boolean) => void = storyIdParser;
 
     constructor(private store$: Store<ISidebarState>) {}
 

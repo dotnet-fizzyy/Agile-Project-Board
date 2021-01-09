@@ -53,3 +53,6 @@ export function getTeamMembersDropdownItems(teamMembers: IUser[]): ISelectItem[]
 export const getFormattedDate = (date: Date): string => moment(date).format('yyyy-MM-DD');
 
 export const matchToRegex = (value: string): boolean => new RegExp('^[a-zA-Z0-9_]*$').test(value);
+
+export const storyIdParser = (storyId: string, isDefect: boolean) =>
+    (isDefect ? 'DE' : 'US') + storyId.split('-')[0].toUpperCase();

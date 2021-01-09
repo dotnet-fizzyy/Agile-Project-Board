@@ -21,6 +21,7 @@ namespace WebAPI.Core.Constants
 	    public const string StoryControllerUrl = "story";
 	    public const string StoryControllerGetAllStoriesUrl = StoryControllerUrl + "/all";
 	    public const string StoryControllerGetStoryUrl = StoryControllerUrl + "/{storyId}";
+	    public const string StoryControllerUpdateStoryColumnUrl = StoryControllerUrl + "/column";
 
 		public const string TeamControllerUrl = "team";
 		public const string TeamControllerCreateTeamWithCustomerUrl = TeamControllerUrl + "/customer";

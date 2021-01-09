@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { catchError, map, mergeMap, withLatestFrom } from 'rxjs/operators';
 import { HttpService } from '../../services/http.service';
 import * as WebApiRoutes from '../../utils/constants/webapi-routes';
-import { IStory } from '../../utils/interfaces';
+import { IStory, IUpdateStoryColumn } from '../../utils/interfaces';
 import { ChangeSidebarStateAction } from '../actions/sidebar.actions';
 import * as StoryActions from '../actions/stories.actions';
 import { GetIsOpenedSidebarSelector } from '../selectors/sidebar.selectors';
@@ -37,6 +37,28 @@ export default class StoriesEffects {
             }),
             catchError((error, caught) => {
                 this.store$.dispatch(new StoryActions.CreateStoryFailureAction(error));
+
+                return caught;
+            })
+        )
+    );
+
+    changeStoryColumn$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType<StoryActions.ChangeStoryColumnAction>(StoryActions.StoryActions.CHANGE_STORY_COLUMN),
+            mergeMap((action) => {
+                const updateStoryColumn: IUpdateStoryColumn = {
+                    storyId: action.payload.storyId,
+                    column: action.payload.storyColumn,
+                };
+
+                return this.httpClient.put(WebApiRoutes.StoryRoutes.CHANGE_STORY_COLUMN, updateStoryColumn);
+            }),
+            map((response) => {
+                return new StoryActions.ChangeStorySuccess();
+            }),
+            catchError((error, caught) => {
+                this.store$.dispatch(new StoryActions.ChangeStoryFailure(error));
 
                 return caught;
             })

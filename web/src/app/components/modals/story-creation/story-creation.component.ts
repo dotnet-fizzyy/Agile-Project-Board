@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import * as StoryActions from '../../../redux/actions/stories.actions';
 import * as ProjectSelectors from '../../../redux/selectors/project.selectors';
 import * as TeamSelectors from '../../../redux/selectors/team.selectors';
 import { IStoreState } from '../../../redux/store/state';
@@ -48,6 +49,6 @@ export class StoryCreationComponent implements OnInit {
             estimation: Number(this.storyForm.get(StoryFields.estimation).value),
         };
 
-        console.warn(story);
+        this.store$.dispatch(new StoryActions.CreateStoryRequestAction(story));
     };
 }

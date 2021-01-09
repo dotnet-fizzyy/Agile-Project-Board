@@ -11,6 +11,8 @@ export const StoryActions = {
     CREATE_STORY_REQUEST: '[stories] create_story_request',
     CREATE_STORY_SUCCESS: '[stories] create_story_success',
     CREATE_STORY_FAILURE: '[stories] create_story_failure',
+    CHANGE_STORY_COLUMN_SUCCESS: '[stories] change_story_column_success',
+    CHANGE_STORY_COLUMN_FAILURE: '[stories] change_story_column_failure',
 };
 
 export class GetStoriesRequestAction implements Action {
@@ -52,6 +54,15 @@ export class ChangeStoryColumnAction implements Action {
             newColumnIndex: number;
         }
     ) {}
+}
+
+export class ChangeStorySuccess implements Action {
+    readonly type: string = StoryActions.CHANGE_STORY_COLUMN_SUCCESS;
+}
+
+export class ChangeStoryFailure implements Action {
+    constructor(public error: Error) {}
+    readonly type: string = StoryActions.CHANGE_STORY_COLUMN_FAILURE;
 }
 
 export type UserActionTypes = GetStoriesRequestAction & GetStoriesSuccessAction;

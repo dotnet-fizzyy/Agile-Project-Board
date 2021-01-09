@@ -1,23 +1,23 @@
 .column-container {
-  height: 100%;
-  width: 220px;
-  background-color: rgba(221, 217, 217, 0.5);
+    height: 100%;
+    width: 250px;
+    background-color: rgba(221, 217, 217, 0.5);
 }
 
 .column-header {
-  height: 40px;
-  width: 100%;
-  border-bottom: 1px solid white;
+    height: 40px;
+    width: 100%;
+    border-bottom: 1px solid white;
 
-  span {
-    display: inline-block;
-    font-size: 20px;
-    margin: 10px 0 0 20px;
-    color: white;
-  }
+    span {
+        display: inline-block;
+        font-size: 20px;
+        margin: 10px 0 0 20px;
+        color: white;
+    }
 }
 
 .column-body {
-  width: 100%;
-  padding-top: 10px;
+    width: 100%;
+    padding-top: 10px;
 }

@@ -325,6 +325,7 @@
     <Compile Include="Models\Web\Story.cs" />
     <Compile Include="Models\Web\Team.cs" />
     <Compile Include="Models\Web\TeamManagementModel.cs" />
+    <Compile Include="Models\Web\UpdateStoryColumnModel.cs" />
     <Compile Include="Models\Web\User.cs" />
     <Compile Include="Models\Web\UserPasswordUpdateModel.cs" />
     <Compile Include="Presentation\Controllers\EpicController.cs" />

@@ -15,6 +15,8 @@ namespace WebAPI.Core.Interfaces.Services
 
         Task<Story> UpdateStoryAsync(Story story);
 
+        Task UpdateStoryColumnAsync(UpdateStoryColumnModel storyColumn);
+
         Task RemoveStoryAsync(Guid story);
     }
 }

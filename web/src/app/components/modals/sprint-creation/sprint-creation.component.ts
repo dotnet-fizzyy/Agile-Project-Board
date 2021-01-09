@@ -32,7 +32,9 @@ export class SprintCreationComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.store$.select(ProjectSelectors.getEpicsForSelect).subscribe((x) => (this.epics = x));
+        this.store$.select(ProjectSelectors.getEpicsForSelect).subscribe((x) => {
+            this.epics = x;
+        });
 
         this.isCreation = this.modalData.type === ModalType.CREATE;
         this.formGroup = this.fb.group({

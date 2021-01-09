@@ -200,6 +200,7 @@ export default class ProjectEffects {
                 return [
                     new ProjectActions.GetProjectSuccess(project),
                     new ProjectActions.GetEpicsSuccess(epics),
+                    new ProjectActions.GetSprintsFromEpicSuccess(sprints),
                     new StoryActions.GetStoriesSuccessAction(stories),
                     new TeamActions.GetTeamSuccess(team),
                 ];
@@ -222,10 +223,14 @@ export default class ProjectEffects {
                     WebApiRoutes.SprintRoutes.GET_EPIC_SPRINTS + `epicId=${action.payload}&includeChildren=true`
                 )
             ),
-            map((response: any) => {
-                const epicSprints: ISprint[] = response.map(ProjectEffects.mapToSprint);
+            switchMap((response: any) => {
+                const epicSprints: ISprint[] = response.items.map(ProjectEffects.mapToSprint);
+                const stories: IStory[] = response.items.map((x) => x.stories).reduce((acc, x) => acc.concat(x), []);
 
-                return new ProjectActions.GetFullSprintsFromEpicSuccess(epicSprints);
+                return [
+                    new ProjectActions.GetFullSprintsFromEpicSuccess(epicSprints),
+                    new StoryActions.GetStoriesSuccessAction(stories),
+                ];
             }),
             catchError((error, caught) => {
                 this.store$.dispatch(new ProjectActions.GetFullSprintsFromEpicFailure(error));

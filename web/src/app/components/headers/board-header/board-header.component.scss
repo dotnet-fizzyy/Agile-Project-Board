@@ -29,3 +29,18 @@
 .general-items-container {
     @extend .row-flex-alignment;
 }
+
+.members-container {
+    margin-right: 50px;
+    display: flex;
+    align-items: center;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.user-icon {
+    margin-right: 5px;
+    color: #000;
+}

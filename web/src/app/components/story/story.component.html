@@ -1,6 +1,6 @@
 <div class="story-container" cdkDrag [cdkDragData]="story">
   <div class="story-header">
-    <span (click)="onClick()" matTooltip="View Details">{{ story.storyId }}</span>
+    <span (click)="onClick()" matTooltip="View Details">{{ storyIdParser(story.storyId, story.isDefect) }}</span>
     <div class="icons-container">
       <mat-icon matTooltip="Ready" class="story-ready-icon">done_outline</mat-icon>
       <mat-icon matTooltip="Block" class="story-ready-icon">block</mat-icon>
