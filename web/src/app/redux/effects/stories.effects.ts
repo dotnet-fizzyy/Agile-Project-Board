@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { catchError, map, mergeMap, withLatestFrom } from 'rxjs/operators';
+import { catchError, map, mergeMap } from 'rxjs/operators';
 import { HttpService } from '../../services/http.service';
 import * as WebApiRoutes from '../../utils/constants/webapi-routes';
 import { IStory, IUpdateStoryColumn } from '../../utils/interfaces';
-import { ChangeSidebarStateAction } from '../actions/sidebar.actions';
+import * as SidebarActions from '../actions/sidebar.actions';
 import * as StoryActions from '../actions/stories.actions';
-import { GetIsOpenedSidebarSelector } from '../selectors/sidebar.selectors';
 import { IStoreState } from '../store/state';
 
 @Injectable()
@@ -17,12 +16,7 @@ export default class StoriesEffects {
     viewDetails$ = createEffect(() =>
         this.actions$.pipe(
             ofType(StoryActions.StoryActions.VIEW_STORY_DETAILS),
-            withLatestFrom(this.store$.select(GetIsOpenedSidebarSelector)),
-            map(([action, isOpened]) => {
-                if (!isOpened) {
-                    return new ChangeSidebarStateAction();
-                }
-            })
+            map(() => new SidebarActions.ChangeSidebarState(true))
         )
     );
 
@@ -59,6 +53,23 @@ export default class StoriesEffects {
             }),
             catchError((error, caught) => {
                 this.store$.dispatch(new StoryActions.ChangeStoryFailure(error));
+
+                return caught;
+            })
+        )
+    );
+
+    updateStory$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType<StoryActions.UpdateStoryRequest>(StoryActions.StoryActions.UPDATE_STORY_REQUEST),
+            mergeMap((action) => this.httpClient.put(WebApiRoutes.MainRoutes.STORIES, action.story)),
+            map((response: any) => {
+                const mappedStory = StoriesEffects.mapToStory(response);
+
+                return new StoryActions.UpdateStorySuccess(mappedStory);
+            }),
+            catchError((error, caught) => {
+                this.store$.dispatch(new StoryActions.UpdateStoryFailure(error));
 
                 return caught;
             })

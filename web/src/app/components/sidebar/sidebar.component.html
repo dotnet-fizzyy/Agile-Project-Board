@@ -1,3 +1,70 @@
 <div class="root-sidebar-container">
-  <mat-icon class="close-sidebar-icon" (click)="onCloseClick()">cancel</mat-icon>
+    <mat-icon class="close-sidebar-icon" (click)="onCloseClick()">cancel</mat-icon>
+    <div class="inner-container">
+        <h2 class="main-label">Story info</h2>
+        <form *ngIf="storyForm" [formGroup]="storyForm">
+            <app-input-wrapper
+                [formControlName]="storyFields.title"
+                label="Title"
+                [required]="true"
+                type="text"
+            ></app-input-wrapper>
+            <app-input-wrapper
+                [formControlName]="storyFields.description"
+                label="Description"
+                [required]="true"
+                type="text"
+            ></app-input-wrapper>
+            <div class="buttons-container">
+                <button
+                    [ngClass]="{'ready-button': !!storyForm.get(storyFields.isReady).value}"
+                    (click)="onClickReady()"
+                >
+                    Ready
+                </button>
+                <button
+                    [ngClass]="{'block-button': !!storyForm.get(storyFields.isBlocked).value}"
+                    (click)="onClickBlock()"
+                >
+                    Blocked
+                </button>
+            </div>
+            <app-input-wrapper
+                *ngIf="storyForm.get(storyFields.isBlocked).value"
+                [formControlName]="storyFields.blockReason"
+                label="Block reason"
+                [required]="true"
+                type="text"
+            ></app-input-wrapper>
+            <app-input-wrapper
+                [formControlName]="storyFields.estimation"
+                label="Estimation"
+                [required]="true"
+                type="number"
+            ></app-input-wrapper>
+            <app-select-wrapper
+                [formControlName]="storyFields.column"
+                [options]="storyColumns"
+                label="Column"
+                [required]="true"
+            ></app-select-wrapper>
+            <app-select-wrapper
+                [formControlName]="storyFields.userId"
+                [options]="teamMembers"
+                label="User"
+                [required]="true"
+            ></app-select-wrapper>
+        </form>
+    </div>
+    <div [ngClass]="{ 'update-container': true, 'visible-container': hasStoryValuesChanged() }">
+        <button
+            mat-raised-button
+            color="primary"
+            (click)="onClickUpdateStoryChanges()"
+            [disabled]="storyForm.invalid"
+        >
+            Update
+        </button>
+        <button mat-raised-button color="warn" (click)="onClickCancelStoryChanges()">Cancel</button>
+    </div>
 </div>

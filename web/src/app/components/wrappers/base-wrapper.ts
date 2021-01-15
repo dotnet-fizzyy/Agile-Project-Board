@@ -8,6 +8,7 @@ export const ValidationMessage: { [key: string]: (message: IValidationMessage) =
     minlength: (message) => `The min length of this field is ${message.length} symbols`,
     max: (message) => `The maximum value is ${message.maxValue}`,
     min: (message) => `The minimum value is ${message.minValue}`,
+    pattern: () => 'The field is invalid',
 };
 
 @Directive()

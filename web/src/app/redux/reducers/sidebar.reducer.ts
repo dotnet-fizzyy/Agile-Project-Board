@@ -1,3 +1,4 @@
+import { SidebarActionTypes } from '../actions/sidebar.actions';
 import * as SidebarActions from '../actions/sidebar.actions';
 import { ISidebarState } from '../store/state';
 
@@ -5,7 +6,7 @@ const initialState: ISidebarState = {
     isOpened: false,
 };
 
-export default function sidebarReducer(state = initialState, action): ISidebarState {
+export default function sidebarReducer(state = initialState, action: SidebarActionTypes): ISidebarState {
     switch (action.type) {
         case SidebarActions.SidebarActions.CHANGE_SIDEBAR_STATE:
             return handleChangeSidebarStateAction(state, action);
@@ -16,10 +17,10 @@ export default function sidebarReducer(state = initialState, action): ISidebarSt
 
 function handleChangeSidebarStateAction(
     state: ISidebarState,
-    action: SidebarActions.ChangeSidebarStateAction
+    action: SidebarActions.ChangeSidebarState
 ): ISidebarState {
     return {
         ...state,
-        isOpened: !state.isOpened,
+        isOpened: action.payload,
     };
 }

@@ -81,6 +81,7 @@ export interface IValidationMessage {
     length?: number;
     maxValue?: number;
     minValue?: number;
+    regex?: string;
 }
 
 export interface IUpdateUserStatus {

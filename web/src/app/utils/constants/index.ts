@@ -53,3 +53,5 @@ export const StoryFields = {
     isReady: 'isReady',
     blockReason: 'blockReason',
 };
+
+export const BaseRegexExpression = '[A-Za-z-,.!?:_@ ][A-Za-z0-9-,.!?:_@ ]*';

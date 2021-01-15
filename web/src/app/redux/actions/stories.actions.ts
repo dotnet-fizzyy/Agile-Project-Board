@@ -13,6 +13,9 @@ export const StoryActions = {
     CREATE_STORY_FAILURE: '[stories] create_story_failure',
     CHANGE_STORY_COLUMN_SUCCESS: '[stories] change_story_column_success',
     CHANGE_STORY_COLUMN_FAILURE: '[stories] change_story_column_failure',
+    UPDATE_STORY_REQUEST: '[stories] update_story_request',
+    UPDATE_STORY_SUCCESS: '[stories] update_story_success',
+    UPDATE_STORY_FAILURE: '[stories] update_story_failure',
 };
 
 export class GetStoriesRequestAction implements Action {
@@ -63,6 +66,21 @@ export class ChangeStorySuccess implements Action {
 export class ChangeStoryFailure implements Action {
     constructor(public error: Error) {}
     readonly type: string = StoryActions.CHANGE_STORY_COLUMN_FAILURE;
+}
+
+export class UpdateStoryRequest implements Action {
+    constructor(public story: IStory) {}
+    readonly type: string = StoryActions.UPDATE_STORY_REQUEST;
+}
+
+export class UpdateStorySuccess implements Action {
+    constructor(public story: IStory) {}
+    readonly type: string = StoryActions.UPDATE_STORY_SUCCESS;
+}
+
+export class UpdateStoryFailure implements Action {
+    constructor(public error: Error) {}
+    readonly type: string = StoryActions.UPDATE_STORY_FAILURE;
 }
 
 export type UserActionTypes = GetStoriesRequestAction & GetStoriesSuccessAction;
