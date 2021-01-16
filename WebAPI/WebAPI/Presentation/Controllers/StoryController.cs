@@ -69,6 +69,10 @@ namespace WebAPI.Presentation.Controllers
 	        return Ok(updatedStory);
         }
 
+
+        /// <summary>
+        /// Update story column via board DND
+        /// </summary>
         [HttpPut]
         [Route(RouteConstants.StoryControllerUpdateStoryColumnUrl)]
         public async Task<HttpResponseMessage> UpdateStoryColumn([FromBody]UpdateStoryColumnModel storyColumn)

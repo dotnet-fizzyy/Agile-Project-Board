@@ -49,10 +49,10 @@ export default class StoriesEffects {
                 return this.httpClient.put(WebApiRoutes.StoryRoutes.CHANGE_STORY_COLUMN, updateStoryColumn);
             }),
             map((response) => {
-                return new StoryActions.ChangeStorySuccess();
+                return new StoryActions.ChangeStoryColumnSuccess();
             }),
             catchError((error, caught) => {
-                this.store$.dispatch(new StoryActions.ChangeStoryFailure(error));
+                this.store$.dispatch(new StoryActions.ChangeStoryColumnFailure(error));
 
                 return caught;
             })
@@ -62,7 +62,7 @@ export default class StoriesEffects {
     updateStory$ = createEffect(() =>
         this.actions$.pipe(
             ofType<StoryActions.UpdateStoryRequest>(StoryActions.StoryActions.UPDATE_STORY_REQUEST),
-            mergeMap((action) => this.httpClient.put(WebApiRoutes.MainRoutes.STORIES, action.story)),
+            mergeMap((action) => this.httpClient.put(WebApiRoutes.MainRoutes.STORIES, action.payload)),
             map((response: any) => {
                 const mappedStory = StoriesEffects.mapToStory(response);
 
@@ -83,7 +83,7 @@ export default class StoriesEffects {
             column: response.column,
             isDefect: response.isDefect,
             description: response.description,
-            estimation: response.points,
+            estimation: response.estimation,
             userId: response.userId,
             isBlocked: response.isBlocked,
             isReady: response.isReady,

@@ -33,7 +33,7 @@
                 *ngIf="storyForm.get(storyFields.isBlocked).value"
                 [formControlName]="storyFields.blockReason"
                 label="Block reason"
-                [required]="true"
+                [required]="storyForm.get(storyFields.isBlocked).value"
                 type="text"
             ></app-input-wrapper>
             <app-input-wrapper

@@ -56,20 +56,31 @@ export class SidebarComponent implements OnInit {
             [StoryFields.column]: [story.column],
             [StoryFields.isReady]: [story.isReady],
             [StoryFields.isBlocked]: [story.isBlocked],
-            [StoryFields.blockReason]: [story.blockReason ? story.blockReason : ''],
+            [StoryFields.blockReason]: [
+                story.blockReason ? story.blockReason : '',
+                Validators.pattern(BaseRegexExpression),
+            ],
             [StoryFields.isDefect]: [story.isDefect],
         });
     }
 
     public onClickReady = (): void => {
-        this.storyForm.get(StoryFields.isReady).setValue(true);
-        this.storyForm.get(StoryFields.isBlocked).setValue(false);
-        this.storyForm.get(StoryFields.blockReason).setValue('');
+        if (this.storyForm.get(StoryFields.isReady).value) {
+            this.storyForm.get(StoryFields.isReady).setValue(false);
+        } else {
+            this.storyForm.get(StoryFields.isReady).setValue(true);
+            this.storyForm.get(StoryFields.isBlocked).setValue(false);
+            this.storyForm.get(StoryFields.blockReason).setValue('');
+        }
     };
 
     public onClickBlock = (): void => {
-        this.storyForm.get(StoryFields.isReady).setValue(false);
-        this.storyForm.get(StoryFields.isBlocked).setValue(true);
+        if (this.storyForm.get(StoryFields.isBlocked).value) {
+            this.storyForm.get(StoryFields.isBlocked).setValue(false);
+        } else {
+            this.storyForm.get(StoryFields.isReady).setValue(false);
+            this.storyForm.get(StoryFields.isBlocked).setValue(true);
+        }
     };
 
     public onClickUpdateStoryChanges = (): void => {

@@ -6,7 +6,7 @@ const initialState: IStoriesState = {
     selectedStory: null,
 };
 
-export default function storiesReducer(state = initialState, action): IStoriesState {
+export default function storiesReducer(state = initialState, action: StoryActions.StoryActionTypes): IStoriesState {
     switch (action.type) {
         case StoryActions.StoryActions.GET_STORIES_SUCCESS:
             return handleGetStoriesSuccessAction(state, action);
@@ -16,6 +16,8 @@ export default function storiesReducer(state = initialState, action): IStoriesSt
             return handleChangeStoryColumnAction(state, action);
         case StoryActions.StoryActions.CREATE_STORY_SUCCESS:
             return handleCreateStorySuccess(state, action);
+        case StoryActions.StoryActions.UPDATE_STORY_SUCCESS:
+            return handleUpdateStorySuccess(state, action);
         default:
             return state;
     }
@@ -64,5 +66,19 @@ function handleCreateStorySuccess(state: IStoriesState, action: StoryActions.Cre
     return {
         ...state,
         stories: state.stories.concat(action.payload),
+    };
+}
+
+function handleUpdateStorySuccess(state: IStoriesState, action: StoryActions.UpdateStorySuccess): IStoriesState {
+    return {
+        ...state,
+        stories: state.stories.map((story) => {
+            return story.storyId === action.payload.storyId
+                ? {
+                      ...action.payload,
+                  }
+                : story;
+        }),
+        selectedStory: action.payload,
     };
 }

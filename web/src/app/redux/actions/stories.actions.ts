@@ -59,22 +59,22 @@ export class ChangeStoryColumnAction implements Action {
     ) {}
 }
 
-export class ChangeStorySuccess implements Action {
+export class ChangeStoryColumnSuccess implements Action {
     readonly type: string = StoryActions.CHANGE_STORY_COLUMN_SUCCESS;
 }
 
-export class ChangeStoryFailure implements Action {
+export class ChangeStoryColumnFailure implements Action {
     constructor(public error: Error) {}
     readonly type: string = StoryActions.CHANGE_STORY_COLUMN_FAILURE;
 }
 
 export class UpdateStoryRequest implements Action {
-    constructor(public story: IStory) {}
+    constructor(public payload: IStory) {}
     readonly type: string = StoryActions.UPDATE_STORY_REQUEST;
 }
 
 export class UpdateStorySuccess implements Action {
-    constructor(public story: IStory) {}
+    constructor(public payload: IStory) {}
     readonly type: string = StoryActions.UPDATE_STORY_SUCCESS;
 }
 
@@ -83,4 +83,8 @@ export class UpdateStoryFailure implements Action {
     readonly type: string = StoryActions.UPDATE_STORY_FAILURE;
 }
 
-export type UserActionTypes = GetStoriesRequestAction & GetStoriesSuccessAction;
+export type StoryActionTypes = GetStoriesRequestAction &
+    GetStoriesSuccessAction &
+    UpdateStorySuccess &
+    ChangeStoryColumnAction &
+    ViewStoryDetailsAction;
