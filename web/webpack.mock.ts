@@ -1,4 +1,3 @@
-// @ts-ignore
 import webpackMockServer from 'webpack-mock-server';
 
 export default webpackMockServer.add((app, helper) => {
