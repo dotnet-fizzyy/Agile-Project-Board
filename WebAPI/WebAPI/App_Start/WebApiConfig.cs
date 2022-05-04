@@ -21,10 +21,9 @@ namespace WebAPI
             // Web API routes
             config.MapHttpAttributeRoutes();
 
-#if DEBUG
 	        var corsAttribute = new EnableCorsAttribute("*", "*", "*");
 	        config.EnableCors(corsAttribute);
-#endif
+
 	        config.Routes.MapHttpRoute(name: "", routeTemplate: "{id}.html", defaults: new { id = "index" });
 
             config.Routes.MapHttpRoute(
