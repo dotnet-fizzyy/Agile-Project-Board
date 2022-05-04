@@ -12,8 +12,12 @@ namespace WebAPI.ApplicationLogic
 				var hashedInputBytes = hash.ComputeHash(bytes);
 
 				var hashedInputStringBuilder = new StringBuilder(128);
-				foreach (var b in hashedInputBytes)
-					hashedInputStringBuilder.Append(b.ToString("X2"));
+
+				foreach (var hashInputByte in hashedInputBytes)
+				{
+					hashedInputStringBuilder.Append(hashInputByte.ToString("X2"));
+				}
+
 				return hashedInputStringBuilder.ToString();
 			}
 		}
