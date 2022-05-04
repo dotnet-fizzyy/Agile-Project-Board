@@ -16,3 +16,7 @@ src/.DS_Store
 src/app/.DS_Store
 
 .DS_Store
+
+WebAPI/src/WebAPI/bin/
+
+WebAPI/src/WebAPI/obj/
