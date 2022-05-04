@@ -52,11 +52,13 @@ namespace WebAPI.App_Start
 
                 RegisterServices(kernel);
                 GlobalConfiguration.Configuration.DependencyResolver = new NinjectDependencyResolver(kernel);
+
                 return kernel;
             }
             catch
             {
                 kernel.Dispose();
+
                 throw;
             }
         }
