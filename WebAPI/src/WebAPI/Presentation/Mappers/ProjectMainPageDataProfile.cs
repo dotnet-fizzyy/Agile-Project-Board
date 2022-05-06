@@ -6,8 +6,8 @@ namespace WebAPI.Presentation.Mappers
 	{
 		public ProjectMainPageDataProfile()
 		{
-			CreateMap<Models.Entities.ProjectMainPageData, Models.Web.ProjectMainPageModel>();
-			CreateMap<Models.Web.ProjectMainPageModel, Models.Entities.ProjectMainPageData>();
+			this.CreateMap<Models.Entities.ProjectMainPageData, Models.Web.ProjectMainPageModel>();
+			this.CreateMap<Models.Web.ProjectMainPageModel, Models.Entities.ProjectMainPageData>();
 		}
 	}
 }

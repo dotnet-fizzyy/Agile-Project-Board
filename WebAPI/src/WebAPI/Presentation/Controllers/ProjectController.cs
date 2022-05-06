@@ -14,13 +14,13 @@ namespace WebAPI.Presentation.Controllers
 	[RequestBodyFilter]
     public class ProjectController : ApiController
     {
-        private readonly IProjectService _projectService;
-        private readonly IRequestHeadersProvider _requestHeadersProvider;
+        private readonly IProjectService projectService;
+        private readonly IRequestHeadersProvider requestHeadersProvider;
 
         public ProjectController(IProjectService projectService, IRequestHeadersProvider requestHeadersProvider)
         {
-            _projectService = projectService;
-            _requestHeadersProvider = requestHeadersProvider;
+            this.projectService = projectService;
+            this.requestHeadersProvider = requestHeadersProvider;
         }
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace WebAPI.Presentation.Controllers
         /// </summary>
         [HttpGet]
         [Route(RouteConstants.ProjectControllerGetAllProjectsUrl)]
-        public async Task<CollectionResponse<Project>> GetAllProjects() => await _projectService.GetProjectsAsync();
+        public async Task<CollectionResponse<Project>> GetAllProjects() => await this.projectService.GetProjectsAsync();
 
         /// <summary>
         /// Get exact project by its id
@@ -37,14 +37,14 @@ namespace WebAPI.Presentation.Controllers
         [Route(RouteConstants.ProjectControllerGetProjectUrl)]
         public async Task<IHttpActionResult> GetProject(Guid projectId)
         {
-            var project = await _projectService.GeProjectAsync(projectId);
+            var project = await this.projectService.GeProjectAsync(projectId);
 
             if (project == null)
             {
-                return NotFound();
+                return this.NotFound();
             }
 
-            return Ok(project);
+            return this.Ok(project);
         }
 
         /// <summary>
@@ -55,16 +55,16 @@ namespace WebAPI.Presentation.Controllers
         [Route(RouteConstants.ProjectControllerCreateProjectWithCustomerUrl)]
         public async Task<IHttpActionResult> GetProjectByCustomerId()
         {
-	        var userId = _requestHeadersProvider.GetUserId(Request);
+	        var userId = this.requestHeadersProvider.GetUserId(this.Request);
 
-	        var project = await _projectService.GetCustomerProject(userId);
+	        var project = await this.projectService.GetCustomerProject(userId);
 
 	        if (project == null)
 	        {
-		        return NotFound();
+		        return this.NotFound();
 	        }
 
-	        return Ok(project);
+	        return this.Ok(project);
         }
 
         /// <summary>
@@ -75,9 +75,9 @@ namespace WebAPI.Presentation.Controllers
         [Route(RouteConstants.ProjectControllerMainPageUrl)]
         public async Task<ProjectMainPageModel> GetProjectMainPageDataIndex()
         {
-	        var userId = _requestHeadersProvider.GetUserId(Request);
+	        var userId = this.requestHeadersProvider.GetUserId(this.Request);
 
-	        var projectMainPageDataModel = await _projectService.GetProjectMainPageData(userId);
+	        var projectMainPageDataModel = await this.projectService.GetProjectMainPageData(userId);
 
             return projectMainPageDataModel;
         }
@@ -90,9 +90,9 @@ namespace WebAPI.Presentation.Controllers
         [Route(RouteConstants.ProjectControllerBoardPageUrl)]
         public async Task<ProjectBoardPageModel> GetProjectBoardDataIndex(Guid projectId)
         {
-	        var userId = _requestHeadersProvider.GetUserId(Request);
+	        var userId = this.requestHeadersProvider.GetUserId(this.Request);
 
-            var projectBoardModel = await _projectService.GetProjectBoardData(projectId, userId);
+            var projectBoardModel = await this.projectService.GetProjectBoardData(projectId, userId);
 
             return projectBoardModel;
         }
@@ -104,9 +104,9 @@ namespace WebAPI.Presentation.Controllers
         [Route(RouteConstants.ProjectControllerUrl)]
         public async Task<IHttpActionResult> CreateProject([FromBody] Project project)
         {
-            var createdProject = await _projectService.CreateProjectAsync(project);
+            var createdProject = await this.projectService.CreateProjectAsync(project);
 
-            return Created(nameof(ProjectController), createdProject);
+            return this.Created(nameof(ProjectController), createdProject);
         }
 
         /// <summary>
@@ -116,9 +116,9 @@ namespace WebAPI.Presentation.Controllers
         [Route(RouteConstants.ProjectControllerUrl)]
         public async Task<IHttpActionResult> UpdateProject([FromBody] Project project)
         {
-            var updatedProject = await _projectService.UpdateProjectAsync(project);
+            var updatedProject = await this.projectService.UpdateProjectAsync(project);
 
-            return Ok(updatedProject);
+            return this.Ok(updatedProject);
         }
 
         /// <summary>
@@ -128,7 +128,7 @@ namespace WebAPI.Presentation.Controllers
         [Route(RouteConstants.ProjectControllerGetProjectUrl)]
         public async Task<HttpResponseMessage> RemoveProject(Guid projectId)
         {
-            await _projectService.RemoveProjectAsync(projectId);
+            await this.projectService.RemoveProjectAsync(projectId);
 
             return new HttpResponseMessage(HttpStatusCode.NoContent);
         }

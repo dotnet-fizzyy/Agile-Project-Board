@@ -11,14 +11,14 @@ using WebAPI.Presentation.Filters;
 
 namespace WebAPI.Presentation.Controllers
 {
-	[RequestBodyFilter]
+	[RequestBodyFilterAttribute]
     public class EpicController : ApiController
     {
-        private readonly IEpicService _epicService;
+        private readonly IEpicService epicService;
 
         public EpicController(IEpicService epicService)
         {
-            _epicService = epicService;
+            this.epicService = epicService;
         }
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace WebAPI.Presentation.Controllers
         /// </summary>
         [HttpGet]
         [Route(RouteConstants.EpicControllerGetAllEpicsUrl)]
-        public async Task<CollectionResponse<Epic>> GetAllEpics() => await _epicService.GetEpicsAsync();
+        public async Task<CollectionResponse<Epic>> GetAllEpics() => await this.epicService.GetEpicsAsync();
 
         /// <summary>
         /// Get epic by its id
@@ -35,14 +35,14 @@ namespace WebAPI.Presentation.Controllers
         [Route(RouteConstants.EpicControllerGetEpicUrl)]
         public async Task<IHttpActionResult> GetEpic(Guid epicId)
         {
-	        var epic = await _epicService.GetEpicAsync(epicId);
+	        var epic = await this.epicService.GetEpicAsync(epicId);
 
 	        if (epic == null)
 	        {
-		        return NotFound();
+		        return this.NotFound();
 	        }
 
-	        return Ok(epic);
+	        return this.Ok(epic);
         }
 
         /// <summary>
@@ -52,9 +52,9 @@ namespace WebAPI.Presentation.Controllers
         [Route(RouteConstants.EpicControllerUrl)]
         public async Task<IHttpActionResult> CreateEpic([FromBody] Epic epic)
         {
-	        var createdEpic = await _epicService.CreateEpicAsync(epic);
+	        var createdEpic = await this.epicService.CreateEpicAsync(epic);
 
-	        return Created(nameof(EpicController), createdEpic);
+	        return this.Created(nameof(EpicController), createdEpic);
         }
 
         /// <summary>
@@ -64,9 +64,9 @@ namespace WebAPI.Presentation.Controllers
         [Route(RouteConstants.EpicControllerUrl)]
         public async Task<IHttpActionResult> UpdateProject([FromBody] Epic epic)
         {
-	        var updatedEpic = await _epicService.UpdateEpicAsync(epic);
+	        var updatedEpic = await this.epicService.UpdateEpicAsync(epic);
 
-	        return Ok(updatedEpic);
+	        return this.Ok(updatedEpic);
         }
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace WebAPI.Presentation.Controllers
         [Route(RouteConstants.EpicControllerGetEpicUrl)]
         public async Task<HttpResponseMessage> RemoveProject(Guid epicId)
         {
-	        await _epicService.RemoveEpicAsync(epicId);
+	        await this.epicService.RemoveEpicAsync(epicId);
 
 	        return new HttpResponseMessage(HttpStatusCode.NoContent);
         }

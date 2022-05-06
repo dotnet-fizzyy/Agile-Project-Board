@@ -5,11 +5,6 @@ namespace WebAPI.Models.Web
 {
     public class Team
     {
-        public Team()
-        {
-            Users = new List<User>();
-        }
-
         public Guid TeamId { get; set; }
 
         public Guid ProjectId { get; set; }
@@ -18,6 +13,6 @@ namespace WebAPI.Models.Web
 
         public string Location { get; set; }
 
-        public IList<User> Users { get; set; }
+        public IList<User> Users { get; set; } = new List<User>();
     }
 }

@@ -8,9 +8,9 @@ namespace WebAPI.Presentation.Mappers
     {
         public StoryProfile()
         {
-            CreateMap<Models.Entities.Story, Models.Web.Story>()
+            this.CreateMap<Models.Entities.Story, Models.Web.Story>()
                 .ForMember(x => x.Column, opt => opt.MapFrom(src => src.Columns.ToString()));
-            CreateMap<Models.Web.Story, Models.Entities.Story>()
+            this.CreateMap<Models.Web.Story, Models.Entities.Story>()
                 .ForMember(x => x.Columns, opt => opt.MapFrom(src => (Columns)Enum.Parse(typeof(Columns), src.Column, true)));
         }
     }

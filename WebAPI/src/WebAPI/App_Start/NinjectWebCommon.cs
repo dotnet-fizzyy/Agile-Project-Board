@@ -68,7 +68,8 @@ namespace WebAPI.App_Start
         /// </summary>
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
-        {
-        }        
-    }
+		{
+			// Method intentionally left empty.
+		}
+	}
 }

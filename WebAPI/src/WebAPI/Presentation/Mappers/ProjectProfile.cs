@@ -6,8 +6,8 @@ namespace WebAPI.Presentation.Mappers
     {
         public ProjectProfile()
         {
-            CreateMap<Models.Entities.Project, Models.Web.Project>();
-            CreateMap<Models.Web.Project, Models.Entities.Project>();
+            this.CreateMap<Models.Entities.Project, Models.Web.Project>();
+            this.CreateMap<Models.Web.Project, Models.Entities.Project>();
         }
     }
 }

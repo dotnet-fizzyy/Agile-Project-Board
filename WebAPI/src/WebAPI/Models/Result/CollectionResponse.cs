@@ -6,11 +6,11 @@ namespace WebAPI.Models.Result
     {
         public CollectionResponse()
         {
-            Items = new List<T>();
+            this.Items = new List<T>();
         }
 
         public IList<T> Items { get; set; }
 
-        public int Count => Items.Count;
+        public int Count => this.Items.Count;
     }
 }

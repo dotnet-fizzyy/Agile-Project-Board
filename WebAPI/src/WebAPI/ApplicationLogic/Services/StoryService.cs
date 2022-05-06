@@ -12,22 +12,22 @@ namespace WebAPI.ApplicationLogic.Services
 {
     public class StoryService : IStoryService
     {
-        private readonly IStoryRepository _storyRepository;
-        private readonly IMapper _mapper;
+        private readonly IStoryRepository storyRepository;
+        private readonly IMapper mapper;
 
         public StoryService(IStoryRepository storyRepository, IMapper mapper)
         {
-            _storyRepository = storyRepository;
-            _mapper = mapper;
+            this.storyRepository = storyRepository;
+            this.mapper = mapper;
         }
 
         public async Task<CollectionResponse<Story>> GeStoriesAsync()
         {
-            var storyEntities = await _storyRepository.SearchForMultipleItemsAsync();
+            var storyEntities = await this.storyRepository.SearchForMultipleItemsAsync();
 
             var collectionResponse = new CollectionResponse<Story>
             {
-                Items = storyEntities.Select(_mapper.Map<Story>).ToList(),
+                Items = storyEntities.Select(this.mapper.Map<Story>).ToList(),
             };
 
             return collectionResponse;
@@ -35,31 +35,31 @@ namespace WebAPI.ApplicationLogic.Services
 
         public async Task<Story> GetStoryAsync(Guid storyId)
         {
-            var storyEntity = await _storyRepository.SearchForSingleItemAsync(x => x.StoryId == storyId);
+            var storyEntity = await this.storyRepository.SearchForSingleItemAsync(x => x.StoryId == storyId);
 
-            var storyModel = _mapper.Map<Story>(storyEntity);
+            var storyModel = this.mapper.Map<Story>(storyEntity);
 
             return storyModel;
         }
 
         public async Task<Story> CreateStoryAsync(Story story)
         {
-            var storyEntity = _mapper.Map<Models.Entities.Story>(story);
+            var storyEntity = this.mapper.Map<Models.Entities.Story>(story);
 
-            var createdEntity = await _storyRepository.CreateItemAsync(storyEntity);
+            var createdEntity = await this.storyRepository.CreateItemAsync(storyEntity);
 
-            var storyModel = _mapper.Map<Story>(createdEntity);
+            var storyModel = this.mapper.Map<Story>(createdEntity);
 
             return storyModel;
         }
 
         public async Task<Story> UpdateStoryAsync(Story story)
         {
-            var storyEntity = _mapper.Map<Models.Entities.Story>(story);
+            var storyEntity = this.mapper.Map<Models.Entities.Story>(story);
 
-            var updatedEntity = await _storyRepository.UpdateItemAsync(storyEntity);
+            var updatedEntity = await this.storyRepository.UpdateItemAsync(storyEntity);
 
-            var storyModel = _mapper.Map<Story>(updatedEntity);
+            var storyModel = this.mapper.Map<Story>(updatedEntity);
 
             return storyModel;
         }
@@ -68,12 +68,10 @@ namespace WebAPI.ApplicationLogic.Services
         {
 	        var column = (Columns)Enum.Parse(typeof(Columns), storyColumn.Column);
 
-	        await _storyRepository.UpdateStoryColumnAsync(storyColumn.StoryId, column);
+	        await this.storyRepository.UpdateStoryColumnAsync(storyColumn.StoryId, column);
         }
 
-        public async Task RemoveStoryAsync(Guid storyId)
-        {
-            await _storyRepository.RemoveItemAsync(x => x.StoryId == storyId);
-        }
-    }
+		public async Task RemoveStoryAsync(Guid storyId) => 
+            await this.storyRepository.RemoveItemAsync(x => x.StoryId == storyId);
+	}
 }

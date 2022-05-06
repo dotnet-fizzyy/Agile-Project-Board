@@ -6,8 +6,8 @@ namespace WebAPI.Presentation.Mappers
     {
         public TeamProfile()
         {
-            CreateMap<Models.Entities.Team, Models.Web.Team>();
-            CreateMap<Models.Web.Team, Models.Entities.Team>();
+            this.CreateMap<Models.Entities.Team, Models.Web.Team>();
+            this.CreateMap<Models.Web.Team, Models.Entities.Team>();
         }
     }
 }

@@ -5,11 +5,6 @@ namespace WebAPI.Models.Web
 {
     public class Sprint
     {
-        public Sprint()
-        {
-            Stories = new List<Story>();
-        }
-
         public Guid SprintId { get; set; }
 
         public Guid EpicId { get; set; }
@@ -20,6 +15,6 @@ namespace WebAPI.Models.Web
 
         public DateTime EndDate { get; set; }
 
-        public IList<Story> Stories { get; set; }
+        public IList<Story> Stories { get; set; } = new List<Story>();
     }
 }

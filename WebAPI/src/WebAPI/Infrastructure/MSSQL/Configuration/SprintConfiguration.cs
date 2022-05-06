@@ -8,9 +8,10 @@ namespace WebAPI.Infrastructure.MSSQL.Configuration
     {
         public SprintConfiguration()
         {
-            HasKey(x => x.SprintId);
-            Property(x => x.SprintId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            HasMany(x => x.Stories).WithOptional().HasForeignKey(e => e.SprintId);
+            this.HasKey(x => x.SprintId);
+            this.Property(x => x.SprintId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+
+            this.HasMany(x => x.Stories).WithOptional().HasForeignKey(e => e.SprintId);
         }
     }
 }

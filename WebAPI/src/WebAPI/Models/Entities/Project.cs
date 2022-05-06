@@ -5,12 +5,6 @@ namespace WebAPI.Models.Entities
 {
     public class Project
     {
-        public Project()
-        {
-            Teams = new List<Team>();
-            Epics = new List<Epic>();
-        }
-
         public Guid ProjectId { get; set; }
 
         public string ProjectName { get; set; }
@@ -21,8 +15,8 @@ namespace WebAPI.Models.Entities
 
         public Guid CustomerId { get; set; }
 
-        public IList<Team> Teams { get; set; }
+        public IList<Team> Teams { get; set; } = new List<Team>();
 
-        public IList<Epic> Epics { get; set; }
+        public IList<Epic> Epics { get; set; } = new List<Epic>();
     }
 }

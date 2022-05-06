@@ -11,14 +11,14 @@ using WebAPI.Presentation.Filters;
 
 namespace WebAPI.Presentation.Controllers
 {
-    [RequestBodyFilter]
+    [RequestBodyFilterAttribute]
     public class UserController : ApiController
     {
-        private readonly IUserService _userService;
+        private readonly IUserService userService;
 
         public UserController(IUserService userService)
         {
-            _userService = userService;
+            this.userService = userService;
         }
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace WebAPI.Presentation.Controllers
         /// </summary>
         [HttpGet]
         [Route(RouteConstants.UserControllerGetAllUsersUrl)]
-        public async Task<CollectionResponse<User>> GetUsers() => await _userService.GetUsersAsync();
+        public async Task<CollectionResponse<User>> GetUsers() => await this.userService.GetUsersAsync();
 
         /// <summary>
         /// Get exact user by its id
@@ -35,14 +35,14 @@ namespace WebAPI.Presentation.Controllers
         [Route(RouteConstants.UserControllerGetUserUrl)]
         public async Task<IHttpActionResult> GetUser(Guid userId)
         {
-            var user = await _userService.GetUserAsync(userId);
+            var user = await this.userService.GetUserAsync(userId);
 
             if (user == null)
             {
-                return NotFound();
+                return this.NotFound();
             }
 
-            return Ok(user);
+            return this.Ok(user);
         }
 
         /// <summary>
@@ -52,9 +52,9 @@ namespace WebAPI.Presentation.Controllers
         [Route(RouteConstants.UserControllerUrl)]
         public async Task<IHttpActionResult> CreateUser([FromBody]User user)
         {
-            var createdUser = await _userService.CreateUserAsync(user);
+            var createdUser = await this.userService.CreateUserAsync(user);
 
-            return Created(nameof(UserController), createdUser);
+            return this.Created(nameof(UserController), createdUser);
         }
 
         /// <summary>
@@ -64,14 +64,14 @@ namespace WebAPI.Presentation.Controllers
         [Route(RouteConstants.UserControllerAuthenticateUrl)]
         public async Task<IHttpActionResult> AuthenticateUser([FromBody]AuthUser authUser)
         {
-	        var authenticatedUser = await _userService.AuthenticateUser(authUser);
+	        var authenticatedUser = await this.userService.AuthenticateUser(authUser);
 
 	        if (authenticatedUser == null)
 	        {
-		        return BadRequest();
+		        return this.BadRequest();
 	        }
 
-	        return Ok(authenticatedUser);
+	        return this.Ok(authenticatedUser);
         }
 
         /// <summary>
@@ -81,9 +81,9 @@ namespace WebAPI.Presentation.Controllers
         [Route(RouteConstants.UserControllerCreateCustomerUrl)]
         public async Task<IHttpActionResult> CreateCustomer([FromBody]AuthUser authUser)
         {
-	        var createdCustomer = await _userService.CreateCustomerAsync(authUser);
+	        var createdCustomer = await this.userService.CreateCustomerAsync(authUser);
 
-	        return Created(nameof(UserController), createdCustomer);
+	        return this.Created(nameof(UserController), createdCustomer);
         }
 
         /// <summary>
@@ -93,9 +93,9 @@ namespace WebAPI.Presentation.Controllers
         [Route(RouteConstants.UserControllerUrl)]
         public async Task<IHttpActionResult> UpdateUser([FromBody]User user)
         {
-            var updatedUser = await _userService.UpdateUserAsync(user);
+            var updatedUser = await this.userService.UpdateUserAsync(user);
 
-            return Ok(updatedUser);
+            return this.Ok(updatedUser);
         }
 
         /// <summary>
@@ -105,7 +105,7 @@ namespace WebAPI.Presentation.Controllers
         [Route(RouteConstants.UserControllerUpdateUserPasswordUrl)]
         public async Task<HttpResponseMessage> UpdateUserPassword([FromBody]UserPasswordUpdateModel user)
         {
-	        await _userService.UpdateUserPasswordAsync(user);
+	        await this.userService.UpdateUserPasswordAsync(user);
 
 	        return new HttpResponseMessage(HttpStatusCode.NoContent);
         }
@@ -118,7 +118,7 @@ namespace WebAPI.Presentation.Controllers
         [Route(RouteConstants.UserControllerUpdateUserStatusUrl)]
         public async Task<HttpResponseMessage> UpdateUserStatus([FromBody]User user)
         {
-	        await _userService.UpdateUserStatusAsync(user);
+	        await this.userService.UpdateUserStatusAsync(user);
 
             return new HttpResponseMessage(HttpStatusCode.NoContent);
         }
@@ -130,7 +130,7 @@ namespace WebAPI.Presentation.Controllers
         [Route(RouteConstants.UserControllerGetUserUrl)]
         public async Task<HttpResponseMessage> RemoveUser(Guid userId)
         {
-            await _userService.RemoveUserAsync(userId);
+            await this.userService.RemoveUserAsync(userId);
 
             return new HttpResponseMessage(HttpStatusCode.NoContent);
         }

@@ -16,10 +16,10 @@ namespace WebAPI.Infrastructure.MSSQL.Repository
         {
 	        var story = new Story { StoryId = storyId, Columns = column };
 
-	        _databaseContext.Stories.Attach(story);
-	        _databaseContext.Entry(story).Property(x => x.Columns).IsModified = true;
+            this.DatabaseContext.Stories.Attach(story);
+            this.DatabaseContext.Entry(story).Property(x => x.Columns).IsModified = true;
 
-	        await _databaseContext.SaveChangesAsync();
+	        await this.DatabaseContext.SaveChangesAsync();
         }
     }
 }

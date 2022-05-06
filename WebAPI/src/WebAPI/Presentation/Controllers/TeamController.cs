@@ -12,16 +12,16 @@ using WebAPI.Presentation.Filters;
 
 namespace WebAPI.Presentation.Controllers
 {
-    [RequestBodyFilter]
+    [RequestBodyFilterAttribute]
     public class TeamController : ApiController
     {
-        private readonly ITeamService _teamService;
-        private readonly IRequestHeadersProvider _requestHeadersProvider;
+        private readonly ITeamService teamService;
+        private readonly IRequestHeadersProvider requestHeadersProvider;
 
         public TeamController(ITeamService teamService, IRequestHeadersProvider requestHeadersProvider)
         {
-            _teamService = teamService;
-            _requestHeadersProvider = requestHeadersProvider;
+            this.teamService = teamService;
+            this.requestHeadersProvider = requestHeadersProvider;
         }
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace WebAPI.Presentation.Controllers
         /// </summary>
         [HttpGet]
         [Route(RouteConstants.TeamControllerGetAllTeamsUrl)]
-        public async Task<CollectionResponse<Team>> GetTeams() => await _teamService.GetTeamsAsync();
+        public async Task<CollectionResponse<Team>> GetTeams() => await this.teamService.GetTeamsAsync();
 
         /// <summary>
         /// Get exact team by its id
@@ -38,14 +38,14 @@ namespace WebAPI.Presentation.Controllers
         [Route(RouteConstants.TeamControllerGetTeamUrl)]
         public async Task<IHttpActionResult> GetTeam(Guid teamId)
         {
-	        var team = await _teamService.GetTeamAsync(teamId);
+	        var team = await this.teamService.GetTeamAsync(teamId);
 
 	        if (team == null)
 	        {
-		        return NotFound();
+		        return this.NotFound();
 	        }
 
-	        return Ok(team);
+	        return this.Ok(team);
         }
 
         /// <summary>
@@ -55,34 +55,34 @@ namespace WebAPI.Presentation.Controllers
         [Route(RouteConstants.TeamControllerGetUserTeamUrl)]
         public async Task<IHttpActionResult> GetUserTeam(Guid userId)
         {
-            var userTeam = await _teamService.GetUserTeamAsync(userId);
+            var userTeam = await this.teamService.GetUserTeamAsync(userId);
 
             if (userTeam == null)
             {
-	            return NotFound();
+	            return this.NotFound();
             }
 
-	        return Ok(userTeam);
+	        return this.Ok(userTeam);
         }
 
         /// <summary>
         /// Get team for team management page, requires customer id
         /// </summary>
-        [UserVerificationFilter]
+        [UserVerificationFilterAttribute]
         [HttpGet]
         [Route(RouteConstants.TeamControllerTeamManagementUrl)]
         public async Task<IHttpActionResult> GetTeamManagementPageIndex()
         {
-	        var userId = _requestHeadersProvider.GetUserId(Request);
+	        var userId = this.requestHeadersProvider.GetUserId(this.Request);
 
-	        var teamManagementPageData = await _teamService.GetTeamManagementPageData(userId);
+	        var teamManagementPageData = await this.teamService.GetTeamManagementPageData(userId);
 
 	        if (teamManagementPageData == null)
 	        {
-		        return NotFound();
+		        return this.NotFound();
 	        }
 
-            return Ok(teamManagementPageData);
+            return this.Ok(teamManagementPageData);
         }
 
         /// <summary>
@@ -92,24 +92,24 @@ namespace WebAPI.Presentation.Controllers
         [Route(RouteConstants.TeamControllerUrl)]
         public async Task<IHttpActionResult> CreateTeam([FromBody] Team team)
         {
-	        var createdTeam = await _teamService.CreateTeamAsync(team);
+	        var createdTeam = await this.teamService.CreateTeamAsync(team);
 
-	        return Created(nameof(TeamController), createdTeam);
+	        return this.Created(nameof(TeamController), createdTeam);
         }
 
         /// <summary>
         /// Create team and updated customer profile with owned team
         /// </summary>
-        [UserVerificationFilter]
+        [UserVerificationFilterAttribute]
         [HttpPost]
         [Route(RouteConstants.TeamControllerCreateTeamWithCustomerUrl)]
         public async Task<IHttpActionResult> CreateTeamWithCustomer([FromBody] Team team)
         {
-	        var userId = _requestHeadersProvider.GetUserId(Request);
+	        var userId = this.requestHeadersProvider.GetUserId(this.Request);
 
-	        var createdTeam = await _teamService.CreateTeamWithCustomerAsync(team, userId);
+	        var createdTeam = await this.teamService.CreateTeamWithCustomerAsync(team, userId);
 
-	        return Created(nameof(TeamController), createdTeam);
+	        return this.Created(nameof(TeamController), createdTeam);
         }
 
         /// <summary>
@@ -119,9 +119,9 @@ namespace WebAPI.Presentation.Controllers
         [Route(RouteConstants.TeamControllerUrl)]
         public async Task<IHttpActionResult> UpdateTeam([FromBody] Team team)
         {
-	        var updatedTeam = await _teamService.UpdateTeamAsync(team);
+	        var updatedTeam = await this.teamService.UpdateTeamAsync(team);
 
-	        return Ok(updatedTeam);
+	        return this.Ok(updatedTeam);
         }
 
         /// <summary>
@@ -131,7 +131,7 @@ namespace WebAPI.Presentation.Controllers
         [Route(RouteConstants.TeamControllerGetTeamUrl)]
         public async Task<HttpResponseMessage> RemoveTeam(Guid teamId)
         {
-	        await _teamService.RemoveTeamAsync(teamId);
+	        await this.teamService.RemoveTeamAsync(teamId);
 
 	        return new HttpResponseMessage(HttpStatusCode.NoContent);
         }

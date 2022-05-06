@@ -339,8 +339,8 @@
     <Compile Include="Core\Enums\Columns.cs" />
     <Compile Include="Core\Interfaces\Repository\IBaseCrudRepository.cs" />
     <Compile Include="Core\Interfaces\Repository\IUserRepository.cs" />
-    <Compile Include="Presentation\Filters\RequestBodyFilter.cs" />
-    <Compile Include="Presentation\Filters\UserVerificationFilter.cs" />
+    <Compile Include="Presentation\Filters\RequestBodyFilterAttribute.cs" />
+    <Compile Include="Presentation\Filters\UserVerificationFilterAttribute.cs" />
     <Compile Include="Presentation\Mappers\EpicProfile.cs" />
     <Compile Include="Presentation\Mappers\ProjectMainPageDataProfile.cs" />
     <Compile Include="Presentation\Mappers\ProjectProfile.cs" />
@@ -376,6 +376,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\..\packages\SonarAnalyzer.CSharp.8.38.0.46746\analyzers\Google.Protobuf.dll" />
+    <Analyzer Include="..\..\packages\SonarAnalyzer.CSharp.8.38.0.46746\analyzers\SonarAnalyzer.CFG.dll" />
+    <Analyzer Include="..\..\packages\SonarAnalyzer.CSharp.8.38.0.46746\analyzers\SonarAnalyzer.CSharp.dll" />
+    <Analyzer Include="..\..\packages\SonarAnalyzer.CSharp.8.38.0.46746\analyzers\SonarAnalyzer.dll" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

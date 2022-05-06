@@ -10,9 +10,10 @@ using WebAPI;
 
 namespace WebAPI
 {
-    public class SwaggerConfig
+    public static class SwaggerConfig
     {
-        public static void Register()
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Minor Code Smell", "S1481:Unused local variables should be removed", Justification = "<Pending>")]
+		public static void Register()
         {
             var thisAssembly = typeof(SwaggerConfig).Assembly;
 

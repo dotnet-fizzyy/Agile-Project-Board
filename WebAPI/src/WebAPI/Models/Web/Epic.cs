@@ -5,11 +5,6 @@ namespace WebAPI.Models.Web
 {
     public class Epic
     {
-        public Epic()
-        {
-            Sprints = new List<Sprint>();
-        }
-
         public Guid EpicId { get; set; }
 
         public Guid ProjectId { get; set; }
@@ -20,6 +15,6 @@ namespace WebAPI.Models.Web
 
         public DateTime EndDate { get; set; }
 
-        public IList<Sprint> Sprints { get; set; }
+        public IList<Sprint> Sprints { get; set; } = new List<Sprint>();
     }
 }

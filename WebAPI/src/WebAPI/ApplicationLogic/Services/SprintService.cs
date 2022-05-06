@@ -12,22 +12,22 @@ namespace WebAPI.ApplicationLogic.Services
 {
     public class SprintService : ISprintService
     {
-        private readonly ISprintRepository _sprintRepository;
-        private readonly IMapper _mapper;
+        private readonly ISprintRepository sprintRepository;
+        private readonly IMapper mapper;
 
         public SprintService(ISprintRepository sprintRepository, IMapper mapper)
         {
-            _sprintRepository = sprintRepository;
-            _mapper = mapper;
+            this.sprintRepository = sprintRepository;
+            this.mapper = mapper;
         }
 
         public async Task<CollectionResponse<Sprint>> GetSprintsAsync()
         {
-            var sprintEntities = await _sprintRepository.SearchForMultipleItemsAsync();
+            var sprintEntities = await this.sprintRepository.SearchForMultipleItemsAsync();
 
             var collectionResponse = new CollectionResponse<Sprint>
             {
-                Items = sprintEntities.Select(_mapper.Map<Sprint>).ToList(),
+                Items = sprintEntities.Select(this.mapper.Map<Sprint>).ToList(),
             };
 
             return collectionResponse;
@@ -38,19 +38,19 @@ namespace WebAPI.ApplicationLogic.Services
             IEnumerable<Models.Entities.Sprint> sprintEntities;
             if (includeChildren)
             {
-                sprintEntities = await _sprintRepository.SearchForMultipleItemsAsync(
+                sprintEntities = await this.sprintRepository.SearchForMultipleItemsAsync(
                     x => x.EpicId == epicId, 
                     x => x.Stories
                     );
             }
             else
             {
-                sprintEntities = await _sprintRepository.SearchForMultipleItemsAsync(x => x.EpicId == epicId);
+                sprintEntities = await this.sprintRepository.SearchForMultipleItemsAsync(x => x.EpicId == epicId);
             }
 
             var collectionResponse = new CollectionResponse<Sprint>
 	        {
-		        Items = sprintEntities.Select(_mapper.Map<Sprint>).ToList(),
+		        Items = sprintEntities.Select(this.mapper.Map<Sprint>).ToList(),
 	        };
 
 	        return collectionResponse;
@@ -58,38 +58,36 @@ namespace WebAPI.ApplicationLogic.Services
 
         public async Task<Sprint> GetSprintAsync(Guid sprintId)
         {
-            var sprintEntity = await _sprintRepository.SearchForSingleItemAsync(x => x.SprintId == sprintId);
+            var sprintEntity = await this.sprintRepository.SearchForSingleItemAsync(x => x.SprintId == sprintId);
 
-            var sprintModel = _mapper.Map<Sprint>(sprintEntity);
+            var sprintModel = this.mapper.Map<Sprint>(sprintEntity);
 
             return sprintModel;
         }
 
         public async Task<Sprint> CreateSprintAsync(Sprint sprint)
         {
-            var sprintEntity = _mapper.Map<Models.Entities.Sprint>(sprint);
+            var sprintEntity = this.mapper.Map<Models.Entities.Sprint>(sprint);
 
-            var createdEntity = await _sprintRepository.CreateItemAsync(sprintEntity);
+            var createdEntity = await this.sprintRepository.CreateItemAsync(sprintEntity);
 
-            var storyModel = _mapper.Map<Sprint>(createdEntity);
+            var storyModel = this.mapper.Map<Sprint>(createdEntity);
 
             return storyModel;
         }
 
         public async Task<Sprint> UpdateSprintAsync(Sprint sprint)
         {
-            var sprintEntity = _mapper.Map<Models.Entities.Sprint>(sprint);
+            var sprintEntity = this.mapper.Map<Models.Entities.Sprint>(sprint);
 
-            var updatedEntity = await _sprintRepository.UpdateItemAsync(sprintEntity);
+            var updatedEntity = await this.sprintRepository.UpdateItemAsync(sprintEntity);
 
-            var storyModel = _mapper.Map<Sprint>(updatedEntity);
+            var storyModel = this.mapper.Map<Sprint>(updatedEntity);
 
             return storyModel;
         }
 
-        public async Task RemoveSprintAsync(Guid sprintId)
-        {
-            await _sprintRepository.RemoveItemAsync(x => x.SprintId == sprintId);
-        }
-    }
+		public async Task RemoveSprintAsync(Guid sprintId) => 
+            await this.sprintRepository.RemoveItemAsync(x => x.SprintId == sprintId);
+	}
 }

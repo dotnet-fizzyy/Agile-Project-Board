@@ -8,10 +8,11 @@ namespace WebAPI.Infrastructure.MSSQL.Configuration
     {
         public ProjectConfiguration()
         {
-            HasKey(x => x.ProjectId);
-            Property(x => x.ProjectId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            HasMany(x => x.Teams).WithOptional().HasForeignKey(e => e.ProjectId);
-            HasMany(x => x.Epics).WithOptional().HasForeignKey(e => e.ProjectId);
+            this.HasKey(x => x.ProjectId);
+            this.Property(x => x.ProjectId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+
+            this.HasMany(x => x.Teams).WithOptional().HasForeignKey(e => e.ProjectId);
+            this.HasMany(x => x.Epics).WithOptional().HasForeignKey(e => e.ProjectId);
         }
     }
 }

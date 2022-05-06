@@ -16,9 +16,9 @@ namespace WebAPI.Infrastructure.MSSQL.Repository
         public async Task<ProjectMainPageData> GetProjectMainPageDataAsync(Guid userId)
         {
 	        var query =
-				from users in _databaseContext.Users
-				join teams in _databaseContext.Teams on users.TeamId equals teams.TeamId
-		        join projects in _databaseContext.Projects on teams.ProjectId equals projects.ProjectId
+				from users in this.DatabaseContext.Users
+				join teams in this.DatabaseContext.Teams on users.TeamId equals teams.TeamId
+		        join projects in this.DatabaseContext.Projects on teams.ProjectId equals projects.ProjectId
 		        where users.UserId == userId
 				select new { teams, projects };
 

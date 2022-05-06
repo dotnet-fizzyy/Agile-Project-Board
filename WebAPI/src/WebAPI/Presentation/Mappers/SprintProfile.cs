@@ -6,8 +6,8 @@ namespace WebAPI.Presentation.Mappers
     {
         public SprintProfile()
         {
-            CreateMap<Models.Entities.Sprint, Models.Web.Sprint>();
-            CreateMap<Models.Web.Sprint, Models.Entities.Sprint>();
+            this.CreateMap<Models.Entities.Sprint, Models.Web.Sprint>();
+            this.CreateMap<Models.Web.Sprint, Models.Entities.Sprint>();
         }
     }
 }

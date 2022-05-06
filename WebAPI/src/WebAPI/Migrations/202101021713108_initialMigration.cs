@@ -10,7 +10,8 @@
         }
         
         public override void Down()
-        {
-        }
-    }
+		{
+			// Method intentionally left empty.
+		}
+	}
 }

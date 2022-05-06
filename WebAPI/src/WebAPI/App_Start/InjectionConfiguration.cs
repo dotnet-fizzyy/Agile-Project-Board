@@ -14,29 +14,29 @@ namespace WebAPI.App_Start
     {
         public override void Load()
         {
-	        //Repository
-            Bind<IUserRepository>().To<UserRepository>().InRequestScope();
-            Bind<ITeamRepository>().To<TeamRepository>().InRequestScope();
-            Bind<IStoryRepository>().To<StoryRepository>().InRequestScope();
-            Bind<ISprintRepository>().To<SprintRepository>().InRequestScope();
-            Bind<IEpicRepository>().To<EpicRepository>().InRequestScope();
-            Bind<IProjectRepository>().To<ProjectRepository>().InRequestScope();
+            //Repository
+            this.Bind<IUserRepository>().To<UserRepository>().InRequestScope();
+            this.Bind<ITeamRepository>().To<TeamRepository>().InRequestScope();
+            this.Bind<IStoryRepository>().To<StoryRepository>().InRequestScope();
+            this.Bind<ISprintRepository>().To<SprintRepository>().InRequestScope();
+            this.Bind<IEpicRepository>().To<EpicRepository>().InRequestScope();
+            this.Bind<IProjectRepository>().To<ProjectRepository>().InRequestScope();
 
             //Services
-            Bind<IUserService>().To<UserService>().InRequestScope();
-            Bind<IProjectService>().To<ProjectService>().InRequestScope();
-            Bind<ITeamService>().To<TeamService>().InRequestScope();
-            Bind<ISprintService>().To<SprintService>().InRequestScope();
-            Bind<IEpicService>().To<EpicService>().InRequestScope();
-            Bind<IStoryService>().To<StoryService>().InRequestScope();
-            Bind<IRequestHeadersProvider>().To<RequestHeadersProvider>().InRequestScope();
+            this.Bind<IUserService>().To<UserService>().InRequestScope();
+            this.Bind<IProjectService>().To<ProjectService>().InRequestScope();
+            this.Bind<ITeamService>().To<TeamService>().InRequestScope();
+            this.Bind<ISprintService>().To<SprintService>().InRequestScope();
+            this.Bind<IEpicService>().To<EpicService>().InRequestScope();
+            this.Bind<IStoryService>().To<StoryService>().InRequestScope();
+            this.Bind<IRequestHeadersProvider>().To<RequestHeadersProvider>().InRequestScope();
 
             //Mapper
             var mapperConfig = new MapperConfiguration(cfg =>
             {
                 cfg.AddMaps(Assembly.GetExecutingAssembly());
             });
-            Bind<IMapper>().ToConstructor(c => new Mapper(mapperConfig)).InSingletonScope();
+            this.Bind<IMapper>().ToConstructor(c => new Mapper(mapperConfig)).InSingletonScope();
         }
     }
 }

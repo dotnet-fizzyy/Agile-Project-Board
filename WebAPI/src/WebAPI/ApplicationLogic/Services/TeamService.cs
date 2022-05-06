@@ -11,26 +11,31 @@ namespace WebAPI.ApplicationLogic.Services
 {
     public class TeamService : ITeamService
     {
-        private readonly ITeamRepository _teamRepository;
-        private readonly IProjectRepository _projectRepository;
-        private readonly IUserRepository _userRepository;
-        private readonly IMapper _mapper;
+        private readonly ITeamRepository teamRepository;
+        private readonly IProjectRepository projectRepository;
+        private readonly IUserRepository userRepository;
+        private readonly IMapper mapper;
 
-        public TeamService(ITeamRepository teamRepository, IUserRepository userRepository, IProjectRepository projectRepository, IMapper mapper)
+        public TeamService(
+            ITeamRepository teamRepository, 
+            IUserRepository userRepository, 
+            IProjectRepository projectRepository, 
+            IMapper mapper
+        )
         {
-            _teamRepository = teamRepository;
-            _userRepository = userRepository;
-            _projectRepository = projectRepository;
-            _mapper = mapper;
+            this.teamRepository = teamRepository;
+            this.userRepository = userRepository;
+            this.projectRepository = projectRepository;
+            this.mapper = mapper;
         }
 
         public async Task<CollectionResponse<Team>> GetTeamsAsync()
         {
-            var teamEntities = await _teamRepository.SearchForMultipleItemsAsync();
+            var teamEntities = await this.teamRepository.SearchForMultipleItemsAsync();
 
             var collectionResponse = new CollectionResponse<Team>
             {
-                Items = teamEntities.Select(_mapper.Map<Team>).ToList(),
+                Items = teamEntities.Select(this.mapper.Map<Team>).ToList(),
             };
 
             return collectionResponse;
@@ -38,9 +43,9 @@ namespace WebAPI.ApplicationLogic.Services
 
         public async Task<Team> GetTeamAsync(Guid teamId)
         {
-            var teamEntity = await _teamRepository.SearchForSingleItemAsync(x => x.TeamId == teamId);
+            var teamEntity = await this.teamRepository.SearchForSingleItemAsync(x => x.TeamId == teamId);
 
-            var teamModel = _mapper.Map<Team>(teamEntity);
+            var teamModel = this.mapper.Map<Team>(teamEntity);
 
             return teamModel;
         }
@@ -48,33 +53,36 @@ namespace WebAPI.ApplicationLogic.Services
         public async Task<Team> GetUserTeamAsync(Guid userId)
         {
 	        var teamEntity =
-		        await _teamRepository.SearchForSingleItemAsync(x => x.Users.Any(src => src.UserId == userId));
+                await this.teamRepository.SearchForSingleItemAsync(x => x.Users.Any(src => src.UserId == userId));
 
 	        if (teamEntity == null)
 	        {
                 return null;
 	        }
 
-	        var teamModel = _mapper.Map<Team>(teamEntity);
+	        var teamModel = this.mapper.Map<Team>(teamEntity);
 
 	        return teamModel;
         }
 
         public async Task<TeamManagementModel> GetTeamManagementPageData(Guid userId)
         {
-	        var projectEntity = await _projectRepository.SearchForSingleItemAsync(x => x.CustomerId == userId);
+	        var projectEntity = await this.projectRepository.SearchForSingleItemAsync(x => x.CustomerId == userId);
 
 	        if (projectEntity == null)
 	        {
 		        return null;
 	        }
 
-	        var teamEntity = await _teamRepository.SearchForSingleItemAsync(x => x.Users.Any(u => u.UserId == userId), team => team.Users);
+	        var teamEntity = await this.teamRepository.SearchForSingleItemAsync(
+                x => x.Users.Any(u => u.UserId == userId), 
+                team => team.Users
+            );
 
             var teamManagementModel = new TeamManagementModel
             {
-                Project = _mapper.Map<Project>(projectEntity),
-                Team = _mapper.Map<Team>(teamEntity),
+                Project = this.mapper.Map<Project>(projectEntity),
+                Team = this.mapper.Map<Team>(teamEntity),
             };
 
             return teamManagementModel;
@@ -82,42 +90,40 @@ namespace WebAPI.ApplicationLogic.Services
 
         public async Task<Team> CreateTeamAsync(Team team)
         {
-            var teamEntity = _mapper.Map<Models.Entities.Team>(team);
+            var teamEntity = this.mapper.Map<Models.Entities.Team>(team);
 
-            var createdEntity = await _teamRepository.CreateItemAsync(teamEntity);
+            var createdEntity = await this.teamRepository.CreateItemAsync(teamEntity);
 
-            var teamModel = _mapper.Map<Team>(createdEntity);
+            var teamModel = this.mapper.Map<Team>(createdEntity);
 
             return teamModel;
         }
 
         public async Task<Team> CreateTeamWithCustomerAsync(Team team, Guid customerId)
         {
-	        var teamEntity = _mapper.Map<Models.Entities.Team>(team);
+	        var teamEntity = this.mapper.Map<Models.Entities.Team>(team);
 
-	        var createdEntity = await _teamRepository.CreateItemAsync(teamEntity);
+	        var createdEntity = await this.teamRepository.CreateItemAsync(teamEntity);
 
-	        await _userRepository.UpdateUserTeamAsync(customerId, createdEntity.TeamId);
+            await this.userRepository.UpdateUserTeamAsync(customerId, createdEntity.TeamId);
 
-	        var teamModel = _mapper.Map<Team>(createdEntity);
+	        var teamModel = this.mapper.Map<Team>(createdEntity);
 
 	        return teamModel;
         }
 
         public async Task<Team> UpdateTeamAsync(Team team)
         {
-            var teamEntity = _mapper.Map<Models.Entities.Team>(team);
+            var teamEntity = this.mapper.Map<Models.Entities.Team>(team);
 
-            var updatedEntity = await _teamRepository.UpdateItemAsync(teamEntity);
+            var updatedEntity = await this.teamRepository.UpdateItemAsync(teamEntity);
 
-            var teamModel = _mapper.Map<Team>(updatedEntity);
+            var teamModel = this.mapper.Map<Team>(updatedEntity);
 
             return teamModel;
         }
 
-        public async Task RemoveTeamAsync(Guid teamId)
-        {
-            await _teamRepository.RemoveItemAsync(x => x.TeamId == teamId);
-        }
-    }
+		public async Task RemoveTeamAsync(Guid teamId) =>
+            await this.teamRepository.RemoveItemAsync(x => x.TeamId == teamId);
+	}
 }

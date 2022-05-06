@@ -14,11 +14,11 @@ namespace WebAPI.Presentation.Controllers
 	[RequestBodyFilter]
     public class StoryController : ApiController
     {
-        private readonly IStoryService _storyService;
+        private readonly IStoryService storyService;
 
         public StoryController(IStoryService storyService)
         {
-            _storyService = storyService;
+            this.storyService = storyService;
         }
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace WebAPI.Presentation.Controllers
         /// </summary>
         [HttpGet]
         [Route(RouteConstants.StoryControllerGetAllStoriesUrl)]
-        public async Task<CollectionResponse<Story>> GetAllStories() => await _storyService.GeStoriesAsync();
+        public async Task<CollectionResponse<Story>> GetAllStories() => await this.storyService.GeStoriesAsync();
 
         /// <summary>
         /// Get exact story by its id
@@ -35,14 +35,14 @@ namespace WebAPI.Presentation.Controllers
         [Route(RouteConstants.StoryControllerGetStoryUrl)]
         public async Task<IHttpActionResult> GetStory(Guid storyId)
         {
-	        var story = await _storyService.GetStoryAsync(storyId);
+	        var story = await this.storyService.GetStoryAsync(storyId);
 
 	        if (story == null)
 	        {
-		        return NotFound();
+		        return this.NotFound();
 	        }
 
-	        return Ok(story);
+	        return this.Ok(story);
         }
 
         /// <summary>
@@ -52,9 +52,9 @@ namespace WebAPI.Presentation.Controllers
         [Route(RouteConstants.StoryControllerUrl)]
         public async Task<IHttpActionResult> CreateStory([FromBody] Story story)
         {
-	        var createdStory = await _storyService.CreateStoryAsync(story);
+	        var createdStory = await this.storyService.CreateStoryAsync(story);
 
-	        return Created(nameof(StoryController), createdStory);
+	        return this.Created(nameof(StoryController), createdStory);
         }
 
         /// <summary>
@@ -64,9 +64,9 @@ namespace WebAPI.Presentation.Controllers
         [Route(RouteConstants.StoryControllerUrl)]
         public async Task<IHttpActionResult> UpdateStory([FromBody] Story story)
         {
-	        var updatedStory = await _storyService.UpdateStoryAsync(story);
+	        var updatedStory = await this.storyService.UpdateStoryAsync(story);
 
-	        return Ok(updatedStory);
+	        return this.Ok(updatedStory);
         }
 
 
@@ -77,7 +77,7 @@ namespace WebAPI.Presentation.Controllers
         [Route(RouteConstants.StoryControllerUpdateStoryColumnUrl)]
         public async Task<HttpResponseMessage> UpdateStoryColumn([FromBody]UpdateStoryColumnModel storyColumn)
         {
-	        await _storyService.UpdateStoryColumnAsync(storyColumn);
+	        await this.storyService.UpdateStoryColumnAsync(storyColumn);
 
             return new HttpResponseMessage(HttpStatusCode.NoContent);
         }
@@ -90,7 +90,7 @@ namespace WebAPI.Presentation.Controllers
         [Route(RouteConstants.StoryControllerGetStoryUrl)]
         public async Task<HttpResponseMessage> RemoveStory(Guid storyId)
         {
-	        await _storyService.RemoveStoryAsync(storyId);
+	        await this.storyService.RemoveStoryAsync(storyId);
 
 	        return new HttpResponseMessage(HttpStatusCode.NoContent);
         }

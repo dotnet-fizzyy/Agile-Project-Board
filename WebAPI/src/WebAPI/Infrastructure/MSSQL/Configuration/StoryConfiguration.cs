@@ -8,8 +8,8 @@ namespace WebAPI.Infrastructure.MSSQL.Configuration
     {
         public StoryConfiguration()
         {
-            HasKey(x => x.StoryId);
-            Property(x => x.StoryId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            this.HasKey(x => x.StoryId);
+            this.Property(x => x.StoryId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
         }
     }
 }

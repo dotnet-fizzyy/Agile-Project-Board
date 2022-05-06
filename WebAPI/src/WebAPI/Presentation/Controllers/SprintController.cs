@@ -14,11 +14,11 @@ namespace WebAPI.Presentation.Controllers
 	[RequestBodyFilter]
     public class SprintController : ApiController
     {
-        private readonly ISprintService _sprintService;
+        private readonly ISprintService sprintService;
 
         public SprintController(ISprintService sprintService)
         {
-            _sprintService = sprintService;
+            this.sprintService = sprintService;
         }
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace WebAPI.Presentation.Controllers
         /// </summary>
         [HttpGet]
         [Route(RouteConstants.SprintControllerGetAllSprintsUrl)]
-        public async Task<CollectionResponse<Sprint>> GetAllProjects() => await _sprintService.GetSprintsAsync();
+        public async Task<CollectionResponse<Sprint>> GetAllProjects() => await this.sprintService.GetSprintsAsync();
 
         /// <summary>
         /// Get exact sprint by its id
@@ -35,14 +35,14 @@ namespace WebAPI.Presentation.Controllers
         [Route(RouteConstants.SprintControllerGetSprintUrl)]
         public async Task<IHttpActionResult> GetSprint(Guid sprintId)
         {
-	        var sprint = await _sprintService.GetSprintAsync(sprintId);
+	        var sprint = await this.sprintService.GetSprintAsync(sprintId);
 
 	        if (sprint == null)
 	        {
-		        return NotFound();
+		        return this.NotFound();
 	        }
 
-	        return Ok(sprint);
+	        return this.Ok(sprint);
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace WebAPI.Presentation.Controllers
         public async Task<CollectionResponse<Sprint>> GetSprintsFromEpic(
 	        [FromUri]Guid epicId, 
 	        [FromUri]bool includeChildren
-	        ) => await _sprintService.GetSprintsFromEpicAsync(epicId, includeChildren);
+	        ) => await this.sprintService.GetSprintsFromEpicAsync(epicId, includeChildren);
 
         /// <summary>
         /// Create sprint
@@ -62,9 +62,9 @@ namespace WebAPI.Presentation.Controllers
         [Route(RouteConstants.SprintControllerUrl)]
         public async Task<IHttpActionResult> CreateSprint([FromBody] Sprint sprint)
         {
-	        var createdSprint = await _sprintService.CreateSprintAsync(sprint);
+	        var createdSprint = await this.sprintService.CreateSprintAsync(sprint);
 
-	        return Created(nameof(SprintController), createdSprint);
+	        return this.Created(nameof(SprintController), createdSprint);
         }
 
         /// <summary>
@@ -74,9 +74,9 @@ namespace WebAPI.Presentation.Controllers
         [Route(RouteConstants.SprintControllerUrl)]
         public async Task<IHttpActionResult> UpdateSprint([FromBody] Sprint sprint)
         {
-	        var updatedSprint = await _sprintService.UpdateSprintAsync(sprint);
+	        var updatedSprint = await this.sprintService.UpdateSprintAsync(sprint);
 
-	        return Ok(updatedSprint);
+	        return this.Ok(updatedSprint);
         }
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace WebAPI.Presentation.Controllers
         [Route(RouteConstants.SprintControllerGetSprintUrl)]
         public async Task<HttpResponseMessage> RemoveSprint(Guid sprintId)
         {
-	        await _sprintService.RemoveSprintAsync(sprintId);
+	        await this.sprintService.RemoveSprintAsync(sprintId);
 
 	        return new HttpResponseMessage(HttpStatusCode.NoContent);
         }

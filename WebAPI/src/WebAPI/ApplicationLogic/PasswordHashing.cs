@@ -2,7 +2,7 @@
 
 namespace WebAPI.ApplicationLogic
 {
-	public class PasswordHashing
+	public static class PasswordHashing
 	{
 		public static string GeneratePassword(string input)
 		{

@@ -8,9 +8,10 @@ namespace WebAPI.Infrastructure.MSSQL.Configuration
     {
         public EpicConfiguration()
         {
-            HasKey(x => x.EpicId);
-            Property(x => x.EpicId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            HasMany(x => x.Sprints).WithOptional().HasForeignKey(e => e.EpicId);
+            this.HasKey(x => x.EpicId);
+            this.Property(x => x.EpicId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+
+            this.HasMany(x => x.Sprints).WithOptional().HasForeignKey(e => e.EpicId);
         }
     }
 }

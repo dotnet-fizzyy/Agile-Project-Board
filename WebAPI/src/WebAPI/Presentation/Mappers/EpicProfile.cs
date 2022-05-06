@@ -6,8 +6,8 @@ namespace WebAPI.Presentation.Mappers
     {
         public EpicProfile()
         {
-            CreateMap<Models.Entities.Epic, Models.Web.Epic>();
-            CreateMap<Models.Web.Epic, Models.Entities.Epic>();
+            this.CreateMap<Models.Entities.Epic, Models.Web.Epic>();
+            this.CreateMap<Models.Web.Epic, Models.Entities.Epic>();
         }
     }
 }

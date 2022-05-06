@@ -11,28 +11,24 @@ namespace WebAPI.Infrastructure.MSSQL.Repository
 {
     public abstract class BaseCrudRepository<T> : IBaseCrudRepository<T> where T : class
     {
-        protected readonly DatabaseContext _databaseContext;
-        private readonly DbSet<T> _dbSet;
+        protected readonly DatabaseContext DatabaseContext;
+        private readonly DbSet<T> dbSet;
 
         protected BaseCrudRepository(DatabaseContext databaseContext)
         {
-            _databaseContext = databaseContext;
-            _dbSet = databaseContext.Set<T>();
+            this.DatabaseContext = databaseContext;
+            this.dbSet = databaseContext.Set<T>();
         }
 
-        public async Task<IEnumerable<T>> SearchForMultipleItemsAsync()
-        {
-            return await _dbSet.AsNoTracking().ToListAsync();
-        }
+        public async Task<IEnumerable<T>> SearchForMultipleItemsAsync() =>
+            await this.dbSet.AsNoTracking().ToListAsync();
 
-        public async Task<IEnumerable<T>> SearchForMultipleItemsAsync(Expression<Func<T, bool>> expression)
-        {
-            return await _dbSet.Where(expression).AsNoTracking().ToListAsync();
-        }
+        public async Task<IEnumerable<T>> SearchForMultipleItemsAsync(Expression<Func<T, bool>> expression) => 
+            await this.dbSet.Where(expression).AsNoTracking().ToListAsync();
 
         public async Task<IEnumerable<T>> SearchForMultipleItemsAsync(Expression<Func<T, bool>> expression, params Expression<Func<T, object>>[] includes)
         {
-	        var query = _dbSet.Where(expression).AsNoTracking();
+	        var query = this.dbSet.Where(expression).AsNoTracking();
 
             if (includes.Length != 0)
 	        {
@@ -46,7 +42,7 @@ namespace WebAPI.Infrastructure.MSSQL.Repository
         {
             try
             {
-                var query = _dbSet.Where(expression).AsNoTracking();
+                var query = this.dbSet.Where(expression).AsNoTracking();
 
                 if (includes.Length != 0)
                 {
@@ -65,11 +61,11 @@ namespace WebAPI.Infrastructure.MSSQL.Repository
         {
             try
             {
-                _dbSet.Add(item);
+                this.dbSet.Add(item);
 
-                await _databaseContext.SaveChangesAsync();
+                await this.DatabaseContext.SaveChangesAsync();
 
-                _databaseContext.Entry(item).State = EntityState.Detached;
+                this.DatabaseContext.Entry(item).State = EntityState.Detached;
 
                 return item;
             }
@@ -83,11 +79,11 @@ namespace WebAPI.Infrastructure.MSSQL.Repository
         {
             try
             {
-                _dbSet.AddOrUpdate(item);
+                this.dbSet.AddOrUpdate(item);
 
-                await _databaseContext.SaveChangesAsync();
+                await this.DatabaseContext.SaveChangesAsync();
 
-                _databaseContext.Entry(item).State = EntityState.Detached;
+                this.DatabaseContext.Entry(item).State = EntityState.Detached;
 
                 return item;
             }
@@ -101,9 +97,9 @@ namespace WebAPI.Infrastructure.MSSQL.Repository
         {
             try
             {
-                _dbSet.RemoveRange(_dbSet.Where(expression));
+                this.dbSet.RemoveRange(this.dbSet.Where(expression));
 
-                await _databaseContext.SaveChangesAsync();
+                await this.DatabaseContext.SaveChangesAsync();
             }
             catch (Exception e)
             {
