@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
 using WebAPI.Core.Constants;
+using WebAPI.Presentation.Utilities;
 
 namespace WebAPI.Presentation.Filters
 {
@@ -29,25 +29,14 @@ namespace WebAPI.Presentation.Filters
 
 			if (userHeader == null)
 			{
-				var httpResponseMessage = new HttpResponseMessage
-				{
-					StatusCode = HttpStatusCode.Unauthorized,
-				};
-
-				return httpResponseMessage;
+				return ResponseUtilities.GenerateUnauthorizedResponse();
 			}
 
 			var isGuid = Guid.TryParse(userHeader, out var validUserId);
 
 			if (!isGuid)
 			{
-				var httpResponseMessage = new HttpResponseMessage
-				{
-					StatusCode = HttpStatusCode.BadRequest,
-					Content = new StringContent(BadRequestReasonMessage),
-				};
-
-				return httpResponseMessage;
+				return ResponseUtilities.GenerateBadRequestResponse(BadRequestReasonMessage);
 			}
 
 			return await continuation();

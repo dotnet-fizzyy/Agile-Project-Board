@@ -3,7 +3,6 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using WebAPI.Core.Constants;
 using WebAPI.Core.Interfaces.Services;
 using WebAPI.Models.Result;
 using WebAPI.Models.Web;
@@ -11,7 +10,8 @@ using WebAPI.Presentation.Filters;
 
 namespace WebAPI.Presentation.Controllers
 {
-	[RequestBodyFilterAttribute]
+	[RequestBodyFilter]
+    [Route("epic")]
     public class EpicController : ApiController
     {
         private readonly IEpicService epicService;
@@ -25,14 +25,15 @@ namespace WebAPI.Presentation.Controllers
         /// Get all epics (should be removed after development)
         /// </summary>
         [HttpGet]
-        [Route(RouteConstants.EpicControllerGetAllEpicsUrl)]
-        public async Task<CollectionResponse<Epic>> GetAllEpics() => await this.epicService.GetEpicsAsync();
+        [Route("all")]
+        public async Task<CollectionResponse<Epic>> GetAllEpics() => 
+            await this.epicService.GetEpicsAsync();
 
         /// <summary>
         /// Get epic by its id
         /// </summary>
         [HttpGet]
-        [Route(RouteConstants.EpicControllerGetEpicUrl)]
+        [Route("{epicId:guid}")]
         public async Task<IHttpActionResult> GetEpic(Guid epicId)
         {
 	        var epic = await this.epicService.GetEpicAsync(epicId);
@@ -49,7 +50,6 @@ namespace WebAPI.Presentation.Controllers
         /// Create epic
         /// </summary>
         [HttpPost]
-        [Route(RouteConstants.EpicControllerUrl)]
         public async Task<IHttpActionResult> CreateEpic([FromBody] Epic epic)
         {
 	        var createdEpic = await this.epicService.CreateEpicAsync(epic);
@@ -61,7 +61,6 @@ namespace WebAPI.Presentation.Controllers
         /// Update epic
         /// </summary>
         [HttpPut]
-        [Route(RouteConstants.EpicControllerUrl)]
         public async Task<IHttpActionResult> UpdateProject([FromBody] Epic epic)
         {
 	        var updatedEpic = await this.epicService.UpdateEpicAsync(epic);
@@ -73,7 +72,7 @@ namespace WebAPI.Presentation.Controllers
         /// Remove epic via its id
         /// </summary>
         [HttpDelete]
-        [Route(RouteConstants.EpicControllerGetEpicUrl)]
+        [Route("{epicId:guid}")]
         public async Task<HttpResponseMessage> RemoveProject(Guid epicId)
         {
 	        await this.epicService.RemoveEpicAsync(epicId);

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
+using WebAPI.Presentation.Utilities;
 
 namespace WebAPI.Presentation.Filters
 {
@@ -24,16 +24,12 @@ namespace WebAPI.Presentation.Filters
 			var httpMethod = actionContext.Request.Method;
 			var requestBody = actionContext.ActionArguments.Values.FirstOrDefault();
 
-			if ((httpMethod == HttpMethod.Post || httpMethod == HttpMethod.Put) && requestBody == null)
+			var isRequestBodyMissing = requestBody == null;
+			var isHttpMethodPostOrPut = httpMethod == HttpMethod.Post || httpMethod == HttpMethod.Put;
+
+			if (isRequestBodyMissing && isHttpMethodPostOrPut)
 			{
-				var response = new HttpResponseMessage
-				{
-					StatusCode = HttpStatusCode.BadRequest,
-					Content = new StringContent(BadRequestReasonMessage),
-				};
-
-
-				return response;
+				return ResponseUtilities.GenerateBadRequestResponse(BadRequestReasonMessage);
 			}
 
 			return await continuation();

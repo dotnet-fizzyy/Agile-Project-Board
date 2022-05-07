@@ -3,7 +3,6 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using WebAPI.Core.Constants;
 using WebAPI.Core.Interfaces.Services;
 using WebAPI.Models.Result;
 using WebAPI.Models.Web;
@@ -12,6 +11,7 @@ using WebAPI.Presentation.Filters;
 namespace WebAPI.Presentation.Controllers
 {
 	[RequestBodyFilter]
+    [Route("project")]
     public class ProjectController : ApiController
     {
         private readonly IProjectService projectService;
@@ -27,14 +27,14 @@ namespace WebAPI.Presentation.Controllers
         /// Get all projects (should be removed after development)
         /// </summary>
         [HttpGet]
-        [Route(RouteConstants.ProjectControllerGetAllProjectsUrl)]
+        [Route("all")]
         public async Task<CollectionResponse<Project>> GetAllProjects() => await this.projectService.GetProjectsAsync();
 
         /// <summary>
         /// Get exact project by its id
         /// </summary>
         [HttpGet]
-        [Route(RouteConstants.ProjectControllerGetProjectUrl)]
+        [Route("{projectId:guid}")]
         public async Task<IHttpActionResult> GetProject(Guid projectId)
         {
             var project = await this.projectService.GeProjectAsync(projectId);
@@ -52,7 +52,7 @@ namespace WebAPI.Presentation.Controllers
         /// </summary>
         [UserVerificationFilter]
         [HttpGet]
-        [Route(RouteConstants.ProjectControllerCreateProjectWithCustomerUrl)]
+        [Route("customer")]
         public async Task<IHttpActionResult> GetProjectByCustomerId()
         {
 	        var userId = this.requestHeadersProvider.GetUserId(this.Request);
@@ -72,7 +72,7 @@ namespace WebAPI.Presentation.Controllers
         /// </summary>
         [UserVerificationFilter]
         [HttpGet]
-        [Route(RouteConstants.ProjectControllerMainPageUrl)]
+        [Route("main")]
         public async Task<ProjectMainPageModel> GetProjectMainPageDataIndex()
         {
 	        var userId = this.requestHeadersProvider.GetUserId(this.Request);
@@ -87,7 +87,7 @@ namespace WebAPI.Presentation.Controllers
         /// </summary>
         [UserVerificationFilter]
         [HttpGet]
-        [Route(RouteConstants.ProjectControllerBoardPageUrl)]
+        [Route("board/{projectId:guid}")]
         public async Task<ProjectBoardPageModel> GetProjectBoardDataIndex(Guid projectId)
         {
 	        var userId = this.requestHeadersProvider.GetUserId(this.Request);
@@ -101,7 +101,6 @@ namespace WebAPI.Presentation.Controllers
         /// Create project
         /// </summary>
         [HttpPost]
-        [Route(RouteConstants.ProjectControllerUrl)]
         public async Task<IHttpActionResult> CreateProject([FromBody] Project project)
         {
             var createdProject = await this.projectService.CreateProjectAsync(project);
@@ -113,7 +112,6 @@ namespace WebAPI.Presentation.Controllers
         /// Update project
         /// </summary>
         [HttpPut]
-        [Route(RouteConstants.ProjectControllerUrl)]
         public async Task<IHttpActionResult> UpdateProject([FromBody] Project project)
         {
             var updatedProject = await this.projectService.UpdateProjectAsync(project);
@@ -125,7 +123,7 @@ namespace WebAPI.Presentation.Controllers
         /// Remove project via its id
         /// </summary>
         [HttpDelete]
-        [Route(RouteConstants.ProjectControllerGetProjectUrl)]
+        [Route("{projectId:guid}")]
         public async Task<HttpResponseMessage> RemoveProject(Guid projectId)
         {
             await this.projectService.RemoveProjectAsync(projectId);

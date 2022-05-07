@@ -11,7 +11,8 @@ using WebAPI.Presentation.Filters;
 
 namespace WebAPI.Presentation.Controllers
 {
-    [RequestBodyFilterAttribute]
+    [RequestBodyFilter]
+    [Route("user")]
     public class UserController : ApiController
     {
         private readonly IUserService userService;
@@ -25,14 +26,15 @@ namespace WebAPI.Presentation.Controllers
         /// Get all users (should be removed after development)
         /// </summary>
         [HttpGet]
-        [Route(RouteConstants.UserControllerGetAllUsersUrl)]
-        public async Task<CollectionResponse<User>> GetUsers() => await this.userService.GetUsersAsync();
+        [Route("all")]
+        public async Task<CollectionResponse<User>> GetUsers() =>
+            await this.userService.GetUsersAsync();
 
         /// <summary>
         /// Get exact user by its id
         /// </summary>
         [HttpGet]
-        [Route(RouteConstants.UserControllerGetUserUrl)]
+        [Route("{userId:guid}")]
         public async Task<IHttpActionResult> GetUser(Guid userId)
         {
             var user = await this.userService.GetUserAsync(userId);
@@ -49,7 +51,6 @@ namespace WebAPI.Presentation.Controllers
         /// Create user
         /// </summary>
         [HttpPost]
-        [Route(RouteConstants.UserControllerUrl)]
         public async Task<IHttpActionResult> CreateUser([FromBody]User user)
         {
             var createdUser = await this.userService.CreateUserAsync(user);
@@ -61,7 +62,7 @@ namespace WebAPI.Presentation.Controllers
         /// Authenticate user with his name and password
         /// </summary>
         [HttpPost]
-        [Route(RouteConstants.UserControllerAuthenticateUrl)]
+        [Route("auth")]
         public async Task<IHttpActionResult> AuthenticateUser([FromBody]AuthUser authUser)
         {
 	        var authenticatedUser = await this.userService.AuthenticateUser(authUser);
@@ -78,7 +79,7 @@ namespace WebAPI.Presentation.Controllers
         /// Create customer on registration
         /// </summary>
         [HttpPost]
-        [Route(RouteConstants.UserControllerCreateCustomerUrl)]
+        [Route("customer")]
         public async Task<IHttpActionResult> CreateCustomer([FromBody]AuthUser authUser)
         {
 	        var createdCustomer = await this.userService.CreateCustomerAsync(authUser);
@@ -90,7 +91,6 @@ namespace WebAPI.Presentation.Controllers
         /// Update user (without password)
         /// </summary>
         [HttpPut]
-        [Route(RouteConstants.UserControllerUrl)]
         public async Task<IHttpActionResult> UpdateUser([FromBody]User user)
         {
             var updatedUser = await this.userService.UpdateUserAsync(user);
@@ -102,7 +102,7 @@ namespace WebAPI.Presentation.Controllers
         /// Update password for exact user
         /// </summary>
         [HttpPut]
-        [Route(RouteConstants.UserControllerUpdateUserPasswordUrl)]
+        [Route("password")]
         public async Task<HttpResponseMessage> UpdateUserPassword([FromBody]UserPasswordUpdateModel user)
         {
 	        await this.userService.UpdateUserPasswordAsync(user);
@@ -115,7 +115,7 @@ namespace WebAPI.Presentation.Controllers
         /// Update user status (active or blocked)
         /// </summary>
         [HttpPut]
-        [Route(RouteConstants.UserControllerUpdateUserStatusUrl)]
+        [Route("status")]
         public async Task<HttpResponseMessage> UpdateUserStatus([FromBody]User user)
         {
 	        await this.userService.UpdateUserStatusAsync(user);
@@ -127,7 +127,7 @@ namespace WebAPI.Presentation.Controllers
         /// Remove user via its id
         /// </summary>
         [HttpDelete]
-        [Route(RouteConstants.UserControllerGetUserUrl)]
+        [Route("{userId:guid}")]
         public async Task<HttpResponseMessage> RemoveUser(Guid userId)
         {
             await this.userService.RemoveUserAsync(userId);

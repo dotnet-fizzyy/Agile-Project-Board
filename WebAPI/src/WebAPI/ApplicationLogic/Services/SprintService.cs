@@ -39,8 +39,8 @@ namespace WebAPI.ApplicationLogic.Services
             if (includeChildren)
             {
                 sprintEntities = await this.sprintRepository.SearchForMultipleItemsAsync(
-                    x => x.EpicId == epicId, 
-                    x => x.Stories
+                        x => x.EpicId == epicId, 
+                        x => x.Stories
                     );
             }
             else
