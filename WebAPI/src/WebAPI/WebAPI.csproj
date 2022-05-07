@@ -348,6 +348,7 @@
     <Compile Include="Presentation\Mappers\StoryProfile.cs" />
     <Compile Include="Presentation\Mappers\TeamProfile.cs" />
     <Compile Include="Presentation\Mappers\UserProfile.cs" />
+    <Compile Include="Presentation\Utilities\ResponseUtilities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

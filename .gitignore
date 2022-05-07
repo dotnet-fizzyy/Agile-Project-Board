@@ -1,22 +1,11 @@
 
-WebAPI/packages/
+**/packages
+**/obj
+**/bin
 
-WebAPI/WebAPI/obj/
+**/.vs
+**/.idea
 
-WebAPI/WebAPI/bin/
+**/node_modules
 
-WebAPI/.vs/
-
-node_modules/
-
-.idea/
-
-src/.DS_Store
-
-src/app/.DS_Store
-
-.DS_Store
-
-WebAPI/src/WebAPI/bin/
-
-WebAPI/src/WebAPI/obj/
+**/.DS_Store
