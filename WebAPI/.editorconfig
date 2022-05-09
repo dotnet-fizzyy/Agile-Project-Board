@@ -5,6 +5,9 @@ dotnet_diagnostic.S112.severity = None
 # S927: Parameter names should match base declaration and other partial definitions
 dotnet_diagnostic.S927.severity = None
 
+# S1128: Remove unused namespaces
+dotnet_diagnostic.S1128.severity = error
+
 # IDE0003: Remove qualification
 dotnet_diagnostic.IDE0003.severity = none
 

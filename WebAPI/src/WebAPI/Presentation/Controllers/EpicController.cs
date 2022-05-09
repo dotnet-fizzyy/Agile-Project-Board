@@ -11,7 +11,7 @@ using WebAPI.Presentation.Filters;
 namespace WebAPI.Presentation.Controllers
 {
 	[RequestBodyFilter]
-    [Route("epic")]
+    [RoutePrefix("epic")]
     public class EpicController : ApiController
     {
         private readonly IEpicService epicService;

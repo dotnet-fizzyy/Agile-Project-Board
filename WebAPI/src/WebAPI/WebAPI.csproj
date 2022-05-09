@@ -384,6 +384,23 @@
     <Analyzer Include="..\..\packages\SonarAnalyzer.CSharp.8.38.0.46746\analyzers\SonarAnalyzer.CSharp.dll" />
     <Analyzer Include="..\..\packages\SonarAnalyzer.CSharp.8.38.0.46746\analyzers\SonarAnalyzer.dll" />
   </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WebAPI.Application\WebAPI.Application.csproj">
+      <Project>{f9f2723d-2d86-498e-93e9-f5823f07a925}</Project>
+      <Name>WebAPI.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebAPI.Domain\WebAPI.Domain.csproj">
+      <Project>{e4486c9c-e34c-4d3f-a809-9186fcaf0c04}</Project>
+      <Name>WebAPI.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebAPI.Infrastructure\WebAPI.Infrastructure.csproj">
+      <Project>{92925046-EF27-46FD-9F3B-74358D25E1E8}</Project>
+      <Name>WebAPI.Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

@@ -11,7 +11,7 @@ using WebAPI.Presentation.Filters;
 namespace WebAPI.Presentation.Controllers
 {
 	[RequestBodyFilter]
-    [Route("project")]
+    [RoutePrefix("project")]
     public class ProjectController : ApiController
     {
         private readonly IProjectService projectService;

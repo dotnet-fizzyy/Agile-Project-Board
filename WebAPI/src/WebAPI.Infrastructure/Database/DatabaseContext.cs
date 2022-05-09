@@ -4,7 +4,7 @@ using WebAPI.Infrastructure.Database.Configuration;
 
 namespace WebAPI.Infrastructure.Database
 {
-	public class DatabaseContext : DbContext
+	public sealed class DatabaseContext : DbContext
 	{
 		public DatabaseContext() : base("ScrumBoardContext") { }
 

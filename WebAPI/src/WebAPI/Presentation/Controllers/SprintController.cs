@@ -11,7 +11,7 @@ using WebAPI.Presentation.Filters;
 namespace WebAPI.Presentation.Controllers
 {
 	[RequestBodyFilter]
-    [Route("sprint")]
+    [RoutePrefix("sprint")]
     public class SprintController : ApiController
     {
         private readonly ISprintService sprintService;

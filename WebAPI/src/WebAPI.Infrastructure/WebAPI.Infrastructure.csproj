@@ -51,19 +51,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Database\Configuration\EpicConfiguration.cs" />
+    <Compile Include="Database\Configuration\ProjectConfiguration.cs" />
+    <Compile Include="Database\Configuration\SprintConfiguration.cs" />
+    <Compile Include="Database\Configuration\StoryConfiguration.cs" />
+    <Compile Include="Database\Configuration\TeamConfiguration.cs" />
+    <Compile Include="Database\Configuration\UserConfiguration.cs" />
     <Compile Include="Database\DatabaseContext.cs" />
+    <Compile Include="Database\Repositories\Common\BaseReadOnlyRepository.cs" />
+    <Compile Include="Database\Repositories\Common\BaseWriteOnlyRepository.cs" />
+    <Compile Include="Database\Repositories\User\UserReadOnlyRepository.cs" />
+    <Compile Include="Database\Repositories\User\UserWriteOnlyRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\WebAPI.Domain\WebAPI.Domain.csproj">
-      <Project>{E4486C9C-E34C-4D3F-A809-9186FCAF0C04}</Project>
-      <Name>WebAPI.Domain</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WebAPI.Application\WebAPI.Application.csproj">
+      <Project>{f9f2723d-2d86-498e-93e9-f5823f07a925}</Project>
+      <Name>WebAPI.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebAPI.Domain\WebAPI.Domain.csproj">
+      <Project>{e4486c9c-e34c-4d3f-a809-9186fcaf0c04}</Project>
+      <Name>WebAPI.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

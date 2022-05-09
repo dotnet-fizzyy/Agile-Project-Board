@@ -1,11 +1,11 @@
 ﻿namespace WebAPI.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0009:Member access should be qualified.", Justification = "<Pending>")]
     public partial class InitialCreate : DbMigration
     {
-        public override void Up()
+		public override void Up()
         {
             CreateTable(
                 "dbo.Epics",
@@ -97,8 +97,8 @@
                 .Index(t => t.TeamId);
             
         }
-        
-        public override void Down()
+
+		public override void Down()
         {
             DropForeignKey("dbo.Teams", "ProjectId", "dbo.Projects");
             DropForeignKey("dbo.Users", "TeamId", "dbo.Teams");

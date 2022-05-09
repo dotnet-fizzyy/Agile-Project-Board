@@ -11,7 +11,7 @@ using WebAPI.Presentation.Filters;
 namespace WebAPI.Presentation.Controllers
 {
 	[RequestBodyFilter]
-    [Route("story")]
+    [RoutePrefix("story")]
     public class StoryController : ApiController
     {
         private readonly IStoryService storyService;

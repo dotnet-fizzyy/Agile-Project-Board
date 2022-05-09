@@ -11,7 +11,7 @@ using WebAPI.Presentation.Filters;
 namespace WebAPI.Presentation.Controllers
 {
     [RequestBodyFilter]
-    [Route("team")]
+    [RoutePrefix("team")]
     public class TeamController : ApiController
     {
         private readonly ITeamService teamService;
