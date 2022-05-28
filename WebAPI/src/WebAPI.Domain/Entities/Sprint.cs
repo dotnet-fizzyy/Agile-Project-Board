@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace WebAPI.Domain.Entities
 {
-	public class Sprint
+	public class Sprint : IBaseEntity
 	{
-		public Guid SprintId { get; set; }
+		public Guid Id { get; set; }
 
 		public Guid EpicId { get; set; }
 

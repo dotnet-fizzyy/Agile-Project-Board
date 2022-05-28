@@ -8,8 +8,10 @@ namespace WebAPI.Infrastructure.Database.Configuration
 	{
 		public StoryConfiguration()
 		{
-			this.HasKey(x => x.StoryId);
-			this.Property(x => x.StoryId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+			this.HasKey(x => x.Id);
+			this.Property(x => x.Id)
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity)
+				.HasColumnName("StoryId");
 		}
 	}
 }

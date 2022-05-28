@@ -60,6 +60,16 @@
     <Compile Include="Database\DatabaseContext.cs" />
     <Compile Include="Database\Repositories\Common\BaseReadOnlyRepository.cs" />
     <Compile Include="Database\Repositories\Common\BaseWriteOnlyRepository.cs" />
+    <Compile Include="Database\Repositories\Epic\EpicReadOnlyRepository.cs" />
+    <Compile Include="Database\Repositories\Epic\EpicWriteOnlyRepository.cs" />
+    <Compile Include="Database\Repositories\Project\ProjectReadOnlyRepository.cs" />
+    <Compile Include="Database\Repositories\Project\ProjectWriteOnlyRepository.cs" />
+    <Compile Include="Database\Repositories\Sprint\SprintReadOnlyRepository.cs" />
+    <Compile Include="Database\Repositories\Sprint\SprintWriteOnlyRepository.cs" />
+    <Compile Include="Database\Repositories\Story\StoryWriteOnlyRepository.cs" />
+    <Compile Include="Database\Repositories\Story\StoryReadOnlyRepository.cs" />
+    <Compile Include="Database\Repositories\Team\TeamReadOnlyRepository.cs" />
+    <Compile Include="Database\Repositories\Team\TeamWriteOnlyRepository.cs" />
     <Compile Include="Database\Repositories\User\UserReadOnlyRepository.cs" />
     <Compile Include="Database\Repositories\User\UserWriteOnlyRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

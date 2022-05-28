@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace WebAPI.Domain.Entities
 {
-	public class Team
+	public class Team : IBaseEntity
 	{
-		public Guid TeamId { get; set; }
+		public Guid Id { get; set; }
 
 		public Guid? ProjectId { get; set; }
 

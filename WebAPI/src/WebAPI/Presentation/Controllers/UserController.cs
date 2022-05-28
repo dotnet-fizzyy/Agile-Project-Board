@@ -57,7 +57,7 @@ namespace WebAPI.Presentation.Controllers
         [HttpPost]
         public async Task<IHttpActionResult> CreateUser([FromBody] User user)
         {
-            var createdUser = await this.userService.CreateUserAsync(user);
+            var createdUser = await this.userCommands.CreateAsync(user);
 
             return this.Created(nameof(UserController), createdUser);
         }

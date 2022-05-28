@@ -3,9 +3,9 @@ using WebAPI.Domain.Enums;
 
 namespace WebAPI.Domain.Entities
 {
-	public class User
+	public class User : IBaseEntity
 	{
-		public Guid UserId { get; set; }
+		public Guid Id { get; set; }
 
 		public Guid? TeamId { get; set; }
 

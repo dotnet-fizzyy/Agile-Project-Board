@@ -8,8 +8,10 @@ namespace WebAPI.Infrastructure.Database.Configuration
 	{
 		public ProjectConfiguration()
 		{
-			this.HasKey(x => x.ProjectId);
-			this.Property(x => x.ProjectId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+			this.HasKey(x => x.Id);
+			this.Property(x => x.Id)
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity)
+				.HasColumnName("ProjectId");
 
 			this.HasMany(x => x.Teams).WithOptional().HasForeignKey(e => e.ProjectId);
 			this.HasMany(x => x.Epics).WithOptional().HasForeignKey(e => e.ProjectId);

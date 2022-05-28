@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Epic.cs" />
+    <Compile Include="Entities\IBaseEntity.cs" />
     <Compile Include="Entities\Project.cs" />
     <Compile Include="Entities\Sprint.cs" />
     <Compile Include="Entities\Story.cs" />

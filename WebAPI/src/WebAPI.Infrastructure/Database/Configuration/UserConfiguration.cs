@@ -8,8 +8,10 @@ namespace WebAPI.Infrastructure.Database.Configuration
 	{
 		public UserConfiguration()
 		{
-			this.HasKey(x => x.UserId);
-			this.Property(x => x.UserId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+			this.HasKey(x => x.Id);
+			this.Property(x => x.Id)
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity)
+				.HasColumnName("UserId");
 		}
 	}
 }

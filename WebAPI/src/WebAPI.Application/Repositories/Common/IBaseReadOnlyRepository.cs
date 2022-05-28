@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using WebAPI.Domain.Entities;
 using WebAPI.Domain.Helpers;
 
 namespace WebAPI.Application.Repositories.Common
 {
-	public interface IBaseReadOnlyRepository<T> where T : class
+	public interface IBaseReadOnlyRepository<T> 
+		where T : class, IBaseEntity
 	{
 		Task<CollectionResult<T>> SearchForMultipleItemsAsync(int limit, int offset, bool incudeTracking);
 

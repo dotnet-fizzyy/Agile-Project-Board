@@ -1,6 +1,6 @@
 using System.Data.Entity;
+using System.Reflection;
 using WebAPI.Domain.Entities;
-using WebAPI.Infrastructure.Database.Configuration;
 
 namespace WebAPI.Infrastructure.Database
 {
@@ -22,12 +22,7 @@ namespace WebAPI.Infrastructure.Database
 
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{
-			modelBuilder.Configurations.Add(new UserConfiguration());
-			modelBuilder.Configurations.Add(new TeamConfiguration());
-			modelBuilder.Configurations.Add(new StoryConfiguration());
-			modelBuilder.Configurations.Add(new ProjectConfiguration());
-			modelBuilder.Configurations.Add(new EpicConfiguration());
-			modelBuilder.Configurations.Add(new SprintConfiguration());
+			modelBuilder.Configurations.AddFromAssembly(Assembly.Load("WebAPI.Infrastructure"));
 		}
 	}
 }
