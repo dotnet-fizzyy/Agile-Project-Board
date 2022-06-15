@@ -20,18 +20,11 @@ namespace WebAPI.Infrastructure.Database.Repositories.Common
 			this.dbSet = databaseContext.Set<T>();
 		}
 
-		public async Task<T> CreateEntityAsync(T entity, bool commitImmediatly)
+		public async Task<T> CreateEntityAsync(T entity)
 		{
 			try
 			{
 				this.dbSet.Add(entity);
-
-				if (commitImmediatly)
-				{
-					await this.CommitAsync();
-
-					this.DatabaseContext.Entry(entity).State = EntityState.Detached;
-				}
 
 				return entity;
 			}
@@ -42,18 +35,11 @@ namespace WebAPI.Infrastructure.Database.Repositories.Common
 			}
 		}
 
-		public async Task<T> UpdateEntityAsync(T item, bool commitImmediatly)
+		public async Task<T> UpdateEntityAsync(T item)
 		{
 			try
 			{
 				this.dbSet.AddOrUpdate(item);
-
-				if (commitImmediatly)
-				{
-					await this.CommitAsync();
-
-					this.DatabaseContext.Entry(item).State = EntityState.Detached;
-				}
 
 				return item;
 			}

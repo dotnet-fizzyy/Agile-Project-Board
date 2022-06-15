@@ -45,6 +45,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Mappers\UserProfile.cs" />
+    <Compile Include="Models\User\BaseUser.cs" />
+    <Compile Include="Models\User\UserAction.cs" />
+    <Compile Include="Models\User\UserActivityStatusAction.cs" />
+    <Compile Include="Models\User\UserPasswordAction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Common\IBaseReadOnlyRepository.cs" />
     <Compile Include="Repositories\Common\IBaseWriteOnlyRepository.cs" />

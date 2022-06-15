@@ -1,5 +1,4 @@
 using System.Data.Entity;
-using System.Reflection;
 using WebAPI.Domain.Entities;
 
 namespace WebAPI.Infrastructure.Database
@@ -22,7 +21,7 @@ namespace WebAPI.Infrastructure.Database
 
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{
-			modelBuilder.Configurations.AddFromAssembly(Assembly.Load("WebAPI.Infrastructure"));
+			modelBuilder.Configurations.AddFromAssembly(typeof(DatabaseContext).Assembly);
 		}
 	}
 }

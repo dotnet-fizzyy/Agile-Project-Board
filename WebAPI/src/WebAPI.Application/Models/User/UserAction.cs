@@ -1,6 +1,6 @@
 ﻿namespace WebAPI.Application.Models.User
 {
-	public class UserResult : BaseUser
+	public class UserAction : BaseUser
 	{
 
 	}

@@ -28,9 +28,9 @@ namespace WebAPI.Application.Services.User.Queries
 			return this.mapper.Map<UserResult>(user);
 		}
 
-		public async Task<CollectionResult<UserResult>> GetUsers(int limit, int offset)
+		public async Task<CollectionResult<UserResult>> GetUsersAsync(int limit, int offset)
 		{
-			var includeTracking = false;
+			const bool includeTracking = false;
 
 			var usersCollection = await this.userReadRepository
 				.SearchForMultipleItemsAsync(limit, offset, includeTracking);

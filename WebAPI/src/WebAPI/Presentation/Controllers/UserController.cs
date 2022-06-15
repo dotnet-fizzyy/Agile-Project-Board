@@ -3,10 +3,11 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using WebAPI.Application.Models.User;
 using WebAPI.Application.Services.User.Commands;
 using WebAPI.Application.Services.User.Queries;
 using WebAPI.Core.Interfaces.Services;
-using WebAPI.Models.Result;
+using WebAPI.Domain.Helpers;
 using WebAPI.Models.Web;
 using WebAPI.Presentation.Filters;
 
@@ -17,18 +18,18 @@ namespace WebAPI.Presentation.Controllers
     public class UserController : ApiController
     {
         private readonly IUserService userService;
-        private readonly IUserCommandsUseCase userCommands;
         private readonly IUserQueriesUseCase userQueries;
+        private readonly IUserCommandsUseCase userCommands;
 
         public UserController(
-            IUserService userService, 
-            IUserQueriesUseCase userQueries, 
-            IUserCommandsUseCase userCommands
+            IUserService userService,
+            IUserCommandsUseCase userCommands,
+            IUserQueriesUseCase userQueries
         )
         {
             this.userService = userService;
-            this.userQueries = userQueries;
             this.userCommands = userCommands;
+            this.userQueries = userQueries;
         }
 
         /// <summary>
@@ -36,8 +37,11 @@ namespace WebAPI.Presentation.Controllers
         /// </summary>
         [HttpGet]
         [Route("all")]
-        public async Task<CollectionResponse<User>> GetUsers() =>
-            await this.userService.GetUsersAsync();
+        public async Task<CollectionResult<UserResult>> GetUsers(
+            [FromUri] int limit,
+            [FromUri] int offset
+        ) =>
+            await this.userQueries.GetUsersAsync(limit, offset);
 
         /// <summary>
         /// Get exact user by its id
@@ -49,17 +53,6 @@ namespace WebAPI.Presentation.Controllers
             var user = await this.userQueries.GetUserByIdAsync(userId);
 
             return this.Ok(user);
-        }
-
-        /// <summary>
-        /// Create user
-        /// </summary>
-        [HttpPost]
-        public async Task<IHttpActionResult> CreateUser([FromBody] User user)
-        {
-            var createdUser = await this.userCommands.CreateAsync(user);
-
-            return this.Created(nameof(UserController), createdUser);
         }
 
         /// <summary>
@@ -92,12 +85,23 @@ namespace WebAPI.Presentation.Controllers
         }
 
         /// <summary>
+        /// Create user
+        /// </summary>
+        [HttpPost]
+        public async Task<IHttpActionResult> Create([FromBody] UserAction user)
+        {
+            var createdUser = await this.userCommands.CreateUserAsync(user);
+
+            return this.Created(nameof(UserController), createdUser);
+        }
+
+        /// <summary>
         /// Update user (without password)
         /// </summary>
         [HttpPut]
-        public async Task<IHttpActionResult> UpdateUser([FromBody] User user)
+        public async Task<IHttpActionResult> Update([FromBody] UserAction user)
         {
-            var updatedUser = await this.userService.UpdateUserAsync(user);
+            var updatedUser = await this.userCommands.UpdateAsync(user);
 
             return this.Ok(updatedUser);
         }
@@ -107,9 +111,9 @@ namespace WebAPI.Presentation.Controllers
         /// </summary>
         [HttpPut]
         [Route("password")]
-        public async Task<HttpResponseMessage> UpdateUserPassword([FromBody] UserPasswordUpdateModel user)
+        public async Task<HttpResponseMessage> UpdateUserPassword([FromBody] UserPasswordAction user)
         {
-	        await this.userService.UpdateUserPasswordAsync(user);
+	        await this.userCommands.UpdatePasswordAsync(user);
 
 	        return new HttpResponseMessage(HttpStatusCode.NoContent);
         }
@@ -119,9 +123,9 @@ namespace WebAPI.Presentation.Controllers
         /// </summary>
         [HttpPut]
         [Route("status")]
-        public async Task<HttpResponseMessage> UpdateUserStatus([FromBody] User user)
+        public async Task<HttpResponseMessage> UpdateActivityStatus([FromBody] UserActivityStatusAction userActivityStatus)
         {
-	        await this.userService.UpdateUserStatusAsync(user);
+            await this.userCommands.UpdateActivityStatusAsync(userActivityStatus);
 
             return new HttpResponseMessage(HttpStatusCode.NoContent);
         }
@@ -131,9 +135,9 @@ namespace WebAPI.Presentation.Controllers
         /// </summary>
         [HttpDelete]
         [Route("{userId:guid}")]
-        public async Task<HttpResponseMessage> RemoveUser(Guid userId)
+        public async Task<HttpResponseMessage> Remove(Guid userId)
         {
-            await this.userService.RemoveUserAsync(userId);
+            await this.userCommands.RemoveByIdAsync(userId);
 
             return new HttpResponseMessage(HttpStatusCode.NoContent);
         }

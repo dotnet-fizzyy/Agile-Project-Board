@@ -7,9 +7,9 @@ namespace WebAPI.Application.Repositories.Common
 	public interface IBaseWriteOnlyRepository<T> 
 		where T : class, IBaseEntity
 	{
-		Task<T> CreateEntityAsync(T entity, bool commitImmediatly);
+		Task<T> CreateEntityAsync(T entity);
 
-		Task<T> UpdateEntityAsync(T item, bool commitImmediatly);
+		Task<T> UpdateEntityAsync(T item);
 
 		Task RemoveEntityAsync(Guid id);
 
