@@ -44,7 +44,7 @@ namespace WebAPI.Application.Services.User.Commands
 
 		public async Task UpdatePasswordAsync(UserPasswordAction userPassword)
 		{
-			var hashedPassword = PasswordHashing.GeneratePassword(userPassword.Password);
+			var hashedPassword = AppHash.HashPassword(userPassword.Password);
 
 			this.userWriteOnlyRepository.UpdatePassword(userPassword.UserId, hashedPassword);
 
@@ -62,7 +62,7 @@ namespace WebAPI.Application.Services.User.Commands
 		private async Task<UserResult> CreateUserAsync(UserAction user, Domain.Enums.UserRole assignmentRole)
 		{
 			var userEntity = this.mapper.Map<Domain.Entities.User>(user);
-			userEntity.Password = PasswordHashing.GeneratePassword(userEntity.Password);
+			userEntity.Password = AppHash.HashPassword(userEntity.Password);
 			userEntity.UserRole = assignmentRole;
 
 			var createdUserEntity = await this.userWriteOnlyRepository.CreateEntityAsync(userEntity);

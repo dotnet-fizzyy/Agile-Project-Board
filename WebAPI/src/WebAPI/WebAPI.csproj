@@ -263,7 +263,6 @@
     <Compile Include="ApplicationLogic\Services\SprintService.cs" />
     <Compile Include="ApplicationLogic\Services\StoryService.cs" />
     <Compile Include="ApplicationLogic\Services\TeamService.cs" />
-    <Compile Include="ApplicationLogic\Services\UserService.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\InjectionConfiguration.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
@@ -282,7 +281,6 @@
     <Compile Include="Core\Interfaces\Services\ISprintService.cs" />
     <Compile Include="Core\Interfaces\Services\IStoryService.cs" />
     <Compile Include="Core\Interfaces\Services\ITeamService.cs" />
-    <Compile Include="Core\Interfaces\Services\IUserService.cs" />
     <Compile Include="Infrastructure\MSSQL\Configuration\EpicConfiguration.cs" />
     <Compile Include="Infrastructure\MSSQL\Configuration\ProjectConfiguration.cs" />
     <Compile Include="Infrastructure\MSSQL\Configuration\SprintConfiguration.cs" />
@@ -314,7 +312,6 @@
     <Compile Include="Models\Entities\Team.cs" />
     <Compile Include="Models\Entities\User.cs" />
     <Compile Include="Models\Result\CollectionResponse.cs" />
-    <Compile Include="Models\Web\AuthUser.cs" />
     <Compile Include="Models\Web\Epic.cs" />
     <Compile Include="Models\Web\FullProjectDescription.cs" />
     <Compile Include="Models\Web\Project.cs" />
@@ -327,6 +324,7 @@
     <Compile Include="Models\Web\UpdateStoryColumnModel.cs" />
     <Compile Include="Models\Web\User.cs" />
     <Compile Include="Models\Web\UserPasswordUpdateModel.cs" />
+    <Compile Include="Presentation\Controllers\AuthController.cs" />
     <Compile Include="Presentation\Controllers\EpicController.cs" />
     <Compile Include="Presentation\Controllers\ProjectController.cs" />
     <Compile Include="Presentation\Controllers\SprintController.cs" />

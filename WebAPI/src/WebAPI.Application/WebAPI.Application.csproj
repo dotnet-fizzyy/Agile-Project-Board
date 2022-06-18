@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Mappers\UserProfile.cs" />
+    <Compile Include="Models\User\AuthUser.cs" />
     <Compile Include="Models\User\BaseUser.cs" />
     <Compile Include="Models\User\UserAction.cs" />
     <Compile Include="Models\User\UserActivityStatusAction.cs" />

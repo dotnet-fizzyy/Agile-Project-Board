@@ -13,9 +13,6 @@ namespace WebAPI.Presentation.Mappers
 				.ForMember(x => x.Password, opt => opt.Ignore());
 			this.CreateMap<Models.Web.User, Models.Entities.User>()
 				.ForMember(x => x.UserRole, opt => opt.MapFrom(src => (UserRole)Enum.Parse(typeof(UserRole), src.UserRole)));
-
-			this.CreateMap<Models.Web.AuthUser, Models.Entities.User>()
-				.ForMember(x => x.IsActive, src => src.MapFrom(opt => true));
 		}
 	}
 }

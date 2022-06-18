@@ -56,7 +56,6 @@ namespace WebAPI.App_Start
             this.Bind<IUserWriteOnlyRepository>().To<UserWriteOnlyRepository>().InRequestScope();
 
             // Services
-            this.Bind<IUserService>().To<UserService>().InRequestScope();
             this.Bind<IProjectService>().To<ProjectService>().InRequestScope();
             this.Bind<ITeamService>().To<TeamService>().InRequestScope();
             this.Bind<ISprintService>().To<SprintService>().InRequestScope();

@@ -1,4 +1,4 @@
-﻿namespace WebAPI.Models.Web
+﻿namespace WebAPI.Application.Models.User
 {
 	public class AuthUser
 	{

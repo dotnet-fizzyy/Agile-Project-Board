@@ -2,9 +2,9 @@
 
 namespace WebAPI.Application.Utilities
 {
-	public static class PasswordHashing
+	public static class AppHash
 	{
-		public static string GeneratePassword(string input)
+		public static string HashPassword(string input)
 		{
 			var bytes = Encoding.UTF8.GetBytes(input);
 

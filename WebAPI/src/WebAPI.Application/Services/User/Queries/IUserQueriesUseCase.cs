@@ -7,6 +7,8 @@ namespace WebAPI.Application.Services.User.Queries
 {
 	public interface IUserQueriesUseCase
 	{
+		Task<UserResult> AuthenticateUser(AuthUser authUser);
+
 		Task<CollectionResult<UserResult>> GetUsersAsync(int limit, int offset);
 
 		Task<UserResult> GetUserByIdAsync(Guid id);

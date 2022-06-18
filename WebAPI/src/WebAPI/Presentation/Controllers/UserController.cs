@@ -6,9 +6,7 @@ using System.Web.Http;
 using WebAPI.Application.Models.User;
 using WebAPI.Application.Services.User.Commands;
 using WebAPI.Application.Services.User.Queries;
-using WebAPI.Core.Interfaces.Services;
 using WebAPI.Domain.Helpers;
-using WebAPI.Models.Web;
 using WebAPI.Presentation.Filters;
 
 namespace WebAPI.Presentation.Controllers
@@ -17,17 +15,14 @@ namespace WebAPI.Presentation.Controllers
     [RoutePrefix("user")]
     public class UserController : ApiController
     {
-        private readonly IUserService userService;
         private readonly IUserQueriesUseCase userQueries;
         private readonly IUserCommandsUseCase userCommands;
 
         public UserController(
-            IUserService userService,
             IUserCommandsUseCase userCommands,
             IUserQueriesUseCase userQueries
         )
         {
-            this.userService = userService;
             this.userCommands = userCommands;
             this.userQueries = userQueries;
         }
@@ -56,30 +51,13 @@ namespace WebAPI.Presentation.Controllers
         }
 
         /// <summary>
-        /// Authenticate user with his name and password
-        /// </summary>
-        [HttpPost]
-        [Route("auth")]
-        public async Task<IHttpActionResult> AuthenticateUser([FromBody] AuthUser authUser)
-        {
-	        var authenticatedUser = await this.userService.AuthenticateUser(authUser);
-
-	        if (authenticatedUser == null)
-	        {
-		        return this.BadRequest();
-	        }
-
-	        return this.Ok(authenticatedUser);
-        }
-
-        /// <summary>
         /// Create customer on registration
         /// </summary>
         [HttpPost]
         [Route("customer")]
-        public async Task<IHttpActionResult> CreateCustomer([FromBody] AuthUser authUser)
+        public async Task<IHttpActionResult> CreateCustomer([FromBody] UserAction user)
         {
-	        var createdCustomer = await this.userService.CreateCustomerAsync(authUser);
+	        var createdCustomer = await this.userCommands.CreateCustomerAsync(user);
 
 	        return this.Created(nameof(UserController), createdCustomer);
         }
@@ -88,7 +66,7 @@ namespace WebAPI.Presentation.Controllers
         /// Create user
         /// </summary>
         [HttpPost]
-        public async Task<IHttpActionResult> Create([FromBody] UserAction user)
+        public async Task<IHttpActionResult> CreateUser([FromBody] UserAction user)
         {
             var createdUser = await this.userCommands.CreateUserAsync(user);
 
