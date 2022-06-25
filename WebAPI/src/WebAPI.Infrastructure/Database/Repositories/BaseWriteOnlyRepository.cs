@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using WebAPI.Application.Repositories.Common;
 using WebAPI.Domain.Entities;
 
-namespace WebAPI.Infrastructure.Database.Repositories.Common
+namespace WebAPI.Infrastructure.Database.Repositories
 {
 	public abstract class BaseWriteOnlyRepository<T> : IBaseWriteOnlyRepository<T>
 		where T : class, IBaseEntity

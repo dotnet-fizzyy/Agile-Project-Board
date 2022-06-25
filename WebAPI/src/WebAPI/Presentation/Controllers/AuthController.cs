@@ -2,9 +2,11 @@
 using System.Web.Http;
 using WebAPI.Application.Models.User;
 using WebAPI.Application.Services.User.Queries;
+using WebAPI.Presentation.Filters;
 
 namespace WebAPI.Presentation.Controllers
 {
+	[RequestBodyFilter]
 	[RoutePrefix("auth")]
 	public class AuthController : ApiController
 	{
@@ -16,7 +18,7 @@ namespace WebAPI.Presentation.Controllers
 		}
 
 		/// <summary>
-		/// Authenticate user with his name and password
+		/// Authenticate user with name and password
 		/// </summary>
 		[HttpPost]
 		public async Task<IHttpActionResult> AuthenticateUser([FromBody] AuthUser authUser)

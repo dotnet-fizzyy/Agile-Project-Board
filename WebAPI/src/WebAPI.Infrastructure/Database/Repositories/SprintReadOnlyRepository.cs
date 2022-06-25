@@ -1,7 +1,6 @@
 ﻿using WebAPI.Application.Repositories.Sprint;
-using WebAPI.Infrastructure.Database.Repositories.Common;
 
-namespace WebAPI.Infrastructure.Database.Repositories.Sprint
+namespace WebAPI.Infrastructure.Database.Repositories
 {
 	public class SprintReadOnlyRepository : BaseReadOnlyRepository<Domain.Entities.Sprint>, ISprintReadOnlyRepository
 	{

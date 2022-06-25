@@ -6,7 +6,7 @@ using System.Web.Http;
 using WebAPI.Application.Models.User;
 using WebAPI.Application.Services.User.Commands;
 using WebAPI.Application.Services.User.Queries;
-using WebAPI.Domain.Helpers;
+using WebAPI.DomainAPI.Extensions;
 using WebAPI.Presentation.Filters;
 
 namespace WebAPI.Presentation.Controllers

@@ -1,7 +1,6 @@
 ﻿using WebAPI.Application.Repositories.Story;
-using WebAPI.Infrastructure.Database.Repositories.Common;
 
-namespace WebAPI.Infrastructure.Database.Repositories.Story
+namespace WebAPI.Infrastructure.Database.Repositories
 {
 	public class StoryReadOnlyRepository : BaseReadOnlyRepository<Domain.Entities.Story>, IStoryReadOnlyRepository
 	{

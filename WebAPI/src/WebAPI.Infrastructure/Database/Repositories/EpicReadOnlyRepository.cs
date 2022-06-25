@@ -1,7 +1,6 @@
 ﻿using WebAPI.Application.Repositories.Epic;
-using WebAPI.Infrastructure.Database.Repositories.Common;
 
-namespace WebAPI.Infrastructure.Database.Repositories.Epic
+namespace WebAPI.Infrastructure.Database.Repositories
 {
 	public class EpicReadOnlyRepository : BaseReadOnlyRepository<Domain.Entities.Epic>, IEpicReadOnlyRepository
 	{

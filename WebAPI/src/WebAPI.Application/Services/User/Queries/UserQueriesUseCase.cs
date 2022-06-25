@@ -5,7 +5,7 @@ using AutoMapper;
 using WebAPI.Application.Models.User;
 using WebAPI.Application.Repositories.User;
 using WebAPI.Application.Utilities;
-using WebAPI.Domain.Helpers;
+using WebAPI.DomainAPI.Extensions;
 
 namespace WebAPI.Application.Services.User.Queries
 {

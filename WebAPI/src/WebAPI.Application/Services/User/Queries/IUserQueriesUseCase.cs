@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using WebAPI.Application.Models.User;
-using WebAPI.Domain.Helpers;
+using WebAPI.DomainAPI.Extensions;
 
 namespace WebAPI.Application.Services.User.Queries
 {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace WebAPI.Domain.Helpers
+namespace WebAPI.DomainAPI.Extensions
 {
 	public class CollectionResult<T> where T : class
 	{

@@ -4,9 +4,10 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using WebAPI.Application.Repositories.Common;
 using WebAPI.Domain.Entities;
-using WebAPI.Domain.Helpers;
+using WebAPI.DomainAPI.Exceptions;
+using WebAPI.DomainAPI.Extensions;
 
-namespace WebAPI.Infrastructure.Database.Repositories.Common
+namespace WebAPI.Infrastructure.Database.Repositories
 {
 	public abstract class BaseReadOnlyRepository<T> : IBaseReadOnlyRepository<T>
 		where T : class, IBaseEntity
@@ -21,7 +22,11 @@ namespace WebAPI.Infrastructure.Database.Repositories.Common
 			this.dbSet = databaseContext.Set<T>();
 		}
 
-		public Task<CollectionResult<T>> SearchForMultipleItemsAsync(int limit, int offset, bool incudeTracking) => throw new NotImplementedException();
+		public async Task<CollectionResult<T>> SearchForMultipleItemsAsync(int limit, int offset, bool incudeTracking)
+		{
+			// todo: work
+			return null;
+		}
 
 		public async Task<T> SearchByIdAsync(Guid id, bool incudeTracking) => 
 			await this.SearchForSingleItemAsync(x => x.Id == id, incudeTracking);
@@ -39,18 +44,12 @@ namespace WebAPI.Infrastructure.Database.Repositories.Common
 				entity = await this.dbSet.AsNoTracking().SingleOrDefaultAsync(expression);
 			}
 
-			HandleMissingEntity(entity);
-
-			return entity;
-		}
-
-		private static void HandleMissingEntity(T entity)
-		{
 			if (entity == null)
 			{
-				// todo: update exceptions hierarchy
-				throw new Exception();
+				throw new NotFoundException(typeof(T).Name, string.Empty);
 			}
+
+			return entity;
 		}
 	}
 }

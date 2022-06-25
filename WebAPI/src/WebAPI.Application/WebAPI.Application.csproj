@@ -63,6 +63,10 @@
     <Compile Include="Repositories\Story\IStoryWriteOnlyRepository.cs" />
     <Compile Include="Repositories\Team\ITeamReadOnlyRepository.cs" />
     <Compile Include="Repositories\Team\ITeamWriteOnlyRepository.cs" />
+    <Compile Include="Services\Epic\Commands\EpicWriteOnlyUseCase.cs" />
+    <Compile Include="Services\Epic\Commands\IEpicWriteOnlyUseCase.cs" />
+    <Compile Include="Services\Epic\Queries\EpicReadOnlyUseCase.cs" />
+    <Compile Include="Services\Epic\Queries\IEpicReadOnlyUseCase.cs" />
     <Compile Include="Services\User\Commands\IUserCommandsUseCase.cs" />
     <Compile Include="Models\User\UserResult.cs" />
     <Compile Include="Services\User\Commands\UserCommandsUserCase.cs" />
@@ -70,10 +74,17 @@
     <Compile Include="Services\User\Queries\UserQueriesUseCase.cs" />
     <Compile Include="Repositories\User\IUserReadOnlyRepository.cs" />
     <Compile Include="Repositories\User\IUserWriteOnlyRepository.cs" />
-    <Compile Include="Utilities\PasswordHashing.cs" />
+    <Compile Include="Utilities\AppHash.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
+    <Folder Include="Services\Project\Commands\" />
+    <Folder Include="Services\Project\Queries\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WebAPI.DomainAPI\WebAPI.DomainAPI.csproj">
+      <Project>{f72a01ca-64fd-4859-8a3b-2567f1a58ab3}</Project>
+      <Name>WebAPI.DomainAPI</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WebAPI.Domain\WebAPI.Domain.csproj">
       <Project>{e4486c9c-e34c-4d3f-a809-9186fcaf0c04}</Project>
       <Name>WebAPI.Domain</Name>

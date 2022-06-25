@@ -2,7 +2,7 @@
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using WebAPI.Domain.Entities;
-using WebAPI.Domain.Helpers;
+using WebAPI.DomainAPI.Extensions;
 
 namespace WebAPI.Application.Repositories.Common
 {

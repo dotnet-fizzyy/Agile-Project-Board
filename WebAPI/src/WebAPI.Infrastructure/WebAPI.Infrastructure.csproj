@@ -58,20 +58,20 @@
     <Compile Include="Database\Configuration\TeamConfiguration.cs" />
     <Compile Include="Database\Configuration\UserConfiguration.cs" />
     <Compile Include="Database\DatabaseContext.cs" />
-    <Compile Include="Database\Repositories\Common\BaseReadOnlyRepository.cs" />
-    <Compile Include="Database\Repositories\Common\BaseWriteOnlyRepository.cs" />
-    <Compile Include="Database\Repositories\Epic\EpicReadOnlyRepository.cs" />
-    <Compile Include="Database\Repositories\Epic\EpicWriteOnlyRepository.cs" />
-    <Compile Include="Database\Repositories\Project\ProjectReadOnlyRepository.cs" />
-    <Compile Include="Database\Repositories\Project\ProjectWriteOnlyRepository.cs" />
-    <Compile Include="Database\Repositories\Sprint\SprintReadOnlyRepository.cs" />
-    <Compile Include="Database\Repositories\Sprint\SprintWriteOnlyRepository.cs" />
-    <Compile Include="Database\Repositories\Story\StoryWriteOnlyRepository.cs" />
-    <Compile Include="Database\Repositories\Story\StoryReadOnlyRepository.cs" />
-    <Compile Include="Database\Repositories\Team\TeamReadOnlyRepository.cs" />
-    <Compile Include="Database\Repositories\Team\TeamWriteOnlyRepository.cs" />
-    <Compile Include="Database\Repositories\User\UserReadOnlyRepository.cs" />
-    <Compile Include="Database\Repositories\User\UserWriteOnlyRepository.cs" />
+    <Compile Include="Database\Repositories\BaseReadOnlyRepository.cs" />
+    <Compile Include="Database\Repositories\BaseWriteOnlyRepository.cs" />
+    <Compile Include="Database\Repositories\EpicReadOnlyRepository.cs" />
+    <Compile Include="Database\Repositories\EpicWriteOnlyRepository.cs" />
+    <Compile Include="Database\Repositories\ProjectReadOnlyRepository.cs" />
+    <Compile Include="Database\Repositories\ProjectWriteOnlyRepository.cs" />
+    <Compile Include="Database\Repositories\SprintReadOnlyRepository.cs" />
+    <Compile Include="Database\Repositories\SprintWriteOnlyRepository.cs" />
+    <Compile Include="Database\Repositories\StoryWriteOnlyRepository.cs" />
+    <Compile Include="Database\Repositories\StoryReadOnlyRepository.cs" />
+    <Compile Include="Database\Repositories\TeamReadOnlyRepository.cs" />
+    <Compile Include="Database\Repositories\TeamWriteOnlyRepository.cs" />
+    <Compile Include="Database\Repositories\UserReadOnlyRepository.cs" />
+    <Compile Include="Database\Repositories\UserWriteOnlyRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -82,6 +82,10 @@
     <ProjectReference Include="..\WebAPI.Application\WebAPI.Application.csproj">
       <Project>{f9f2723d-2d86-498e-93e9-f5823f07a925}</Project>
       <Name>WebAPI.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebAPI.DomainAPI\WebAPI.DomainAPI.csproj">
+      <Project>{f72a01ca-64fd-4859-8a3b-2567f1a58ab3}</Project>
+      <Name>WebAPI.DomainAPI</Name>
     </ProjectReference>
     <ProjectReference Include="..\WebAPI.Domain\WebAPI.Domain.csproj">
       <Project>{e4486c9c-e34c-4d3f-a809-9186fcaf0c04}</Project>

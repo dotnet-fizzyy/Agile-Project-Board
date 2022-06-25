@@ -1,8 +1,7 @@
 ﻿using System;
 using WebAPI.Application.Repositories.User;
-using WebAPI.Infrastructure.Database.Repositories.Common;
 
-namespace WebAPI.Infrastructure.Database.Repositories.User
+namespace WebAPI.Infrastructure.Database.Repositories
 {
 	public class UserWriteOnlyRepository : BaseWriteOnlyRepository<Domain.Entities.User>, IUserWriteOnlyRepository
 	{

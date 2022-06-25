@@ -1,7 +1,6 @@
 ﻿using WebAPI.Application.Repositories.Project;
-using WebAPI.Infrastructure.Database.Repositories.Common;
 
-namespace WebAPI.Infrastructure.Database.Repositories.Project
+namespace WebAPI.Infrastructure.Database.Repositories
 {
 	public class ProjectReadOnlyRepository : BaseReadOnlyRepository<Domain.Entities.Project>, IProjectReadOnlyRepository
 	{

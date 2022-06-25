@@ -1,10 +1,9 @@
-﻿using System;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Threading.Tasks;
 using WebAPI.Application.Repositories.User;
-using WebAPI.Infrastructure.Database.Repositories.Common;
+using WebAPI.DomainAPI.Exceptions;
 
-namespace WebAPI.Infrastructure.Database.Repositories.User
+namespace WebAPI.Infrastructure.Database.Repositories
 {
 	public class UserReadOnlyRepository : BaseReadOnlyRepository<Domain.Entities.User>, IUserReadOnlyRepository
 	{
@@ -23,7 +22,10 @@ namespace WebAPI.Infrastructure.Database.Repositories.User
 
 			if (existingUser == null)
 			{
-				throw new Exception("Not found");
+				throw new NotFoundException(
+					nameof(Domain.Entities.User), 
+					$"{nameof(existingUser.Username)} and {nameof(existingUser.Password)}"
+				);
 			}
 
 			return existingUser;

@@ -337,6 +337,7 @@
     <Compile Include="Core\Enums\Columns.cs" />
     <Compile Include="Core\Interfaces\Repository\IBaseCrudRepository.cs" />
     <Compile Include="Core\Interfaces\Repository\IUserRepository.cs" />
+    <Compile Include="Presentation\Filters\ExceptionFilterAttribute.cs" />
     <Compile Include="Presentation\Filters\RequestBodyFilterAttribute.cs" />
     <Compile Include="Presentation\Filters\UserVerificationFilterAttribute.cs" />
     <Compile Include="Presentation\Mappers\EpicProfile.cs" />
@@ -389,6 +390,10 @@
     <ProjectReference Include="..\WebAPI.Application\WebAPI.Application.csproj">
       <Project>{f9f2723d-2d86-498e-93e9-f5823f07a925}</Project>
       <Name>WebAPI.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebAPI.DomainAPI\WebAPI.DomainAPI.csproj">
+      <Project>{f72a01ca-64fd-4859-8a3b-2567f1a58ab3}</Project>
+      <Name>WebAPI.DomainAPI</Name>
     </ProjectReference>
     <ProjectReference Include="..\WebAPI.Domain\WebAPI.Domain.csproj">
       <Project>{e4486c9c-e34c-4d3f-a809-9186fcaf0c04}</Project>
