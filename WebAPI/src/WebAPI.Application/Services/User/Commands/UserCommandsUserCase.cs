@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using WebAPI.Application.Models.User;
-using WebAPI.Application.Repositories.User;
+using WebAPI.Application.Repositories;
 using WebAPI.Application.Utilities;
 
 namespace WebAPI.Application.Services.User.Commands

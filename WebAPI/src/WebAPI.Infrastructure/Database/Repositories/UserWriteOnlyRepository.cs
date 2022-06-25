@@ -1,9 +1,10 @@
 ﻿using System;
-using WebAPI.Application.Repositories.User;
+using WebAPI.Application.Repositories;
+using WebAPI.Domain.Entities;
 
 namespace WebAPI.Infrastructure.Database.Repositories
 {
-	public class UserWriteOnlyRepository : BaseWriteOnlyRepository<Domain.Entities.User>, IUserWriteOnlyRepository
+	public class UserWriteOnlyRepository : BaseWriteOnlyRepository<User>, IUserWriteOnlyRepository
 	{
 		public UserWriteOnlyRepository(DatabaseContext databaseContext) : base(databaseContext)
 		{
@@ -12,7 +13,7 @@ namespace WebAPI.Infrastructure.Database.Repositories
 
 		public void UpdatePassword(Guid userId, string password)
 		{
-			var user = new Domain.Entities.User
+			var user = new User
 			{
 				Id = userId,
 				Password = password,
@@ -24,7 +25,7 @@ namespace WebAPI.Infrastructure.Database.Repositories
 
 		public void UpdateActivityStatus(Guid userId, bool isActive)
 		{
-			var user = new Domain.Entities.User
+			var user = new User
 			{
 				Id = userId,
 				IsActive = isActive

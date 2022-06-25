@@ -2,7 +2,7 @@
 using System.Data.Entity;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using WebAPI.Application.Repositories.Common;
+using WebAPI.Application.Repositories;
 using WebAPI.Domain.Entities;
 using WebAPI.DomainAPI.Exceptions;
 using WebAPI.DomainAPI.Extensions;
@@ -46,6 +46,7 @@ namespace WebAPI.Infrastructure.Database.Repositories
 
 			if (entity == null)
 			{
+				// todo: fix with expressions cast
 				throw new NotFoundException(typeof(T).Name, string.Empty);
 			}
 

@@ -2,7 +2,7 @@
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Threading.Tasks;
-using WebAPI.Application.Repositories.Common;
+using WebAPI.Application.Repositories;
 using WebAPI.Domain.Entities;
 
 namespace WebAPI.Infrastructure.Database.Repositories

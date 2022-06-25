@@ -1,8 +1,9 @@
-﻿using WebAPI.Application.Repositories.Sprint;
+﻿using WebAPI.Application.Repositories;
+using WebAPI.Domain.Entities;
 
 namespace WebAPI.Infrastructure.Database.Repositories
 {
-	public class SprintReadOnlyRepository : BaseReadOnlyRepository<Domain.Entities.Sprint>, ISprintReadOnlyRepository
+	public class SprintReadOnlyRepository : BaseReadOnlyRepository<Sprint>, ISprintReadOnlyRepository
 	{
 		public SprintReadOnlyRepository(DatabaseContext databaseContext) : base(databaseContext)
 		{

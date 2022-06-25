@@ -51,18 +51,18 @@
     <Compile Include="Models\User\UserActivityStatusAction.cs" />
     <Compile Include="Models\User\UserPasswordAction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\Common\IBaseReadOnlyRepository.cs" />
-    <Compile Include="Repositories\Common\IBaseWriteOnlyRepository.cs" />
-    <Compile Include="Repositories\Epic\IEpicWriteOnlyRepository.cs" />
-    <Compile Include="Repositories\Epic\IEpicReadOnlyRepository.cs" />
-    <Compile Include="Repositories\Project\IProjectReadOnlyRepository.cs" />
-    <Compile Include="Repositories\Project\IProjectWriteOnlyRepository.cs" />
-    <Compile Include="Repositories\Sprint\ISprintReadOnlyRepository.cs" />
-    <Compile Include="Repositories\Sprint\ISprintWriteOnlyRepository.cs" />
-    <Compile Include="Repositories\Story\IStoryReadOnlyRepository.cs" />
-    <Compile Include="Repositories\Story\IStoryWriteOnlyRepository.cs" />
-    <Compile Include="Repositories\Team\ITeamReadOnlyRepository.cs" />
-    <Compile Include="Repositories\Team\ITeamWriteOnlyRepository.cs" />
+    <Compile Include="Repositories\IBaseReadOnlyRepository.cs" />
+    <Compile Include="Repositories\IBaseWriteOnlyRepository.cs" />
+    <Compile Include="Repositories\IEpicWriteOnlyRepository.cs" />
+    <Compile Include="Repositories\IEpicReadOnlyRepository.cs" />
+    <Compile Include="Repositories\IProjectReadOnlyRepository.cs" />
+    <Compile Include="Repositories\IProjectWriteOnlyRepository.cs" />
+    <Compile Include="Repositories\ISprintReadOnlyRepository.cs" />
+    <Compile Include="Repositories\ISprintWriteOnlyRepository.cs" />
+    <Compile Include="Repositories\IStoryReadOnlyRepository.cs" />
+    <Compile Include="Repositories\IStoryWriteOnlyRepository.cs" />
+    <Compile Include="Repositories\ITeamReadOnlyRepository.cs" />
+    <Compile Include="Repositories\ITeamWriteOnlyRepository.cs" />
     <Compile Include="Services\Epic\Commands\EpicWriteOnlyUseCase.cs" />
     <Compile Include="Services\Epic\Commands\IEpicWriteOnlyUseCase.cs" />
     <Compile Include="Services\Epic\Queries\EpicReadOnlyUseCase.cs" />
@@ -72,8 +72,8 @@
     <Compile Include="Services\User\Commands\UserCommandsUserCase.cs" />
     <Compile Include="Services\User\Queries\IUserQueriesUseCase.cs" />
     <Compile Include="Services\User\Queries\UserQueriesUseCase.cs" />
-    <Compile Include="Repositories\User\IUserReadOnlyRepository.cs" />
-    <Compile Include="Repositories\User\IUserWriteOnlyRepository.cs" />
+    <Compile Include="Repositories\IUserReadOnlyRepository.cs" />
+    <Compile Include="Repositories\IUserWriteOnlyRepository.cs" />
     <Compile Include="Utilities\AppHash.cs" />
   </ItemGroup>
   <ItemGroup>

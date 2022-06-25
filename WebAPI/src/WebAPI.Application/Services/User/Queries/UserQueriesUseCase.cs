@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using WebAPI.Application.Models.User;
-using WebAPI.Application.Repositories.User;
+using WebAPI.Application.Repositories;
 using WebAPI.Application.Utilities;
 using WebAPI.DomainAPI.Extensions;
 
