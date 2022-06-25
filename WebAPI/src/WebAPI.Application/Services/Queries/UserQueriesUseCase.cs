@@ -7,7 +7,7 @@ using WebAPI.Application.Repositories;
 using WebAPI.Application.Utilities;
 using WebAPI.DomainAPI.Extensions;
 
-namespace WebAPI.Application.Services.User.Queries
+namespace WebAPI.Application.Services.Queries
 {
 	public class UserQueriesUseCase : IUserQueriesUseCase
 	{

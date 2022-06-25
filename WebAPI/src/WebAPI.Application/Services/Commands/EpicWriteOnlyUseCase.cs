@@ -1,4 +1,4 @@
-﻿namespace WebAPI.Application.Services.Epic.Commands
+﻿namespace WebAPI.Application.Services.Commands
 {
 	public class EpicWriteOnlyUseCase : IEpicWriteOnlyUseCase
 	{

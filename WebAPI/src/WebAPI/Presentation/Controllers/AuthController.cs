@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Http;
 using WebAPI.Application.Models.User;
-using WebAPI.Application.Services.User.Queries;
+using WebAPI.Application.Services.Queries;
 using WebAPI.Presentation.Filters;
 
 namespace WebAPI.Presentation.Controllers

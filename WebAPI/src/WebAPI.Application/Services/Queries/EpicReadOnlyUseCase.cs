@@ -1,4 +1,4 @@
-﻿namespace WebAPI.Application.Services.Epic.Queries
+﻿namespace WebAPI.Application.Services.Queries
 {
 	public class EpicReadOnlyUseCase : IEpicReadOnlyUseCase
 	{

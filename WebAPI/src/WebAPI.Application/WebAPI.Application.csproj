@@ -63,23 +63,20 @@
     <Compile Include="Repositories\IStoryWriteOnlyRepository.cs" />
     <Compile Include="Repositories\ITeamReadOnlyRepository.cs" />
     <Compile Include="Repositories\ITeamWriteOnlyRepository.cs" />
-    <Compile Include="Services\Epic\Commands\EpicWriteOnlyUseCase.cs" />
-    <Compile Include="Services\Epic\Commands\IEpicWriteOnlyUseCase.cs" />
-    <Compile Include="Services\Epic\Queries\EpicReadOnlyUseCase.cs" />
-    <Compile Include="Services\Epic\Queries\IEpicReadOnlyUseCase.cs" />
-    <Compile Include="Services\User\Commands\IUserCommandsUseCase.cs" />
+    <Compile Include="Services\Commands\EpicWriteOnlyUseCase.cs" />
+    <Compile Include="Services\Commands\IEpicWriteOnlyUseCase.cs" />
+    <Compile Include="Services\Queries\EpicReadOnlyUseCase.cs" />
+    <Compile Include="Services\Queries\IEpicReadOnlyUseCase.cs" />
+    <Compile Include="Services\Commands\IUserCommandsUseCase.cs" />
     <Compile Include="Models\User\UserResult.cs" />
-    <Compile Include="Services\User\Commands\UserCommandsUserCase.cs" />
-    <Compile Include="Services\User\Queries\IUserQueriesUseCase.cs" />
-    <Compile Include="Services\User\Queries\UserQueriesUseCase.cs" />
+    <Compile Include="Services\Commands\UserCommandsUserCase.cs" />
+    <Compile Include="Services\Queries\IUserQueriesUseCase.cs" />
+    <Compile Include="Services\Queries\UserQueriesUseCase.cs" />
     <Compile Include="Repositories\IUserReadOnlyRepository.cs" />
     <Compile Include="Repositories\IUserWriteOnlyRepository.cs" />
     <Compile Include="Utilities\AppHash.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Services\Project\Commands\" />
-    <Folder Include="Services\Project\Queries\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\WebAPI.DomainAPI\WebAPI.DomainAPI.csproj">
       <Project>{f72a01ca-64fd-4859-8a3b-2567f1a58ab3}</Project>

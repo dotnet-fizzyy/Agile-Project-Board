@@ -5,7 +5,7 @@ using WebAPI.Application.Models.User;
 using WebAPI.Application.Repositories;
 using WebAPI.Application.Utilities;
 
-namespace WebAPI.Application.Services.User.Commands
+namespace WebAPI.Application.Services.Commands
 {
 	public class UserCommandsUserCase : IUserCommandsUseCase
 	{

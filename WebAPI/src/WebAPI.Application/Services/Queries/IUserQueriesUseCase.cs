@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using WebAPI.Application.Models.User;
 using WebAPI.DomainAPI.Extensions;
 
-namespace WebAPI.Application.Services.User.Queries
+namespace WebAPI.Application.Services.Queries
 {
 	public interface IUserQueriesUseCase
 	{

@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using WebAPI.Application.Models.User;
 
-namespace WebAPI.Application.Services.User.Commands
+namespace WebAPI.Application.Services.Commands
 {
 	public interface IUserCommandsUseCase
 	{
